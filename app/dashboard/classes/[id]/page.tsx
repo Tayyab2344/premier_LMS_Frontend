@@ -47,7 +47,8 @@ export default function ClassroomPage() {
 
   // Real-time Virtual Classroom states
   const [socket, setSocket] = useState<any>(null);
-  const [isWaiting, setIsWaiting] = useState(true);
+  const [_isWaiting, setIsWaiting] = useState(true);
+
   const [waitingList, setWaitingList] = useState<any[]>([]);
   const [participantList, setParticipantList] = useState<any[]>([]);
   const [showControlPanel, setShowControlPanel] = useState(false);

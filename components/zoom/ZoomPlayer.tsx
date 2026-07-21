@@ -337,7 +337,7 @@ function ZoomPlayer({
           // ── Screen sharing: host-only ────────────────────────────────────────
           // screenShare: 1 shows the share button; 0 hides it entirely for
           // non-host participants, preventing students from attempting to share.
-          screenShare: isModerator ? 1 : 0,
+          screenShare: isModerator,
 
           // Ensure the full participant management panel renders for the host.
           // Without isSupportAV the SDK may suppress host-only controls
@@ -368,7 +368,7 @@ function ZoomPlayer({
               joinParams.zak = zak;
             }
 
-            ZoomMtg.join({
+            (ZoomMtg as any).join({
               ...joinParams,
               success: () => {
                 setStatus('connected');
@@ -381,7 +381,7 @@ function ZoomPlayer({
                 // onWaitingRoomParticipantJoin fires when Zoom's native waiting
                 // room is active and a participant is held there.
                 if (isModerator) {
-                  ZoomMtg.inMeetingServiceListener(
+                  (ZoomMtg as any).inMeetingServiceListener(
                     'onWaitingRoomParticipantJoin',
                     (data: any) => {
                       console.info(
@@ -392,7 +392,7 @@ function ZoomPlayer({
                     },
                   );
 
-                  ZoomMtg.inMeetingServiceListener(
+                  (ZoomMtg as any).inMeetingServiceListener(
                     'onUserJoin',
                     (data: any) => {
                       console.info(
@@ -413,12 +413,12 @@ function ZoomPlayer({
                 // somehow unmutes themselves, we immediately re-mute them.
                 // Fires within ~200 ms. Does NOT run for the host/moderator.
                 if (!isModerator) {
-                  ZoomMtg.inMeetingServiceListener(
+                  (ZoomMtg as any).inMeetingServiceListener(
                     'onAudioStateChange',
                     (data: any) => {
                       if (data?.muted === false) {
                         // Student unmuted — re-mute immediately
-                        ZoomMtg.muteAudio({
+                        (ZoomMtg as any).muteAudio({
                           mute: true,
                           success: () => {},
                           error: (e: any) =>
