@@ -443,7 +443,7 @@ function RecordingPlayer() {
 
           {/* Video Iframe Container */}
           <div className="relative w-full aspect-[16/9] bg-black rounded-xl overflow-hidden shadow-lg border border-gray-200 shrink-0">
-            {securePlayback?.streamUrl ? (
+            {securePlayback?.streamUrl && !securePlayback.streamUrl.includes('youtube.com') && !securePlayback.streamUrl.includes('youtu.be') ? (
               <video
                 ref={videoRef}
                 key={securePlayback.id}

@@ -243,7 +243,7 @@ export default function ClassesPage() {
     setLectureUrl("");
     setLectureDurationHours("1");
     setLectureDurationMinutes("0");
-    setLectureLive(false);
+    setLectureLive(true);
     setShowRecordedLectureModal(true);
   };
 
