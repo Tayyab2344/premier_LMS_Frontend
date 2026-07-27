@@ -497,7 +497,17 @@ export default function DashboardPage() {
 
             {activeTab === 'settings' && (
               <div className="bg-white border border-border-light rounded-xl p-6">
-                <h1 className="text-xl font-bold text-text-primary mb-6">Security Settings</h1>
+                <h1 className="text-xl font-bold text-text-primary mb-2">Security Settings</h1>
+                <p className="text-xs text-text-secondary mb-6">Manage your account security and password</p>
+
+                <div className="bg-blue-50 border border-blue-200 text-blue-800 text-xs rounded-xl p-4 mb-6 flex items-start gap-3">
+                  <span className="text-base shrink-0">💡</span>
+                  <div>
+                    <strong className="font-bold">Logged in with a system-generated password?</strong>
+                    <p className="mt-0.5 text-blue-700">We strongly recommend updating your temporary password below to a new personal password for enhanced account security.</p>
+                  </div>
+                </div>
+
                 {pwError && (
                   <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-4 py-3 mb-4">
                     {pwError}

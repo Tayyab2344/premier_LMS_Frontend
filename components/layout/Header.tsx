@@ -17,8 +17,8 @@ export default function Header() {
   const hideHeader = 
     pathname.startsWith('/auth') || 
     pathname.startsWith('/admin') ||
-    pathname.startsWith('/dashboard/classes') ||
-    pathname.startsWith('/dashboard/recordings/player');
+    pathname.startsWith('/dashboard') ||
+    pathname.startsWith('/admission');
 
   useEffect(() => {
     if (hideHeader) return;
@@ -98,7 +98,14 @@ export default function Header() {
           <Link href="/about" className="text-sm font-medium text-text-secondary hover:text-brand-green transition-colors no-underline">
             About Us
           </Link>
+          <Link href="/news" className="text-sm font-medium text-text-secondary hover:text-brand-green transition-colors no-underline">
+            News &amp; Updates
+          </Link>
 
+
+          <Link href="/admission" className="text-sm font-medium text-brand-green hover:underline transition-colors no-underline">
+            Apply Admission
+          </Link>
 
           {user ? (
             <div className="flex items-center gap-3 ml-2 border-l border-border-light pl-3">
@@ -123,9 +130,9 @@ export default function Header() {
                 SIGN IN
               </Link>
 
-              {/* Sign Up */}
-              <Link id="btn-signup" href="/auth/signup" className="btn-signup whitespace-nowrap no-underline text-center">
-                SIGN UP
+              {/* Admission Form */}
+              <Link id="btn-signup" href="/admission" className="btn-signup whitespace-nowrap no-underline text-center">
+                ADMISSION FORM
               </Link>
             </>
           )}
