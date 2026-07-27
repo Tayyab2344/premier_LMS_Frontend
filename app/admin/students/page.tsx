@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import api from "@/lib/api";
 import { useModal } from "@/lib/ModalContext";
+import Pagination from "@/components/ui/Pagination";
 
 interface Student {
   id: string;
@@ -23,10 +24,25 @@ export default function AdminStudentsPage() {
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
 
-  const fetchStudents = async () => {
+  // Pagination & Search state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const fetchStudents = async (page = currentPage, search = searchTerm) => {
+    setLoading(true);
     try {
-      const res = await api.get("/users?role=student");
-      setStudents(res.data);
+      const res = await api.get("/users", {
+        params: { role: "student", page, limit: 10, search },
+      });
+      if (res.data?.data) {
+        setStudents(res.data.data);
+        setTotalPages(res.data.meta.totalPages);
+        setTotalItems(res.data.meta.total);
+      } else {
+        setStudents(res.data || []);
+      }
     } catch (err) {
       console.error("Failed to load students list", err);
     } finally {
@@ -35,8 +51,8 @@ export default function AdminStudentsPage() {
   };
 
   useEffect(() => {
-    fetchStudents();
-  }, []);
+    fetchStudents(currentPage, searchTerm);
+  }, [currentPage, searchTerm]);
 
   const handleToggleStatus = async (id: string) => {
     setActionLoading(true);
@@ -50,7 +66,7 @@ export default function AdminStudentsPage() {
     }
   };
 
-  if (loading) {
+  if (loading && students.length === 0) {
     return (
       <div className="flex items-center justify-center py-20">
         <div className="w-8 h-8 border-4 border-brand-green/30 border-t-brand-green rounded-full animate-spin" />
@@ -60,9 +76,27 @@ export default function AdminStudentsPage() {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-xl font-bold text-text-primary">Enrolled Students</h1>
-        <p className="text-xs text-text-secondary mt-1">Manage active students and their courses</p>
+      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-xl font-bold text-text-primary">Enrolled Students</h1>
+          <p className="text-xs text-text-secondary mt-1">Manage active students and their courses</p>
+        </div>
+
+        <div className="relative w-full sm:w-72">
+          <input
+            type="text"
+            placeholder="Search student name or email..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="w-full pl-9 pr-4 py-2 text-xs border border-border-light rounded-xl bg-white text-text-primary placeholder:text-gray-400 focus:border-brand-green"
+          />
+          <svg className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
       </div>
 
       <div className="bg-white border border-border-light rounded-xl overflow-hidden shadow-sm">
@@ -83,7 +117,7 @@ export default function AdminStudentsPage() {
                   <td className="px-6 py-4 text-sm font-bold text-text-primary">{student.name}</td>
                   <td className="px-6 py-4 text-xs text-text-secondary">{student.email}</td>
                   <td className="px-6 py-4 text-xs text-text-primary">
-                    {student.enrollments?.map((e) => e.course.name).join(", ") || "None"}
+                    {student.enrollments?.map((e) => e.course?.name).filter(Boolean).join(", ") || "None"}
                   </td>
                   <td className="px-6 py-4 text-xs">
                     <span className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
@@ -93,7 +127,11 @@ export default function AdminStudentsPage() {
                     </span>
                   </td>
                   <td className="px-6 py-4 text-xs text-right">
-                    <button onClick={() => handleToggleStatus(student.id)} className="btn-signup text-[10px] px-3 py-1 bg-white border border-border-light text-text-primary hover:bg-bg-light">
+                    <button
+                      onClick={() => handleToggleStatus(student.id)}
+                      disabled={actionLoading}
+                      className="btn-signup text-xs px-3 py-1.5"
+                    >
                       Toggle Active
                     </button>
                   </td>
@@ -102,23 +140,22 @@ export default function AdminStudentsPage() {
               {students.length === 0 && (
                 <tr>
                   <td colSpan={5} className="text-center py-12 text-sm text-text-secondary">
-                    No active students found
+                    No students found.
                   </td>
                 </tr>
               )}
             </tbody>
           </table>
         </div>
-      </div>
 
-      {actionLoading && (
-        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/25 backdrop-blur-[2px]">
-          <div className="bg-white border border-border-light rounded-2xl p-6 flex flex-col items-center space-y-4 shadow-2xl">
-            <div className="w-10 h-10 border-4 border-brand-green/20 border-t-brand-green rounded-full animate-spin" />
-            <p className="text-xs font-bold text-text-primary uppercase tracking-wider">Processing Request...</p>
-          </div>
-        </div>
-      )}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalItems={totalItems}
+          pageSize={10}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      </div>
     </div>
   );
 }

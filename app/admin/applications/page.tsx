@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import api from "@/lib/api";
+import Pagination from "@/components/ui/Pagination";
 
 interface Application {
   id: string;
@@ -26,6 +27,13 @@ export default function AdminApplicationsPage() {
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
   const [newCredentials, setNewCredentials] = useState<{ email: string; password: string } | null>(null);
 
+  // Pagination & Filter States
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
+
   const showToast = (message: string, type: "success" | "error" = "success") => {
     setToast({ message, type });
     setTimeout(() => {
@@ -33,10 +41,19 @@ export default function AdminApplicationsPage() {
     }, 5000);
   };
 
-  const fetchApplications = async () => {
+  const fetchApplications = async (page = currentPage, status = statusFilter, search = searchTerm) => {
+    setLoading(true);
     try {
-      const res = await api.get("/admissions");
-      setApplications(res.data);
+      const res = await api.get("/admissions", {
+        params: { page, limit: 10, status, search },
+      });
+      if (res.data?.data) {
+        setApplications(res.data.data);
+        setTotalPages(res.data.meta.totalPages);
+        setTotalItems(res.data.meta.total);
+      } else {
+        setApplications(res.data || []);
+      }
     } catch (err) {
       console.error("Failed to fetch applications", err);
     } finally {
@@ -45,8 +62,8 @@ export default function AdminApplicationsPage() {
   };
 
   useEffect(() => {
-    fetchApplications();
-  }, []);
+    fetchApplications(currentPage, statusFilter, searchTerm);
+  }, [currentPage, statusFilter, searchTerm]);
 
   const handleUpdateStatus = async (status: string) => {
     if (!selectedApp) return;
@@ -117,6 +134,41 @@ export default function AdminApplicationsPage() {
         </div>
       )}
 
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+        <div className="relative w-full sm:w-72">
+          <input
+            type="text"
+            placeholder="Search applicant name, email, CNIC..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="w-full pl-9 pr-4 py-2 text-xs border border-border-light rounded-xl bg-white text-text-primary placeholder:text-gray-400 focus:border-brand-green"
+          />
+          <svg className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+          <span className="text-xs text-text-secondary font-medium">Status:</span>
+          <select
+            value={statusFilter}
+            onChange={(e) => {
+              setStatusFilter(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="px-3 py-2 text-xs border border-border-light rounded-xl bg-white text-text-primary font-medium focus:border-brand-green"
+          >
+            <option value="all">All Applications</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+      </div>
+
       <div className="bg-white border border-border-light rounded-xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
@@ -150,13 +202,16 @@ export default function AdminApplicationsPage() {
                         ? "bg-green-50 text-green-600 border border-green-200"
                         : app.status === "rejected"
                         ? "bg-red-50 text-red-600 border border-red-200"
-                        : "bg-yellow-50 text-yellow-600 border border-yellow-200"
+                        : "bg-amber-50 text-amber-600 border border-amber-200"
                     }`}>
                       {app.status}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-xs text-right">
-                    <button onClick={() => setSelectedApp(app)} className="btn-signup text-[10px] px-3 py-1 bg-white border border-border-light text-text-primary hover:bg-bg-light">
+                    <button
+                      onClick={() => setSelectedApp(app)}
+                      className="btn-signup text-xs px-3 py-1.5"
+                    >
                       Review
                     </button>
                   </td>
@@ -165,13 +220,21 @@ export default function AdminApplicationsPage() {
               {applications.length === 0 && (
                 <tr>
                   <td colSpan={6} className="text-center py-12 text-sm text-text-secondary">
-                    No applications submitted yet.
+                    No applications found.
                   </td>
                 </tr>
               )}
             </tbody>
           </table>
         </div>
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalItems={totalItems}
+          pageSize={10}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
       </div>
 
       {/* Review Modal */}

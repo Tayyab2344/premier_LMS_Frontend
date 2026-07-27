@@ -51,6 +51,9 @@ export default function DashboardPage() {
   // Expanded course accordion state
   const [expandedCourses, setExpandedCourses] = useState<{ [key: string]: boolean }>({});
 
+  // Tab Loading States
+  const [loadingTab, setLoadingTab] = useState(false);
+
   useEffect(() => {
     if (isLoading) return;
 
@@ -64,28 +67,47 @@ export default function DashboardPage() {
       return;
     }
 
-    async function fetchDashboardData() {
+    async function fetchProfileData() {
       try {
-        const [profileRes, classesRes, pastClassesRes, recordingsRes] = await Promise.all([
-          api.get('/auth/profile'),
-          api.get('/classes/my/upcoming'),
-          api.get('/classes/my/past'),
-          api.get('/classes/my/recordings'),
-        ]);
-
+        const profileRes = await api.get('/auth/profile');
         setProfile(profileRes.data);
-        setUpcomingClasses(classesRes.data);
-        setPastClasses(pastClassesRes.data);
-        setRecordings(recordingsRes.data);
       } catch (err) {
-        console.error('Failed to load dashboard backend data:', err);
+        console.error('Failed to load user profile data:', err);
       } finally {
         setLoadingData(false);
       }
     }
 
-    fetchDashboardData();
+    fetchProfileData();
   }, [user, isLoading, router]);
+
+  // Lazy load tab data on activeTab change
+  useEffect(() => {
+    if (!user || loadingData) return;
+
+    if (activeTab === 'classes' && upcomingClasses.length === 0 && pastClasses.length === 0) {
+      setLoadingTab(true);
+      Promise.all([
+        api.get('/classes/my/upcoming'),
+        api.get('/classes/my/past'),
+      ])
+        .then(([classesRes, pastRes]) => {
+          setUpcomingClasses(classesRes.data?.data || classesRes.data || []);
+          setPastClasses(pastRes.data?.data || pastRes.data || []);
+        })
+        .catch((err) => console.error('Failed to load classes tab data:', err))
+        .finally(() => setLoadingTab(false));
+    } else if (activeTab === 'recordings' && recordings.length === 0) {
+      setLoadingTab(true);
+      api
+        .get('/classes/my/recordings')
+        .then((res) => {
+          setRecordings(res.data?.data || res.data || []);
+        })
+        .catch((err) => console.error('Failed to load recordings tab data:', err))
+        .finally(() => setLoadingTab(false));
+    }
+  }, [activeTab, user, loadingData, upcomingClasses.length, pastClasses.length, recordings.length]);
 
   if (isLoading || loadingData) {
     return (
@@ -288,7 +310,11 @@ export default function DashboardPage() {
                 {/* Upcoming Live Classes Section */}
                 <div>
                   <h1 className="text-xl font-bold text-text-primary mb-6">Upcoming Live Classes</h1>
-                  {upcomingClasses.length === 0 ? (
+                  {loadingTab ? (
+                    <div className="bg-white border border-border-light rounded-xl p-8 flex items-center justify-center">
+                      <div className="w-6 h-6 border-2 border-brand-green/30 border-t-brand-green rounded-full animate-spin" />
+                    </div>
+                  ) : upcomingClasses.length === 0 ? (
                     <div className="bg-white border border-border-light rounded-xl p-8 text-center text-text-secondary text-sm">
                       No upcoming live classes scheduled at this time.
                     </div>
@@ -355,7 +381,11 @@ export default function DashboardPage() {
             {activeTab === 'recordings' && (
               <div>
                 <h1 className="text-xl font-bold text-text-primary mb-6">Recorded Sessions</h1>
-                {Object.keys(recordingsByCourse).length === 0 ? (
+                {loadingTab ? (
+                  <div className="bg-white border border-border-light rounded-xl p-8 flex items-center justify-center">
+                    <div className="w-6 h-6 border-2 border-brand-green/30 border-t-brand-green rounded-full animate-spin" />
+                  </div>
+                ) : Object.keys(recordingsByCourse).length === 0 ? (
                   <div className="bg-white border border-border-light rounded-xl p-12 text-center text-text-secondary">
                     No recordings posted for your courses yet.
                   </div>

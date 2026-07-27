@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import api from "@/lib/api";
 import { useModal } from "@/lib/ModalContext";
 
+import Pagination from "@/components/ui/Pagination";
+
 interface Course {
   id: string;
   name: string;
@@ -48,10 +50,25 @@ export default function AdminBatchesPage() {
     classesPerWeek: 3,
   });
 
-  const fetchBatches = async () => {
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const fetchBatches = async (page = currentPage, search = searchTerm) => {
+    setLoading(true);
     try {
-      const res = await api.get("/batches");
-      setBatches(res.data);
+      const res = await api.get("/batches", {
+        params: { page, limit: 10, search },
+      });
+      if (res.data?.data) {
+        setBatches(res.data.data);
+        setTotalPages(res.data.meta.totalPages);
+        setTotalItems(res.data.meta.total);
+      } else {
+        setBatches(res.data || []);
+      }
     } catch (err) {
       console.error("Failed to load batches", err);
     } finally {
@@ -60,11 +77,11 @@ export default function AdminBatchesPage() {
   };
 
   useEffect(() => {
-    fetchBatches();
+    fetchBatches(currentPage, searchTerm);
     api.get("/courses/all")
-      .then((res) => setCoursesList(res.data))
+      .then((res) => setCoursesList(res.data?.data || res.data || []))
       .catch(() => {});
-  }, []);
+  }, [currentPage, searchTerm]);
 
   const handleCourseToggle = (courseId: string) => {
     if (form.courseIds.includes(courseId)) {
@@ -157,14 +174,26 @@ export default function AdminBatchesPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center justify-between mb-8 gap-4 flex-wrap">
         <div>
           <h1 className="text-xl font-bold text-text-primary">Batches</h1>
           <p className="text-xs text-text-secondary mt-1">Manage academic batches and offered courses</p>
         </div>
-        <button onClick={() => setShowModal(true)} className="btn-signup text-xs px-4 py-2">
-          + Add Batch
-        </button>
+        <div className="flex items-center gap-3">
+          <input
+            type="text"
+            placeholder="Search batches..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="px-4 py-2 text-xs border border-border-light rounded-lg bg-white text-text-primary focus:outline-none focus:ring-1 focus:ring-brand-green"
+          />
+          <button onClick={() => setShowModal(true)} className="btn-signup text-xs px-4 py-2 shrink-0">
+            + Add Batch
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -299,6 +328,14 @@ export default function AdminBatchesPage() {
           </div>
         )}
       </div>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        totalItems={totalItems}
+        pageSize={10}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
 
       {/* Add Batch Modal */}
       {showModal && (

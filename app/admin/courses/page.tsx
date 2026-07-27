@@ -5,6 +5,8 @@ import Link from "next/link";
 import api from "@/lib/api";
 import { useModal } from "@/lib/ModalContext";
 
+import Pagination from "@/components/ui/Pagination";
+
 interface Course {
   id: string;
   name: string;
@@ -25,10 +27,25 @@ export default function AdminCoursesPage() {
     discountedFee: 30000,
   });
 
-  const fetchCourses = async () => {
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const fetchCourses = async (page = currentPage, search = searchTerm) => {
+    setLoading(true);
     try {
-      const res = await api.get("/courses/all");
-      setCourses(res.data);
+      const res = await api.get("/courses/all", {
+        params: { page, limit: 10, search },
+      });
+      if (res.data?.data) {
+        setCourses(res.data.data);
+        setTotalPages(res.data.meta.totalPages);
+        setTotalItems(res.data.meta.total);
+      } else {
+        setCourses(res.data || []);
+      }
     } catch (err) {
       console.error("Failed to load courses", err);
     } finally {
@@ -37,8 +54,8 @@ export default function AdminCoursesPage() {
   };
 
   useEffect(() => {
-    fetchCourses();
-  }, []);
+    fetchCourses(currentPage, searchTerm);
+  }, [currentPage, searchTerm]);
 
   const handleCreate = async () => {
     setActionLoading(true);
@@ -76,14 +93,26 @@ export default function AdminCoursesPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center justify-between mb-8 gap-4 flex-wrap">
         <div>
           <h1 className="text-xl font-bold text-text-primary">Courses</h1>
           <p className="text-xs text-text-secondary mt-1">Manage academy curriculum and fees</p>
         </div>
-        <button onClick={() => setShowModal(true)} className="btn-signup text-xs px-4 py-2">
-          + Add Course
-        </button>
+        <div className="flex items-center gap-3">
+          <input
+            type="text"
+            placeholder="Search courses..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="px-4 py-2 text-xs border border-border-light rounded-lg bg-white text-text-primary focus:outline-none focus:ring-1 focus:ring-brand-green"
+          />
+          <button onClick={() => setShowModal(true)} className="btn-signup text-xs px-4 py-2 shrink-0">
+            + Add Course
+          </button>
+        </div>
       </div>
 
       <div className="bg-white border border-border-light rounded-xl overflow-hidden shadow-sm">
@@ -133,6 +162,14 @@ export default function AdminCoursesPage() {
             </tbody>
           </table>
         </div>
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalItems={totalItems}
+          pageSize={10}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
       </div>
 
       {/* Add Course Modal */}
