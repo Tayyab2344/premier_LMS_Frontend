@@ -53,12 +53,14 @@ export default function Header() {
       <div className="container-main flex items-center justify-between h-16 gap-3">
         {/* ── Logo ─────────────────────────────── */}
         <Link href="/" className="flex items-center gap-2 shrink-0 no-underline group">
-          <div className="w-9 h-9 rounded-full bg-brand-green flex items-center justify-center group-hover:bg-brand-green-dark transition-colors">
-            <span className="text-accent-gold text-sm font-extrabold leading-none">P</span>
-          </div>
-          <span className="text-sm font-bold text-brand-green hidden sm:inline tracking-tight">
-            Premier
-          </span>
+          <Image
+            src="/logo.png"
+            alt="Premier Tax Corporate & Accounting School Logo"
+            width={160}
+            height={44}
+            className="h-10 w-auto object-contain"
+            priority
+          />
         </Link>
 
         {/* ── Search Bar (desktop) ─────────────── */}

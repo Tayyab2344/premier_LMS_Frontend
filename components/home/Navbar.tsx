@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GraduationCap, Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -52,12 +53,14 @@ export function Navbar() {
           <div className="flex items-center justify-between h-[72px]">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group" aria-label="Premier LMS Homepage">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-blue-glow group-hover:scale-105 transition-transform duration-300">
-                <GraduationCap className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-heading font-extrabold text-heading">
-                Premier<span className="text-primary">LMS</span>
-              </span>
+              <Image
+                src="/logo.png"
+                alt="Premier Tax Corporate & Accounting School Logo"
+                width={180}
+                height={50}
+                className="h-11 w-auto object-contain transition-transform group-hover:scale-105"
+                priority
+              />
             </Link>
 
             {/* Desktop Nav */}

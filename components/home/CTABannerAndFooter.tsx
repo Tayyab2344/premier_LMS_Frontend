@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, GraduationCap, ArrowUp, MessageCircle, ShieldCheck } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowRight, ArrowUp, MessageCircle, ShieldCheck } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -84,12 +85,13 @@ export function Footer() {
           {/* Col 1: About */}
           <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-3" aria-label="Premier LMS Home">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-blue-glow">
-                <GraduationCap className="w-5 h-5" aria-hidden="true" />
-              </div>
-              <span className="text-xl font-heading font-extrabold text-heading">
-                Premier<span className="text-primary">LMS</span>
-              </span>
+              <Image
+                src="/logo.png"
+                alt="Premier Tax Corporate & Accounting School Logo"
+                width={180}
+                height={50}
+                className="h-11 w-auto object-contain"
+              />
             </Link>
             <p className="text-sm leading-relaxed max-w-sm text-slate-600">
               Premier Learning Management System owned and instructed by Raja Gulfam. Empowering certified professionals globally with accredited tax, accounting, and finance education.

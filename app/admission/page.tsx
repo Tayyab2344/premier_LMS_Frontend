@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import api from '@/lib/api';
 import { useAuth } from '@/lib/AuthContext';
 import { useModal } from '@/lib/ModalContext';
 import {
-  GraduationCap,
   ArrowLeft,
   CheckCircle2,
   AlertCircle,
@@ -32,31 +32,31 @@ export default function AdmissionPage() {
   const [fatherName, setFatherName] = useState('');
   const [cnic, setCnic] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
-  const [gender] = useState('male');
+  const [gender, setGender] = useState('Male');
   const [whatsapp, setWhatsapp] = useState('');
   const [email, setEmail] = useState('');
   const [postalAddress, setPostalAddress] = useState('');
   const [province, setProvince] = useState('Punjab');
   const [city, setCity] = useState('');
   const [lastQualification, setLastQualification] = useState('B.Com / M.Com');
-  const [passingYear] = useState('2024');
-  const [institute] = useState('University of the Punjab');
+  const [passingYear, setPassingYear] = useState('2024');
+  const [institute, setInstitute] = useState('');
 
-  const [emergencyName] = useState('Family Contact');
-  const [emergencyRelation] = useState('Guardian');
-  const [emergencyContact] = useState('0300-0000000');
+  const [emergencyName, setEmergencyName] = useState('');
+  const [emergencyRelation, setEmergencyRelation] = useState('Guardian');
+  const [emergencyContact, setEmergencyContact] = useState('');
 
-  // Single course selection
-  const [selectedCourse, setSelectedCourse] = useState<string>(
-    'Certified Income Tax & Sales Tax Practitioner Masterclass'
-  );
-  const [paymentMethod] = useState('Meezan Bank Transfer');
+  // Course selection & Class Mode
+  const [selectedCourse, setSelectedCourse] = useState<string>('Certified Tax Practitioner (CTP)');
+  const [classMode, setClassMode] = useState<string>('Online');
+  const [paymentMethod, setPaymentMethod] = useState('Meezan Bank Transfer');
   const [transactionId, setTransactionId] = useState('');
 
   // Files Upload filenames
-  const [cnicFile] = useState('cnic_submitted.pdf');
-  const [photoFile] = useState('portrait_submitted.jpg');
+  const [cnicFile, setCnicFile] = useState('');
+  const [photoFile, setPhotoFile] = useState('');
   const [paymentProof, setPaymentProof] = useState('');
+  const [declarationAgreed, setDeclarationAgreed] = useState(true);
 
   // Validation Error States
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -296,17 +296,14 @@ export default function AdmissionPage() {
       <header className="bg-slate-900 border-b border-slate-800 py-4 px-6 sm:px-12">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
-              <GraduationCap className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <span className="text-lg font-heading font-extrabold text-white tracking-tight">
-                Premier<span className="text-primary-400">LMS</span>
-              </span>
-              <span className="text-[10px] block text-slate-400 font-mono">
-                Raja Gulfam Tax &amp; Legal Academy
-              </span>
-            </div>
+            <Image
+              src="/logo.png"
+              alt="Premier Tax Corporate & Accounting School Logo"
+              width={200}
+              height={55}
+              className="h-12 w-auto object-contain"
+              priority
+            />
           </Link>
 
           <Link
@@ -476,6 +473,20 @@ export default function AdmissionPage() {
 
                 <div>
                   <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
+                    Gender *
+                  </label>
+                  <select
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs text-heading focus:outline-none focus:border-brand-green bg-white"
+                  >
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                     Pakistani Mobile / WhatsApp Contact *
                   </label>
                   <div className="relative">
@@ -524,40 +535,65 @@ export default function AdmissionPage() {
               </div>
             </div>
 
-            {/* ── Section 2: Education & Address ───────────── */}
+            {/* ── Section 2: Academic Background ───────────── */}
             <div className="space-y-6">
               <div className="flex items-center gap-3 pb-3 border-b border-border">
-                <div className="w-8 h-8 rounded-xl bg-primary-50 text-primary flex items-center justify-center font-heading font-bold text-xs">
+                <div className="w-8 h-8 rounded-xl bg-emerald-50 text-brand-green flex items-center justify-center font-heading font-bold text-xs border border-emerald-200">
                   2
                 </div>
                 <div>
                   <h2 className="text-base font-heading font-bold text-heading">
-                    Education &amp; Postal Address
+                    Academic Background &amp; Address
                   </h2>
-                  <p className="text-[11px] text-body">Where to dispatch physical certificate &amp; course manual</p>
+                  <p className="text-[11px] text-body">Qualifications &amp; dispatch postal address for certificates</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 <div>
                   <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
-                    Qualification / Background *
+                    Last Qualification *
                   </label>
-                  <select
+                  <input
+                    type="text"
+                    required
                     value={lastQualification}
                     onChange={(e) => setLastQualification(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs text-heading focus:outline-none focus:border-primary bg-white"
-                  >
-                    <option value="LL.B / LL.M (Advocate High Court / Subordinate Bar)">LL.B / LL.M (Advocate)</option>
-                    <option value="ITP (Income Tax Practitioner / Tax Bar)">ITP (Income Tax Practitioner)</option>
-                    <option value="CA / ACMA / ACCA / FCMA">CA / ACMA / ACCA / FCMA</option>
-                    <option value="B.Com / M.Com / BS Accounting & Finance">B.Com / M.Com / BS Accounting</option>
-                    <option value="BBA / MBA Finance">BBA / MBA Finance</option>
-                    <option value="Business Owner / Entrepreneur">Business Owner / Entrepreneur</option>
-                    <option value="Other Student / Graduate">Other Student / Graduate</option>
-                  </select>
+                    placeholder="e.g. B.Com, LL.B, CA, MBA"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs text-heading focus:outline-none focus:border-brand-green bg-white"
+                  />
                 </div>
 
+                <div>
+                  <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
+                    Passing Year *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={passingYear}
+                    onChange={(e) => setPassingYear(e.target.value)}
+                    placeholder="e.g. 2023"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-mono text-heading focus:outline-none focus:border-brand-green bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
+                    Institute / University *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={institute}
+                    onChange={(e) => setInstitute(e.target.value)}
+                    placeholder="e.g. University of the Punjab"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs text-heading focus:outline-none focus:border-brand-green bg-white"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 <div>
                   <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                     City Name *
@@ -572,7 +608,7 @@ export default function AdmissionPage() {
                     }}
                     placeholder="e.g. Lahore, Karachi, Islamabad"
                     className={`w-full px-4 py-2.5 rounded-xl border text-xs text-heading focus:outline-none ${
-                      errors.city ? 'border-red-500 bg-red-50/20' : 'border-slate-200 focus:border-primary'
+                      errors.city ? 'border-red-500 bg-red-50/20' : 'border-slate-200 focus:border-brand-green'
                     }`}
                   />
                   {errors.city && <p className="text-[11px] text-red-500 mt-1">{errors.city}</p>}
@@ -585,7 +621,7 @@ export default function AdmissionPage() {
                   <select
                     value={province}
                     onChange={(e) => setProvince(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs text-heading focus:outline-none focus:border-primary bg-white"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs text-heading focus:outline-none focus:border-brand-green bg-white"
                   >
                     <option value="Punjab">Punjab</option>
                     <option value="Sindh">Sindh</option>
@@ -613,11 +649,70 @@ export default function AdmissionPage() {
                       }}
                       placeholder="House/Office No., Street, Sector/Area"
                       className={`w-full pl-10 pr-4 py-2.5 rounded-xl border text-xs text-heading focus:outline-none ${
-                        errors.postalAddress ? 'border-red-500 bg-red-50/20' : 'border-slate-200 focus:border-primary'
+                        errors.postalAddress ? 'border-red-500 bg-red-50/20' : 'border-slate-200 focus:border-brand-green'
                       }`}
                     />
                   </div>
                   {errors.postalAddress && <p className="text-[11px] text-red-500 mt-1">{errors.postalAddress}</p>}
+                </div>
+              </div>
+            </div>
+
+            {/* ── Section 3: Emergency Contact ───────────── */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-3 pb-3 border-b border-border">
+                <div className="w-8 h-8 rounded-xl bg-emerald-50 text-brand-green flex items-center justify-center font-heading font-bold text-xs border border-emerald-200">
+                  3
+                </div>
+                <div>
+                  <h2 className="text-base font-heading font-bold text-heading">
+                    Emergency Contact Information
+                  </h2>
+                  <p className="text-[11px] text-body">Guardian or family emergency contact</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                <div>
+                  <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
+                    Emergency Contact Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={emergencyName}
+                    onChange={(e) => setEmergencyName(e.target.value)}
+                    placeholder="e.g. Tariq Mehmood"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs text-heading focus:outline-none focus:border-brand-green bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
+                    Relation *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={emergencyRelation}
+                    onChange={(e) => setEmergencyRelation(e.target.value)}
+                    placeholder="e.g. Father / Brother / Spouse"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs text-heading focus:outline-none focus:border-brand-green bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
+                    Emergency Contact Number *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={emergencyContact}
+                    onChange={(e) => setEmergencyContact(formatPhone(e.target.value))}
+                    placeholder="0300-0000000"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-mono text-heading focus:outline-none focus:border-brand-green bg-white"
+                  />
                 </div>
               </div>
             </div>
@@ -636,37 +731,73 @@ export default function AdmissionPage() {
                 </div>
               </div>
 
-              {/* Course Selection Radio Cards */}
+              {/* Course Selection (10 Official Courses from PDF) */}
               <div className="space-y-3">
                 <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
-                  Select Target Masterclass *
+                  4. COURSE ENROLLMENT (Select Desired Course) *
                 </label>
 
-                <div className="grid gap-3">
-                  <div
-                    onClick={() => setSelectedCourse('Certified Income Tax & Sales Tax Practitioner Masterclass')}
-                    className={`p-4 rounded-2xl border cursor-pointer transition-all flex items-center justify-between ${
-                      selectedCourse.includes('Income Tax')
-                        ? 'border-primary bg-primary-50/40 shadow-sm'
-                        : 'border-slate-200 hover:border-slate-300 bg-white'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCourse.includes('Income Tax') ? 'border-primary bg-primary text-white' : 'border-slate-300'}`}>
-                        {selectedCourse.includes('Income Tax') && <CheckCircle2 className="w-3.5 h-3.5" />}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {[
+                    '1. Certified Tax Practitioner (CTP)',
+                    '2. Advanced Tax Litigation Manager (ATLM)',
+                    '3. Certified Taxation Expert (CTE)',
+                    '4. Certified Corporate Manager (CCM)',
+                    '5. Certified Accounting Technician (CAT)',
+                    '6. Certified Financial Manager (CFM)',
+                    '7. Financial Statement Analyst (FSA)',
+                    '8. Certified Sales Tax Expert (CSTE)',
+                    '9. Certified Corporate Expert (CCE)',
+                    '10. Certified Financial Statements Preparer (CFSP)'
+                  ].map((courseName) => (
+                    <div
+                      key={courseName}
+                      onClick={() => setSelectedCourse(courseName)}
+                      className={`p-3.5 rounded-2xl border cursor-pointer transition-all flex items-center gap-3 ${
+                        selectedCourse === courseName
+                          ? 'border-brand-green bg-emerald-50/60 shadow-sm'
+                          : 'border-slate-200 hover:border-slate-300 bg-white'
+                      }`}
+                    >
+                      <div className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
+                        selectedCourse === courseName ? 'border-brand-green bg-brand-green text-white' : 'border-slate-300'
+                      }`}>
+                        {selectedCourse === courseName && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
                       </div>
-                      <div>
-                        <h4 className="text-xs font-heading font-bold text-heading">
-                          Certified Income Tax &amp; Sales Tax Practitioner Masterclass
-                        </h4>
-                        <p className="text-[11px] text-body">12 Weeks (90+ Hours) · Instructor: Advocate Raja Gulfam</p>
-                      </div>
+                      <span className="text-xs font-heading font-bold text-heading">
+                        {courseName}
+                      </span>
                     </div>
-                    <div className="text-right">
-                      <span className="text-xs font-mono text-slate-400 line-through block">PKR 50,000</span>
-                      <span className="text-sm font-mono font-extrabold text-heading">PKR 30,000</span>
-                    </div>
-                  </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Class Mode Selection (Online / Physical) */}
+              <div className="space-y-2 pt-2">
+                <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
+                  5. CLASS MODE *
+                </label>
+                <div className="flex gap-4">
+                  {['Online', 'Physical'].map((mode) => (
+                    <label
+                      key={mode}
+                      onClick={() => setClassMode(mode)}
+                      className={`flex-1 p-3.5 rounded-2xl border cursor-pointer transition-all flex items-center justify-center gap-2 text-xs font-bold ${
+                        classMode === mode
+                          ? 'border-brand-green bg-emerald-50/60 text-brand-green'
+                          : 'border-slate-200 hover:border-slate-300 bg-white text-slate-700'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="classMode"
+                        checked={classMode === mode}
+                        onChange={() => setClassMode(mode)}
+                        className="accent-brand-green"
+                      />
+                      <span>{mode === 'Online' ? '💻 Online Live Class (LMS App)' : '🏢 Physical Class (On-Campus)'}</span>
+                    </label>
+                  ))}
                 </div>
               </div>
 
@@ -700,8 +831,24 @@ export default function AdmissionPage() {
                 </div>
               </div>
 
-              {/* Transaction ID & Receipts */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {/* Payment Method & Transaction ID & File Uploads */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                <div>
+                  <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
+                    Payment Method *
+                  </label>
+                  <select
+                    value={paymentMethod}
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs text-heading focus:outline-none focus:border-brand-green bg-white"
+                  >
+                    <option value="Meezan Bank Transfer">Meezan Bank Transfer</option>
+                    <option value="JazzCash / EasyPaisa">JazzCash / EasyPaisa</option>
+                    <option value="Online Banking / ATM Transfer">Online Banking / ATM Transfer</option>
+                    <option value="Cash at Campus">Cash at Campus</option>
+                  </select>
+                </div>
+
                 <div>
                   <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                     Bank Transaction / TRX ID
@@ -710,27 +857,70 @@ export default function AdmissionPage() {
                     type="text"
                     value={transactionId}
                     onChange={(e) => setTransactionId(e.target.value)}
-                    placeholder="e.g. TRX-98432176 or ATM Receipt No."
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-mono text-heading focus:outline-none focus:border-primary"
+                    placeholder="e.g. TRX-98432176"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-mono text-heading focus:outline-none focus:border-brand-green"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
-                    Upload Payment Receipt / Deposit Slip
+                    Payment Receipt / Slip
                   </label>
                   <input
                     type="file"
                     accept="image/*,.pdf"
                     onChange={(e) => handleFileUpload(e, setPaymentProof)}
-                    className="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-heading file:font-bold file:bg-primary-50 file:text-primary hover:file:bg-primary-100"
+                    className="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-brand-green hover:file:bg-emerald-100"
                   />
                   {paymentProof && (
                     <span className="text-[10px] text-emerald-600 font-mono mt-1 block">
-                      ✓ Attached: {paymentProof}
+                      ✓ {paymentProof}
                     </span>
                   )}
                 </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
+                <div>
+                  <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
+                    Upload CNIC / ID Front Copy (Optional)
+                  </label>
+                  <input
+                    type="file"
+                    accept="image/*,.pdf"
+                    onChange={(e) => handleFileUpload(e, setCnicFile)}
+                    className="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-brand-green hover:file:bg-emerald-100"
+                  />
+                  {cnicFile && <span className="text-[10px] text-emerald-600 font-mono mt-1 block">✓ {cnicFile}</span>}
+                </div>
+
+                <div>
+                  <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
+                    Upload Passport Size Photograph (Optional)
+                  </label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleFileUpload(e, setPhotoFile)}
+                    className="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-brand-green hover:file:bg-emerald-100"
+                  />
+                  {photoFile && <span className="text-[10px] text-emerald-600 font-mono mt-1 block">✓ {photoFile}</span>}
+                </div>
+              </div>
+
+              {/* DECLARATION CHECKBOX */}
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={declarationAgreed}
+                    onChange={(e) => setDeclarationAgreed(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 rounded text-brand-green focus:ring-brand-green border-slate-300 accent-brand-green"
+                  />
+                  <span className="text-xs text-slate-700 leading-relaxed font-body">
+                    <strong>DECLARATION:</strong> I hereby declare that the information provided above is correct to the best of my knowledge and I agree to abide by the rules and regulations of Premier Tax Corporate &amp; Accounting School.
+                  </span>
+                </label>
               </div>
             </div>
 
