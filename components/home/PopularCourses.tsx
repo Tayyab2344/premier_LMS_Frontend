@@ -272,7 +272,7 @@ export function PopularCourses() {
                   </div>
 
                   <Link
-                    href={`/courses/${course.slug}`}
+                    href="/admission"
                     className="w-full btn-primary !py-3 text-sm text-center justify-center font-body font-semibold"
                   >
                     {course.status === 'Available' ? 'Enroll Now' : 'View Masterclass'}

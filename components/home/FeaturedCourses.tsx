@@ -258,7 +258,7 @@ export function FeaturedCourses() {
                     <span className="text-xs text-body block">Total Fee</span>
                     <span className="text-2xl font-extrabold text-heading">PKR {preview.price.toLocaleString()}</span>
                   </div>
-                  <Link href="/courses" className="px-5 py-2.5 rounded-xl bg-primary text-white font-bold text-xs hover:bg-primary-700 transition-colors">
+                  <Link href="/admission" className="px-5 py-2.5 rounded-xl bg-primary text-white font-bold text-xs hover:bg-primary-700 transition-colors">
                     Enroll Now
                   </Link>
                 </div>

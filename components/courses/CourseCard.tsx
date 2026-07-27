@@ -174,7 +174,7 @@ export function CourseCard({ course, onNotifyClick }: CourseCardProps) {
           {/* Action Button */}
           {isAvailable ? (
             <Link
-              href={`/courses/${course.slug}`}
+              href="/admission"
               className="w-full btn-primary !py-3 !text-xs text-center justify-center font-heading font-bold shadow-md group-hover:shadow-blue-glow transition-all"
             >
               Enroll Now

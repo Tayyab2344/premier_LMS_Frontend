@@ -83,7 +83,7 @@ export function Navbar() {
                 Login
               </Link>
               <Link
-                href="/courses"
+                href="/admission"
                 className="btn-primary !py-2.5 !px-6 !text-[13px]"
               >
                 Enroll Now
@@ -128,7 +128,7 @@ export function Navbar() {
                 <Link href="/auth/login" onClick={() => setMobileOpen(false)} className="btn-secondary w-full">
                   Login
                 </Link>
-                <Link href="/courses" onClick={() => setMobileOpen(false)} className="btn-primary w-full">
+                <Link href="/admission" onClick={() => setMobileOpen(false)} className="btn-primary w-full">
                   Enroll Now <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
