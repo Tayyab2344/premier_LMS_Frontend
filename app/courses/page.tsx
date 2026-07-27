@@ -1,21 +1,41 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { CoursesHero } from '@/components/courses/CoursesHero';
 import { CourseStats } from '@/components/courses/CourseStats';
 import { CourseFilterBar } from '@/components/courses/CourseFilterBar';
 import { CourseCard } from '@/components/courses/CourseCard';
 import { NotifyModal } from '@/components/courses/NotifyModal';
 import { CourseCTA } from '@/components/courses/detail/CourseCTA';
-import { COURSES_DATA, Course } from '@/lib/coursesData';
+import { COURSES_DATA, Course, mapBackendCourseToFrontend } from '@/lib/coursesData';
+import api from '@/lib/api';
 import { SlidersHorizontal } from 'lucide-react';
 
 export default function CoursesPage() {
+  const [coursesList, setCoursesList] = useState<Course[]>(COURSES_DATA);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedLevel, setSelectedLevel] = useState('All');
   const [selectedStatus, setSelectedStatus] = useState('All');
   const [selectedSort, setSelectedSort] = useState('popular');
+
+  // Fetch dynamic courses from backend DB
+  useEffect(() => {
+    api
+      .get('/courses')
+      .then((res) => {
+        if (res.data && Array.isArray(res.data) && res.data.length > 0) {
+          const dynamicCourses = res.data.map(mapBackendCourseToFrontend);
+          // Combine dynamic courses, avoiding duplicate titles/slugs
+          const dynamicSlugs = new Set(dynamicCourses.map((c: Course) => c.slug.toLowerCase()));
+          const staticRemaining = COURSES_DATA.filter((c) => !dynamicSlugs.has(c.slug.toLowerCase()) && !dynamicSlugs.has(c.id.toLowerCase()));
+          setCoursesList([...dynamicCourses, ...staticRemaining]);
+        }
+      })
+      .catch((err) => {
+        console.error('Using fallback static courses list', err);
+      });
+  }, []);
 
   // Notify Modal State
   const [notifyModalOpen, setNotifyModalOpen] = useState(false);
@@ -23,12 +43,12 @@ export default function CoursesPage() {
 
   // Extract unique categories for filter dropdown
   const categoriesList = useMemo(() => {
-    return Array.from(new Set(COURSES_DATA.map((c) => c.category)));
-  }, []);
+    return Array.from(new Set(coursesList.map((c) => c.category)));
+  }, [coursesList]);
 
   // Filter & Sort Logic
   const filteredCourses = useMemo(() => {
-    let result = [...COURSES_DATA];
+    let result = [...coursesList];
 
     // Search Query Filter
     if (searchQuery.trim()) {
@@ -71,7 +91,7 @@ export default function CoursesPage() {
     }
 
     return result;
-  }, [searchQuery, selectedCategory, selectedLevel, selectedStatus, selectedSort]);
+  }, [coursesList, searchQuery, selectedCategory, selectedLevel, selectedStatus, selectedSort]);
 
   const handleResetFilters = () => {
     setSearchQuery('');

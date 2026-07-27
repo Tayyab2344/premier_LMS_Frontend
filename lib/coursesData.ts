@@ -736,3 +736,93 @@ export const COURSES_DATA: Course[] = [
     faqs: [{ question: 'When is launch expected?', answer: 'Launching in Q4 2027.' }],
   },
 ];
+
+export function mapBackendCourseToFrontend(c: any): Course {
+  const slug = c.id || c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const durHours = c.duration || 36;
+  return {
+    id: c.id,
+    slug: slug,
+    title: c.name,
+    category: c.category || 'Tax & Accounting',
+    status: c.isActive ? 'Available' : 'Coming Soon',
+    badge: c.badge || (c.discountedFee === 0 ? 'Free' : undefined),
+    duration: `${durHours} Hours`,
+    weeksCount: Math.ceil(durHours / 3),
+    level: (c.level as any) || 'Intermediate',
+    instructor: {
+      name: c.instructorName || 'Raja Gulfam',
+      title: c.instructorTitle || 'Advocate High Court & ACMA',
+      avatar: c.instructorImage || '/about/founder-portrait.jpeg',
+      bio: c.instructorBio || 'Leading tax consultant, Advocate High Court, and General Secretary Hazara Tax Bar Association with decades of practice.',
+      experience: '15+ Years Active Legal Practice',
+      teachingPhilosophy: 'Practical case study based legal & tax training.',
+      expertise: ['Income Tax Filing', 'Sales Tax', 'Corporate Compliance', 'Appellate Litigation'],
+      education: ['Advocate High Court', 'ACMA', 'General Secretary Hazara Tax Bar Association'],
+      certifications: ['High Court Bar License', 'ACMA Practitioner'],
+      socials: { linkedin: '' },
+    },
+    rating: 4.9,
+    reviewCount: c.reviews?.length || 120,
+    ratingDistribution: [
+      { stars: 5, percentage: 85, count: 102 },
+      { stars: 4, percentage: 10, count: 12 },
+      { stars: 3, percentage: 5, count: 6 },
+    ],
+    studentsCount: c.enrollments?.length || 1500,
+    price: c.discountedFee ?? 30000,
+    originalPrice: c.originalFee || 50000,
+    language: c.language || 'Urdu & English',
+    format: 'Mobile App + Live/Recorded Masterclass',
+    thumbnail: c.thumbnail || '/about/teaching-class.jpeg',
+    shortDescription: c.description || 'Comprehensive professional practitioner masterclass.',
+    fullDescription: c.longDescription || c.description || 'Complete practitioner masterclass providing hands-on knowledge.',
+    whoIsThisFor: ['Tax Practitioners', 'Advocates & Legal Consultants', 'Accountants & Finance Managers'],
+    learningObjectives: c.whatYouWillLearn || ['Master tax compliance', 'Navigate corporate laws', 'Execute filing independently'],
+    careerOpportunities: ['Tax & Corporate Consultant', 'Senior Tax Manager', 'Independent Legal Practitioner'],
+    skillsIncluded: c.whatYouWillLearn || ['Tax Filing', 'FBR Compliance', 'Corporate Litigation'],
+    requirements: c.requirements || ['Mobile App access on Android/iOS or Computer'],
+    certificateInfo: {
+      title: `${c.name} Certification`,
+      accreditation: 'Premier LMS & Raja Gulfam Academy',
+      features: ['Verifiable Certificate ID', 'Mobile App downloadable PDF'],
+    },
+    modules: c.modules && c.modules.length > 0 ? c.modules.map((m: any, idx: number) => ({
+      id: m.id || `mod-${idx}`,
+      number: idx + 1,
+      title: m.title,
+      description: `Module ${idx + 1} curriculum breakdown`,
+      duration: `${m.lessons?.reduce((acc: number, l: any) => acc + (l.duration || 15), 0) || 60} mins`,
+      lessons: m.lessons?.map((l: any) => ({
+        title: l.title,
+        duration: `${l.duration || 15} Mins`,
+        type: 'video',
+        isFree: l.isPreview || false,
+      })) || [],
+    })) : [
+      {
+        id: 'mod-1',
+        number: 1,
+        title: 'Core Fundamentals & Legal Regulations',
+        description: 'Introduction to regulatory requirements, portals, and filing systems.',
+        duration: '2 Hours',
+        lessons: [
+          { title: 'Overview & Portal Setup', duration: '30 Mins', type: 'video', isFree: true },
+          { title: 'Filing Workflow & Calculations', duration: '45 Mins', type: 'video', isFree: false },
+        ],
+      },
+    ],
+    projects: [],
+    reviews: c.reviews && c.reviews.length > 0 ? c.reviews.map((r: any, idx: number) => ({
+      id: r.id || `rev-${idx}`,
+      name: r.name,
+      role: 'Enrolled Student',
+      avatar: '/about/founder-portrait.jpeg',
+      rating: r.rating || 5,
+      date: r.date || 'Recent',
+      comment: r.content,
+      helpfulCount: 15,
+    })) : [],
+    faqs: [{ question: 'How do I access this course?', answer: 'Once enrolled, instant full access is granted on the Premier LMS Student Mobile App.' }],
+  };
+}

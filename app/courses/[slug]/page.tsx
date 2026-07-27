@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SmoothScrollProvider } from '@/components/about/SmoothScrollProvider';
@@ -16,7 +16,8 @@ import { TabFAQs } from '@/components/courses/detail/TabFAQs';
 import { CourseSidebar } from '@/components/courses/detail/CourseSidebar';
 import { RelatedCoursesCarousel } from '@/components/courses/detail/RelatedCoursesCarousel';
 import { NotifyModal } from '@/components/courses/NotifyModal';
-import { COURSES_DATA } from '@/lib/coursesData';
+import { COURSES_DATA, Course, mapBackendCourseToFrontend } from '@/lib/coursesData';
+import api from '@/lib/api';
 import Link from 'next/link';
 import { BookOpen } from 'lucide-react';
 
@@ -28,10 +29,53 @@ export default function CourseDetailPage() {
   const [notifyModalOpen, setNotifyModalOpen] = useState(false);
   const [notifyCourseTitle, setNotifyCourseTitle] = useState('');
 
-  // Find course from COURSES_DATA
-  const course = useMemo(() => {
-    return COURSES_DATA.find((c) => c.slug === slug);
+  const [dynamicCourse, setDynamicCourse] = useState<Course | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Check static list first
+    const staticMatch = COURSES_DATA.find((c) => c.slug === slug || c.id === slug);
+    if (staticMatch) {
+      setDynamicCourse(staticMatch);
+      setLoading(false);
+      return;
+    }
+
+    // Try fetching from backend API by ID or all active
+    api
+      .get(`/courses/${slug}`)
+      .then((res) => {
+        if (res.data) {
+          setDynamicCourse(mapBackendCourseToFrontend(res.data));
+        }
+      })
+      .catch(() => {
+        // Fallback: search in GET /courses list
+        api.get('/courses').then((res) => {
+          if (res.data && Array.isArray(res.data)) {
+            const found = res.data.find(
+              (c: any) => c.id === slug || c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') === slug
+            );
+            if (found) {
+              setDynamicCourse(mapBackendCourseToFrontend(found));
+            }
+          }
+        }).catch(() => {});
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [slug]);
+
+  const course = dynamicCourse;
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-white text-heading flex items-center justify-center p-6 pt-24">
+        <div className="w-8 h-8 border-4 border-brand-green/30 border-t-brand-green rounded-full animate-spin" />
+      </main>
+    );
+  }
 
   if (!course) {
     return (
