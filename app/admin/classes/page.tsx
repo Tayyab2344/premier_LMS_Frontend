@@ -109,14 +109,16 @@ export default function ClassesPage() {
     fetchDashboardData();
     api.get("/batches")
       .then((res) => {
-        setBatchesList(res.data);
+        const batches = Array.isArray(res.data) ? res.data : res.data?.data || [];
+        setBatchesList(batches);
       })
       .catch((err) => {
         console.error("Failed to load batches:", err);
       });
     api.get("/courses")
       .then((res) => {
-        setCoursesList(res.data);
+        const courses = Array.isArray(res.data) ? res.data : res.data?.data || [];
+        setCoursesList(courses);
       })
       .catch((err) => {
         console.error("Failed to load courses:", err);
@@ -125,18 +127,18 @@ export default function ClassesPage() {
 
   const getWeeklyClassCount = () => {
     if (!form.batchName || !form.scheduledStart) return 0;
-    
+
     const batchInHierarchy = batchesHierarchy.find(b => b.name === form.batchName);
     if (!batchInHierarchy) return 0;
 
     const date = new Date(form.scheduledStart);
     if (isNaN(date.getTime())) return 0;
-    
+
     const day = date.getDay();
     const diff = date.getDate() - day + (day === 0 ? -6 : 1);
     const startOfWeek = new Date(date.setDate(diff));
     startOfWeek.setHours(0, 0, 0, 0);
-    
+
     const endOfWeek = new Date(startOfWeek);
     endOfWeek.setDate(startOfWeek.getDate() + 6);
     endOfWeek.setHours(23, 59, 59, 999);
@@ -150,7 +152,7 @@ export default function ClassesPage() {
         }
       });
     });
-    
+
     return count;
   };
 
@@ -228,7 +230,7 @@ export default function ClassesPage() {
     setSelectedLectureForEdit(null);
     const courseId = selectedCourseForRecordings || coursesList[0]?.id || "";
     setLectureCourseId(courseId);
-    
+
     // Find next class number
     const siblingLectures = coursesRecordings.filter(
       (l: any) => l.courseId === courseId || l.course?.id === courseId
@@ -238,7 +240,7 @@ export default function ClassesPage() {
       return !isNaN(num) && num > max ? num : max;
     }, 0);
     setLectureClassNo((maxClassNo + 1).toString());
-    
+
     setLectureTitle("");
     setLectureUrl("");
     setLectureDurationHours("1");
@@ -253,13 +255,13 @@ export default function ClassesPage() {
     setLectureClassNo(lecture.classNo ? lecture.classNo.toString() : "");
     setLectureTitle(lecture.title);
     setLectureUrl(lecture.recordingUrl);
-    
+
     const totalMins = parseInt(lecture.duration, 10) || 0;
     const hrs = Math.floor(totalMins / 60);
     const mins = totalMins % 60;
     setLectureDurationHours(hrs.toString());
     setLectureDurationMinutes(mins.toString());
-    
+
     setLectureLive(lecture.recordingLive);
     setShowRecordedLectureModal(true);
   };
@@ -363,33 +365,32 @@ export default function ClassesPage() {
           <div>
             <h2 className="text-base font-bold text-text-primary flex items-center gap-3">
               {batch.name}
-              <span className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                batch.status === "admission"
+              <span className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${batch.status === "admission"
                   ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
                   : batch.status === "classes"
-                  ? "bg-blue-50 text-blue-700 border border-blue-200"
-                  : batch.status === "completed"
-                  ? "bg-gray-100 text-gray-500 border border-gray-200"
-                  : batch.isActive
-                  ? "bg-green-50 text-green-700 border border-green-200"
-                  : "bg-gray-100 text-gray-500 border border-gray-200"
-              }`}>
+                    ? "bg-blue-50 text-blue-700 border border-blue-200"
+                    : batch.status === "completed"
+                      ? "bg-gray-100 text-gray-500 border border-gray-200"
+                      : batch.isActive
+                        ? "bg-green-50 text-green-700 border border-green-200"
+                        : "bg-gray-100 text-gray-500 border border-gray-200"
+                }`}>
                 {batch.status === "admission"
                   ? "Admission Phase"
                   : batch.status === "classes"
-                  ? "Classes Phase"
-                  : batch.status === "completed"
-                  ? "Completed"
-                  : batch.isActive
-                  ? "Active"
-                  : "Inactive"}
+                    ? "Classes Phase"
+                    : batch.status === "completed"
+                      ? "Completed"
+                      : batch.isActive
+                        ? "Active"
+                        : "Inactive"}
               </span>
             </h2>
             <p className="text-xs text-text-secondary mt-1">
               Duration: {new Date(batch.startDate).toLocaleDateString()} - {new Date(batch.endDate).toLocaleDateString()}
             </p>
           </div>
-          
+
           {/* Total Applicants Pill */}
           <div className="bg-brand-green/5 border border-brand-green/10 rounded-xl px-4 py-2 text-right">
             <span className="text-[10px] uppercase font-bold text-brand-green block">Total Applicants</span>
@@ -406,8 +407,8 @@ export default function ClassesPage() {
                   Course: {course.name}
                 </h3>
                 {!isPast && (
-                  <button 
-                    onClick={() => handleOpenScheduleModal(batch.name, course.name)} 
+                  <button
+                    onClick={() => handleOpenScheduleModal(batch.name, course.name)}
                     className="btn-signup text-[10px] px-3 py-1 bg-brand-green border-brand-green hover:bg-brand-green/90 text-white cursor-pointer"
                   >
                     + Schedule Class
@@ -455,9 +456,8 @@ export default function ClassesPage() {
                             </div>
                           </td>
                           <td className="px-4 py-3 text-[10px]">
-                            <span className={`inline-block px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider ${
-                              cls.status === "live" ? "bg-red-500 text-white" : cls.status === "completed" ? "bg-gray-100 text-text-secondary" : "bg-blue-50 text-blue-600"
-                            }`}>
+                            <span className={`inline-block px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider ${cls.status === "live" ? "bg-red-500 text-white" : cls.status === "completed" ? "bg-gray-100 text-text-secondary" : "bg-blue-50 text-blue-600"
+                              }`}>
                               {cls.status}
                             </span>
                           </td>
@@ -532,11 +532,10 @@ export default function ClassesPage() {
       <div className="flex border-b border-border-light mb-6">
         <button
           onClick={() => setActiveTab('schedule')}
-          className={`px-4 py-2 text-sm font-semibold border-b-2 transition-all ${
-            activeTab === 'schedule'
+          className={`px-4 py-2 text-sm font-semibold border-b-2 transition-all ${activeTab === 'schedule'
               ? 'border-brand-green text-brand-green font-bold'
               : 'border-transparent text-text-secondary hover:text-text-primary'
-          }`}
+            }`}
         >
           Live Schedule Dashboard
         </button>
@@ -545,11 +544,10 @@ export default function ClassesPage() {
             setActiveTab('recordings');
             setSelectedCourseForRecordings(null);
           }}
-          className={`px-4 py-2 text-sm font-semibold border-b-2 transition-all ${
-            activeTab === 'recordings'
+          className={`px-4 py-2 text-sm font-semibold border-b-2 transition-all ${activeTab === 'recordings'
               ? 'border-brand-green text-brand-green font-bold'
               : 'border-transparent text-text-secondary hover:text-text-primary'
-          }`}
+            }`}
         >
           Recorded Lectures library
         </button>
@@ -590,8 +588,8 @@ export default function ClassesPage() {
                 <h2 className="text-base font-bold text-text-primary">Recorded Lectures Library</h2>
                 <p className="text-xs text-text-secondary mt-0.5">Select a course to view and manage its recorded classes</p>
               </div>
-              <button 
-                onClick={handleOpenAddRecordingModal} 
+              <button
+                onClick={handleOpenAddRecordingModal}
                 className="btn-signup text-xs px-3 py-1.5 bg-[#c9a84c] border-[#c9a84c] hover:bg-[#c9a84c]/90 text-white cursor-pointer"
               >
                 + Add Recorded Lecture
@@ -608,7 +606,7 @@ export default function ClassesPage() {
                   ).length;
 
                   return (
-                    <div 
+                    <div
                       key={course.id}
                       onClick={() => {
                         setSelectedCourseForRecordings(course.id);
@@ -652,7 +650,7 @@ export default function ClassesPage() {
             <div className="bg-white border border-border-light rounded-xl shadow-sm p-6 space-y-6 animate-fade-in">
               <div className="flex items-center justify-between border-b border-border-light pb-4">
                 <div className="space-y-1">
-                  <button 
+                  <button
                     onClick={() => setSelectedCourseForRecordings(null)}
                     className="flex items-center gap-1.5 text-xs text-text-secondary hover:text-text-primary transition-all font-semibold"
                   >
@@ -666,14 +664,14 @@ export default function ClassesPage() {
                     {activeCourse?.name}
                   </h2>
                   <p className="text-xs text-text-secondary">
-                    {courseSubTab === 'lectures' 
+                    {courseSubTab === 'lectures'
                       ? `${filteredLectures.length} lecture${filteredLectures.length !== 1 ? 's' : ''} uploaded for this course`
                       : `${courseStudents.length} student${courseStudents.length !== 1 ? 's' : ''} enrolled in this course`}
                   </p>
                 </div>
                 {courseSubTab === 'lectures' && (
-                  <button 
-                    onClick={handleOpenAddRecordingModal} 
+                  <button
+                    onClick={handleOpenAddRecordingModal}
                     className="btn-signup text-xs px-3 py-1.5 bg-[#c9a84c] border-[#c9a84c] hover:bg-[#c9a84c]/90 text-white cursor-pointer"
                   >
                     + Add Recorded Lecture
@@ -685,21 +683,19 @@ export default function ClassesPage() {
               <div className="flex border-b border-border-light pb-0.5 mb-2">
                 <button
                   onClick={() => setCourseSubTab('lectures')}
-                  className={`px-4 py-2 text-xs font-bold border-b-2 transition-all ${
-                    courseSubTab === 'lectures'
+                  className={`px-4 py-2 text-xs font-bold border-b-2 transition-all ${courseSubTab === 'lectures'
                       ? 'border-[#c9a84c] text-[#c9a84c]'
                       : 'border-transparent text-text-secondary hover:text-text-primary'
-                  }`}
+                    }`}
                 >
                   Recorded Lectures
                 </button>
                 <button
                   onClick={() => setCourseSubTab('students')}
-                  className={`px-4 py-2 text-xs font-bold border-b-2 transition-all ${
-                    courseSubTab === 'students'
+                  className={`px-4 py-2 text-xs font-bold border-b-2 transition-all ${courseSubTab === 'students'
                       ? 'border-[#c9a84c] text-[#c9a84c]'
                       : 'border-transparent text-text-secondary hover:text-text-primary'
-                  }`}
+                    }`}
                 >
                   Enrolled Students
                 </button>
@@ -709,8 +705,8 @@ export default function ClassesPage() {
                 filteredLectures.length === 0 ? (
                   <div className="text-center py-12 bg-bg-light border border-border-light rounded-xl space-y-3">
                     <p className="text-xs text-text-secondary italic">No recorded lectures uploaded for this course yet.</p>
-                    <button 
-                      onClick={handleOpenAddRecordingModal} 
+                    <button
+                      onClick={handleOpenAddRecordingModal}
                       className="btn-signup text-xs px-3 py-1.5 bg-[#c9a84c] border-[#c9a84c] hover:bg-[#c9a84c]/90 text-white cursor-pointer inline-block"
                     >
                       Upload First Lecture
@@ -739,17 +735,16 @@ export default function ClassesPage() {
                               <span className="underline">{lecture.recordingUrl}</span>
                             </td>
                             <td className="px-4 py-3 text-xs">
-                              <span className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                                lecture.recordingLive 
-                                  ? "bg-green-50 text-green-700 border border-green-200" 
+                              <span className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${lecture.recordingLive
+                                  ? "bg-green-50 text-green-700 border border-green-200"
                                   : "bg-gray-100 text-gray-700 border border-gray-200"
-                              }`}>
+                                }`}>
                                 {lecture.recordingLive ? "Live" : "Draft"}
                               </span>
                             </td>
                             <td className="px-4 py-3 text-xs text-right">
                               <div className="flex gap-2 justify-end items-center">
-                                <button 
+                                <button
                                   onClick={async () => {
                                     try {
                                       const { data } = await api.post(`/classes/${lecture.id}/recording-token`);
@@ -757,29 +752,28 @@ export default function ClassesPage() {
                                     } catch (err: any) {
                                       showAlert("Error", err.response?.data?.message || "Failed to generate preview token");
                                     }
-                                  }} 
+                                  }}
                                   className="px-3 py-1.5 bg-neutral-800 border border-neutral-700 hover:bg-neutral-700 text-white font-semibold rounded-lg text-xs transition-all cursor-pointer"
                                 >
                                   Preview
                                 </button>
-                                <button 
-                                  onClick={() => handleOpenEditRecordingModal(lecture)} 
+                                <button
+                                  onClick={() => handleOpenEditRecordingModal(lecture)}
                                   className="btn-signup text-xs px-3 py-1.5 bg-bg-light border-border-light text-text-secondary hover:text-text-primary cursor-pointer"
                                 >
                                   Edit
                                 </button>
-                                <button 
-                                  onClick={() => handleToggleLiveRecording(lecture, !lecture.recordingLive)} 
-                                  className={`px-3 py-1.5 font-bold border rounded-lg text-xs transition-all cursor-pointer ${
-                                    lecture.recordingLive 
-                                      ? "bg-red-50 hover:bg-red-100 text-red-600 border-red-200" 
+                                <button
+                                  onClick={() => handleToggleLiveRecording(lecture, !lecture.recordingLive)}
+                                  className={`px-3 py-1.5 font-bold border rounded-lg text-xs transition-all cursor-pointer ${lecture.recordingLive
+                                      ? "bg-red-50 hover:bg-red-100 text-red-600 border-red-200"
                                       : "bg-green-50 hover:bg-green-100 text-green-700 border-green-200"
-                                  }`}
+                                    }`}
                                 >
                                   {lecture.recordingLive ? "Make Draft" : "Make Live"}
                                 </button>
-                                <button 
-                                  onClick={() => handleDeleteRecording(lecture.id)} 
+                                <button
+                                  onClick={() => handleDeleteRecording(lecture.id)}
                                   className="text-red-500 hover:text-red-700 font-bold px-2 py-1 cursor-pointer"
                                 >
                                   Delete
@@ -936,11 +930,10 @@ export default function ClassesPage() {
                 const targetClasses = batchesHierarchy.find(b => b.name === form.batchName)?.classesPerWeek || 3;
                 const limitReached = weekClassesCount >= targetClasses;
                 return (
-                  <div className={`text-xs font-semibold rounded-lg p-2.5 flex items-center justify-between border ${
-                    limitReached
+                  <div className={`text-xs font-semibold rounded-lg p-2.5 flex items-center justify-between border ${limitReached
                       ? "text-yellow-600 bg-yellow-50 border-yellow-200"
                       : "text-brand-green bg-brand-green/5 border-brand-green/10"
-                  }`}>
+                    }`}>
                     <span className="flex items-center gap-1.5">
                       <span className={`w-2.5 h-2.5 rounded-full ${limitReached ? "bg-yellow-500 animate-pulse" : "bg-brand-green"}`} />
                       Weekly target tracking:
@@ -953,15 +946,15 @@ export default function ClassesPage() {
               {/* Student Permissions Section */}
               <div className="border-t border-border-light pt-4 space-y-3">
                 <h4 className="text-xs font-bold text-text-primary uppercase tracking-wider mb-2">Student Permissions</h4>
-                
+
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col">
                     <span className="text-xs font-semibold text-text-primary">Microphone Access</span>
                     <span className="text-[10px] text-text-secondary">Allow students to unmute their mic</span>
                   </div>
-                  <input 
-                    type="checkbox" 
-                    checked={form.allowStudentMic} 
+                  <input
+                    type="checkbox"
+                    checked={form.allowStudentMic}
                     onChange={(e) => setForm({ ...form, allowStudentMic: e.target.checked })}
                     className="w-4 h-4 text-brand-green border-border-light rounded focus:ring-brand-green cursor-pointer"
                   />
@@ -972,9 +965,9 @@ export default function ClassesPage() {
                     <span className="text-xs font-semibold text-text-primary">Camera Access</span>
                     <span className="text-[10px] text-text-secondary">Allow students to turn on camera</span>
                   </div>
-                  <input 
-                    type="checkbox" 
-                    checked={form.allowStudentCamera} 
+                  <input
+                    type="checkbox"
+                    checked={form.allowStudentCamera}
                     onChange={(e) => setForm({ ...form, allowStudentCamera: e.target.checked })}
                     className="w-4 h-4 text-brand-green border-border-light rounded focus:ring-brand-green cursor-pointer"
                   />
@@ -985,9 +978,9 @@ export default function ClassesPage() {
                     <span className="text-xs font-semibold text-text-primary">Screen Sharing</span>
                     <span className="text-[10px] text-text-secondary">Allow students to share screen</span>
                   </div>
-                  <input 
-                    type="checkbox" 
-                    checked={form.allowStudentScreenshare} 
+                  <input
+                    type="checkbox"
+                    checked={form.allowStudentScreenshare}
                     onChange={(e) => setForm({ ...form, allowStudentScreenshare: e.target.checked })}
                     className="w-4 h-4 text-brand-green border-border-light rounded focus:ring-brand-green cursor-pointer"
                   />
@@ -1008,14 +1001,14 @@ export default function ClassesPage() {
               <h2 className="font-bold text-text-primary text-base">
                 {selectedLectureForEdit ? "Edit Recorded Lecture" : "Add Recorded Lecture"}
               </h2>
-              <button 
-                onClick={() => setShowRecordedLectureModal(false)} 
+              <button
+                onClick={() => setShowRecordedLectureModal(false)}
                 className="text-text-secondary hover:text-text-primary text-xl font-bold cursor-pointer"
               >
                 ×
               </button>
             </div>
-            
+
             <div className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Course</label>
@@ -1047,36 +1040,36 @@ export default function ClassesPage() {
 
               <div>
                 <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Class/Lecture Number</label>
-                <input 
+                <input
                   type="number"
                   min="1"
                   step="1"
-                  value={lectureClassNo} 
-                  onChange={(e) => setLectureClassNo(e.target.value)} 
-                  className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary focus:outline-none focus:ring-1 focus:ring-[#c9a84c]" 
-                  placeholder="e.g. 1" 
+                  value={lectureClassNo}
+                  onChange={(e) => setLectureClassNo(e.target.value)}
+                  className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary focus:outline-none focus:ring-1 focus:ring-[#c9a84c]"
+                  placeholder="e.g. 1"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Lecture Title</label>
-                <input 
+                <input
                   type="text"
-                  value={lectureTitle} 
-                  onChange={(e) => setLectureTitle(e.target.value)} 
-                  className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary focus:outline-none focus:ring-1 focus:ring-[#c9a84c]" 
-                  placeholder="e.g. Lecture 1: Introduction to FBR Portal" 
+                  value={lectureTitle}
+                  onChange={(e) => setLectureTitle(e.target.value)}
+                  className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary focus:outline-none focus:ring-1 focus:ring-[#c9a84c]"
+                  placeholder="e.g. Lecture 1: Introduction to FBR Portal"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">YouTube Video URL</label>
-                <input 
+                <input
                   type="text"
-                  value={lectureUrl} 
-                  onChange={(e) => setLectureUrl(e.target.value)} 
-                  className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary focus:outline-none focus:ring-1 focus:ring-[#c9a84c]" 
-                  placeholder="e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ" 
+                  value={lectureUrl}
+                  onChange={(e) => setLectureUrl(e.target.value)}
+                  className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary focus:outline-none focus:ring-1 focus:ring-[#c9a84c]"
+                  placeholder="e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                 />
               </div>
 
@@ -1084,25 +1077,25 @@ export default function ClassesPage() {
                 <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Duration</label>
                 <div className="flex gap-4">
                   <div className="flex-1 flex items-center gap-2">
-                    <input 
+                    <input
                       type="number"
                       min="0"
-                      value={lectureDurationHours} 
-                      onChange={(e) => setLectureDurationHours(e.target.value)} 
-                      className="w-full px-3 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary focus:outline-none focus:ring-1 focus:ring-[#c9a84c]" 
-                      placeholder="Hours" 
+                      value={lectureDurationHours}
+                      onChange={(e) => setLectureDurationHours(e.target.value)}
+                      className="w-full px-3 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary focus:outline-none focus:ring-1 focus:ring-[#c9a84c]"
+                      placeholder="Hours"
                     />
                     <span className="text-xs text-text-secondary font-bold">hrs</span>
                   </div>
                   <div className="flex-1 flex items-center gap-2">
-                    <input 
+                    <input
                       type="number"
                       min="0"
                       max="59"
-                      value={lectureDurationMinutes} 
-                      onChange={(e) => setLectureDurationMinutes(e.target.value)} 
-                      className="w-full px-3 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary focus:outline-none focus:ring-1 focus:ring-[#c9a84c]" 
-                      placeholder="Minutes" 
+                      value={lectureDurationMinutes}
+                      onChange={(e) => setLectureDurationMinutes(e.target.value)}
+                      className="w-full px-3 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary focus:outline-none focus:ring-1 focus:ring-[#c9a84c]"
+                      placeholder="Minutes"
                     />
                     <span className="text-xs text-text-secondary font-bold">mins</span>
                   </div>
@@ -1110,7 +1103,7 @@ export default function ClassesPage() {
               </div>
 
               <div className="flex items-center gap-3 pt-2">
-                <input 
+                <input
                   type="checkbox"
                   id="lecture-live"
                   checked={lectureLive}
@@ -1123,14 +1116,14 @@ export default function ClassesPage() {
               </div>
 
               <div className="flex gap-3 pt-4 border-t border-border-light">
-                <button 
-                  onClick={handleSaveRecordedLecture} 
+                <button
+                  onClick={handleSaveRecordedLecture}
                   className="btn-signup flex-1 py-2.5 text-sm cursor-pointer"
                 >
                   Save Lecture
                 </button>
-                <button 
-                  onClick={() => setShowRecordedLectureModal(false)} 
+                <button
+                  onClick={() => setShowRecordedLectureModal(false)}
                   className="px-4 py-2.5 bg-transparent border border-border-light hover:bg-gray-50 text-text-secondary font-semibold rounded-lg text-sm transition-all cursor-pointer"
                 >
                   Cancel
@@ -1147,14 +1140,14 @@ export default function ClassesPage() {
           <div className="bg-white border border-border-light rounded-xl p-6 w-full max-w-lg mx-4 shadow-xl">
             <div className="flex items-center justify-between mb-5 border-b border-gray-100 pb-3">
               <h2 className="font-bold text-text-primary text-base">Student Admission &amp; Profile Details</h2>
-              <button 
-                onClick={() => setSelectedStudentForDetails(null)} 
+              <button
+                onClick={() => setSelectedStudentForDetails(null)}
                 className="text-text-secondary hover:text-text-primary text-xl font-bold"
               >
                 ×
               </button>
             </div>
-            
+
             <div className="space-y-4 max-h-[70vh] overflow-y-auto pr-1">
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -1220,7 +1213,7 @@ export default function ClassesPage() {
             </div>
 
             <div className="flex justify-end gap-3 mt-6 pt-3 border-t border-gray-100">
-              <button 
+              <button
                 onClick={() => {
                   navigator.clipboard.writeText(selectedStudentForDetails.email);
                   showAlert("Copied!", `Email "${selectedStudentForDetails.email}" copied.`);
@@ -1229,7 +1222,7 @@ export default function ClassesPage() {
               >
                 Copy Email
               </button>
-              <button 
+              <button
                 onClick={() => setSelectedStudentForDetails(null)}
                 className="px-4 py-2 bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-bold rounded-lg text-xs transition-all cursor-pointer"
               >
