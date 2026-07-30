@@ -139,7 +139,6 @@ export default function AdminDashboard() {
   // Chart data
   const [batchesHierarchy, setBatchesHierarchy] = useState<any[]>([]);
   const [recentApplications, setRecentApplications] = useState<any[]>([]);
-  const [coursesList, setCoursesList] = useState<any[]>([]);
 
   useEffect(() => {
     async function loadDashboard() {
@@ -170,7 +169,6 @@ export default function AdminDashboard() {
           const d = coursesRes.value.data;
           const arr = Array.isArray(d) ? d : d?.data || [];
           setCourseCount(d?.meta?.total || arr.length);
-          setCoursesList(arr);
         }
 
         // Upcoming classes (returns raw number)
