@@ -673,6 +673,7 @@ export default function ClassroomPage() {
           userEmail={user?.email || ''}
           userId={user?.id}
           isModerator={credentials.isModerator}
+          allowStudentScreenshare={credentials.allowStudentScreenshare}
           zak={credentials.zak}
           socket={socket}
           onInit={(client) => {

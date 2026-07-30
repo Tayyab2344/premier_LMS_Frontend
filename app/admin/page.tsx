@@ -570,47 +570,6 @@ export default function AdminDashboard() {
           )}
         </div>
 
-        {/* Quick Actions */}
-        <div className="bg-white border border-border-light rounded-xl p-6 shadow-sm">
-          <h2 className="text-sm font-bold text-text-primary mb-4">Quick Actions</h2>
-          <div className="space-y-2.5">
-            {[
-              { label: "Schedule a Class", href: "/admin/classes", icon: "M12 6v6m0 0v6m0-6h6m-6 0H6", color: "bg-emerald-50 text-emerald-600 border-emerald-100" },
-              { label: "Add New Course", href: "/admin/courses", icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253", color: "bg-violet-50 text-violet-600 border-violet-100" },
-              { label: "Review Applications", href: "/admin/applications", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4", color: "bg-amber-50 text-amber-600 border-amber-100" },
-              { label: "Manage Batches", href: "/admin/batches", icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z", color: "bg-blue-50 text-blue-600 border-blue-100" },
-              { label: "View Students", href: "/admin/students", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z", color: "bg-rose-50 text-rose-600 border-rose-100" },
-            ].map((action) => (
-              <Link
-                key={action.label}
-                href={action.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl border transition-all hover:-translate-y-0.5 hover:shadow-sm no-underline ${action.color}`}
-              >
-                <svg className="w-4.5 h-4.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d={action.icon} />
-                </svg>
-                <span className="text-xs font-bold">{action.label}</span>
-              </Link>
-            ))}
-          </div>
-
-          {/* Course Distribution mini-stat */}
-          {coursesList.length > 0 && (
-            <div className="mt-5 pt-4 border-t border-gray-100">
-              <h3 className="text-[10px] font-bold text-text-secondary uppercase tracking-wider mb-3">Course Library</h3>
-              <div className="space-y-2">
-                {coursesList.slice(0, 4).map((course: any) => (
-                  <div key={course.id} className="flex items-center justify-between">
-                    <span className="text-[11px] font-medium text-text-primary truncate pr-3">{course.name}</span>
-                    <span className="text-[10px] font-bold text-gray-400 shrink-0">
-                      {course.modules?.length || 0} modules
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
       </div>
     </div>
   );

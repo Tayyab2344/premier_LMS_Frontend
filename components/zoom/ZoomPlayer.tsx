@@ -20,6 +20,8 @@ export interface ZoomPlayerProps {
    * Only pass this for moderators. Fetched fresh from the backend on each join.
    */
   zak?: string;
+  /** Whether the host has allowed students to share their screen */
+  allowStudentScreenshare?: boolean;
   /** Shared socket from parent to reuse */
   socket?: any;
   /** Called when client is successfully initialized and joined */
@@ -47,6 +49,7 @@ function ZoomPlayer({
   userId,
   isModerator,
   zak,
+  allowStudentScreenshare = false,
   socket,
   onInit,
   onMeetingEnd,
@@ -160,6 +163,18 @@ function ZoomPlayer({
       document.removeEventListener('contextmenu', handleContextMenu);
       window.removeEventListener('keydown', handleKeyDown);
     };
+  }, []);
+
+  // 4. Polyfill getDisplayMedia for Mobile WebViews so the Share Screen button renders
+  useEffect(() => {
+    if (typeof navigator !== 'undefined' && navigator.mediaDevices) {
+      if (typeof navigator.mediaDevices.getDisplayMedia !== 'function') {
+        (navigator.mediaDevices as any).getDisplayMedia = () => {
+          alert("Screen sharing is not supported in the mobile app. Please use a desktop browser to share your screen.");
+          return Promise.reject(new Error("Screen sharing not supported in WebView."));
+        };
+      }
+    }
   }, []);
 
   // 4. Update watermark coordinates and opacity randomly every 6 seconds
@@ -334,10 +349,9 @@ function ZoomPlayer({
             ? `${window.location.origin}/admin/classes`
             : `${window.location.origin}/dashboard`,
 
-          // ── Screen sharing: host-only ────────────────────────────────────────
-          // screenShare: 1 shows the share button; 0 hides it entirely for
-          // non-host participants, preventing students from attempting to share.
-          screenShare: isModerator,
+          // ── Screen sharing ────────────────────────────────────────
+          // screenShare: 1 shows the share button; 0 hides it entirely.
+          screenShare: isModerator || allowStudentScreenshare,
 
           // Ensure the full participant management panel renders for the host.
           // Without isSupportAV the SDK may suppress host-only controls
