@@ -26,6 +26,8 @@
     "react-countup": "^6.5.3",
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^10.1.0",
+    "redux": "^4.2.1",
+    "redux-thunk": "^2.4.2",
     "socket.io-client": "^4.8.3",
     "tailwind-merge": "^3.6.0"
   },

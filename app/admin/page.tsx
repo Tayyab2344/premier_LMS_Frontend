@@ -51,7 +51,6 @@ function DonutChart({ segments, size = 180 }: {
         {segments.map((seg, i) => {
           const pct = seg.value / total;
           const dashLen = pct * circumference;
-          const dashOffset = -offset * circumference / total * (total / 1);
           const currentOffset = offset;
           offset += seg.value;
           const strokeDashoffset = -(currentOffset / total) * circumference;
