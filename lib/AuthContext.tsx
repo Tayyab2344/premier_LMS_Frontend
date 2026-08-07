@@ -23,6 +23,26 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const DEFAULT_AVATAR = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop';
+
+function resolveAvatarUrl(photoFile?: string): string {
+  if (!photoFile || photoFile === 'passport_photo.jpg' || photoFile === 'cnic_submitted.pdf') {
+    return DEFAULT_AVATAR;
+  }
+  if (photoFile.startsWith('http://') || photoFile.startsWith('https://')) {
+    return photoFile;
+  }
+  const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+  const backendBase = apiBase.replace(/\/api\/?$/, '');
+  if (photoFile.startsWith('/api/uploads/')) {
+    return `${backendBase}${photoFile}`;
+  }
+  if (photoFile.startsWith('uploads/')) {
+    return `${backendBase}/${photoFile}`;
+  }
+  return `${backendBase}/api/uploads/${photoFile}`;
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -38,14 +58,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           const parsed = JSON.parse(storedUser);
           setUser(parsed);
 
-          // Optionally sync/fetch latest profile from server
+          // Sync/fetch latest profile from server
           const { data } = await api.get('/auth/profile');
+          const photoFile = data.admissions?.find((a: any) => a.photoFile)?.photoFile;
           const mappedUser: User = {
             id: data.id,
             name: data.name,
             email: data.email,
             role: data.role,
-            avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
+            avatar: resolveAvatarUrl(photoFile),
             enrolledCourses: data.enrollments?.map((e: any) => e.course.name) || [],
           };
           setUser(mappedUser);
@@ -69,16 +90,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       // Set cookie expiry (7 days matching JWT)
       Cookies.set('accessToken', accessToken, { expires: 7 });
 
-      // Fetch profile to get enrollments
+      // Fetch profile to get enrollments & admissions
       const profileRes = await api.get('/auth/profile');
       const profile = profileRes.data;
+      const photoFile = profile.admissions?.find((a: any) => a.photoFile)?.photoFile;
 
       const loggedInUser: User = {
         id: userData.id,
         name: userData.name,
         email: userData.email,
         role: userData.role,
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
+        avatar: resolveAvatarUrl(photoFile),
         enrolledCourses: profile.enrollments?.map((e: any) => e.course.name) || [],
       };
 
