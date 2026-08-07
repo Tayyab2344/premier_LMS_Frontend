@@ -809,30 +809,49 @@ export default function AdmissionPage() {
                     {coursesList.map((c: any) => {
                       const courseName = c.name;
                       const fee = c.discountedFee || 30000;
+                      const isSelected = selectedCourse === courseName;
                       return (
-                        <div
+                        <label
                           key={c.id || courseName}
                           onClick={() => setSelectedCourse(courseName)}
-                          className={`p-3.5 rounded-2xl border cursor-pointer transition-all flex items-center justify-between gap-3 ${
-                            selectedCourse === courseName
-                              ? 'border-brand-green bg-emerald-50/60 shadow-sm'
-                              : 'border-slate-200 hover:border-slate-300 bg-white'
+                          className={`group relative p-4 rounded-2xl border-2 cursor-pointer transition-all duration-200 flex items-center justify-between gap-3 select-none ${
+                            isSelected
+                              ? 'border-emerald-600 bg-emerald-50/70 shadow-sm ring-2 ring-emerald-600/20'
+                              : 'border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50/50'
                           }`}
                         >
                           <div className="flex items-center gap-3">
-                            <div className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
-                              selectedCourse === courseName ? 'border-brand-green bg-brand-green text-white' : 'border-slate-300'
-                            }`}>
-                              {selectedCourse === courseName && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
+                            <input
+                              type="radio"
+                              name="selectedCourseOption"
+                              value={courseName}
+                              checked={isSelected}
+                              onChange={() => setSelectedCourse(courseName)}
+                              className="sr-only"
+                            />
+                            <div
+                              className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-200 ${
+                                isSelected
+                                  ? 'border-emerald-600 bg-emerald-600 text-white shadow-xs'
+                                  : 'border-slate-300 bg-white group-hover:border-slate-400'
+                              }`}
+                            >
+                              {isSelected && <div className="w-2 h-2 rounded-full bg-white shadow-xs" />}
                             </div>
-                            <span className="text-xs font-heading font-bold text-heading">
+                            <span className={`text-xs font-heading font-bold transition-colors ${
+                              isSelected ? 'text-emerald-950' : 'text-heading'
+                            }`}>
                               {courseName}
                             </span>
                           </div>
-                          <span className="text-[11px] font-mono font-semibold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-full shrink-0">
+                          <span className={`text-[11px] font-mono font-semibold px-2.5 py-1 rounded-full shrink-0 transition-colors ${
+                            isSelected
+                              ? 'text-emerald-800 bg-emerald-100/90 border border-emerald-200/50'
+                              : 'text-emerald-700 bg-emerald-50 border border-emerald-100'
+                          }`}>
                             Rs. {fee.toLocaleString()}
                           </span>
-                        </div>
+                        </label>
                       );
                     })}
                   </div>
