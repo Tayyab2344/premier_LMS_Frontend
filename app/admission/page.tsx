@@ -39,8 +39,8 @@ export default function AdmissionPage() {
   const [postalAddress, setPostalAddress] = useState('');
   const [province, setProvince] = useState('Punjab');
   const [city, setCity] = useState('');
-  const [lastQualification, setLastQualification] = useState('B.Com / M.Com');
-  const [passingYear, setPassingYear] = useState('2024');
+  const [lastQualification, setLastQualification] = useState('');
+  const [passingYear, setPassingYear] = useState('');
   const [institute, setInstitute] = useState('');
 
   const [emergencyName, setEmergencyName] = useState('');
@@ -49,14 +49,15 @@ export default function AdmissionPage() {
 
   // Course selection & Class Mode
   const [selectedCourse, setSelectedCourse] = useState<string>('Certified Tax Practitioner (CTP)');
-  const [classMode, setClassMode] = useState<string>('Online');
+  const classMode = 'Online';
   const [paymentMethod, setPaymentMethod] = useState('Meezan Bank Transfer');
   const [transactionId, setTransactionId] = useState('');
 
-  // Files Upload filenames
+  // Files Upload filenames & Validation
   const [cnicFile, setCnicFile] = useState('');
   const [photoFile, setPhotoFile] = useState('');
   const [paymentProof, setPaymentProof] = useState('');
+  const [fileErrors, setFileErrors] = useState<Record<string, string>>({});
   const [declarationAgreed, setDeclarationAgreed] = useState(true);
 
   // Validation Error States
@@ -201,13 +202,38 @@ export default function AdmissionPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // File Upload Helper
+  // File Upload Helper with Strict Validation (Max 5MB, JPG/PNG/WEBP/PDF)
+  const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'application/pdf'];
+  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+
   const handleFileUpload = async (
     e: React.ChangeEvent<HTMLInputElement>,
+    fieldKey: string,
     setter: (val: string) => void
   ) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    // Reset error for this field
+    setFileErrors((prev) => ({ ...prev, [fieldKey]: '' }));
+
+    // File size validation (5MB max)
+    if (file.size > MAX_FILE_SIZE) {
+      const errorText = `File "${file.name}" exceeds the 5MB size limit (${(file.size / (1024 * 1024)).toFixed(1)} MB). Please select a smaller file.`;
+      setFileErrors((prev) => ({ ...prev, [fieldKey]: errorText }));
+      e.target.value = '';
+      return;
+    }
+
+    // File format / type validation
+    const fileExt = file.name.split('.').pop()?.toLowerCase();
+    const isAllowedExt = ['jpg', 'jpeg', 'png', 'webp', 'pdf'].includes(fileExt || '');
+    if (!ALLOWED_FILE_TYPES.includes(file.type) && !isAllowedExt) {
+      const errorText = `Invalid file format for "${file.name}". Only JPG, PNG, WEBP, and PDF documents are allowed.`;
+      setFileErrors((prev) => ({ ...prev, [fieldKey]: errorText }));
+      e.target.value = '';
+      return;
+    }
 
     const formData = new FormData();
     formData.append('file', file);
@@ -218,8 +244,9 @@ export default function AdmissionPage() {
       });
       setter(res.data.filename);
       showAlert('File Uploaded', `${file.name} attached successfully.`);
-    } catch {
-      setter(file.name);
+    } catch (err: any) {
+      const apiMsg = err?.response?.data?.message || `Failed to upload ${file.name}. Please try again.`;
+      setFileErrors((prev) => ({ ...prev, [fieldKey]: apiMsg }));
     }
   };
 
@@ -812,32 +839,14 @@ export default function AdmissionPage() {
                 )}
               </div>
 
-              {/* Class Mode Selection (Online / Physical) */}
+              {/* Class Mode Display (Online Live Class) */}
               <div className="space-y-2 pt-2">
                 <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                   5. CLASS MODE *
                 </label>
-                <div className="flex gap-4">
-                  {['Online', 'Physical'].map((mode) => (
-                    <label
-                      key={mode}
-                      onClick={() => setClassMode(mode)}
-                      className={`flex-1 p-3.5 rounded-2xl border cursor-pointer transition-all flex items-center justify-center gap-2 text-xs font-bold ${
-                        classMode === mode
-                          ? 'border-brand-green bg-emerald-50/60 text-brand-green'
-                          : 'border-slate-200 hover:border-slate-300 bg-white text-slate-700'
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="classMode"
-                        checked={classMode === mode}
-                        onChange={() => setClassMode(mode)}
-                        className="accent-brand-green"
-                      />
-                      <span>{mode === 'Online' ? '💻 Online Live Class (LMS App)' : '🏢 Physical Class (On-Campus)'}</span>
-                    </label>
-                  ))}
+                <div className="p-3.5 rounded-2xl border border-brand-green bg-emerald-50/60 flex items-center gap-2 text-xs font-bold text-brand-green">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                  <span>💻 {classMode} Live Class (Premier LMS Student App & Portal)</span>
                 </div>
               </div>
 
@@ -904,14 +913,17 @@ export default function AdmissionPage() {
 
                 <div>
                   <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
-                    Payment Receipt / Slip
+                    Payment Receipt / Slip (Max 5MB)
                   </label>
                   <input
                     type="file"
-                    accept="image/*,.pdf"
-                    onChange={(e) => handleFileUpload(e, setPaymentProof)}
+                    accept=".jpg,.jpeg,.png,.webp,.pdf"
+                    onChange={(e) => handleFileUpload(e, 'paymentProof', setPaymentProof)}
                     className="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-brand-green hover:file:bg-emerald-100"
                   />
+                  {fileErrors.paymentProof && (
+                    <p className="text-[11px] text-red-500 font-medium mt-1">{fileErrors.paymentProof}</p>
+                  )}
                   {paymentProof && (
                     <span className="text-[10px] text-emerald-600 font-mono mt-1 block">
                       ✓ {paymentProof}
@@ -923,27 +935,33 @@ export default function AdmissionPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
                 <div>
                   <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
-                    Upload CNIC / ID Front Copy (Optional)
+                    Upload CNIC / ID Front Copy (Max 5MB)
                   </label>
                   <input
                     type="file"
-                    accept="image/*,.pdf"
-                    onChange={(e) => handleFileUpload(e, setCnicFile)}
+                    accept=".jpg,.jpeg,.png,.webp,.pdf"
+                    onChange={(e) => handleFileUpload(e, 'cnicFile', setCnicFile)}
                     className="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-brand-green hover:file:bg-emerald-100"
                   />
+                  {fileErrors.cnicFile && (
+                    <p className="text-[11px] text-red-500 font-medium mt-1">{fileErrors.cnicFile}</p>
+                  )}
                   {cnicFile && <span className="text-[10px] text-emerald-600 font-mono mt-1 block">✓ {cnicFile}</span>}
                 </div>
 
                 <div>
                   <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
-                    Upload Passport Size Photograph (Optional)
+                    Upload Passport Photograph (Max 5MB)
                   </label>
                   <input
                     type="file"
-                    accept="image/*"
-                    onChange={(e) => handleFileUpload(e, setPhotoFile)}
+                    accept=".jpg,.jpeg,.png,.webp"
+                    onChange={(e) => handleFileUpload(e, 'photoFile', setPhotoFile)}
                     className="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-brand-green hover:file:bg-emerald-100"
                   />
+                  {fileErrors.photoFile && (
+                    <p className="text-[11px] text-red-500 font-medium mt-1">{fileErrors.photoFile}</p>
+                  )}
                   {photoFile && <span className="text-[10px] text-emerald-600 font-mono mt-1 block">✓ {photoFile}</span>}
                 </div>
               </div>

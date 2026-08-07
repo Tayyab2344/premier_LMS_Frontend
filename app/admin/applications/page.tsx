@@ -237,58 +237,89 @@ export default function AdminApplicationsPage() {
         />
       </div>
 
-      {/* Review Modal */}
+      {/* Review Application Modal */}
       {selectedApp && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm overflow-y-auto py-10">
-          <div className="bg-white border border-border-light rounded-xl p-6 w-full max-w-2xl mx-4 shadow-xl max-h-[85vh] overflow-y-auto">
-            <div className="flex items-center justify-between mb-5 border-b border-border-light pb-3">
-              <h2 className="font-bold text-text-primary text-base">Review Application</h2>
-              <button onClick={() => setSelectedApp(null)} className="text-text-secondary hover:text-text-primary text-xl font-bold">×</button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/75 backdrop-blur-md overflow-y-auto py-10 select-none animate-fade-in">
+          <div className="bg-slate-900 border border-slate-700/60 rounded-3xl p-6 sm:p-8 w-full max-w-2xl mx-4 shadow-2xl max-h-[85vh] overflow-y-auto text-white space-y-6 animate-scale-up relative">
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-400 via-emerald-500 to-amber-600" />
+            
+            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
+                  Application Review
+                </span>
+                <h2 className="font-heading font-extrabold text-white text-lg mt-1">Review Student Admission</h2>
+              </div>
+              <button
+                onClick={() => setSelectedApp(null)}
+                className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center font-bold text-lg transition-colors cursor-pointer"
+              >
+                ✕
+              </button>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm mb-6">
-              <div className="space-y-3">
-                <h3 className="font-bold text-xs uppercase text-text-secondary tracking-wider">Personal Info</h3>
-                <p><strong>Name:</strong> {selectedApp.fullName}</p>
-                <p><strong>CNIC:</strong> {selectedApp.cnic}</p>
-                <p><strong>Email:</strong> {selectedApp.email}</p>
-                <p><strong>WhatsApp:</strong> {selectedApp.whatsapp}</p>
-                <p><strong>Selected Courses:</strong> {selectedApp.selectedCourses.join(", ")}</p>
-                <p><strong>Total Paid amount:</strong> PKR {selectedApp.totalAmount.toLocaleString()}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+              <div className="bg-slate-800/50 rounded-2xl p-4 border border-slate-800 space-y-2.5">
+                <h3 className="font-bold text-[11px] uppercase text-slate-400 tracking-wider font-mono">Personal Information</h3>
+                <p><strong className="text-slate-300">Name:</strong> <span className="text-white font-medium">{selectedApp.fullName}</span></p>
+                <p><strong className="text-slate-300">CNIC:</strong> <span className="text-amber-300 font-mono">{selectedApp.cnic}</span></p>
+                <p><strong className="text-slate-300">Email:</strong> <span className="text-slate-200">{selectedApp.email}</span></p>
+                <p><strong className="text-slate-300">WhatsApp:</strong> <span className="text-slate-200 font-mono">{selectedApp.whatsapp}</span></p>
+                <p><strong className="text-slate-300">Selected Courses:</strong> <span className="text-emerald-400 font-bold">{selectedApp.selectedCourses.join(", ")}</span></p>
+                <p><strong className="text-slate-300">Total Paid:</strong> <span className="text-emerald-400 font-mono font-bold">PKR {selectedApp.totalAmount.toLocaleString()}</span></p>
               </div>
-              <div className="space-y-4">
-                <h3 className="font-bold text-xs uppercase text-text-secondary tracking-wider">Attached Documents</h3>
-                <div className="flex flex-col gap-2">
-                  {selectedApp.paymentProof && (
-                    <a href={getMediaUrl(selectedApp.paymentProof)} target="_blank" rel="noopener noreferrer" className="text-xs text-brand-green hover:underline">
-                      📎 View Payment Proof Receipt
+
+              <div className="bg-slate-800/50 rounded-2xl p-4 border border-slate-800 space-y-3">
+                <h3 className="font-bold text-[11px] uppercase text-slate-400 tracking-wider font-mono">Attached Documents</h3>
+                <div className="flex flex-col gap-2.5">
+                  {selectedApp.paymentProof ? (
+                    <a href={getMediaUrl(selectedApp.paymentProof)} target="_blank" rel="noopener noreferrer" className="text-xs text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 px-3 py-2 rounded-xl flex items-center gap-2 transition-colors">
+                      <span>📄 View Payment Proof Receipt</span>
                     </a>
+                  ) : (
+                    <span className="text-slate-500 italic">No receipt attached</span>
                   )}
-                  {selectedApp.cnicFile && (
-                    <a href={getMediaUrl(selectedApp.cnicFile)} target="_blank" rel="noopener noreferrer" className="text-xs text-brand-green hover:underline">
-                      📎 View CNIC Copy
+                  {selectedApp.cnicFile ? (
+                    <a href={getMediaUrl(selectedApp.cnicFile)} target="_blank" rel="noopener noreferrer" className="text-xs text-amber-400 hover:text-amber-300 bg-amber-500/10 border border-amber-500/20 px-3 py-2 rounded-xl flex items-center gap-2 transition-colors">
+                      <span>🆔 View CNIC Copy</span>
                     </a>
+                  ) : (
+                    <span className="text-slate-500 italic">No CNIC copy attached</span>
                   )}
-                  {selectedApp.photoFile && (
-                    <a href={getMediaUrl(selectedApp.photoFile)} target="_blank" rel="noopener noreferrer" className="text-xs text-brand-green hover:underline">
-                      📎 View Photo
+                  {selectedApp.photoFile ? (
+                    <a href={getMediaUrl(selectedApp.photoFile)} target="_blank" rel="noopener noreferrer" className="text-xs text-sky-400 hover:text-sky-300 bg-sky-500/10 border border-sky-500/20 px-3 py-2 rounded-xl flex items-center gap-2 transition-colors">
+                      <span>🖼️ View Photo</span>
                     </a>
+                  ) : (
+                    <span className="text-slate-500 italic">No photo attached</span>
                   )}
                 </div>
               </div>
             </div>
 
-            <div className="border-t border-border-light pt-4 space-y-4">
+            <div className="border-t border-slate-800 pt-5 space-y-4">
               <div>
-                <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Remarks / Reason</label>
-                <textarea value={remarks} onChange={(e) => setRemarks(e.target.value)} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary" rows={3} placeholder="Add remarks for approval / rejection" />
+                <label className="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1.5 font-mono">Remarks / Admin Reason</label>
+                <textarea
+                  value={remarks}
+                  onChange={(e) => setRemarks(e.target.value)}
+                  className="w-full px-4 py-2.5 text-xs bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                  rows={3}
+                  placeholder="Add optional notes or reason for rejection/approval"
+                />
               </div>
-              <div className="flex gap-3 justify-end">
-                <button onClick={() => handleUpdateStatus("rejected")} className="btn-signup bg-red-600 border-red-600 hover:bg-red-700 text-xs px-4 py-2">
+              <div className="flex gap-3 justify-end pt-2">
+                <button
+                  onClick={() => handleUpdateStatus("rejected")}
+                  className="px-5 py-2.5 text-xs font-bold bg-rose-600/90 hover:bg-rose-600 text-white rounded-xl shadow-md transition-all cursor-pointer border border-rose-500/30"
+                >
                   Reject Application
                 </button>
-                <button onClick={() => handleUpdateStatus("approved")} className="btn-signup bg-green-600 border-green-600 hover:bg-green-700 text-xs px-4 py-2">
-                  Approve Application
+                <button
+                  onClick={() => handleUpdateStatus("approved")}
+                  className="px-6 py-2.5 text-xs font-bold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl shadow-md shadow-emerald-950 transition-all cursor-pointer border border-emerald-500/40"
+                >
+                  Approve & Create Account
                 </button>
               </div>
             </div>
@@ -297,27 +328,27 @@ export default function AdminApplicationsPage() {
       )}
 
       {actionLoading && (
-        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/25 backdrop-blur-[2px]">
-          <div className="bg-white border border-border-light rounded-2xl p-6 flex flex-col items-center space-y-4 shadow-2xl">
-            <div className="w-10 h-10 border-4 border-brand-green/20 border-t-brand-green rounded-full animate-spin" />
-            <p className="text-xs font-bold text-text-primary uppercase tracking-wider">Processing Request...</p>
+        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-slate-950/75 backdrop-blur-sm">
+          <div className="bg-slate-900 border border-slate-700/60 rounded-3xl p-6 flex flex-col items-center space-y-4 shadow-2xl text-white">
+            <div className="w-10 h-10 border-4 border-emerald-500/30 border-t-emerald-400 rounded-full animate-spin" />
+            <p className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">Processing Request...</p>
           </div>
         </div>
       )}
 
       {toast && (
-        <div className={`fixed bottom-5 right-5 z-[99999] flex items-center gap-3 px-4 py-3.5 rounded-xl shadow-lg border animate-scale-up max-w-sm ${
+        <div className={`fixed bottom-6 right-6 z-[99999] flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl border animate-scale-up max-w-md ${
           toast.type === "success"
-            ? "bg-[#edf7f3] border-green-200 text-green-800"
-            : "bg-[#fdf2f2] border-red-200 text-red-800"
+            ? "bg-slate-900 border-emerald-500/40 text-emerald-300 shadow-emerald-950/50"
+            : "bg-slate-900 border-rose-500/40 text-rose-300 shadow-rose-950/50"
         }`}>
-          <div className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-black shrink-0 ${
-            toast.type === "success" ? "bg-green-100 text-green-600" : "bg-red-100 text-red-600"
+          <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-black shrink-0 ${
+            toast.type === "success" ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" : "bg-rose-500/20 text-rose-400 border border-rose-500/30"
           }`}>
             {toast.type === "success" ? "✓" : "!"}
           </div>
-          <p className="text-xs font-bold leading-normal">{toast.message}</p>
-          <button onClick={() => setToast(null)} className="text-gray-400 hover:text-gray-600 text-sm ml-2 font-bold">✕</button>
+          <p className="text-xs font-semibold leading-normal font-sans text-white">{toast.message}</p>
+          <button onClick={() => setToast(null)} className="text-slate-400 hover:text-white text-sm ml-2 font-bold cursor-pointer">✕</button>
         </div>
       )}
     </div>
