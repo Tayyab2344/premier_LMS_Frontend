@@ -92,10 +92,11 @@ export default function AdminCoursesPage() {
     }
   };
 
-  const handleToggleActive = async (id: string) => {
+  const handleToggleActive = async (course: Course) => {
     setActionLoading(true);
     try {
-      await api.patch(`/courses/${id}`);
+      await api.patch(`/courses/${course.id}`, { isActive: !course.isActive });
+      showAlert("Success", `Course "${course.name}" has been ${!course.isActive ? 'activated' : 'deactivated'} for admissions.`);
       await fetchCourses();
     } catch {
       showAlert("Error", "Failed to toggle course status");
@@ -184,7 +185,7 @@ export default function AdminCoursesPage() {
                       <Link href={`/admin/courses/${course.id}`} className="btn-signup text-[10px] px-3 py-1.5 bg-brand-green text-white hover:bg-brand-green-dark no-underline inline-block">
                         Edit &amp; Curriculum
                       </Link>
-                      <button onClick={() => handleToggleActive(course.id)} className="px-3 py-1.5 text-[10px] font-bold bg-white border border-border-light text-text-primary hover:bg-bg-light rounded-lg">
+                      <button onClick={() => handleToggleActive(course)} className="px-3 py-1.5 text-[10px] font-bold bg-white border border-border-light text-text-primary hover:bg-bg-light rounded-lg">
                         {course.isActive ? "Deactivate" : "Activate"}
                       </button>
                       <button onClick={() => handleDelete(course.id)} className="px-2.5 py-1.5 text-[10px] font-bold bg-white border border-red-200 text-red-600 hover:bg-red-50 rounded-lg">

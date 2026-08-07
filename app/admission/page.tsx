@@ -25,7 +25,8 @@ export default function AdmissionPage() {
   const { user } = useAuth();
   const { showAlert } = useModal();
 
-  const [selectedBatchId, setSelectedBatchId] = useState<string>('');
+  const [coursesList, setCoursesList] = useState<{ id: string; name: string; discountedFee?: number }[]>([]);
+  const [loadingCourses, setLoadingCourses] = useState(true);
 
   // Form State
   const [fullName, setFullName] = useState('');
@@ -127,17 +128,28 @@ export default function AdmissionPage() {
 
   useEffect(() => {
     api
-      .get('/batches/public')
+      .get('/courses')
       .then((res) => {
-        if (res.data && res.data.length > 0) {
-          setSelectedBatchId(res.data[0].id);
+        const fetched = Array.isArray(res.data) ? res.data : (res.data?.data || []);
+        if (fetched && fetched.length > 0) {
+          setCoursesList(fetched);
+          setSelectedCourse((prev) => {
+            if (fetched.some((c: any) => c.name === prev)) return prev;
+            return fetched[0].name;
+          });
         }
       })
-      .catch(() => {});
+      .catch((err) => {
+        console.error('Failed to load active courses:', err);
+      })
+      .finally(() => {
+        setLoadingCourses(false);
+      });
   }, []);
 
-  // Total Fee
-  const totalAmount = 30000;
+  // Total Fee dynamically derived from selected course or default 30000
+  const selectedCourseObj = coursesList.find((c) => c.name === selectedCourse);
+  const totalAmount = selectedCourseObj?.discountedFee || 30000;
 
   // Validate form before submission
   const validateForm = () => {
@@ -244,7 +256,6 @@ export default function AdmissionPage() {
         selectedCourses: [selectedCourse],
         totalAmount,
         paymentMethod,
-        batchId: selectedBatchId || undefined,
       });
 
       setSuccessMsg(
@@ -737,39 +748,57 @@ export default function AdmissionPage() {
                   4. COURSE ENROLLMENT (Select Desired Course) *
                 </label>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {[
-                    '1. Certified Tax Practitioner (CTP)',
-                    '2. Advanced Tax Litigation Manager (ATLM)',
-                    '3. Certified Taxation Expert (CTE)',
-                    '4. Certified Corporate Manager (CCM)',
-                    '5. Certified Accounting Technician (CAT)',
-                    '6. Certified Financial Manager (CFM)',
-                    '7. Financial Statement Analyst (FSA)',
-                    '8. Certified Sales Tax Expert (CSTE)',
-                    '9. Certified Corporate Expert (CCE)',
-                    '10. Certified Financial Statements Preparer (CFSP)'
-                  ].map((courseName) => (
-                    <div
-                      key={courseName}
-                      onClick={() => setSelectedCourse(courseName)}
-                      className={`p-3.5 rounded-2xl border cursor-pointer transition-all flex items-center gap-3 ${
-                        selectedCourse === courseName
-                          ? 'border-brand-green bg-emerald-50/60 shadow-sm'
-                          : 'border-slate-200 hover:border-slate-300 bg-white'
-                      }`}
-                    >
-                      <div className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
-                        selectedCourse === courseName ? 'border-brand-green bg-brand-green text-white' : 'border-slate-300'
-                      }`}>
-                        {selectedCourse === courseName && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
-                      </div>
-                      <span className="text-xs font-heading font-bold text-heading">
-                        {courseName}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+                {loadingCourses ? (
+                  <div className="p-6 text-center text-xs text-slate-500 bg-slate-50 rounded-2xl border border-slate-200">
+                    Loading available courses...
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {(coursesList.length > 0
+                      ? coursesList
+                      : [
+                          { id: '1', name: 'Certified Tax Practitioner (CTP)', discountedFee: 30000 },
+                          { id: '2', name: 'Advanced Tax Litigation Manager (ATLM)', discountedFee: 30000 },
+                          { id: '3', name: 'Certified Taxation Expert (CTE)', discountedFee: 30000 },
+                          { id: '4', name: 'Certified Corporate Manager (CCM)', discountedFee: 30000 },
+                          { id: '5', name: 'Certified Accounting Technician (CAT)', discountedFee: 30000 },
+                          { id: '6', name: 'Certified Financial Manager (CFM)', discountedFee: 30000 },
+                          { id: '7', name: 'Financial Statement Analyst (FSA)', discountedFee: 30000 },
+                          { id: '8', name: 'Certified Sales Tax Expert (CSTE)', discountedFee: 30000 },
+                          { id: '9', name: 'Certified Corporate Expert (CCE)', discountedFee: 30000 },
+                          { id: '10', name: 'Certified Financial Statements Preparer (CFSP)', discountedFee: 30000 },
+                        ]
+                    ).map((c: any) => {
+                      const courseName = c.name;
+                      const fee = c.discountedFee || 30000;
+                      return (
+                        <div
+                          key={c.id || courseName}
+                          onClick={() => setSelectedCourse(courseName)}
+                          className={`p-3.5 rounded-2xl border cursor-pointer transition-all flex items-center justify-between gap-3 ${
+                            selectedCourse === courseName
+                              ? 'border-brand-green bg-emerald-50/60 shadow-sm'
+                              : 'border-slate-200 hover:border-slate-300 bg-white'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
+                              selectedCourse === courseName ? 'border-brand-green bg-brand-green text-white' : 'border-slate-300'
+                            }`}>
+                              {selectedCourse === courseName && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
+                            </div>
+                            <span className="text-xs font-heading font-bold text-heading">
+                              {courseName}
+                            </span>
+                          </div>
+                          <span className="text-[11px] font-mono font-semibold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-full shrink-0">
+                            Rs. {fee.toLocaleString()}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
 
               {/* Class Mode Selection (Online / Physical) */}

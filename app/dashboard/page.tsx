@@ -257,10 +257,30 @@ export default function DashboardPage() {
               <div>
                 <h1 className="text-xl font-bold text-text-primary mb-6">My Courses</h1>
                 {enrolledCourses.length === 0 ? (
-                  <div className="bg-white border border-border-light rounded-xl p-12 text-center">
-                    <p className="text-text-secondary mb-4">You haven&apos;t enrolled in any courses yet.</p>
-                    <Link href="/courses" className="btn-signup inline-block no-underline">Browse Courses</Link>
-                  </div>
+                  profile?.admissions?.some((a: any) => a.status === 'pending') ? (
+                    <div className="bg-amber-50/80 border border-amber-200 rounded-2xl p-8 text-center max-w-xl mx-auto space-y-4 shadow-sm">
+                      <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center mx-auto text-xl font-bold">
+                        ⏳
+                      </div>
+                      <div>
+                        <h3 className="text-base font-bold text-slate-800 mb-1">Admission Application Pending Approval</h3>
+                        <p className="text-xs text-slate-600 leading-relaxed">
+                          Your admission application for <strong>{profile.admissions.find((a: any) => a.status === 'pending')?.selectedCourses?.join(', ') || 'your selected course'}</strong> is currently under review by the admissions committee.
+                        </p>
+                      </div>
+                      <div className="p-3 rounded-xl bg-white border border-amber-200 text-xs font-mono text-amber-800 inline-block">
+                        Status: Pending Fee Verification &amp; Admin Approval
+                      </div>
+                      <p className="text-[11px] text-slate-500">
+                        Once approved by an admin, your course modules and live classes will automatically unlock here.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="bg-white border border-border-light rounded-xl p-12 text-center">
+                      <p className="text-text-secondary mb-4">You haven&apos;t enrolled in any courses yet.</p>
+                      <Link href="/admission" className="btn-signup inline-block no-underline">Apply for Admission</Link>
+                    </div>
+                  )
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {enrolledCourses.map((c: any) => (
