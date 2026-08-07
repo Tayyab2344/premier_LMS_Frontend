@@ -365,6 +365,31 @@ export default function AdmissionPage() {
               {user ? 'Go to Student Dashboard' : 'Proceed to Student Login'}
             </Link>
           </div>
+        ) : !loadingCourses && coursesList.length === 0 ? (
+          <div className="bg-white border border-slate-200 rounded-3xl p-8 sm:p-12 text-center shadow-card space-y-6 max-w-xl mx-auto">
+            <div className="w-16 h-16 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center mx-auto text-2xl font-bold">
+              🚫
+            </div>
+            <div className="space-y-2">
+              <h2 className="text-2xl font-heading font-extrabold text-heading">Admissions Currently Closed</h2>
+              <p className="text-sm text-body leading-relaxed">
+                Online admissions are currently closed as there are no active batches accepting applications right now.
+              </p>
+            </div>
+            <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-xs font-mono text-amber-900 font-semibold">
+              Status: No Open Admission Batch Available
+            </div>
+            <p className="text-xs text-slate-500">
+              When an administrator opens a new batch, the admission form will automatically activate here with available courses.
+            </p>
+            <Link
+              href="/"
+              className="btn-primary w-full justify-center text-xs font-heading font-bold !py-3 inline-flex items-center gap-2"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Return to Homepage
+            </Link>
+          </div>
         ) : (
           <form
             onSubmit={handleSubmit}
@@ -754,21 +779,7 @@ export default function AdmissionPage() {
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {(coursesList.length > 0
-                      ? coursesList
-                      : [
-                          { id: '1', name: 'Certified Tax Practitioner (CTP)', discountedFee: 30000 },
-                          { id: '2', name: 'Advanced Tax Litigation Manager (ATLM)', discountedFee: 30000 },
-                          { id: '3', name: 'Certified Taxation Expert (CTE)', discountedFee: 30000 },
-                          { id: '4', name: 'Certified Corporate Manager (CCM)', discountedFee: 30000 },
-                          { id: '5', name: 'Certified Accounting Technician (CAT)', discountedFee: 30000 },
-                          { id: '6', name: 'Certified Financial Manager (CFM)', discountedFee: 30000 },
-                          { id: '7', name: 'Financial Statement Analyst (FSA)', discountedFee: 30000 },
-                          { id: '8', name: 'Certified Sales Tax Expert (CSTE)', discountedFee: 30000 },
-                          { id: '9', name: 'Certified Corporate Expert (CCE)', discountedFee: 30000 },
-                          { id: '10', name: 'Certified Financial Statements Preparer (CFSP)', discountedFee: 30000 },
-                        ]
-                    ).map((c: any) => {
+                    {coursesList.map((c: any) => {
                       const courseName = c.name;
                       const fee = c.discountedFee || 30000;
                       return (
