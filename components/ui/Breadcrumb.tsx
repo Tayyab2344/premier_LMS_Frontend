@@ -16,11 +16,11 @@ export default function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
             </svg>
           )}
           {item.href ? (
-            <Link href={item.href} className="hover:text-brand-green transition-colors no-underline">
+            <Link href={item.href} className="hover:text-brand-green transition-colors no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
               {item.label}
             </Link>
           ) : (
-            <span className="text-text-primary font-medium truncate max-w-[200px] sm:max-w-none">
+            <span className="text-text-premier-green font-medium truncate max-w-[200px] sm:max-w-none">
               {item.label}
             </span>
           )}

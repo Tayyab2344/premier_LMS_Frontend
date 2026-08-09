@@ -105,7 +105,7 @@ export function CourseSidebar({ course, onNotifyClick }: CourseSidebarProps) {
         {isAvailable ? (
           <Link
             href="/admission"
-            className="w-full btn-primary !py-4 !text-base text-center justify-center font-heading font-bold shadow-blue-glow group"
+            className="w-full btn-primary !py-4 !text-base text-center justify-center font-heading font-bold shadow-blue-glow group focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
           >
             Enroll Now
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -113,7 +113,7 @@ export function CourseSidebar({ course, onNotifyClick }: CourseSidebarProps) {
         ) : (
           <button
             onClick={onNotifyClick}
-            className="w-full btn-secondary !py-4 !text-sm text-center justify-center font-heading font-bold hover:!bg-amber-50 hover:!border-amber-400 hover:!text-amber-700 transition-all flex items-center gap-2"
+            className="w-full btn-secondary !py-4 !text-sm text-center justify-center font-heading font-bold hover:!bg-amber-50 hover:!border-amber-400 hover:!text-amber-700 transition-all flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
           >
             <Bell className="w-4 h-4 text-amber-500" />
             Notify Me at Launch
@@ -122,7 +122,7 @@ export function CourseSidebar({ course, onNotifyClick }: CourseSidebarProps) {
 
         {/* Mobile App Highlight Card */}
         <div className="p-3.5 rounded-2xl bg-surface-secondary border border-border/80 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-primary-50 text-primary flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-premier-green-50 text-premier-green flex items-center justify-center shrink-0">
             <Smartphone className="w-5 h-5" />
           </div>
           <div>
@@ -143,7 +143,7 @@ export function CourseSidebar({ course, onNotifyClick }: CourseSidebarProps) {
 
           <button
             onClick={handleShare}
-            className="py-2.5 px-3 rounded-xl border border-border bg-surface-secondary text-xs font-heading font-semibold text-heading hover:bg-slate-200 transition-all text-center flex items-center justify-center gap-1.5"
+            className="py-2.5 px-3 rounded-xl border border-border bg-surface-secondary text-xs font-heading font-semibold text-heading hover:bg-slate-200 transition-all text-center flex items-center justify-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
           >
             <Share2 className="w-3.5 h-3.5" />
             {copied ? 'Copied!' : 'Share'}
@@ -161,7 +161,7 @@ export function CourseSidebar({ course, onNotifyClick }: CourseSidebarProps) {
               const IconComp = item.icon;
               return (
                 <div key={idx} className="flex items-center gap-3 text-xs text-body">
-                  <IconComp className="w-4 h-4 text-primary shrink-0" />
+                  <IconComp className="w-4 h-4 text-premier-green shrink-0" />
                   <span>{item.text}</span>
                 </div>
               );

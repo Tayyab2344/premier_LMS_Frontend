@@ -11,7 +11,7 @@ export function AboutCTA() {
       <div className="section-container">
         
         {/* Main Blue Banner Container */}
-        <div className="relative rounded-3xl bg-gradient-to-br from-primary-900 via-primary to-blue-600 p-8 sm:p-14 md:p-16 text-white shadow-card-hover overflow-hidden">
+        <div className="relative rounded-3xl bg-gradient-to-br from-[#0F3524] via-[#164E36] to-[#1E3A8A] p-8 sm:p-14 md:p-16 text-white shadow-card-hover overflow-hidden">
           
           {/* Subtle Ambient Shapes */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/3" />
@@ -57,7 +57,7 @@ export function AboutCTA() {
             <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-4 justify-end">
               <Link
                 href="/courses"
-                className="btn-primary !bg-white !text-primary hover:!bg-surface-hover shadow-lg text-center justify-center !py-4 !px-8 text-base group"
+                className="btn-primary !bg-white !text-premier-green hover:!bg-surface-hover shadow-lg text-center justify-center !py-4 !px-8 text-base group focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
                 aria-label="Browse masterclass courses catalog"
               >
                 Browse Courses
@@ -66,7 +66,7 @@ export function AboutCTA() {
               
               <Link
                 href="/admission"
-                className="btn-secondary !bg-white/10 !text-white !border-white/40 hover:!bg-white/20 text-center justify-center !py-4 !px-8 text-base"
+                className="btn-secondary !bg-white/10 !text-white !border-white/40 hover:!bg-white/20 text-center justify-center !py-4 !px-8 text-base focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
                 aria-label="Proceed to student admission portal"
               >
                 Enroll Today

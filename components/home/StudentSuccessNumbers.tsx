@@ -17,24 +17,22 @@ export function StudentSuccessNumbers() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
-    <section ref={ref} className="py-16 bg-gradient-to-r from-primary-900 via-primary-800 to-primary-900 text-white relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIxIiBmaWxsPSIjRkZGRkZGIiBvcGFjaXR5PSIwLjA1Ii8+PC9zdmc+')] opacity-40" />
-
+    <section ref={ref} className="py-20 bg-premier-cream border-t border-border relative overflow-hidden">
       <div className="section-container relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center">
           {stats.map((stat, i) => {
             const Icon = stat.icon;
             return (
-              <div key={i} className="space-y-2 p-4">
-                <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md mx-auto flex items-center justify-center text-primary-300 mb-3">
+              <div key={i} className="space-y-2 p-6 rounded-2xl bg-white/60 border border-border/50 shadow-soft backdrop-blur-sm">
+                <div className="w-12 h-12 rounded-2xl bg-premier-green/10 text-premier-green mx-auto flex items-center justify-center mb-3">
                   <Icon className="w-6 h-6" />
                 </div>
-                <div className="text-3xl sm:text-4xl font-number font-bold tracking-tight text-white">
+                <div className="text-3xl sm:text-4xl font-number font-extrabold tracking-tight text-premier-green">
                   {inView ? <CountUp start={0} end={stat.end} duration={2.5} separator="," /> : '0'}
                   {stat.suffix}
                 </div>
-                <div className="text-sm font-body font-semibold text-white">{stat.label}</div>
-                <div className="text-xs font-body text-white/60">{stat.desc}</div>
+                <div className="text-sm font-heading font-extrabold text-slate-900">{stat.label}</div>
+                <div className="text-xs font-body text-slate-600">{stat.desc}</div>
               </div>
             );
           })}

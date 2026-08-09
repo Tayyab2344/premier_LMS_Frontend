@@ -1,3 +1,5 @@
+@import 'lenis/dist/lenis.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,13 +12,17 @@
   }
 
   body {
-    @apply bg-white antialiased;
+    @apply bg-premier-cream antialiased text-slate-900;
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    color: #111827;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading text-premier-green;
     letter-spacing: -0.03em;
   }
 
@@ -25,8 +31,8 @@
   }
 
   ::selection {
-    background-color: #DBEAFE;
-    color: #1E3A8A;
+    background-color: #EAE6DB;
+    color: #164E36;
   }
 }
 
@@ -41,15 +47,15 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-primary text-white font-body font-semibold text-base transition-all duration-300 hover:bg-primary-700 hover:shadow-blue-glow hover:-translate-y-0.5 active:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-premier-green text-white font-body font-semibold text-base transition-colors duration-300 hover:bg-premier-green-dark focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white text-primary border-2 border-primary/20 font-body font-semibold text-base transition-all duration-300 hover:border-primary hover:bg-primary-50 hover:-translate-y-0.5 active:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-transparent text-premier-green border border-premier-green font-body font-semibold text-base transition-colors duration-300 hover:bg-premier-green/10 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream;
   }
 
   .btn-accent {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-amber-500 text-slate-950 font-body font-bold text-base transition-all duration-300 hover:bg-amber-400 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-transparent border-2 border-premier-gold text-premier-green font-body font-bold text-base transition-all duration-300 hover:bg-premier-cream-dark hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream;
   }
 
   .gradient-blob {
@@ -60,11 +66,11 @@
 
   /* Premium section header — reusable across all sections */
   .section-badge {
-    @apply inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary-50 border border-primary-200 text-primary text-sm font-body font-semibold;
+    @apply inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-premier-cream border border-premier-cream-dark text-premier-green-dark text-sm font-body font-semibold;
   }
 
   .section-title {
-    @apply text-4xl sm:text-[48px] font-heading font-extrabold text-heading leading-[1.1];
+    @apply text-4xl sm:text-[48px] font-heading font-extrabold text-premier-green leading-[1.1];
     letter-spacing: -0.03em;
   }
 
@@ -80,16 +86,31 @@
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #F8FAFC; }
-::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F3F2EA;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D8D6CC;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #54665C;
+}
 
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-.hide-scrollbar::-webkit-scrollbar { display: none; }
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
 /* Scroll Progress Bar - GPU Accelerated */
 .scroll-progress {
@@ -98,7 +119,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #2563EB, #3B82F6, #60A5FA);
+  background: linear-gradient(90deg, #1B4A31, #326C45, #468A5C);
   z-index: 9999;
   transform-origin: 0% 50%;
   transform: scaleX(0);
@@ -108,6 +129,6 @@
 
 /* Dot grid pattern overlay */
 .dot-pattern {
-  background-image: radial-gradient(circle, #2563EB 0.5px, transparent 0.5px);
+  background-image: radial-gradient(circle, #1B4A31 0.5px, transparent 0.5px);
   background-size: 24px 24px;
 }

@@ -36,7 +36,7 @@ export function TabInstructor({ course }: { course: Course }) {
         {/* Info */}
         <div className="space-y-3 text-center sm:text-left flex-1">
           <div>
-            <span className="text-xs font-heading font-bold uppercase tracking-wider text-primary px-3 py-1 rounded-full bg-primary-50 border border-primary-100 inline-block mb-1">
+            <span className="text-xs font-heading font-bold uppercase tracking-wider text-premier-green px-3 py-1 rounded-full bg-premier-green-50 border border-premier-green-100 inline-block mb-1">
               Lead Instructor
             </span>
             <h3 className="text-2xl font-heading font-extrabold text-heading">
@@ -74,7 +74,7 @@ export function TabInstructor({ course }: { course: Course }) {
       {/* Teaching Philosophy */}
       <div className="p-6 rounded-2xl bg-white border border-border shadow-soft space-y-2">
         <h4 className="text-base font-heading font-bold text-heading flex items-center gap-2">
-          <ShieldCheck className="w-5 h-5 text-primary" /> Teaching Philosophy
+          <ShieldCheck className="w-5 h-5 text-premier-green" /> Teaching Philosophy
         </h4>
         <p className="text-sm text-body italic leading-relaxed">
           "{inst.teachingPhilosophy}"
@@ -97,12 +97,12 @@ export function TabInstructor({ course }: { course: Course }) {
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="p-5 rounded-2xl bg-white border border-border shadow-soft space-y-3">
           <h4 className="text-sm font-heading font-bold text-heading flex items-center gap-2">
-            <GraduationCap className="w-4 h-4 text-primary" /> Education
+            <GraduationCap className="w-4 h-4 text-premier-green" /> Education
           </h4>
           <ul className="space-y-2 text-xs text-body">
             {inst.education.map((edu, idx) => (
               <li key={idx} className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-premier-green shrink-0" />
                 <span>{edu}</span>
               </li>
             ))}
@@ -116,7 +116,7 @@ export function TabInstructor({ course }: { course: Course }) {
           <ul className="space-y-2 text-xs text-body">
             {inst.certifications.map((cert, idx) => (
               <li key={idx} className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-premier-green shrink-0" />
                 <span>{cert}</span>
               </li>
             ))}

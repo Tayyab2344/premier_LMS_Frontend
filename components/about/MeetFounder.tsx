@@ -25,12 +25,12 @@ export function MeetFounder() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
-    <section id="meet-founder" className="section-padding bg-surface-secondary border-y border-border relative overflow-hidden">
+    <section id="meet-founder" className="section-padding bg-white border-y border-border relative overflow-hidden">
       <div className="section-container relative z-10">
         
         {/* Section Title */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <span className="text-xs font-heading font-bold uppercase tracking-wider text-primary px-3.5 py-1.5 rounded-full bg-primary-50 border border-primary-100 inline-block">
+          <span className="text-xs font-heading font-bold uppercase tracking-wider text-premier-green px-3.5 py-1.5 rounded-full bg-premier-green-50 border border-premier-green-100 inline-block">
             Leadership &amp; Vision
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-heading">
@@ -58,7 +58,7 @@ export function MeetFounder() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md rounded-xl p-3 text-center border border-white/40 shadow-md">
                 <p className="text-sm font-heading font-bold text-heading">Raja Gulfam</p>
-                <p className="text-[11px] font-medium text-primary">Advocate High Court · ACMA</p>
+                <p className="text-[11px] font-medium text-premier-green">Advocate High Court · ACMA</p>
               </div>
             </div>
 
@@ -69,7 +69,7 @@ export function MeetFounder() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-surface-secondary text-body hover:text-white hover:bg-primary flex items-center justify-center transition-all shadow-soft"
+                className="w-10 h-10 rounded-full bg-surface-secondary text-body hover:text-white hover:bg-premier-green flex items-center justify-center transition-all shadow-soft"
                 aria-label="LinkedIn Profile"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -131,8 +131,8 @@ export function MeetFounder() {
           <div className="lg:col-span-7 space-y-6">
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <ShieldCheck className="w-5 h-5 text-primary" />
-                <span className="text-xs font-heading font-bold uppercase tracking-wider text-primary">Masterclass Faculty</span>
+                <ShieldCheck className="w-5 h-5 text-premier-green" />
+                <span className="text-xs font-heading font-bold uppercase tracking-wider text-premier-green">Masterclass Faculty</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-heading">
                 Raja Gulfam

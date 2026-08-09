@@ -24,16 +24,16 @@ export default function Footer() {
           </span>
         </div>
         <div className="flex items-center gap-4">
-          <a href="/about" className="text-xs text-text-secondary hover:text-text-primary transition-colors no-underline">
+          <a href="/about" className="text-xs text-text-secondary hover:text-text-premier-green transition-colors no-underline">
             About Us
           </a>
-          <a href="#" className="text-xs text-text-secondary hover:text-text-primary transition-colors no-underline">
+          <a href="#" className="text-xs text-text-secondary hover:text-text-premier-green transition-colors no-underline">
             Privacy Policy
           </a>
-          <a href="#" className="text-xs text-text-secondary hover:text-text-primary transition-colors no-underline">
+          <a href="#" className="text-xs text-text-secondary hover:text-text-premier-green transition-colors no-underline">
             Terms of Service
           </a>
-          <a href="#" className="text-xs text-text-secondary hover:text-text-primary transition-colors no-underline">
+          <a href="#" className="text-xs text-text-secondary hover:text-text-premier-green transition-colors no-underline">
             Contact
           </a>
         </div>

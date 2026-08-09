@@ -1,8 +1,86 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Search, Filter, RotateCcw, X, SlidersHorizontal } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Search, Filter, RotateCcw, X, SlidersHorizontal, ChevronDown, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+interface CustomSelectOption {
+  label: string;
+  value: string;
+}
+
+interface CustomSelectProps {
+  value: string;
+  onChange: (val: string) => void;
+  options: CustomSelectOption[];
+  className?: string;
+}
+
+function CustomSelect({ value, onChange, options, className = '' }: CustomSelectProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const selectedOption = options.find((opt) => opt.value === value) || options[0];
+
+  return (
+    <div ref={dropdownRef} className={`relative inline-block ${className}`}>
+      <button
+        type="button"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface-secondary text-xs font-heading font-semibold text-heading hover:bg-white hover:border-premier-green/40 focus:outline-none focus:ring-2 focus:ring-premier-green transition-all flex items-center justify-between gap-2.5 shadow-sm min-w-[160px]"
+      >
+        <span className="truncate">{selectedOption?.label || value}</span>
+        <ChevronDown className={`w-3.5 h-3.5 text-body/60 transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 text-premier-green' : ''}`} />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 6, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 6, scale: 0.98 }}
+            transition={{ duration: 0.15, ease: 'easeOut' }}
+            data-lenis-prevent
+            onWheel={(e) => e.stopPropagation()}
+            className="absolute left-0 right-0 mt-1.5 w-full min-w-full rounded-xl bg-white border border-border/80 shadow-elevated p-1 z-50 max-h-64 overflow-y-auto"
+          >
+            {options.map((opt) => {
+              const isSelected = opt.value === value;
+              return (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => {
+                    onChange(opt.value);
+                    setIsOpen(false);
+                  }}
+                  className={`w-full text-left px-3 py-2 rounded-lg text-xs font-heading font-semibold transition-colors flex items-center justify-between ${
+                    isSelected
+                      ? 'bg-premier-green-50 text-premier-green font-bold'
+                      : 'text-heading hover:bg-surface-secondary'
+                  }`}
+                >
+                  <span className="truncate">{opt.label}</span>
+                  {isSelected && <Check className="w-3.5 h-3.5 text-premier-green shrink-0 ml-2" />}
+                </button>
+              );
+            })}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 interface CourseFilterBarProps {
   searchQuery: string;
@@ -44,6 +122,30 @@ export function CourseFilterBar({
     selectedStatus !== 'All' ||
     selectedSort !== 'popular';
 
+  const categoryOptions: CustomSelectOption[] = [
+    { label: 'All Categories', value: 'All' },
+    ...categoriesList.map((cat) => ({ label: cat, value: cat })),
+  ];
+
+  const difficultyOptions: CustomSelectOption[] = [
+    { label: 'All Difficulties', value: 'All' },
+    { label: 'Beginner', value: 'Beginner' },
+    { label: 'Intermediate', value: 'Intermediate' },
+    { label: 'Advanced', value: 'Advanced' },
+  ];
+
+  const statusOptions: CustomSelectOption[] = [
+    { label: 'All Statuses', value: 'All' },
+    { label: 'Available Now', value: 'Available' },
+    { label: 'Coming Soon', value: 'Coming Soon' },
+  ];
+
+  const sortOptions: CustomSelectOption[] = [
+    { label: 'Most Popular', value: 'popular' },
+    { label: 'Newest First', value: 'newest' },
+    { label: 'A - Z Title', value: 'a-z' },
+  ];
+
   return (
     <div id="courses-catalog" className="sticky top-[72px] z-30 bg-white/95 backdrop-blur-md border-y border-border py-4 shadow-soft">
       <div className="section-container">
@@ -62,7 +164,7 @@ export function CourseFilterBar({
                 placeholder="Search courses, skills, tools..."
                 value={searchQuery}
                 onChange={(e) => onSearchChange(e.target.value)}
-                className="w-full pl-10 pr-8 py-2.5 rounded-xl border border-border bg-surface-secondary text-xs text-heading placeholder:text-body/60 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                className="w-full pl-10 pr-8 py-2.5 rounded-xl border border-border bg-surface-secondary text-xs text-heading placeholder:text-body/60 focus:outline-none focus:ring-2 focus:ring-premier-green focus:bg-white transition-all"
               />
               {searchQuery && (
                 <button
@@ -74,45 +176,29 @@ export function CourseFilterBar({
               )}
             </div>
 
-            {/* Desktop Filters: Category, Difficulty, Status */}
+            {/* Desktop Custom Dropdown Filters: Category, Difficulty, Status */}
             <div className="hidden lg:flex items-center gap-2">
               
               {/* Category Dropdown */}
-              <select
+              <CustomSelect
                 value={selectedCategory}
-                onChange={(e) => onCategoryChange(e.target.value)}
-                className="px-3.5 py-2.5 rounded-xl border border-border bg-surface-secondary text-xs font-heading font-semibold text-heading focus:outline-none focus:ring-2 focus:ring-primary transition-all"
-              >
-                <option value="All">All Categories</option>
-                {categoriesList.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </select>
+                onChange={onCategoryChange}
+                options={categoryOptions}
+              />
 
               {/* Difficulty Dropdown */}
-              <select
+              <CustomSelect
                 value={selectedLevel}
-                onChange={(e) => onLevelChange(e.target.value)}
-                className="px-3.5 py-2.5 rounded-xl border border-border bg-surface-secondary text-xs font-heading font-semibold text-heading focus:outline-none focus:ring-2 focus:ring-primary transition-all"
-              >
-                <option value="All">All Difficulties</option>
-                <option value="Beginner">Beginner</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Advanced">Advanced</option>
-              </select>
+                onChange={onLevelChange}
+                options={difficultyOptions}
+              />
 
               {/* Course Status Dropdown */}
-              <select
+              <CustomSelect
                 value={selectedStatus}
-                onChange={(e) => onStatusChange(e.target.value)}
-                className="px-3.5 py-2.5 rounded-xl border border-border bg-surface-secondary text-xs font-heading font-semibold text-heading focus:outline-none focus:ring-2 focus:ring-primary transition-all"
-              >
-                <option value="All">All Statuses</option>
-                <option value="Available">Available Now</option>
-                <option value="Coming Soon">Coming Soon</option>
-              </select>
+                onChange={onStatusChange}
+                options={statusOptions}
+              />
 
             </div>
           </div>
@@ -128,22 +214,18 @@ export function CourseFilterBar({
             {/* Sort Dropdown */}
             <div className="flex items-center gap-2">
               <span className="text-xs font-heading font-semibold text-body hidden md:inline-block">Sort:</span>
-              <select
+              <CustomSelect
                 value={selectedSort}
-                onChange={(e) => onSortChange(e.target.value)}
-                className="px-3 py-2 rounded-xl border border-border bg-surface-secondary text-xs font-heading font-semibold text-heading focus:outline-none focus:ring-2 focus:ring-primary transition-all"
-              >
-                <option value="popular">Most Popular</option>
-                <option value="newest">Newest First</option>
-                <option value="a-z">A - Z Title</option>
-              </select>
+                onChange={onSortChange}
+                options={sortOptions}
+              />
             </div>
 
             {/* Reset Filters Button */}
             {hasActiveFilters && (
               <button
                 onClick={onResetFilters}
-                className="px-3 py-2 rounded-xl border border-red-200 bg-red-50 text-red-600 hover:bg-red-100 text-xs font-heading font-bold transition-all flex items-center gap-1.5"
+                className="px-3 py-2.5 rounded-xl border border-red-200 bg-red-50 text-red-600 hover:bg-red-100 text-xs font-heading font-bold transition-all flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
                 title="Reset All Filters"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
@@ -154,7 +236,7 @@ export function CourseFilterBar({
             {/* Mobile Filter Toggle Button */}
             <button
               onClick={() => setMobileDrawerOpen(true)}
-              className="lg:hidden px-3.5 py-2.5 rounded-xl bg-primary text-white text-xs font-heading font-bold flex items-center gap-1.5 shadow-blue-glow"
+              className="lg:hidden px-3.5 py-2.5 rounded-xl bg-premier-green text-white text-xs font-heading font-bold flex items-center gap-1.5 shadow-blue-glow"
             >
               <SlidersHorizontal className="w-4 h-4" />
               <span>Filters</span>
@@ -188,7 +270,7 @@ export function CourseFilterBar({
               <div className="space-y-6">
                 <div className="flex items-center justify-between border-b border-border pb-4">
                   <h3 className="text-base font-heading font-bold text-heading flex items-center gap-2">
-                    <Filter className="w-4 h-4 text-primary" /> Filter Courses
+                    <Filter className="w-4 h-4 text-premier-green" /> Filter Courses
                   </h3>
                   <button
                     onClick={() => setMobileDrawerOpen(false)}
@@ -201,47 +283,34 @@ export function CourseFilterBar({
                 {/* Category Mobile */}
                 <div className="space-y-2">
                   <label className="block text-xs font-heading font-bold text-heading">Category</label>
-                  <select
+                  <CustomSelect
                     value={selectedCategory}
-                    onChange={(e) => onCategoryChange(e.target.value)}
-                    className="w-full p-3 rounded-xl border border-border bg-surface-secondary text-xs font-heading font-semibold"
-                  >
-                    <option value="All">All Categories</option>
-                    {categoriesList.map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat}
-                      </option>
-                    ))}
-                  </select>
+                    onChange={onCategoryChange}
+                    options={categoryOptions}
+                    className="w-full"
+                  />
                 </div>
 
                 {/* Difficulty Mobile */}
                 <div className="space-y-2">
                   <label className="block text-xs font-heading font-bold text-heading">Difficulty Level</label>
-                  <select
+                  <CustomSelect
                     value={selectedLevel}
-                    onChange={(e) => onLevelChange(e.target.value)}
-                    className="w-full p-3 rounded-xl border border-border bg-surface-secondary text-xs font-heading font-semibold"
-                  >
-                    <option value="All">All Difficulties</option>
-                    <option value="Beginner">Beginner</option>
-                    <option value="Intermediate">Intermediate</option>
-                    <option value="Advanced">Advanced</option>
-                  </select>
+                    onChange={onLevelChange}
+                    options={difficultyOptions}
+                    className="w-full"
+                  />
                 </div>
 
                 {/* Status Mobile */}
                 <div className="space-y-2">
                   <label className="block text-xs font-heading font-bold text-heading">Course Status</label>
-                  <select
+                  <CustomSelect
                     value={selectedStatus}
-                    onChange={(e) => onStatusChange(e.target.value)}
-                    className="w-full p-3 rounded-xl border border-border bg-surface-secondary text-xs font-heading font-semibold"
-                  >
-                    <option value="All">All Statuses</option>
-                    <option value="Available">Available Now</option>
-                    <option value="Coming Soon">Coming Soon</option>
-                  </select>
+                    onChange={onStatusChange}
+                    options={statusOptions}
+                    className="w-full"
+                  />
                 </div>
               </div>
 

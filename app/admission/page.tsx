@@ -301,7 +301,7 @@ export default function AdmissionPage() {
   if (checkingStatus) {
     return (
       <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
-        <div className="w-10 h-10 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
+        <div className="w-10 h-10 border-4 border-premier-green/30 border-t-primary rounded-full animate-spin" />
       </main>
     );
   }
@@ -317,10 +317,10 @@ export default function AdmissionPage() {
           <div className="space-y-2">
             <h2 className="text-xl font-heading font-extrabold text-heading">Already Enrolled</h2>
             <p className="text-sm text-body leading-relaxed">
-              You are currently enrolled in <strong className="text-primary">{activeCourseName}</strong> on the Premier LMS Student Mobile App.
+              You are currently enrolled in <strong className="text-premier-green">{activeCourseName}</strong> on the Premier LMS Student Mobile App.
             </p>
           </div>
-          <Link href="/dashboard" className="btn-primary w-full justify-center text-xs">
+          <Link href="/dashboard" className="btn-primary w-full justify-center text-xs focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
             Go to Student Dashboard
           </Link>
         </div>
@@ -333,7 +333,7 @@ export default function AdmissionPage() {
       {/* ── Standalone Top Branding Header ───────────────── */}
       <header className="bg-slate-900 border-b border-slate-800 py-4 px-6 sm:px-12">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
             <Image
               src="/logo.png"
               alt="Premier Tax Corporate & Accounting School Logo"
@@ -346,7 +346,7 @@ export default function AdmissionPage() {
 
           <Link
             href="/"
-            className="flex items-center gap-1.5 text-xs font-heading font-bold text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-800 px-4 py-2 rounded-xl transition-colors border border-slate-700"
+            className="flex items-center gap-1.5 text-xs font-heading font-bold text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-800 px-4 py-2 rounded-xl transition-colors border border-slate-700 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Home
@@ -357,7 +357,7 @@ export default function AdmissionPage() {
       {/* ── Form Container ───────────────────────────────── */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-10">
         <div className="text-center space-y-3 mb-8">
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-primary-50 text-primary text-xs font-heading font-bold uppercase tracking-wider border border-primary-200">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-premier-green-50 text-premier-green text-xs font-heading font-bold uppercase tracking-wider border border-premier-green-200">
             <ShieldCheck className="w-3.5 h-3.5" />
             Official Student Admission Portal
           </span>
@@ -387,7 +387,7 @@ export default function AdmissionPage() {
             </div>
             <Link
               href={user ? '/dashboard' : '/auth/login'}
-              className="btn-primary w-full justify-center text-xs font-heading font-bold !py-3"
+              className="btn-primary w-full justify-center text-xs font-heading font-bold !py-3 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
             >
               {user ? 'Go to Student Dashboard' : 'Proceed to Student Login'}
             </Link>
@@ -411,7 +411,7 @@ export default function AdmissionPage() {
             </p>
             <Link
               href="/"
-              className="btn-primary w-full justify-center text-xs font-heading font-bold !py-3 inline-flex items-center gap-2"
+              className="btn-primary w-full justify-center text-xs font-heading font-bold !py-3 inline-flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
             >
               <ArrowLeft className="w-4 h-4" />
               Return to Homepage
@@ -432,7 +432,7 @@ export default function AdmissionPage() {
             {/* ── Section 1: Personal Profile ───────────────── */}
             <div className="space-y-6">
               <div className="flex items-center gap-3 pb-3 border-b border-border">
-                <div className="w-8 h-8 rounded-xl bg-primary-50 text-primary flex items-center justify-center font-heading font-bold text-xs">
+                <div className="w-8 h-8 rounded-xl bg-premier-green-50 text-premier-green flex items-center justify-center font-heading font-bold text-xs">
                   1
                 </div>
                 <div>
@@ -460,7 +460,7 @@ export default function AdmissionPage() {
                       }}
                       placeholder="e.g. Muhammad Ali Khan"
                       className={`w-full pl-10 pr-4 py-2.5 rounded-xl border text-xs text-heading focus:outline-none ${
-                        errors.fullName ? 'border-red-500 bg-red-50/20' : 'border-slate-200 focus:border-primary'
+                        errors.fullName ? 'border-red-500 bg-red-50/20' : 'border-slate-200 focus:border-premier-green'
                       }`}
                     />
                   </div>
@@ -481,7 +481,7 @@ export default function AdmissionPage() {
                     }}
                     placeholder="e.g. Tariq Mehmood Khan"
                     className={`w-full px-4 py-2.5 rounded-xl border text-xs text-heading focus:outline-none ${
-                      errors.fatherName ? 'border-red-500 bg-red-50/20' : 'border-slate-200 focus:border-primary'
+                      errors.fatherName ? 'border-red-500 bg-red-50/20' : 'border-slate-200 focus:border-premier-green'
                     }`}
                   />
                   {errors.fatherName && <p className="text-[11px] text-red-500 mt-1">{errors.fatherName}</p>}
@@ -501,7 +501,7 @@ export default function AdmissionPage() {
                       onChange={handleCnicChange}
                       placeholder="37405-1234567-1"
                       className={`w-full pl-10 pr-4 py-2.5 rounded-xl border text-xs font-mono text-heading focus:outline-none ${
-                        errors.cnic ? 'border-red-500 bg-red-50/20' : 'border-slate-200 focus:border-primary'
+                        errors.cnic ? 'border-red-500 bg-red-50/20' : 'border-slate-200 focus:border-premier-green'
                       }`}
                     />
                   </div>
@@ -527,7 +527,7 @@ export default function AdmissionPage() {
                         if (errors.dateOfBirth) setErrors((prev) => ({ ...prev, dateOfBirth: '' }));
                       }}
                       className={`w-full pl-10 pr-4 py-2.5 rounded-xl border text-xs text-heading focus:outline-none ${
-                        errors.dateOfBirth ? 'border-red-500 bg-red-50/20' : 'border-slate-200 focus:border-primary'
+                        errors.dateOfBirth ? 'border-red-500 bg-red-50/20' : 'border-slate-200 focus:border-premier-green'
                       }`}
                     />
                   </div>
@@ -562,7 +562,7 @@ export default function AdmissionPage() {
                       onChange={handlePhoneChange}
                       placeholder="0300-1234567"
                       className={`w-full pl-10 pr-4 py-2.5 rounded-xl border text-xs font-mono text-heading focus:outline-none ${
-                        errors.whatsapp ? 'border-red-500 bg-red-50/20' : 'border-slate-200 focus:border-primary'
+                        errors.whatsapp ? 'border-red-500 bg-red-50/20' : 'border-slate-200 focus:border-premier-green'
                       }`}
                     />
                   </div>
@@ -589,7 +589,7 @@ export default function AdmissionPage() {
                       }}
                       placeholder="name@domain.com"
                       className={`w-full pl-10 pr-4 py-2.5 rounded-xl border text-xs text-heading focus:outline-none ${
-                        errors.email ? 'border-red-500 bg-red-50/20' : 'border-slate-200 focus:border-primary'
+                        errors.email ? 'border-red-500 bg-red-50/20' : 'border-slate-200 focus:border-premier-green'
                       }`}
                     />
                   </div>
@@ -783,7 +783,7 @@ export default function AdmissionPage() {
             {/* ── Section 3: Course Selection & Fee Payment ──── */}
             <div className="space-y-6">
               <div className="flex items-center gap-3 pb-3 border-b border-border">
-                <div className="w-8 h-8 rounded-xl bg-primary-50 text-primary flex items-center justify-center font-heading font-bold text-xs">
+                <div className="w-8 h-8 rounded-xl bg-premier-green-50 text-premier-green flex items-center justify-center font-heading font-bold text-xs">
                   3
                 </div>
                 <div>
@@ -832,7 +832,7 @@ export default function AdmissionPage() {
                             <div
                               className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-200 ${
                                 isSelected
-                                  ? 'border-emerald-600 bg-emerald-600 text-white shadow-xs'
+                                  ? 'border-emerald-600 bg-premier-green-dark text-white shadow-xs'
                                   : 'border-slate-300 bg-white group-hover:border-slate-400'
                               }`}
                             >
@@ -864,7 +864,7 @@ export default function AdmissionPage() {
                   5. CLASS MODE *
                 </label>
                 <div className="p-3.5 rounded-2xl border border-brand-green bg-emerald-50/60 flex items-center gap-2 text-xs font-bold text-brand-green">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                  <span className="w-2 h-2 rounded-full bg-premier-green animate-pulse shrink-0" />
                   <span>💻 {classMode} Live Class (Premier LMS Student App & Portal)</span>
                 </div>
               </div>
@@ -1011,7 +1011,7 @@ export default function AdmissionPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="btn-primary !py-3.5 !px-8 text-xs font-heading font-bold w-full sm:w-auto justify-center"
+                className="btn-primary !py-3.5 !px-8 text-xs font-heading font-bold w-full sm:w-auto justify-center focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
               >
                 {submitting ? 'Submitting Application...' : 'Submit Online Admission Application'}
               </button>

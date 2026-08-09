@@ -67,7 +67,7 @@ export default function CheckoutPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h1 className="text-xl font-bold text-text-primary mb-2">Payment Submitted!</h1>
+          <h1 className="text-xl font-bold text-text-premier-green mb-2">Payment Submitted!</h1>
           <p className="text-sm text-text-secondary mb-6 leading-relaxed">
             Our team will verify your payment and activate your course within <strong>24 hours</strong>.
             You&apos;ll receive a confirmation email at <strong>{user.email}</strong>.
@@ -90,19 +90,19 @@ export default function CheckoutPage() {
           { label: 'Checkout' },
         ]} />
 
-        <h1 className="text-2xl font-extrabold text-text-primary mt-4 mb-8">Checkout</h1>
+        <h1 className="text-2xl font-extrabold text-text-premier-green mt-4 mb-8">Checkout</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           {/* Order Summary */}
           <div className="lg:col-span-2">
             <div className="bg-white border border-border-light rounded-xl p-6 lg:sticky lg:top-24">
-              <h2 className="text-base font-bold text-text-primary mb-4">Order Summary</h2>
+              <h2 className="text-base font-bold text-text-premier-green mb-4">Order Summary</h2>
               <div className="flex gap-4 mb-5">
                 <div className="relative w-24 h-14 rounded-lg overflow-hidden shrink-0">
                   <Image src={course.thumbnail} alt={course.title} fill className="object-cover" sizes="96px" />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-sm font-semibold text-text-primary line-clamp-2">{course.title}</h3>
+                  <h3 className="text-sm font-semibold text-text-premier-green line-clamp-2">{course.title}</h3>
                   <p className="text-xs text-text-secondary mt-0.5">{course.instructor}</p>
                 </div>
               </div>
@@ -110,7 +110,7 @@ export default function CheckoutPage() {
               <div className="space-y-2 border-t border-border-light pt-4">
                 <div className="flex justify-between text-sm">
                   <span className="text-text-secondary">Subtotal</span>
-                  <span className="text-text-primary">Rs. {(course.originalPrice ?? course.price ?? 0).toLocaleString('en-PK')}</span>
+                  <span className="text-text-premier-green">Rs. {(course.originalPrice ?? course.price ?? 0).toLocaleString('en-PK')}</span>
                 </div>
                 {discount > 0 && (
                   <div className="flex justify-between text-sm">
@@ -119,8 +119,8 @@ export default function CheckoutPage() {
                   </div>
                 )}
                 <div className="flex justify-between text-base font-bold border-t border-border-light pt-3 mt-2">
-                  <span className="text-text-primary">Total</span>
-                  <span className="text-text-primary">Rs. {(course.price ?? 0).toLocaleString('en-PK')}</span>
+                  <span className="text-text-premier-green">Total</span>
+                  <span className="text-text-premier-green">Rs. {(course.price ?? 0).toLocaleString('en-PK')}</span>
                 </div>
               </div>
             </div>
@@ -129,7 +129,7 @@ export default function CheckoutPage() {
           {/* Payment Form */}
           <div className="lg:col-span-3">
             <form onSubmit={handleSubmit} className="bg-white border border-border-light rounded-xl p-6">
-              <h2 className="text-base font-bold text-text-primary mb-5">Payment Method</h2>
+              <h2 className="text-base font-bold text-text-premier-green mb-5">Payment Method</h2>
 
               {/* Method selection */}
               <div className="space-y-3 mb-6">
@@ -142,7 +142,7 @@ export default function CheckoutPage() {
                       onChange={(e) => setMethod(e.target.value)}
                       className="mt-0.5 accent-brand-green" />
                     <div className="flex-1">
-                      <span className="text-sm font-semibold text-text-primary">{pm.label}</span>
+                      <span className="text-sm font-semibold text-text-premier-green">{pm.label}</span>
                       {method === pm.id && (
                         <pre className="text-xs text-text-secondary mt-2 whitespace-pre-wrap font-sans bg-gray-50 rounded-md p-3">
                           {pm.details}
@@ -155,7 +155,7 @@ export default function CheckoutPage() {
 
               {/* File upload */}
               <div className="mb-6">
-                <label className="block text-sm font-bold text-text-primary mb-2">
+                <label className="block text-sm font-bold text-text-premier-green mb-2">
                   Upload Payment Screenshot / Receipt
                 </label>
                 <div
@@ -167,14 +167,14 @@ export default function CheckoutPage() {
                   }`}
                   onClick={() => document.getElementById('file-upload')?.click()}
                 >
-                  <input id="file-upload" type="file" accept="image/*,.pdf" className="hidden"
+                  <input id="file-upload" type="file" accept="image/*,.pdf" className="hidden focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
                     onChange={(e) => e.target.files?.[0] && setFile(e.target.files[0])} />
                   {file ? (
                     <div className="flex items-center justify-center gap-2">
                       <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-sm font-medium text-text-primary">{file.name}</span>
+                      <span className="text-sm font-medium text-text-premier-green">{file.name}</span>
                       <button type="button" onClick={(e) => { e.stopPropagation(); setFile(null); }}
                         className="text-red-500 hover:text-red-700 ml-2">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -196,7 +196,7 @@ export default function CheckoutPage() {
 
               {/* Submit */}
               <button type="submit" disabled={loading || !file}
-                className="w-full btn-signup py-3 text-base disabled:opacity-50 disabled:cursor-not-allowed">
+                className="w-full btn-signup py-3 text-base disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
                 {loading ? (
                   <span className="flex items-center justify-center gap-2">
                     <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>

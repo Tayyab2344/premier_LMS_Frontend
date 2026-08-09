@@ -176,7 +176,7 @@ export default function AdminBatchesPage() {
     <div>
       <div className="flex items-center justify-between mb-8 gap-4 flex-wrap">
         <div>
-          <h1 className="text-xl font-bold text-text-primary">Batches</h1>
+          <h1 className="text-xl font-bold text-text-premier-green">Batches</h1>
           <p className="text-xs text-text-secondary mt-1">Manage academic batches and offered courses</p>
         </div>
         <div className="flex items-center gap-3">
@@ -188,7 +188,7 @@ export default function AdminBatchesPage() {
               setSearchTerm(e.target.value);
               setCurrentPage(1);
             }}
-            className="px-4 py-2 text-xs border border-border-light rounded-lg bg-white text-text-primary focus:outline-none focus:ring-1 focus:ring-brand-green"
+            className="px-4 py-2 text-xs border border-border-light rounded-lg bg-white text-text-premier-green focus:outline-none focus:ring-1 focus:ring-brand-green"
           />
           <button onClick={() => setShowModal(true)} className="btn-signup text-xs px-4 py-2 shrink-0">
             + Add Batch
@@ -204,7 +204,7 @@ export default function AdminBatchesPage() {
               <div className="absolute top-3 right-3">
                 <span className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
                   batch.status === "admission"
-                    ? "bg-emerald-500 text-white"
+                    ? "bg-premier-green text-white"
                     : batch.status === "classes"
                     ? "bg-blue-600 text-white"
                     : batch.status === "completed"
@@ -228,7 +228,7 @@ export default function AdminBatchesPage() {
             
             <div className="p-6 space-y-4">
               <div>
-                <h3 className="text-lg font-bold text-text-primary">{batch.name}</h3>
+                <h3 className="text-lg font-bold text-text-premier-green">{batch.name}</h3>
                 <p className="text-xs text-text-secondary mt-1">
                   Start: {new Date(batch.startDate).toLocaleDateString()} • End: {new Date(batch.endDate).toLocaleDateString()}
                 </p>
@@ -249,7 +249,7 @@ export default function AdminBatchesPage() {
                     return (
                       <div key={course.id} className="bg-bg-light border border-border-light rounded-lg p-3">
                         <div className="flex items-center justify-between gap-2 flex-wrap">
-                          <span className="text-xs font-bold text-text-primary">
+                          <span className="text-xs font-bold text-text-premier-green">
                             {course.name}
                           </span>
                           <span className="text-[10px] font-bold text-text-secondary uppercase bg-white border border-border-light px-2 py-0.5 rounded">
@@ -307,7 +307,7 @@ export default function AdminBatchesPage() {
                   <select
                     value={batch.status || (batch.isActive ? "classes" : "completed")}
                     onChange={(e) => handleStatusChange(batch.id, e.target.value)}
-                    className="px-2 py-1.5 text-xs border border-border-light rounded-lg bg-white text-text-primary font-medium focus:outline-none focus:ring-1 focus:ring-brand-green cursor-pointer shadow-sm hover:border-text-secondary transition-colors"
+                    className="px-2 py-1.5 text-xs border border-border-light rounded-lg bg-white text-text-premier-green font-medium focus:outline-none focus:ring-1 focus:ring-brand-green cursor-pointer shadow-sm hover:border-text-secondary transition-colors"
                   >
                     <option value="admission">Admission Phase</option>
                     <option value="classes">Classes Phase</option>
@@ -342,33 +342,33 @@ export default function AdminBatchesPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm overflow-y-auto py-10">
           <div className="bg-white border border-border-light rounded-xl p-6 w-full max-w-lg mx-4 shadow-xl max-h-[85vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-5 border-b border-border-light pb-3">
-              <h2 className="font-bold text-text-primary text-base">Add New Batch</h2>
-              <button onClick={() => setShowModal(false)} className="text-text-secondary hover:text-text-primary text-xl font-bold">×</button>
+              <h2 className="font-bold text-text-premier-green text-base">Add New Batch</h2>
+              <button onClick={() => setShowModal(false)} className="text-text-secondary hover:text-text-premier-green text-xl font-bold">×</button>
             </div>
 
             <div className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Batch Name</label>
-                <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary" placeholder="e.g. Income Tax Filing Masterclass — July 2026" />
+                <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green" placeholder="e.g. Income Tax Filing Masterclass — July 2026" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Start Date</label>
-                  <input type="date" value={form.startDate} onChange={(e) => setForm({ ...form, startDate: e.target.value })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary" />
+                  <input type="date" value={form.startDate} onChange={(e) => setForm({ ...form, startDate: e.target.value })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green" />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">End Date</label>
-                  <input type="date" value={form.endDate} onChange={(e) => setForm({ ...form, endDate: e.target.value })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary" />
+                  <input type="date" value={form.endDate} onChange={(e) => setForm({ ...form, endDate: e.target.value })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Classes per Week</label>
-                  <input type="number" min={1} max={7} value={form.classesPerWeek} onChange={(e) => setForm({ ...form, classesPerWeek: parseInt(e.target.value) || 3 })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary" />
+                  <input type="number" min={1} max={7} value={form.classesPerWeek} onChange={(e) => setForm({ ...form, classesPerWeek: parseInt(e.target.value) || 3 })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green" />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Batch Banner / Thumbnail</label>
-                  <input type="file" onChange={handleFileUpload} className="w-full text-xs text-text-secondary mt-1.5" />
+                  <input type="file" onChange={handleFileUpload} className="w-full text-xs text-text-secondary mt-1.5 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream" />
                   {form.thumbnail && <span className="text-[10px] text-green-600 block mt-1">✓ Banner uploaded</span>}
                 </div>
               </div>
@@ -378,7 +378,7 @@ export default function AdminBatchesPage() {
                 <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Offered Courses</label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto border border-border-light rounded-lg p-3 bg-bg-light">
                   {coursesList.map((course) => (
-                    <label key={course.id} className="flex items-center gap-2 text-xs font-medium text-text-primary cursor-pointer hover:text-brand-green">
+                    <label key={course.id} className="flex items-center gap-2 text-xs font-medium text-text-premier-green cursor-pointer hover:text-brand-green">
                       <input type="checkbox" checked={form.courseIds.includes(course.id)} onChange={() => handleCourseToggle(course.id)} />
                       {course.name}
                     </label>
@@ -386,7 +386,7 @@ export default function AdminBatchesPage() {
                 </div>
               </div>
 
-              <button onClick={handleCreate} className="btn-signup w-full py-2.5 text-sm mt-4">Create Batch</button>
+              <button onClick={handleCreate} className="btn-signup w-full py-2.5 text-sm mt-4 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">Create Batch</button>
             </div>
           </div>
         </div>
@@ -396,7 +396,7 @@ export default function AdminBatchesPage() {
         <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/25 backdrop-blur-[2px]">
           <div className="bg-white border border-border-light rounded-2xl p-6 flex flex-col items-center space-y-4 shadow-2xl">
             <div className="w-10 h-10 border-4 border-brand-green/20 border-t-brand-green rounded-full animate-spin" />
-            <p className="text-xs font-bold text-text-primary uppercase tracking-wider">Processing Request...</p>
+            <p className="text-xs font-bold text-text-premier-green uppercase tracking-wider">Processing Request...</p>
           </div>
         </div>
       )}

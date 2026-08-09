@@ -52,12 +52,12 @@ export default function AdminLayout({
         <div>
           {/* Logo */}
           <div className="px-6 pb-6 border-b border-border-light">
-            <Link href="/admin" className="flex items-center gap-2 group no-underline">
+            <Link href="/admin" className="flex items-center gap-2 group no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
               <div className="w-9 h-9 rounded-full bg-brand-green flex items-center justify-center">
                 <span className="text-accent-gold text-xs font-bold">P</span>
               </div>
               <div>
-                <span className="font-bold text-sm text-text-primary block">Premier</span>
+                <span className="font-bold text-sm text-text-premier-green block">Premier</span>
                 <span className="text-[10px] text-text-secondary block -mt-0.5">Admin Panel</span>
               </div>
             </Link>
@@ -76,7 +76,7 @@ export default function AdminLayout({
                   className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors no-underline ${
                     isActive
                       ? "text-brand-green bg-brand-green/5 font-semibold"
-                      : "text-text-secondary hover:text-text-primary hover:bg-gray-50"
+                      : "text-text-secondary hover:text-text-premier-green hover:bg-gray-50"
                   }`}
                 >
                   <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,13 +98,13 @@ export default function AdminLayout({
               </span>
             </div>
             <div className="truncate">
-              <p className="text-xs font-bold text-text-primary truncate m-0">{user?.name}</p>
+              <p className="text-xs font-bold text-text-premier-green truncate m-0">{user?.name}</p>
               <p className="text-[10px] text-text-secondary truncate m-0">{user?.email}</p>
             </div>
           </div>
           <button
             onClick={handleLogout}
-            className="w-full bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold py-2 rounded-lg transition-colors"
+            className="w-full bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold py-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
           >
             Logout
           </button>

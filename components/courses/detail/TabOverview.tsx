@@ -28,7 +28,7 @@ export function TabOverview({ course }: { course: Course }) {
       {/* Quick Summary Grid */}
       <div className="grid sm:grid-cols-3 gap-4 p-5 rounded-2xl bg-surface-secondary border border-border">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-blue-50 text-primary flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-blue-50 text-premier-green flex items-center justify-center shrink-0">
             <Clock className="w-5 h-5" />
           </div>
           <div>
@@ -61,14 +61,14 @@ export function TabOverview({ course }: { course: Course }) {
       {/* Learning Objectives */}
       <div className="space-y-4">
         <div className="flex items-center gap-2">
-          <Target className="w-5 h-5 text-primary" />
+          <Target className="w-5 h-5 text-premier-green" />
           <h3 className="text-xl font-heading font-bold text-heading">What You Will Learn</h3>
         </div>
 
         <div className="grid sm:grid-cols-2 gap-4">
           {course.learningObjectives.map((obj, idx) => (
             <div key={idx} className="flex items-start gap-3 p-4 rounded-xl bg-white border border-border/80 shadow-soft">
-              <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-premier-green shrink-0 mt-0.5" />
               <span className="text-sm font-heading font-semibold text-heading leading-snug">{obj}</span>
             </div>
           ))}
@@ -85,7 +85,7 @@ export function TabOverview({ course }: { course: Course }) {
         <div className="space-y-3">
           {course.whoIsThisFor.map((item, idx) => (
             <div key={idx} className="flex items-start gap-3 p-3.5 rounded-xl bg-surface-secondary border border-border/60">
-              <div className="w-6 h-6 rounded-full bg-primary-50 text-primary flex items-center justify-center text-xs font-mono font-bold shrink-0 mt-0.5">
+              <div className="w-6 h-6 rounded-full bg-premier-green-50 text-premier-green flex items-center justify-center text-xs font-mono font-bold shrink-0 mt-0.5">
                 0{idx + 1}
               </div>
               <p className="text-sm text-body leading-relaxed">{item}</p>
@@ -97,7 +97,7 @@ export function TabOverview({ course }: { course: Course }) {
       {/* Career Opportunities */}
       <div className="space-y-4">
         <div className="flex items-center gap-2">
-          <Briefcase className="w-5 h-5 text-primary" />
+          <Briefcase className="w-5 h-5 text-premier-green" />
           <h3 className="text-xl font-heading font-bold text-heading">Career Opportunities</h3>
         </div>
 
@@ -118,7 +118,7 @@ export function TabOverview({ course }: { course: Course }) {
         <h3 className="text-xl font-heading font-bold text-heading">Key Skills Included</h3>
         <div className="flex flex-wrap gap-2">
           {course.skillsIncluded.map((skill, idx) => (
-            <span key={idx} className="px-3.5 py-1.5 rounded-lg bg-primary-50 text-primary border border-primary-100 text-xs font-heading font-bold">
+            <span key={idx} className="px-3.5 py-1.5 rounded-lg bg-premier-green-50 text-premier-green border border-premier-green-100 text-xs font-heading font-bold">
               {skill}
             </span>
           ))}
@@ -126,7 +126,7 @@ export function TabOverview({ course }: { course: Course }) {
       </div>
 
       {/* Certificate Information Card */}
-      <div className="rounded-3xl bg-gradient-to-r from-primary-900 to-primary p-6 sm:p-8 text-white shadow-elevated flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div className="rounded-3xl bg-[#0F3524] border border-[#164E36] p-6 sm:p-8 text-white shadow-elevated flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div className="space-y-2">
           <div className="flex items-center gap-2 text-amber-300 text-xs font-heading font-bold uppercase tracking-wider">
             <Award className="w-4 h-4" />

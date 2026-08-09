@@ -36,7 +36,7 @@ const communityFeatures = [
     icon: BookOpen,
     title: 'Peer Learning',
     desc: 'Work in small study groups, discuss practical case studies, and exchange reference formats.',
-    color: 'bg-emerald-500',
+    color: 'bg-premier-green',
   },
   {
     icon: Sparkles,
@@ -54,7 +54,7 @@ const communityFeatures = [
 
 export function CommunitySection() {
   return (
-    <section className="section-padding bg-surface-secondary border-b border-border relative overflow-hidden">
+    <section className="section-padding bg-white border-b border-border relative overflow-hidden">
       <div className="section-container relative z-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
@@ -66,7 +66,7 @@ export function CommunitySection() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-5 space-y-6"
           >
-            <span className="text-xs font-heading font-bold uppercase tracking-wider text-primary px-3.5 py-1.5 rounded-full bg-primary-50 border border-primary-100 inline-block">
+            <span className="text-xs font-heading font-bold uppercase tracking-wider text-premier-green px-3.5 py-1.5 rounded-full bg-premier-green-50 border border-premier-green-100 inline-block">
               Collaborative Growth
             </span>
 
@@ -102,13 +102,13 @@ export function CommunitySection() {
               return (
                 <div
                   key={idx}
-                  className="p-5 rounded-2xl bg-white border border-border hover:border-primary/40 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between group"
+                  className="p-5 rounded-2xl bg-white border border-border hover:border-premier-green/40 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div className="space-y-3">
                     <div className={`w-10 h-10 rounded-xl ${feat.color} text-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300`}>
                       <IconComp className="w-5 h-5" />
                     </div>
-                    <h3 className="text-base font-heading font-bold text-heading group-hover:text-primary transition-colors">
+                    <h3 className="text-base font-heading font-bold text-heading group-hover:text-premier-green transition-colors">
                       {feat.title}
                     </h3>
                     <p className="text-xs text-body leading-relaxed">
@@ -116,7 +116,7 @@ export function CommunitySection() {
                     </p>
                   </div>
 
-                  <div className="pt-3 mt-3 border-t border-border/40 flex items-center justify-between text-[11px] font-heading font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="pt-3 mt-3 border-t border-border/40 flex items-center justify-between text-[11px] font-heading font-semibold text-premier-green opacity-0 group-hover:opacity-100 transition-opacity">
                     <span>Explore Feature</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>

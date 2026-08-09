@@ -44,7 +44,7 @@ export default function PenaltyPage() {
         <div className="flex flex-col sm:flex-row gap-4 w-full">
           <Link
             href="/dashboard"
-            className="flex-1 px-6 py-3 bg-red-600/90 hover:bg-red-600 active:bg-red-700 text-white font-bold text-sm rounded-xl transition-all duration-200 shadow-lg shadow-red-600/20 hover:scale-[1.02] text-center"
+            className="flex-1 px-6 py-3 bg-red-600/90 hover:bg-red-600 active:bg-red-700 text-white font-bold text-sm rounded-xl transition-all duration-200 shadow-lg shadow-red-600/20 hover:scale-[1.02] text-center focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
           >
             Back to Dashboard
           </Link>

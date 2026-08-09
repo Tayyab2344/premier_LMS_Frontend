@@ -68,7 +68,7 @@ function LoginContent() {
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-green to-emerald-700 flex items-center justify-center mb-4 shadow-lg shadow-brand-green/20">
               <span className="text-accent-gold text-2xl font-extrabold tracking-tight">P</span>
             </div>
-            <h1 className="text-2xl font-bold text-text-primary tracking-tight">Welcome Back</h1>
+            <h1 className="text-2xl font-bold text-text-premier-green tracking-tight">Welcome Back</h1>
             <p className="text-sm text-text-secondary mt-1.5">Sign in to your learning portal</p>
           </div>
 
@@ -90,7 +90,7 @@ function LoginContent() {
           <form onSubmit={handleSubmit} className="space-y-5" noValidate>
             {/* Email */}
             <div>
-              <label htmlFor="login-email" className="block text-sm font-semibold text-text-primary mb-2">
+              <label htmlFor="login-email" className="block text-sm font-semibold text-text-premier-green mb-2">
                 Email Address
               </label>
               <div className="relative">
@@ -103,7 +103,7 @@ function LoginContent() {
                   value={email}
                   onChange={(e) => { setEmail(e.target.value); setErrors((p) => ({ ...p, email: undefined })); }}
                   placeholder="you@example.com"
-                  className={`w-full pl-11 pr-4 py-3 text-sm border-2 rounded-xl bg-gray-50/50 text-text-primary
+                  className={`w-full pl-11 pr-4 py-3 text-sm border-2 rounded-xl bg-gray-50/50 text-text-premier-green
                              placeholder:text-gray-400 transition-all duration-200 focus:ring-0 focus:bg-white
                              ${errors.email ? 'border-red-300 focus:border-red-400' : 'border-gray-200 focus:border-brand-green'}`}
                 />
@@ -113,7 +113,7 @@ function LoginContent() {
 
             {/* Password */}
             <div>
-              <label htmlFor="login-password" className="block text-sm font-semibold text-text-primary mb-2">
+              <label htmlFor="login-password" className="block text-sm font-semibold text-text-premier-green mb-2">
                 Password
               </label>
               <div className="relative">
@@ -126,14 +126,14 @@ function LoginContent() {
                   value={password}
                   onChange={(e) => { setPassword(e.target.value); setErrors((p) => ({ ...p, password: undefined })); }}
                   placeholder="••••••••"
-                  className={`w-full pl-11 pr-12 py-3 text-sm border-2 rounded-xl bg-gray-50/50 text-text-primary
+                  className={`w-full pl-11 pr-12 py-3 text-sm border-2 rounded-xl bg-gray-50/50 text-text-premier-green
                              placeholder:text-gray-400 transition-all duration-200 focus:ring-0 focus:bg-white
                              ${errors.password ? 'border-red-300 focus:border-red-400' : 'border-gray-200 focus:border-brand-green'}`}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPw(!showPw)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-text-primary transition-colors p-1"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-text-premier-green transition-colors p-1"
                   aria-label={showPw ? 'Hide password' : 'Show password'}
                 >
                   {showPw ? (
@@ -157,7 +157,7 @@ function LoginContent() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full btn-signup py-3.5 text-base font-bold rounded-xl disabled:opacity-60 disabled:cursor-not-allowed shadow-lg shadow-brand-green/20 hover:shadow-xl hover:shadow-brand-green/30 transition-all duration-300"
+              className="w-full btn-signup py-3.5 text-base font-bold rounded-xl disabled:opacity-60 disabled:cursor-not-allowed shadow-lg shadow-brand-green/20 hover:shadow-xl hover:shadow-brand-green/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -178,7 +178,7 @@ function LoginContent() {
           {/* Sign Up Link */}
           <p className="text-center text-sm text-text-secondary">
             Don&apos;t have an account?{' '}
-            <Link href="/admission" className="font-bold text-brand-green hover:text-brand-green-dark transition-colors no-underline">
+            <Link href="/admission" className="font-bold text-brand-green hover:text-brand-green-dark transition-colors no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
               Apply for Admission
             </Link>
           </p>
@@ -248,7 +248,7 @@ function LoginContent() {
 export default function LoginPage() {
   return (
     <Suspense fallback={
-      <main className="min-h-screen flex items-center justify-center bg-white">
+      <main className="min-h-screen flex items-center justify-center bg-premier-cream">
         <div className="w-10 h-10 border-4 border-brand-green/30 border-t-brand-green rounded-full animate-spin" />
       </main>
     }>

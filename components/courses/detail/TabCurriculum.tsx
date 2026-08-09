@@ -35,7 +35,7 @@ export function TabCurriculum({ course }: { course: Course }) {
   const getLessonIcon = (type: ModuleLesson['type']) => {
     switch (type) {
       case 'video':
-        return <PlayCircle className="w-4 h-4 text-primary shrink-0" />;
+        return <PlayCircle className="w-4 h-4 text-premier-green shrink-0" />;
       case 'practical_demo':
         return <FileText className="w-4 h-4 text-emerald-600 shrink-0" />;
       case 'case_study':
@@ -58,13 +58,13 @@ export function TabCurriculum({ course }: { course: Course }) {
         <div className="flex items-center gap-2">
           <button
             onClick={expandAll}
-            className="px-3 py-1.5 rounded-lg border border-border bg-surface-secondary text-xs font-heading font-semibold text-heading hover:bg-white transition-all"
+            className="px-3 py-1.5 rounded-lg border border-border bg-surface-secondary text-xs font-heading font-semibold text-heading hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
           >
             Expand All
           </button>
           <button
             onClick={collapseAll}
-            className="px-3 py-1.5 rounded-lg border border-border bg-surface-secondary text-xs font-heading font-semibold text-heading hover:bg-white transition-all"
+            className="px-3 py-1.5 rounded-lg border border-border bg-surface-secondary text-xs font-heading font-semibold text-heading hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
           >
             Collapse All
           </button>
@@ -97,7 +97,7 @@ export function TabCurriculum({ course }: { course: Course }) {
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono font-bold text-primary">
+                      <span className="text-xs font-mono font-bold text-premier-green">
                         Module 0{mod.number}
                       </span>
                       <span className="text-xs text-body">({mod.lessons?.length || 0} Lectures)</span>
@@ -111,7 +111,7 @@ export function TabCurriculum({ course }: { course: Course }) {
                     <span className="text-xs font-heading font-medium text-body hidden sm:inline-block">
                       {mod.duration}
                     </span>
-                    <div className={`w-8 h-8 rounded-full bg-surface-secondary flex items-center justify-center transition-transform ${isOpen ? 'rotate-180 bg-primary-50 text-primary' : 'text-body'}`}>
+                    <div className={`w-8 h-8 rounded-full bg-surface-secondary flex items-center justify-center transition-transform ${isOpen ? 'rotate-180 bg-premier-green-50 text-premier-green' : 'text-body'}`}>
                       <ChevronDown className="w-4 h-4" />
                     </div>
                   </div>
@@ -134,7 +134,7 @@ export function TabCurriculum({ course }: { course: Course }) {
                       {mod.lessons.map((lesson, lIdx) => (
                         <div
                           key={lIdx}
-                          className="flex items-center justify-between p-3 rounded-xl bg-white border border-border/70 hover:border-primary/30 transition-all text-xs"
+                          className="flex items-center justify-between p-3 rounded-xl bg-white border border-border/70 hover:border-premier-green/30 transition-all text-xs"
                         >
                           <div className="flex items-center gap-3">
                             {getLessonIcon(lesson.type)}
@@ -151,7 +151,7 @@ export function TabCurriculum({ course }: { course: Course }) {
                           <div className="flex items-center gap-3 shrink-0 text-body">
                             <span className="font-mono text-[11px]">{lesson.duration}</span>
                             {lesson.isFree ? (
-                              <span className="text-primary font-bold">Watch</span>
+                              <span className="text-premier-green font-bold">Watch</span>
                             ) : (
                               <Lock className="w-3.5 h-3.5 text-body/40" />
                             )}

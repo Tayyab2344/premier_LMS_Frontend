@@ -130,7 +130,7 @@ export function TabReviews({ course }: { course: Course }) {
                   disabled={votedIds.includes(rev.id)}
                   className={`flex items-center gap-1.5 px-3 py-1 rounded-lg border text-xs font-heading font-semibold transition-all ${
                     votedIds.includes(rev.id)
-                      ? 'bg-primary-50 text-primary border-primary-200'
+                      ? 'bg-premier-green-50 text-premier-green border-premier-green-200'
                       : 'bg-surface-secondary text-body border-border hover:bg-slate-200'
                   }`}
                 >

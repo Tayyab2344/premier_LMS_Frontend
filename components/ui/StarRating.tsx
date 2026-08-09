@@ -44,7 +44,7 @@ export default function StarRating({
     <div className="flex items-center gap-1">
       <div className="flex items-center">{stars}</div>
       {showValue && (
-        <span className={`font-semibold text-text-primary ${size === 'sm' ? 'text-xs' : 'text-sm'}`}>
+        <span className={`font-semibold text-text-premier-green ${size === 'sm' ? 'text-xs' : 'text-sm'}`}>
           {rating.toFixed(1)}
         </span>
       )}

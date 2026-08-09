@@ -9,20 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: '#2563EB',
-          50: '#EFF6FF',
-          100: '#DBEAFE',
-          200: '#BFDBFE',
-          300: '#93C5FD',
-          400: '#60A5FA',
-          500: '#3B82F6',
-          600: '#2563EB',
-          700: '#1D4ED8',
-          800: '#1E40AF',
-          900: '#1E3A8A',
-          950: '#0F172A',
-        },
+        'premier-green': '#164E36',
+        'premier-green-dark': '#0F3524',
+        'premier-cream': '#F8F6F0',
+        'premier-cream-dark': '#EAE6DB',
+        'premier-gold': '#C8B687',
         brand: {
           green: '#059669',
           light: '#D1FAE5',
@@ -31,14 +22,15 @@ const config: Config = {
         'brand-green': '#059669',
         'brand-green-dark': '#047857',
         'brand-green-light': '#D1FAE5',
-        success: '#22C55E',
-        heading: '#111827',
-        body: '#475569',
-        border: '#E5E7EB',
+        success: '#326C45',
+        heading: '#111A15',
+        body: '#111A15',
+        muted: '#54665C',
+        border: '#D8D6CC',
         surface: {
           DEFAULT: '#FFFFFF',
-          secondary: '#F8FAFC',
-          hover: '#EFF6FF',
+          secondary: '#F8F6F0',
+          hover: '#EAE6DB',
         },
       },
       fontFamily: {

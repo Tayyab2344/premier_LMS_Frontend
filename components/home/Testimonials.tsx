@@ -38,10 +38,10 @@ export function Testimonials() {
   const t = testimonials[idx];
 
   return (
-    <section className="py-20 bg-white border-t border-border">
+    <section className="py-20 bg-premier-cream border-t border-border">
       <div className="section-container">
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-50 border border-primary-200 text-primary text-xs font-semibold mb-4">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-premier-green-50 border border-premier-green-200 text-premier-green text-xs font-semibold mb-4">
             <Award className="w-3.5 h-3.5" />
             Verified Practitioner Reviews
           </span>
@@ -66,14 +66,14 @@ export function Testimonials() {
                     <Star key={i} className="w-5 h-5 fill-amber-400" />
                   ))}
                 </div>
-                <Quote className="w-8 h-8 text-primary-100" />
+                <Quote className="w-8 h-8 text-premier-green-100" />
               </div>
               <blockquote className="text-lg font-medium text-heading leading-relaxed mb-8 italic">
                 &ldquo;{t.comment}&rdquo;
               </blockquote>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-5 border-t border-border">
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-xl bg-primary flex items-center justify-center font-bold text-white text-sm shadow-sm">
+                  <div className="w-11 h-11 rounded-xl bg-premier-green flex items-center justify-center font-bold text-white text-sm shadow-sm">
                     {t.initials}
                   </div>
                   <div>
@@ -93,7 +93,7 @@ export function Testimonials() {
           <div className="flex items-center justify-center gap-3 mt-8">
             <button
               onClick={prev}
-              className="w-10 h-10 rounded-full border border-border bg-white flex items-center justify-center text-heading hover:bg-primary-50 hover:border-primary transition-all shadow-sm"
+              className="w-10 h-10 rounded-full border border-border bg-white flex items-center justify-center text-heading hover:bg-premier-green-50 hover:border-premier-green transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -103,14 +103,14 @@ export function Testimonials() {
                 <button
                   key={i}
                   onClick={() => setIdx(i)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all ${i === idx ? 'bg-primary w-6' : 'bg-slate-300'}`}
+                  className={`w-2.5 h-2.5 rounded-full transition-all ${i === idx ? 'bg-premier-green w-6' : 'bg-slate-300'}`}
                   aria-label={`Go to slide ${i + 1}`}
                 />
               ))}
             </div>
             <button
               onClick={next}
-              className="w-10 h-10 rounded-full border border-border bg-white flex items-center justify-center text-heading hover:bg-primary-50 hover:border-primary transition-all shadow-sm"
+              className="w-10 h-10 rounded-full border border-border bg-white flex items-center justify-center text-heading hover:bg-premier-green-50 hover:border-premier-green transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
               aria-label="Next testimonial"
             >
               <ChevronRight className="w-5 h-5" />

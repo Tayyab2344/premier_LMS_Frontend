@@ -8,11 +8,11 @@ export default function NotFound() {
           <span className="text-accent-gold text-3xl font-extrabold">TM</span>
         </div>
         <h1 className="text-6xl font-extrabold text-brand-green mb-4">404</h1>
-        <h2 className="text-2xl font-bold text-text-primary mb-3">Page Not Found</h2>
+        <h2 className="text-2xl font-bold text-text-premier-green mb-3">Page Not Found</h2>
         <p className="text-sm text-text-secondary leading-relaxed mb-8">
           The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
         </p>
-        <Link href="/" className="btn-signup px-8 py-3 text-base no-underline inline-block">
+        <Link href="/" className="btn-signup px-8 py-3 text-base no-underline inline-block focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
           Back to Home
         </Link>
       </div>

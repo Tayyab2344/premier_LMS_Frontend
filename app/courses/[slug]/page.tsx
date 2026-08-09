@@ -71,7 +71,7 @@ export default function CourseDetailPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-white text-heading flex items-center justify-center p-6 pt-24">
+      <main className="min-h-screen bg-premier-cream text-heading flex items-center justify-center p-6 pt-24">
         <div className="w-8 h-8 border-4 border-brand-green/30 border-t-brand-green rounded-full animate-spin" />
       </main>
     );
@@ -79,16 +79,16 @@ export default function CourseDetailPage() {
 
   if (!course) {
     return (
-      <main className="min-h-screen bg-white text-heading flex items-center justify-center p-6 pt-24">
+      <main className="min-h-screen bg-premier-cream text-heading flex items-center justify-center p-6 pt-24">
         <div className="text-center space-y-4 max-w-md">
-          <div className="w-16 h-16 rounded-full bg-primary-50 text-primary flex items-center justify-center mx-auto">
+          <div className="w-16 h-16 rounded-full bg-premier-green-50 text-premier-green flex items-center justify-center mx-auto">
             <BookOpen className="w-8 h-8" />
           </div>
           <h1 className="text-2xl font-heading font-extrabold text-heading">Course Not Found</h1>
           <p className="text-sm text-body leading-relaxed">
             The requested course URL does not match any current or upcoming masterclasses in our catalog.
           </p>
-          <Link href="/courses" className="btn-primary text-xs inline-flex !py-3 !px-6">
+          <Link href="/courses" className="btn-primary text-xs inline-flex !py-3 !px-6 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
             ← Explore All Courses
           </Link>
         </div>
@@ -107,7 +107,7 @@ export default function CourseDetailPage() {
 
   return (
     <SmoothScrollProvider>
-      <main className="min-h-screen bg-white text-heading selection:bg-primary-100 selection:text-primary-900 overflow-x-hidden">
+      <main className="min-h-screen bg-premier-cream text-heading selection:bg-premier-green-100 selection:text-premier-green-900 overflow-x-hidden">
         {/* 1. Light Clean Header (No Dark Banner) */}
         <CourseDetailHero
           course={course}
@@ -118,7 +118,7 @@ export default function CourseDetailPage() {
         <StickyCourseTabs activeTab={activeTab} onTabChange={handleTabClick} />
 
         {/* 3. Main Content & Sidebar Grid */}
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-premier-cream">
           <div className="section-container">
             <div className="grid lg:grid-cols-12 gap-12 items-start">
               

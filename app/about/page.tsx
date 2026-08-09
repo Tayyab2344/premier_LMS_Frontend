@@ -16,7 +16,7 @@ import { AboutCTA } from '@/components/about/AboutCTA';
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-white text-heading selection:bg-primary-100 selection:text-primary-900 overflow-x-hidden">
+    <main className="min-h-screen bg-premier-cream text-heading selection:bg-premier-green-100 selection:text-premier-green-900 overflow-x-hidden">
         {/* 1. Hero Section */}
         <AboutHero />
 

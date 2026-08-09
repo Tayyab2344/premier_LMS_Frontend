@@ -137,14 +137,14 @@ export function FeaturedCourses() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <div>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-50 border border-primary-200 text-primary text-xs font-semibold mb-3">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-premier-green-50 border border-premier-green-200 text-premier-green text-xs font-semibold mb-3">
               <Award className="w-3.5 h-3.5" />
               Accredited Catalog
             </span>
             <h2 className="text-4xl sm:text-[48px] font-heading font-extrabold text-heading leading-[1.1]" style={{ letterSpacing: '-0.03em' }}>Featured Masterclasses</h2>
             <p className="text-body font-body text-base mt-1.5">Practitioner masterclasses instructed directly by Advocate High Court &amp; ACMA Raja Gulfam.</p>
           </div>
-          <Link href="/courses" className="text-xs font-bold text-primary hover:text-primary-700 flex items-center gap-1">
+          <Link href="/courses" className="text-xs font-bold text-premier-green hover:text-premier-green-700 flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
             View Full Catalog ({courses.length}+) <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
@@ -156,7 +156,7 @@ export function FeaturedCourses() {
               key={c.id}
               onClick={() => setFilter(c.id)}
               className={`px-5 h-[42px] rounded-full text-sm font-body font-semibold whitespace-nowrap transition-all ${
-                filter === c.id ? 'bg-primary text-white shadow-sm' : 'bg-white border border-border text-body hover:text-heading hover:border-slate-300'
+                filter === c.id ? 'bg-premier-green text-white shadow-sm' : 'bg-white border border-border text-body hover:text-heading hover:border-slate-300'
               }`}
             >
               {c.label}
@@ -179,7 +179,7 @@ export function FeaturedCourses() {
                 {/* Banner */}
                 <div className={`relative h-40 bg-gradient-to-br ${course.gradient} p-4 flex flex-col justify-between`}>
                   <div className="flex items-center justify-between">
-                    <span className="px-2.5 py-0.5 rounded-full bg-white/90 text-[11px] font-bold text-primary shadow-sm">{course.cpe}</span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-white/90 text-[11px] font-bold text-premier-green shadow-sm">{course.cpe}</span>
                     <span className="px-2 py-0.5 rounded bg-white/20 text-[10px] uppercase font-semibold text-white tracking-wider">{course.level}</span>
                   </div>
                   <div className="flex gap-1.5">
@@ -191,10 +191,10 @@ export function FeaturedCourses() {
 
                 {/* Body */}
                 <div className="p-5 flex-1 flex flex-col">
-                  <div className="text-[11px] font-semibold text-primary uppercase tracking-wider mb-1.5">{course.category}</div>
-                  <h3 className="text-lg font-heading font-extrabold text-heading leading-snug mb-3 group-hover:text-primary transition-colors line-clamp-2" style={{ letterSpacing: '-0.02em' }}>{course.title}</h3>
+                  <div className="text-[11px] font-semibold text-premier-green uppercase tracking-wider mb-1.5">{course.category}</div>
+                  <h3 className="text-lg font-heading font-extrabold text-heading leading-snug mb-3 group-hover:text-premier-green transition-colors line-clamp-2" style={{ letterSpacing: '-0.02em' }}>{course.title}</h3>
                   <div className="flex items-center gap-2.5 mb-3 pb-3 border-b border-border">
-                    <div className="w-7 h-7 rounded-full bg-primary-100 flex items-center justify-center text-primary text-[10px] font-bold">
+                    <div className="w-7 h-7 rounded-full bg-premier-green-100 flex items-center justify-center text-premier-green text-[10px] font-bold">
                       RG
                     </div>
                     <div>
@@ -220,7 +220,7 @@ export function FeaturedCourses() {
                     <div className="text-[10px] font-number text-body line-through">PKR {course.oldPrice.toLocaleString()}</div>
                     <div className="text-xl font-number font-bold text-heading">PKR {course.price.toLocaleString()}</div>
                   </div>
-                  <button onClick={() => setPreview(course)} className="px-4 py-2 rounded-lg border border-border text-xs font-bold text-heading hover:bg-primary hover:text-white hover:border-primary transition-all">
+                  <button onClick={() => setPreview(course)} className="px-4 py-2 rounded-lg border border-border text-xs font-bold text-heading hover:bg-premier-green hover:text-white hover:border-premier-green transition-all">
                     Quick View
                   </button>
                 </div>
@@ -237,10 +237,10 @@ export function FeaturedCourses() {
                 <button onClick={() => setPreview(null)} className="absolute top-4 right-4 p-1 rounded-lg hover:bg-surface-secondary text-body">
                   <X className="w-5 h-5" />
                 </button>
-                <span className="px-2.5 py-1 rounded-full bg-primary-50 text-primary text-xs font-bold">{preview.category}</span>
+                <span className="px-2.5 py-1 rounded-full bg-premier-green-50 text-premier-green text-xs font-bold">{preview.category}</span>
                 <h3 className="text-xl font-bold text-heading">{preview.title}</h3>
                 <div className="flex items-center gap-2 text-xs text-body">
-                  <User className="w-4 h-4 text-primary" /> {preview.instructor} ({preview.role})
+                  <User className="w-4 h-4 text-premier-green" /> {preview.instructor} ({preview.role})
                 </div>
                 <p className="text-xs text-body">Master key financial &amp; tax frameworks with practical FBR IRIS &amp; SECP portal walkthroughs on the Premier LMS Student Mobile App.</p>
                 <div className="grid grid-cols-2 gap-3">
@@ -258,7 +258,7 @@ export function FeaturedCourses() {
                     <span className="text-xs text-body block">Total Fee</span>
                     <span className="text-2xl font-extrabold text-heading">PKR {preview.price.toLocaleString()}</span>
                   </div>
-                  <Link href="/admission" className="px-5 py-2.5 rounded-xl bg-primary text-white font-bold text-xs hover:bg-primary-700 transition-colors">
+                  <Link href="/admission" className="px-5 py-2.5 rounded-xl bg-premier-green text-white font-bold text-xs hover:bg-premier-green-700 transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
                     Enroll Now
                   </Link>
                 </div>

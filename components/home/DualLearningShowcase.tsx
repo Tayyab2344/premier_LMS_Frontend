@@ -22,11 +22,11 @@ export function DualLearningShowcase() {
   const features = tab === 'live' ? liveFeatures : ondemandFeatures;
 
   return (
-    <section className="py-20 bg-white" id="dual-learning">
+    <section className="py-20 bg-premier-cream" id="dual-learning">
       <div className="section-container">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-50 border border-primary-200 text-primary text-xs font-semibold mb-4">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-premier-green-50 border border-premier-green-200 text-premier-green text-xs font-semibold mb-4">
             <Video className="w-3.5 h-3.5" />
             Dual Learning
           </span>
@@ -46,7 +46,7 @@ export function DualLearningShowcase() {
                 {tab === t && (
                   <motion.div
                     layoutId="tabIndicator"
-                    className={`absolute inset-0 ${t === 'live' ? 'bg-primary' : 'bg-accent'} rounded-lg shadow-sm`}
+                    className={`absolute inset-0 ${t === 'live' ? 'bg-premier-green' : 'bg-accent'} rounded-lg shadow-sm`}
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -77,11 +77,11 @@ export function DualLearningShowcase() {
                 return (
                   <div key={i} className={`bg-white rounded-2xl p-5 border border-border hover:shadow-card transition-all`}>
                     <div className="flex items-center gap-3 mb-2">
-                      <div className={`p-2 rounded-lg ${tab === 'live' ? 'bg-primary-50 text-primary' : 'bg-accent-50 text-accent-600'}`}>
+                      <div className={`p-2 rounded-lg ${tab === 'live' ? 'bg-premier-green-50 text-premier-green' : 'bg-accent-50 text-accent-600'}`}>
                         <Icon className="w-5 h-5" />
                       </div>
                       <h3 className="text-sm font-heading font-bold text-heading flex-1">{f.title}</h3>
-                      <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded ${tab === 'live' ? 'bg-primary-50 text-primary' : 'bg-accent-50 text-accent-600'}`}>{f.tag}</span>
+                      <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded ${tab === 'live' ? 'bg-premier-green-50 text-premier-green' : 'bg-accent-50 text-accent-600'}`}>{f.tag}</span>
                     </div>
                     <p className="text-xs text-muted leading-relaxed pl-11">{f.desc}</p>
                   </div>
@@ -116,7 +116,7 @@ export function DualLearningShowcase() {
                   </div>
                   <div className="bg-white/10 backdrop-blur-md p-3 rounded-xl flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <button className={`p-2 rounded-lg ${tab === 'live' ? 'bg-primary text-white' : 'bg-accent text-white'}`}>
+                      <button className={`p-2 rounded-lg ${tab === 'live' ? 'bg-premier-green text-white' : 'bg-accent text-white'}`}>
                         <Play className="w-4 h-4 fill-white" />
                       </button>
                       <div>
@@ -124,7 +124,7 @@ export function DualLearningShowcase() {
                         <div className="text-[10px] text-white/60">{tab === 'live' ? 'Answering Student Question' : '18:42 / 45:00'}</div>
                       </div>
                     </div>
-                    <button className={`px-3 py-1.5 rounded-lg text-xs font-bold text-white ${tab === 'live' ? 'bg-primary/80' : 'bg-white/20'} flex items-center gap-1.5`}>
+                    <button className={`px-3 py-1.5 rounded-lg text-xs font-bold text-white ${tab === 'live' ? 'bg-premier-green/80' : 'bg-white/20'} flex items-center gap-1.5`}>
                       {tab === 'live' ? 'Raise Hand ✋' : <><Download className="w-3.5 h-3.5" /> Worksheet</>}
                     </button>
                   </div>

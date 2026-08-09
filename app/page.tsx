@@ -16,7 +16,7 @@ import { CTABanner } from '@/components/home/CTABannerAndFooter';
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-white relative">
+    <main className="min-h-screen bg-premier-cream relative">
       {/* 1. Hero Section */}
       <Hero />
 

@@ -1,15 +1,16 @@
 import type { Metadata } from 'next'
-import { Manrope, Inter, Space_Grotesk } from 'next/font/google'
+import { Merriweather, Inter, Space_Grotesk } from 'next/font/google'
 import { AuthProvider } from '@/lib/AuthContext'
 import { ModalProvider } from '@/lib/ModalContext'
 import { Navbar } from '@/components/home/Navbar'
 import { Footer } from '@/components/home/CTABannerAndFooter'
 import { ScrollProgressBar } from '@/components/layout/ScrollProgressBar'
+import { LenisProvider } from '@/components/providers/LenisProvider'
 import './globals.css'
 
-const manrope = Manrope({
+const merriweather = Merriweather({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['400', '700', '900'],
   variable: '--font-heading',
   display: 'swap',
 });
@@ -40,16 +41,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${manrope.variable} ${inter.variable} ${spaceGrotesk.variable}`}>
-      <body className="font-body text-heading bg-white antialiased">
-        <AuthProvider>
-          <ModalProvider>
-            <ScrollProgressBar />
-            <Navbar />
-            {children}
-            <Footer />
-          </ModalProvider>
-        </AuthProvider>
+    <html lang="en" className={`${merriweather.variable} ${inter.variable} ${spaceGrotesk.variable}`}>
+      <body className="font-body text-heading bg-premier-cream antialiased">
+        <LenisProvider>
+          <AuthProvider>
+            <ModalProvider>
+              <ScrollProgressBar />
+              <Navbar />
+              {children}
+              <Footer />
+            </ModalProvider>
+          </AuthProvider>
+        </LenisProvider>
       </body>
     </html>
   )

@@ -30,7 +30,7 @@ const courses = [
     category: 'Corporate Law',
     slug: 'corporate-law-and-secp-company-registration',
     ribbon: 'Upcoming',
-    ribbonColor: 'bg-primary',
+    ribbonColor: 'bg-premier-green',
     level: 'Intermediate',
     duration: '10 Weeks',
     students: '850',
@@ -47,7 +47,7 @@ const courses = [
     category: 'Accounting & Finance',
     slug: 'financial-accounting-and-bookkeeping-masterclass',
     ribbon: 'Upcoming',
-    ribbonColor: 'bg-emerald-500',
+    ribbonColor: 'bg-premier-green',
     level: 'Beginner',
     duration: '12 Weeks',
     students: '920',
@@ -128,7 +128,7 @@ export function PopularCourses() {
   return (
     <section className="relative bg-white border-t border-border overflow-hidden" id="courses" style={{ paddingTop: '90px', paddingBottom: '70px' }}>
       {/* Stripe/Linear subtle background */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-primary-100 rounded-full blur-[120px] opacity-20 pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-premier-green-100 rounded-full blur-[120px] opacity-20 pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-blue-200 rounded-full blur-[100px] opacity-15 pointer-events-none" />
       <div className="absolute inset-0 dot-pattern opacity-[0.02] pointer-events-none" />
 
@@ -136,7 +136,7 @@ export function PopularCourses() {
         {/* Header — Premium visual hierarchy */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="space-y-4 max-w-2xl">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-50 border border-primary-200 text-primary text-sm font-body font-semibold">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-premier-green-50 border border-premier-green-200 text-premier-green text-sm font-body font-semibold">
               <Trophy className="w-4 h-4" />
               Premium Legal Education
             </span>
@@ -145,7 +145,7 @@ export function PopularCourses() {
               style={{ letterSpacing: '-0.03em' }}
             >
               Master Practical{' '}
-              <span className="text-primary">Skills</span>
+              <span className="text-premier-green">Skills</span>
               <br className="hidden sm:block" />
               for Your Professional Career
             </h2>
@@ -153,7 +153,7 @@ export function PopularCourses() {
               Learn from Pakistan&apos;s Leading Advocate &amp; ACMA Professional — Master practical taxation, corporate law, finance, compliance, and audit through industry-focused programs.
             </p>
           </div>
-          <Link href="/courses" className="btn-secondary !py-3 !px-6 shrink-0 text-base font-body font-semibold" aria-label="View all masterclass courses">
+          <Link href="/courses" className="btn-secondary !py-3 !px-6 shrink-0 text-base font-body font-semibold focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream" aria-label="View all masterclass courses">
             View All Courses ({courses.length}+)
             <ArrowRight className="w-4 h-4" aria-hidden="true" />
           </Link>
@@ -168,8 +168,8 @@ export function PopularCourses() {
               aria-pressed={filter === cat.id}
               className={`px-5 h-[42px] rounded-full text-sm font-body font-semibold transition-all ${
                 filter === cat.id
-                  ? 'bg-primary text-white shadow-sm'
-                  : 'bg-surface-secondary text-slate-700 hover:bg-slate-200 border border-border'
+                  ? 'bg-premier-green text-white shadow-sm'
+                  : 'bg-white text-slate-700 hover:bg-slate-200 border border-border'
               }`}
             >
               {cat.label}
@@ -188,7 +188,7 @@ export function PopularCourses() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3 }}
-                className="group rounded-3xl bg-white border border-border overflow-hidden shadow-soft hover:shadow-card-hover hover:border-primary/40 transition-all duration-300 flex flex-col justify-between"
+                className="group rounded-3xl bg-white border border-border overflow-hidden shadow-soft hover:shadow-card-hover hover:border-premier-green/40 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   {/* Thumbnail Image Header */}
@@ -227,12 +227,12 @@ export function PopularCourses() {
 
                   {/* Body Content */}
                   <div className="p-6 space-y-4">
-                    <span className="text-[11px] font-body font-bold text-primary uppercase tracking-wider">
+                    <span className="text-[11px] font-body font-bold text-premier-green uppercase tracking-wider">
                       {course.category}
                     </span>
 
                     <h3
-                      className="text-[20px] font-heading font-extrabold text-heading group-hover:text-primary transition-colors leading-snug line-clamp-2"
+                      className="text-[20px] font-heading font-extrabold text-heading group-hover:text-premier-green transition-colors leading-snug line-clamp-2"
                       style={{ letterSpacing: '-0.02em' }}
                     >
                       <Link href={`/courses/${course.slug}`}>
@@ -273,7 +273,7 @@ export function PopularCourses() {
 
                   <Link
                     href="/admission"
-                    className="w-full btn-primary !py-3 text-sm text-center justify-center font-body font-semibold"
+                    className="w-full btn-primary !py-3 text-sm text-center justify-center font-body font-semibold focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
                   >
                     {course.status === 'Available' ? 'Enroll Now' : 'View Masterclass'}
                   </Link>

@@ -33,7 +33,7 @@ export function UpcomingSchedule() {
   const confirm = (e: React.FormEvent) => { e.preventDefault(); if (email) setSuccess(true); };
 
   return (
-    <section className="py-20 bg-white border-t border-border" id="live-classes">
+    <section className="py-20 bg-premier-cream border-t border-border" id="live-classes">
       <div className="section-container">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <div>
@@ -46,7 +46,7 @@ export function UpcomingSchedule() {
           </div>
           <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-secondary border border-border text-xs font-number font-bold text-heading">
             <span>Next Live Class In:</span>
-            <span className="text-primary">{time.d}d {time.h}h {time.m}m {time.s}s</span>
+            <span className="text-premier-green">{time.d}d {time.h}h {time.m}m {time.s}s</span>
           </div>
         </div>
 
@@ -55,12 +55,12 @@ export function UpcomingSchedule() {
             <div key={s.id} className="bg-white rounded-2xl border border-border p-6 shadow-soft hover:shadow-card-hover transition-all flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="px-2.5 py-0.5 rounded-full bg-primary-50 text-primary font-bold">{s.cpe}</span>
+                  <span className="px-2.5 py-0.5 rounded-full bg-premier-green-50 text-premier-green font-bold">{s.cpe}</span>
                   <span className="text-red-600 font-bold flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {s.seats} Seats Left</span>
                 </div>
                 <h3 className="text-base font-bold text-heading leading-snug">{s.title}</h3>
                 <div className="space-y-2 text-xs text-body border-t border-b border-border py-3">
-                  <div className="flex items-center gap-2"><Calendar className="w-3.5 h-3.5 text-primary" /> {s.date}</div>
+                  <div className="flex items-center gap-2"><Calendar className="w-3.5 h-3.5 text-premier-green" /> {s.date}</div>
                   <div className="flex items-center gap-2"><Clock className="w-3.5 h-3.5 text-emerald-600" /> {s.time}</div>
                   <div className="flex items-center gap-2"><UserCheck className="w-3.5 h-3.5 text-amber-600" /> {s.instructor}</div>
                 </div>
@@ -98,9 +98,9 @@ export function UpcomingSchedule() {
                     <p className="text-xs text-body">You are reserving a seat for <strong>{selectedTitle}</strong>.</p>
                     <div>
                       <label className="text-xs font-bold text-heading block mb-1">Your Email Address</label>
-                      <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="name@domain.com" className="w-full px-3.5 py-2.5 rounded-xl border border-border text-xs text-heading focus:outline-none focus:border-primary" />
+                      <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="name@domain.com" className="w-full px-3.5 py-2.5 rounded-xl border border-border text-xs text-heading focus:outline-none focus:border-premier-green" />
                     </div>
-                    <button type="submit" className="w-full btn-primary !py-2.5 text-xs text-center justify-center font-heading font-bold">Confirm Seat</button>
+                    <button type="submit" className="w-full btn-primary !py-2.5 text-xs text-center justify-center font-heading font-bold focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">Confirm Seat</button>
                   </form>
                 )}
               </motion.div>
