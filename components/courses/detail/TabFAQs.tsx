@@ -39,10 +39,10 @@ export function TabFAQs({ course }: { course: Course }) {
                 className="w-full p-5 flex items-center justify-between text-left hover:bg-surface-secondary/60 transition-colors"
               >
                 <span className="text-base font-heading font-bold text-heading flex items-center gap-3">
-                  <HelpCircle className="w-5 h-5 text-primary shrink-0" />
+                  <HelpCircle className="w-5 h-5 text-premier-green shrink-0" />
                   {faq.question}
                 </span>
-                <div className={`w-8 h-8 rounded-full bg-surface-secondary flex items-center justify-center transition-transform ${isOpen ? 'rotate-180 bg-primary-50 text-primary' : 'text-body'}`}>
+                <div className={`w-8 h-8 rounded-full bg-surface-secondary flex items-center justify-center transition-transform ${isOpen ? 'rotate-180 bg-premier-green-50 text-premier-green' : 'text-body'}`}>
                   <ChevronDown className="w-4 h-4" />
                 </div>
               </button>

@@ -19,7 +19,7 @@ export function TabProjects({ course }: { course: Course }) {
 
       {course.projects.length === 0 ? (
         <div className="p-8 rounded-2xl bg-surface-secondary text-center border border-border space-y-2">
-          <FolderGit2 className="w-8 h-8 text-primary mx-auto" />
+          <FolderGit2 className="w-8 h-8 text-premier-green mx-auto" />
           <h4 className="text-base font-heading font-bold text-heading">Case Studies Releasing at Launch</h4>
           <p className="text-xs text-body max-w-sm mx-auto">
             Practical tax and legal case study specifications for "{course.title}" will be announced prior to cohort commencement.
@@ -35,11 +35,11 @@ export function TabProjects({ course }: { course: Course }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: idx * 0.05 }}
-              className="rounded-2xl bg-white border border-border p-5 shadow-soft hover:shadow-card-hover hover:border-primary/40 transition-all flex flex-col justify-between"
+              className="rounded-2xl bg-white border border-border p-5 shadow-soft hover:shadow-card-hover hover:border-premier-green/40 transition-all flex flex-col justify-between"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="px-2.5 py-1 rounded-md bg-primary-50 text-primary text-[10px] font-mono font-bold border border-primary-100">
+                  <span className="px-2.5 py-1 rounded-md bg-premier-green-50 text-premier-green text-[10px] font-mono font-bold border border-premier-green-100">
                     Case Study 0{idx + 1}
                   </span>
                   <span className="text-xs font-mono font-medium text-body flex items-center gap-1">

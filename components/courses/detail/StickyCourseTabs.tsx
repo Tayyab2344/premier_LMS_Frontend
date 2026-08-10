@@ -33,7 +33,7 @@ export function StickyCourseTabs({ activeTab, onTabChange }: StickyCourseTabsPro
                 onClick={() => onTabChange(tab)}
                 className={`relative px-4 py-2 rounded-xl text-xs font-heading font-bold transition-all shrink-0 ${
                   isActive
-                    ? 'text-primary bg-primary-50 border border-primary-100 shadow-soft'
+                    ? 'text-premier-green bg-premier-green-50 border border-premier-green-100 shadow-soft'
                     : 'text-body hover:text-heading hover:bg-surface-secondary'
                 }`}
               >
@@ -41,7 +41,7 @@ export function StickyCourseTabs({ activeTab, onTabChange }: StickyCourseTabsPro
                 {isActive && (
                   <motion.div
                     layoutId="activeTabIndicator"
-                    className="absolute bottom-0 left-2 right-2 h-0.5 bg-primary rounded-full"
+                    className="absolute bottom-0 left-2 right-2 h-0.5 bg-premier-green rounded-full"
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}

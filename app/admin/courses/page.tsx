@@ -131,7 +131,7 @@ export default function AdminCoursesPage() {
     <div>
       <div className="flex items-center justify-between mb-8 gap-4 flex-wrap">
         <div>
-          <h1 className="text-xl font-bold text-text-primary">Courses Management</h1>
+          <h1 className="text-xl font-bold text-text-premier-green">Courses Management</h1>
           <p className="text-xs text-text-secondary mt-1">Manage dynamic academy masterclasses, fees, curriculum, and instructors</p>
         </div>
         <div className="flex items-center gap-3">
@@ -143,7 +143,7 @@ export default function AdminCoursesPage() {
               setSearchTerm(e.target.value);
               setCurrentPage(1);
             }}
-            className="px-4 py-2 text-xs border border-border-light rounded-lg bg-white text-text-primary focus:outline-none focus:ring-1 focus:ring-brand-green"
+            className="px-4 py-2 text-xs border border-border-light rounded-lg bg-white text-text-premier-green focus:outline-none focus:ring-1 focus:ring-brand-green"
           />
           <button onClick={() => setShowModal(true)} className="btn-signup text-xs px-4 py-2 shrink-0">
             + Add New Course
@@ -167,7 +167,7 @@ export default function AdminCoursesPage() {
             <tbody className="divide-y divide-border-light">
               {courses.map((course) => (
                 <tr key={course.id} className="hover:bg-bg-light transition-colors">
-                  <td className="px-6 py-4 text-sm font-bold text-text-primary">{course.name}</td>
+                  <td className="px-6 py-4 text-sm font-bold text-text-premier-green">{course.name}</td>
                   <td className="px-6 py-4 text-xs text-text-secondary">{course.category || "Tax & Legal"}</td>
                   <td className="px-6 py-4 text-xs font-mono text-text-secondary">PKR {course.originalFee.toLocaleString()}</td>
                   <td className="px-6 py-4 text-xs font-mono text-brand-green font-bold">
@@ -182,10 +182,10 @@ export default function AdminCoursesPage() {
                   </td>
                   <td className="px-6 py-4 text-xs text-right">
                     <div className="flex items-center justify-end gap-2">
-                      <Link href={`/admin/courses/${course.id}`} className="btn-signup text-[10px] px-3 py-1.5 bg-brand-green text-white hover:bg-brand-green-dark no-underline inline-block">
+                      <Link href={`/admin/courses/${course.id}`} className="btn-signup text-[10px] px-3 py-1.5 bg-brand-green text-white hover:bg-brand-green-dark no-underline inline-block focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
                         Edit &amp; Curriculum
                       </Link>
-                      <button onClick={() => handleToggleActive(course)} className="px-3 py-1.5 text-[10px] font-bold bg-white border border-border-light text-text-primary hover:bg-bg-light rounded-lg">
+                      <button onClick={() => handleToggleActive(course)} className="px-3 py-1.5 text-[10px] font-bold bg-white border border-border-light text-text-premier-green hover:bg-bg-light rounded-lg">
                         {course.isActive ? "Deactivate" : "Activate"}
                       </button>
                       <button onClick={() => handleDelete(course.id)} className="px-2.5 py-1.5 text-[10px] font-bold bg-white border border-red-200 text-red-600 hover:bg-red-50 rounded-lg">
@@ -221,26 +221,26 @@ export default function AdminCoursesPage() {
           <div className="bg-white border border-border-light rounded-2xl p-6 w-full max-w-lg shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-border-light pb-3">
               <div>
-                <h2 className="font-bold text-text-primary text-base">Add New Masterclass Course</h2>
+                <h2 className="font-bold text-text-premier-green text-base">Add New Masterclass Course</h2>
                 <p className="text-xs text-text-secondary">Create a new course entry to build curriculum &amp; pricing</p>
               </div>
-              <button onClick={() => setShowModal(false)} className="text-text-secondary hover:text-text-primary text-xl font-bold">×</button>
+              <button onClick={() => setShowModal(false)} className="text-text-secondary hover:text-text-premier-green text-xl font-bold">×</button>
             </div>
             
             <div className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Course Name *</label>
-                <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary" placeholder="e.g. Certified Corporate Expert (CCE)" />
+                <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green" placeholder="e.g. Certified Corporate Expert (CCE)" />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Category</label>
-                  <input value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary" placeholder="e.g. Corporate Law" />
+                  <input value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green" placeholder="e.g. Corporate Law" />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Level</label>
-                  <select value={form.level} onChange={(e) => setForm({ ...form, level: e.target.value })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary">
+                  <select value={form.level} onChange={(e) => setForm({ ...form, level: e.target.value })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green">
                     <option value="Beginner">Beginner</option>
                     <option value="Intermediate">Intermediate</option>
                     <option value="Advanced">Advanced</option>
@@ -251,33 +251,33 @@ export default function AdminCoursesPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Original Fee (PKR)</label>
-                  <input type="number" value={form.originalFee} onChange={(e) => setForm({ ...form, originalFee: Number(e.target.value) })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary" />
+                  <input type="number" value={form.originalFee} onChange={(e) => setForm({ ...form, originalFee: Number(e.target.value) })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green" />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Discounted Fee (PKR)</label>
-                  <input type="number" value={form.discountedFee} onChange={(e) => setForm({ ...form, discountedFee: Number(e.target.value) })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary" />
+                  <input type="number" value={form.discountedFee} onChange={(e) => setForm({ ...form, discountedFee: Number(e.target.value) })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green" />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Duration (Hours)</label>
-                  <input type="number" value={form.duration} onChange={(e) => setForm({ ...form, duration: Number(e.target.value) })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary" />
+                  <input type="number" value={form.duration} onChange={(e) => setForm({ ...form, duration: Number(e.target.value) })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green" />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Thumbnail Image URL</label>
-                  <input value={form.thumbnail} onChange={(e) => setForm({ ...form, thumbnail: e.target.value })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary" placeholder="https://..." />
+                  <input value={form.thumbnail} onChange={(e) => setForm({ ...form, thumbnail: e.target.value })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green" placeholder="https://..." />
                 </div>
               </div>
 
               <div>
                 <label className="block text-xs font-bold text-text-secondary uppercase mb-1.5">Short Overview</label>
-                <textarea rows={2} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary" placeholder="Short course description..." />
+                <textarea rows={2} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="w-full px-4 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green" placeholder="Short course description..." />
               </div>
 
               <div className="pt-2 flex items-center justify-end gap-3">
                 <button onClick={() => setShowModal(false)} className="px-4 py-2 text-xs font-bold text-text-secondary border border-border-light rounded-lg hover:bg-bg-light">Cancel</button>
-                <button onClick={handleCreate} className="btn-signup py-2.5 px-6 text-xs">Create Course Record</button>
+                <button onClick={handleCreate} className="btn-signup py-2.5 px-6 text-xs focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">Create Course Record</button>
               </div>
             </div>
           </div>
@@ -288,7 +288,7 @@ export default function AdminCoursesPage() {
         <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/25 backdrop-blur-[2px]">
           <div className="bg-white border border-border-light rounded-2xl p-6 flex flex-col items-center space-y-4 shadow-2xl">
             <div className="w-10 h-10 border-4 border-brand-green/20 border-t-brand-green rounded-full animate-spin" />
-            <p className="text-xs font-bold text-text-primary uppercase tracking-wider">Processing Request...</p>
+            <p className="text-xs font-bold text-text-premier-green uppercase tracking-wider">Processing Request...</p>
           </div>
         </div>
       )}

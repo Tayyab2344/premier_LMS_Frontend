@@ -34,7 +34,7 @@ const roadmapObjectives = [
     title: 'Introduce Advanced Certifications',
     desc: 'Partner with international professional bodies to issue globally recognized executive diplomas.',
     icon: Award,
-    color: 'bg-emerald-500',
+    color: 'bg-premier-green',
   },
   {
     phase: 'Q2 2027',
@@ -75,12 +75,12 @@ const roadmapObjectives = [
 
 export function FutureGoalsRoadmap() {
   return (
-    <section className="section-padding bg-white relative overflow-hidden">
+    <section className="section-padding bg-premier-cream relative overflow-hidden">
       <div className="section-container relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <span className="text-xs font-heading font-bold uppercase tracking-wider text-primary px-3.5 py-1.5 rounded-full bg-primary-50 border border-primary-100 inline-block">
+          <span className="text-xs font-heading font-bold uppercase tracking-wider text-premier-green px-3.5 py-1.5 rounded-full bg-premier-green-50 border border-premier-green-100 inline-block">
             Visionary Growth
           </span>
           <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-heading">
@@ -102,11 +102,11 @@ export function FutureGoalsRoadmap() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.07 }}
-                className="group rounded-3xl bg-surface-secondary border border-border p-6 shadow-soft hover:shadow-card-hover hover:border-primary/40 hover:bg-white transition-all duration-300 flex flex-col justify-between"
+                className="group rounded-3xl bg-surface-secondary border border-border p-6 shadow-soft hover:shadow-card-hover hover:border-premier-green/40 hover:bg-white transition-all duration-300 flex flex-col justify-between"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="px-3 py-1 rounded-full bg-primary-50 text-primary text-[11px] font-mono font-bold border border-primary-100">
+                    <span className="px-3 py-1 rounded-full bg-premier-green-50 text-premier-green text-[11px] font-mono font-bold border border-premier-green-100">
                       {item.phase}
                     </span>
                     <div className={`w-9 h-9 rounded-xl ${item.color} text-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300`}>
@@ -114,7 +114,7 @@ export function FutureGoalsRoadmap() {
                     </div>
                   </div>
 
-                  <h3 className="text-base font-heading font-bold text-heading group-hover:text-primary transition-colors">
+                  <h3 className="text-base font-heading font-bold text-heading group-hover:text-premier-green transition-colors">
                     {item.title}
                   </h3>
 

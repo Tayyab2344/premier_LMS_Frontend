@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
@@ -29,54 +29,102 @@ const faqs = [
 
 export function FAQSection() {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
-    <section className="section-padding bg-surface-secondary border-t border-border" id="faq">
+    <section className="section-padding bg-white border-t border-border" id="faq">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <div className="text-center space-y-4 mb-16">
-          <span className="text-xs font-body font-bold uppercase tracking-wider text-primary px-3.5 py-1.5 rounded-full bg-primary-50 border border-primary-100 inline-block">
+          <span className="inline-block text-xs font-heading font-bold uppercase tracking-wider text-premier-green px-4 py-1.5 rounded-full bg-premier-green-50 border border-premier-green/10">
             Frequently Asked Questions
           </span>
           <h2 className="text-4xl sm:text-[48px] font-heading font-extrabold text-heading leading-[1.1]" style={{ letterSpacing: '-0.03em' }}>
             Got Questions? We Have Answers.
           </h2>
-          <p className="text-base text-body leading-relaxed">
+          <p className="text-base sm:text-lg text-body leading-relaxed">
             Everything you need to know about our tax &amp; corporate law masterclasses, Student Mobile App access, and accredited diplomas.
           </p>
         </div>
 
+        {/* Magnetic Snap FAQ Accordion List */}
         <div className="space-y-4">
           {faqs.map((faq, idx) => {
             const isOpen = openIdx === idx;
+            const isOdd = idx % 2 === 0;
+
+            // Pre-scroll magnetic offsets (disabled on mobile to prevent overflow)
+            const initialX = isMobile ? 0 : isOdd ? -20 : 20;
+            const initialRotate = isMobile ? 0 : isOdd ? -3 : 3;
+
             return (
-              <div
+              <motion.div
                 key={idx}
-                className="rounded-2xl bg-white border border-border overflow-hidden transition-all duration-300 shadow-soft"
+                layout
+                initial={{
+                  opacity: 0,
+                  scale: 0.95,
+                  y: 50,
+                  x: initialX,
+                  rotate: initialRotate,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  scale: 1,
+                  y: 0,
+                  x: 0,
+                  rotate: 0,
+                }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 24,
+                  delay: idx * 0.1,
+                }}
+                className={`rounded-2xl bg-white border transition-colors duration-300 overflow-hidden shadow-soft ${
+                  isOpen ? 'border-premier-green/40 ring-1 ring-premier-green/20' : 'border-border hover:border-premier-green/30'
+                }`}
               >
                 <button
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
-                  className="w-full p-6 text-left font-heading font-bold text-heading text-base sm:text-lg flex justify-between items-center gap-4 hover:text-primary transition-colors"
+                  className="w-full p-6 text-left font-heading font-semibold text-slate-900 text-base sm:text-lg flex justify-between items-center gap-4 hover:text-premier-green transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-white rounded-2xl"
+                  aria-expanded={isOpen}
                 >
-                  <span>{faq.q}</span>
-                  <div className={`w-8 h-8 rounded-full bg-surface-secondary flex items-center justify-center shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 bg-primary-50 text-primary' : 'text-body'}`}>
-                    <ChevronDown className="w-4 h-4" />
+                  <span className="leading-snug">{faq.q}</span>
+                  <div className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
+                    isOpen ? 'rotate-180 bg-premier-green text-white shadow-sm' : 'bg-premier-cream text-premier-green'
+                  }`}>
+                    <ChevronDown className="w-5 h-5" />
                   </div>
                 </button>
 
-                <AnimatePresence>
+                <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
+                      key="content"
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="border-t border-border/50 px-6 pb-6 pt-4 text-body text-sm sm:text-base leading-relaxed"
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className="overflow-hidden"
                     >
-                      {faq.a}
+                      <div className="border-t border-border/50 px-6 pb-6 pt-4 text-slate-600 text-sm sm:text-base leading-relaxed font-body">
+                        {faq.a}
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             );
           })}
         </div>

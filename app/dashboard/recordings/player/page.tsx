@@ -533,7 +533,7 @@ function RecordingPlayer() {
 
             {/* Right side feedback */}
             <div className="flex items-center gap-4">
-              <button className="flex items-center gap-1 text-xs font-bold text-gray-500 hover:text-blue-600 transition-colors">
+              <button className="flex items-center gap-1 text-xs font-bold text-gray-500 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 10.742l-1.922-.641A3.001 3.001 0 015 7.242V4a1 1 0 012 0v3.242c0 .496.129.983.374 1.411l1.31 2.29M18 10h-2.586l.66-2.64A1 1 0 0015.11 6H13v4h-2V6a1 1 0 00-2 0v5h9a2 2 0 002-2V8a2 2 0 00-2-2z" />
                 </svg>
@@ -619,7 +619,7 @@ function RecordingPlayer() {
             <button
               onClick={handleSaveNote}
               disabled={!noteText.trim()}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg text-xs shadow-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center gap-1.5"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg text-xs shadow-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
             >
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />

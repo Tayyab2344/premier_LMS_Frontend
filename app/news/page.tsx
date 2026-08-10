@@ -229,15 +229,15 @@ export default function NewsPage() {
       <section className="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white py-16 border-b border-slate-800">
         <div className="section-container space-y-6">
           <div className="flex items-center gap-2 text-xs text-slate-400 font-heading">
-            <Link href="/" className="hover:text-white transition-colors">
+            <Link href="/" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
               Home
             </Link>
             <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-primary-300 font-semibold">News &amp; Regulatory Updates</span>
+            <span className="text-premier-green-300 font-semibold">News &amp; Regulatory Updates</span>
           </div>
 
           <div className="max-w-3xl space-y-4">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary-300 text-xs font-heading font-bold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-premier-green/20 border border-premier-green/40 text-premier-green-300 text-xs font-heading font-bold uppercase tracking-wider">
               <Newspaper className="w-3.5 h-3.5" />
               Pakistani Tax &amp; Corporate Regulatory Hub
             </span>
@@ -270,7 +270,7 @@ export default function NewsPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent" />
               <div className="absolute top-4 left-4 z-10">
-                <span className="px-3.5 py-1 rounded-full bg-primary text-white text-xs font-heading font-extrabold uppercase tracking-wider shadow-sm">
+                <span className="px-3.5 py-1 rounded-full bg-premier-green text-white text-xs font-heading font-extrabold uppercase tracking-wider shadow-sm">
                   ★ Featured Regulatory Update
                 </span>
               </div>
@@ -279,7 +279,7 @@ export default function NewsPage() {
             <div className="lg:col-span-5 p-8 flex flex-col justify-between space-y-6">
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-xs text-body">
-                  <span className="font-heading font-bold text-primary uppercase tracking-wider">
+                  <span className="font-heading font-bold text-premier-green uppercase tracking-wider">
                     {featured.category}
                   </span>
                   <div className="flex items-center gap-3 text-slate-500 font-mono">
@@ -294,7 +294,7 @@ export default function NewsPage() {
                   </div>
                 </div>
 
-                <h2 className="text-xl sm:text-2xl font-heading font-extrabold text-heading leading-snug hover:text-primary transition-colors cursor-pointer" onClick={() => setActiveArticle(featured)}>
+                <h2 className="text-xl sm:text-2xl font-heading font-extrabold text-heading leading-snug hover:text-premier-green transition-colors cursor-pointer" onClick={() => setActiveArticle(featured)}>
                   {featured.title}
                 </h2>
 
@@ -304,7 +304,7 @@ export default function NewsPage() {
 
                 {featured.officialRef && (
                   <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono text-heading flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-primary shrink-0" />
+                    <FileText className="w-4 h-4 text-premier-green shrink-0" />
                     <span className="truncate">Ref: {featured.officialRef}</span>
                   </div>
                 )}
@@ -348,7 +348,7 @@ export default function NewsPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search FBR SROs, SECP circulars, court rulings..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs text-heading focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-slate-50/50"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs text-heading focus:outline-none focus:border-premier-green focus:ring-1 focus:ring-premier-green bg-slate-50/50"
               />
               {searchQuery && (
                 <button
@@ -361,14 +361,14 @@ export default function NewsPage() {
             </div>
 
             <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
-              <Filter className="w-4 h-4 text-primary shrink-0 hidden sm:block" />
+              <Filter className="w-4 h-4 text-premier-green shrink-0 hidden sm:block" />
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-heading font-bold whitespace-nowrap transition-all ${
                     selectedCategory === cat
-                      ? 'bg-primary text-white shadow-sm'
+                      ? 'bg-premier-green text-white shadow-sm'
                       : 'bg-slate-100 text-body hover:bg-slate-200 border border-slate-200'
                   }`}
                 >
@@ -391,7 +391,7 @@ export default function NewsPage() {
                   setSelectedCategory('All Updates');
                   setSearchQuery('');
                 }}
-                className="text-xs text-primary hover:underline font-heading font-semibold"
+                className="text-xs text-premier-green hover:underline font-heading font-semibold"
               >
                 Clear Filters
               </button>
@@ -423,7 +423,7 @@ export default function NewsPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.3 }}
-                  className="bg-white rounded-3xl border border-border overflow-hidden shadow-soft hover:shadow-card-hover hover:border-primary/40 transition-all duration-300 flex flex-col justify-between group"
+                  className="bg-white rounded-3xl border border-border overflow-hidden shadow-soft hover:shadow-card-hover hover:border-premier-green/40 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
                     {/* Thumbnail Image Header */}
@@ -438,7 +438,7 @@ export default function NewsPage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent pointer-events-none" />
 
                       <div className="relative z-10 p-4 h-full flex flex-col justify-between">
-                        <span className="self-start px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-primary text-[11px] font-heading font-extrabold uppercase shadow-sm">
+                        <span className="self-start px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-premier-green text-[11px] font-heading font-extrabold uppercase shadow-sm">
                           {article.category}
                         </span>
 
@@ -459,7 +459,7 @@ export default function NewsPage() {
                     <div className="p-6 space-y-3">
                       <h3
                         onClick={() => setActiveArticle(article)}
-                        className="text-base font-heading font-bold text-heading group-hover:text-primary transition-colors leading-snug line-clamp-2 cursor-pointer"
+                        className="text-base font-heading font-bold text-heading group-hover:text-premier-green transition-colors leading-snug line-clamp-2 cursor-pointer"
                       >
                         {article.title}
                       </h3>
@@ -498,7 +498,7 @@ export default function NewsPage() {
 
                       <button
                         onClick={() => setActiveArticle(article)}
-                        className="text-xs font-heading font-bold text-primary hover:text-primary-700 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                        className="text-xs font-heading font-bold text-premier-green hover:text-premier-green-700 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
                       >
                         Read More
                         <ArrowRight className="w-3.5 h-3.5" />
@@ -514,7 +514,7 @@ export default function NewsPage() {
         {/* ── Weekly FBR & SECP Newsletter Signup ───────────── */}
         <div className="rounded-3xl bg-slate-950 text-white p-8 sm:p-12 border border-slate-800 shadow-card relative overflow-hidden">
           {/* Subtle glow background */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-premier-green-600/20 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-2xl space-y-4">
@@ -530,7 +530,7 @@ export default function NewsPage() {
             </p>
 
             {subscribed ? (
-              <div className="p-4 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-200 text-xs font-body font-bold flex items-center gap-2">
+              <div className="p-4 rounded-2xl bg-premier-green/20 border border-emerald-500/40 text-emerald-200 text-xs font-body font-bold flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
                 Thank you! You are now subscribed to Premier LMS Weekly Regulatory Updates.
               </div>
@@ -542,11 +542,11 @@ export default function NewsPage() {
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
                   placeholder="Enter your email (e.g. practitioner@domain.pk)"
-                  className="flex-1 px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs placeholder:text-slate-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                  className="flex-1 px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs placeholder:text-slate-400 focus:outline-none focus:border-premier-green focus:ring-1 focus:ring-premier-green"
                 />
                 <button
                   type="submit"
-                  className="btn-accent !py-3 !px-6 text-xs font-body font-bold whitespace-nowrap justify-center"
+                  className="btn-accent !py-3 !px-6 text-xs font-body font-bold whitespace-nowrap justify-center focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
                 >
                   Subscribe for Free
                 </button>
@@ -582,7 +582,7 @@ export default function NewsPage() {
 
               <div className="space-y-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="px-3 py-1 rounded-full bg-primary-50 text-primary text-xs font-heading font-extrabold uppercase">
+                  <span className="px-3 py-1 rounded-full bg-premier-green-50 text-premier-green text-xs font-heading font-extrabold uppercase">
                     {activeArticle.category}
                   </span>
                   <span className="text-xs text-slate-400 font-mono">
@@ -596,7 +596,7 @@ export default function NewsPage() {
 
                 {activeArticle.officialRef && (
                   <div className="p-3 rounded-xl bg-slate-100 border border-slate-200 text-xs font-mono text-heading flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-primary shrink-0" />
+                    <FileText className="w-4 h-4 text-premier-green shrink-0" />
                     <span>Official Reference: <strong>{activeArticle.officialRef}</strong></span>
                   </div>
                 )}
@@ -630,20 +630,20 @@ export default function NewsPage() {
                 </div>
 
                 <div className="flex items-center gap-2 text-xs text-slate-500">
-                  <BookOpen className="w-4 h-4 text-primary" />
+                  <BookOpen className="w-4 h-4 text-premier-green" />
                   <span>Premier LMS Faculty</span>
                 </div>
               </div>
 
               {/* Key Takeaways */}
-              <div className="p-5 rounded-2xl bg-primary-50/60 border border-primary-100 space-y-3">
-                <h4 className="text-xs font-heading font-extrabold uppercase tracking-wider text-primary">
+              <div className="p-5 rounded-2xl bg-premier-green-50/60 border border-premier-green-100 space-y-3">
+                <h4 className="text-xs font-heading font-extrabold uppercase tracking-wider text-premier-green">
                   Key Practitioner Takeaways
                 </h4>
                 <ul className="space-y-2 text-xs text-heading font-medium">
                   {activeArticle.keyTakeaways.map((item, idx) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-premier-green shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -669,7 +669,7 @@ export default function NewsPage() {
                 </div>
                 <Link
                   href="/courses/certified-income-tax-and-sales-tax-practitioner"
-                  className="btn-primary text-xs !py-2.5 !px-5 whitespace-nowrap shrink-0"
+                  className="btn-primary text-xs !py-2.5 !px-5 whitespace-nowrap shrink-0 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
                 >
                   View Course Details
                 </Link>

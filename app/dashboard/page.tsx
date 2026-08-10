@@ -222,7 +222,7 @@ export default function DashboardPage() {
             <div className="bg-white border border-border-light rounded-xl p-5 mb-4 text-center">
               <Image src={user.avatar} alt={user.name} width={64} height={64}
                 className="w-16 h-16 rounded-full object-cover mx-auto mb-3 border-2 border-accent-gold" />
-              <h2 className="text-sm font-bold text-text-primary">{user.name}</h2>
+              <h2 className="text-sm font-bold text-text-premier-green">{user.name}</h2>
               <p className="text-xs text-text-secondary mt-0.5">{user.email}</p>
             </div>
 
@@ -233,7 +233,7 @@ export default function DashboardPage() {
                   className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors border-b border-border-light last:border-b-0 ${
                     activeTab === item.id
                       ? 'text-brand-green bg-brand-green/5'
-                      : 'text-text-secondary hover:text-text-primary hover:bg-gray-50'
+                      : 'text-text-secondary hover:text-text-premier-green hover:bg-gray-50'
                   }`}>
                   <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
@@ -255,7 +255,7 @@ export default function DashboardPage() {
           <div className="flex-1">
             {activeTab === 'courses' && (
               <div>
-                <h1 className="text-xl font-bold text-text-primary mb-6">My Courses</h1>
+                <h1 className="text-xl font-bold text-text-premier-green mb-6">My Courses</h1>
                 {enrolledCourses.length === 0 ? (
                   profile?.admissions?.some((a: any) => a.status === 'pending') ? (
                     <div className="bg-amber-50/80 border border-amber-200 rounded-2xl p-8 text-center max-w-xl mx-auto space-y-4 shadow-sm">
@@ -278,13 +278,13 @@ export default function DashboardPage() {
                   ) : (
                     <div className="bg-white border border-border-light rounded-xl p-12 text-center">
                       <p className="text-text-secondary mb-4">You haven&apos;t enrolled in any courses yet.</p>
-                      <Link href="/admission" className="btn-signup inline-block no-underline">Apply for Admission</Link>
+                      <Link href="/admission" className="btn-signup inline-block no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">Apply for Admission</Link>
                     </div>
                   )
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {enrolledCourses.map((c: any) => (
-                      <Link key={c.id} href={`/courses/${c.slug}`} className="no-underline group">
+                      <Link key={c.id} href={`/courses/${c.slug}`} className="no-underline group focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
                         <div className="bg-white border border-border-light rounded-xl overflow-hidden hover:shadow-card-hover hover:-translate-y-1 transition-all">
                           <div className="relative w-full aspect-[16/9] overflow-hidden">
                             <Image src={c.thumbnail} alt={c.title} fill
@@ -296,7 +296,7 @@ export default function DashboardPage() {
                             )}
                           </div>
                           <div className="p-4">
-                            <h3 className="text-sm font-bold text-text-primary line-clamp-2 mb-3 group-hover:text-brand-green transition-colors">
+                            <h3 className="text-sm font-bold text-text-premier-green line-clamp-2 mb-3 group-hover:text-brand-green transition-colors">
                               {c.title}
                             </h3>
                             {/* Batch & Status */}
@@ -329,7 +329,7 @@ export default function DashboardPage() {
               <div className="space-y-10">
                 {/* Upcoming Live Classes Section */}
                 <div>
-                  <h1 className="text-xl font-bold text-text-primary mb-6">Upcoming Live Classes</h1>
+                  <h1 className="text-xl font-bold text-text-premier-green mb-6">Upcoming Live Classes</h1>
                   {loadingTab ? (
                     <div className="bg-white border border-border-light rounded-xl p-8 flex items-center justify-center">
                       <div className="w-6 h-6 border-2 border-brand-green/30 border-t-brand-green rounded-full animate-spin" />
@@ -350,7 +350,7 @@ export default function DashboardPage() {
                                 <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded animate-pulse">LIVE</span>
                                 <span className="text-xs text-text-secondary font-medium">{cls.batchName}</span>
                               </div>
-                              <h3 className="text-base font-bold text-text-primary mb-1">{cls.title}</h3>
+                              <h3 className="text-base font-bold text-text-premier-green mb-1">{cls.title}</h3>
                               <p className="text-xs text-text-secondary">
                                 {cls.courseName} • {start.toLocaleString()}
                               </p>
@@ -367,7 +367,7 @@ export default function DashboardPage() {
 
                 {/* Past / Completed Classes Section */}
                 <div>
-                  <h1 className="text-xl font-bold text-text-primary mb-6">Past / Completed Classes</h1>
+                  <h1 className="text-xl font-bold text-text-premier-green mb-6">Past / Completed Classes</h1>
                   {pastClasses.length === 0 ? (
                     <div className="bg-white border border-border-light rounded-xl p-8 text-center text-text-secondary text-sm">
                       No completed classes found.
@@ -384,7 +384,7 @@ export default function DashboardPage() {
                                 <span className="bg-gray-200 text-gray-700 text-[10px] font-bold px-2 py-0.5 rounded">COMPLETED</span>
                                 <span className="text-xs text-text-secondary font-medium">{cls.batchName}</span>
                               </div>
-                              <h3 className="text-sm font-bold text-text-primary mb-1">{cls.title}</h3>
+                              <h3 className="text-sm font-bold text-text-premier-green mb-1">{cls.title}</h3>
                               <p className="text-xs text-text-secondary">
                                 {cls.courseName} • Completed on: {start.toLocaleString()}
                               </p>
@@ -400,7 +400,7 @@ export default function DashboardPage() {
 
             {activeTab === 'recordings' && (
               <div>
-                <h1 className="text-xl font-bold text-text-primary mb-6">Recorded Sessions</h1>
+                <h1 className="text-xl font-bold text-text-premier-green mb-6">Recorded Sessions</h1>
                 {loadingTab ? (
                   <div className="bg-white border border-border-light rounded-xl p-8 flex items-center justify-center">
                     <div className="w-6 h-6 border-2 border-brand-green/30 border-t-brand-green rounded-full animate-spin" />
@@ -430,7 +430,7 @@ export default function DashboardPage() {
                         {/* Card Content */}
                         <div className="p-4 flex-1 flex flex-col justify-between">
                           <div>
-                            <h3 className="text-sm font-bold text-text-primary line-clamp-2 mb-1">
+                            <h3 className="text-sm font-bold text-text-premier-green line-clamp-2 mb-1">
                               {courseName}
                             </h3>
                             <p className="text-xs text-text-secondary mb-4">
@@ -468,7 +468,7 @@ export default function DashboardPage() {
                                     [courseName]: !prev[courseName],
                                   }));
                                 }}
-                                className="border border-border-light hover:bg-gray-50 text-text-primary rounded-lg px-2.5 py-2 text-xs font-semibold flex items-center justify-center gap-1 transition-colors cursor-pointer"
+                                className="border border-border-light hover:bg-gray-50 text-text-premier-green rounded-lg px-2.5 py-2 text-xs font-semibold flex items-center justify-center gap-1 transition-colors cursor-pointer"
                               >
                                 <span>Lectures</span>
                                 <svg 
@@ -492,7 +492,7 @@ export default function DashboardPage() {
                                     className="flex items-center justify-between p-2 rounded-lg bg-gray-50 hover:bg-gray-100/70 border border-border-light/40 transition-all text-xs"
                                   >
                                     <div className="flex-1 min-w-0 pr-2">
-                                      <p className="font-semibold text-text-primary truncate">
+                                      <p className="font-semibold text-text-premier-green truncate">
                                         {rec.classNo ? `[Class ${rec.classNo}] ` : ''}{rec.title}
                                       </p>
                                       <div className="flex items-center gap-1 mt-0.5 text-[10px] text-text-secondary">
@@ -530,15 +530,15 @@ export default function DashboardPage() {
 
             {activeTab === 'profile' && (
               <div className="bg-white border border-border-light rounded-xl p-6">
-                <h1 className="text-xl font-bold text-text-primary mb-6">Profile</h1>
+                <h1 className="text-xl font-bold text-text-premier-green mb-6">Profile</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg">
                   <div>
-                    <label className="block text-sm font-medium text-text-primary mb-1.5">Full Name</label>
-                    <input type="text" value={profile?.name || user.name} className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-gray-50 text-text-primary" readOnly />
+                    <label className="block text-sm font-medium text-text-premier-green mb-1.5">Full Name</label>
+                    <input type="text" value={profile?.name || user.name} className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-gray-50 text-text-premier-green focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream" readOnly />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-text-primary mb-1.5">Email</label>
-                    <input type="email" value={profile?.email || user.email} className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-gray-50 text-text-primary" readOnly />
+                    <label className="block text-sm font-medium text-text-premier-green mb-1.5">Email</label>
+                    <input type="email" value={profile?.email || user.email} className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-gray-50 text-text-premier-green focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream" readOnly />
                   </div>
                 </div>
                 <p className="text-xs text-text-secondary mt-4">Profile editing coming soon.</p>
@@ -547,7 +547,7 @@ export default function DashboardPage() {
 
             {activeTab === 'settings' && (
               <div className="bg-white border border-border-light rounded-xl p-6">
-                <h1 className="text-xl font-bold text-text-primary mb-2">Security Settings</h1>
+                <h1 className="text-xl font-bold text-text-premier-green mb-2">Security Settings</h1>
                 <p className="text-xs text-text-secondary mb-6">Manage your account security and password</p>
 
                 <div className="bg-blue-50 border border-blue-200 text-blue-800 text-xs rounded-xl p-4 mb-6 flex items-start gap-3">
@@ -570,18 +570,18 @@ export default function DashboardPage() {
                 )}
                 <form onSubmit={handlePasswordChange} className="space-y-4 max-w-md">
                   <div>
-                    <label className="block text-sm font-medium text-text-primary mb-1.5">Current Password</label>
-                    <input type="password" value={currentPw} onChange={(e) => setCurrentPw(e.target.value)} required className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary" />
+                    <label className="block text-sm font-medium text-text-premier-green mb-1.5">Current Password</label>
+                    <input type="password" value={currentPw} onChange={(e) => setCurrentPw(e.target.value)} required className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-text-primary mb-1.5">New Password</label>
-                    <input type="password" value={newPw} onChange={(e) => setNewPw(e.target.value)} required className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary" />
+                    <label className="block text-sm font-medium text-text-premier-green mb-1.5">New Password</label>
+                    <input type="password" value={newPw} onChange={(e) => setNewPw(e.target.value)} required className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-text-primary mb-1.5">Confirm New Password</label>
-                    <input type="password" value={confirmPw} onChange={(e) => setConfirmPw(e.target.value)} required className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary" />
+                    <label className="block text-sm font-medium text-text-premier-green mb-1.5">Confirm New Password</label>
+                    <input type="password" value={confirmPw} onChange={(e) => setConfirmPw(e.target.value)} required className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green" />
                   </div>
-                  <button type="submit" disabled={submittingPw} className="btn-signup px-6 py-2 text-sm disabled:opacity-50">
+                  <button type="submit" disabled={submittingPw} className="btn-signup px-6 py-2 text-sm disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
                     {submittingPw ? 'Updating...' : 'Update Password'}
                   </button>
                 </form>

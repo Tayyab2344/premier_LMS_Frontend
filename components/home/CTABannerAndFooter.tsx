@@ -8,19 +8,19 @@ import Link from 'next/link';
 
 export function CTABanner() {
   return (
-    <section className="section-padding bg-white relative overflow-hidden">
+    <section className="section-padding bg-premier-cream relative overflow-hidden">
       <div className="section-container">
-        <div className="relative rounded-3xl bg-gradient-to-br from-primary-700 via-primary to-blue-600 p-8 sm:p-14 md:p-16 text-white shadow-card-hover overflow-hidden">
+        <div className="relative rounded-3xl bg-gradient-to-br from-premier-green-dark via-premier-green to-premier-green-dark p-8 sm:p-14 md:p-16 text-white shadow-card-hover overflow-hidden">
           {/* Subtle background circles */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/3" />
-          <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl pointer-events-none translate-y-1/3 -translate-x-1/4" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-premier-gold/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/3" />
+          <div className="absolute bottom-0 left-0 w-72 h-72 bg-emerald-400/10 rounded-full blur-3xl pointer-events-none translate-y-1/3 -translate-x-1/4" />
 
           <div className="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 space-y-4">
-              <span className="inline-block px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-md text-white text-xs font-body font-semibold uppercase tracking-wider">
+              <span className="inline-block px-3.5 py-1 rounded-full bg-premier-cream/15 backdrop-blur-md text-white text-xs font-body font-semibold uppercase tracking-wider">
                 Start Your Journey Today
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-[48px] font-heading font-extrabold leading-tight" style={{ letterSpacing: '-0.03em' }}>
+              <h2 className="text-3xl sm:text-4xl lg:text-[48px] font-heading font-extrabold leading-snug sm:leading-snug lg:leading-[1.25] text-white" style={{ letterSpacing: '-0.01em' }}>
                 Transform Your Professional Skills With Raja Gulfam
               </h2>
               <p className="text-white/80 text-base sm:text-lg font-body max-w-2xl leading-relaxed">
@@ -29,11 +29,11 @@ export function CTABanner() {
             </div>
 
             <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-4 justify-end">
-              <Link href="/courses" className="btn-primary !bg-white !text-primary hover:!bg-surface-hover shadow-lg text-center justify-center">
+              <Link href="/courses" className="btn-primary !bg-premier-cream !text-premier-green hover:!bg-surface-hover shadow-lg text-center justify-center focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
                 Browse Courses
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link href="/about#meet-founder" className="btn-secondary !bg-white/10 !text-white !border-white/40 hover:!bg-white/20 text-center justify-center">
+              <Link href="/about#meet-founder" className="btn-secondary !bg-premier-cream/10 !text-white !border-white/40 hover:!bg-premier-cream/20 text-center justify-center focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
                 Contact Us
               </Link>
             </div>
@@ -78,13 +78,13 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-surface-secondary border-t border-border pt-16 pb-12 text-body relative">
+    <footer className="bg-premier-cream border-t border-border pt-16 pb-12 text-body relative">
       <div className="section-container space-y-12">
         {/* 4 Column Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Col 1: About */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center gap-3" aria-label="Premier LMS Home">
+            <Link href="/" className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream" aria-label="Premier LMS Home">
               <Image
                 src="/logo.png"
                 alt="Premier Tax Corporate & Accounting School Logo"
@@ -115,7 +115,7 @@ export function Footer() {
                 { label: 'Student Admission', href: '/admission' },
               ].map((item) => (
                 <li key={item.label}>
-                  <Link href={item.href} className="hover:text-primary transition-colors">{item.label}</Link>
+                  <Link href={item.href} className="hover:text-premier-green transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">{item.label}</Link>
                 </li>
               ))}
             </ul>
@@ -127,7 +127,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-slate-600">
               {['Corporate Tax Reform', 'Financial Modeling', 'Forensic Accounting', 'Estate & Wealth Tax', 'IFRS Standards'].map((item) => (
                 <li key={item}>
-                  <Link href="/courses" className="hover:text-primary transition-colors">{item}</Link>
+                  <Link href="/courses" className="hover:text-premier-green transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">{item}</Link>
                 </li>
               ))}
             </ul>
@@ -146,9 +146,9 @@ export function Footer() {
                   placeholder="Your email address..."
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl border border-border text-xs outline-none focus:border-primary transition-colors bg-white text-heading"
+                  className="w-full px-3.5 py-2 rounded-xl border border-border text-xs outline-none focus:border-premier-green transition-colors bg-premier-cream text-heading"
                 />
-                <button type="submit" className="w-full btn-primary !py-2 !text-xs" aria-label="Subscribe to newsletter">
+                <button type="submit" className="w-full btn-primary !py-2 !text-xs focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream" aria-label="Subscribe to newsletter">
                   Subscribe
                 </button>
               </form>
@@ -166,9 +166,9 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Premier LMS — Founded by Raja Gulfam. All rights reserved.
           </div>
           <div className="flex items-center gap-6">
-            <Link href="#" className="hover:text-primary transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-primary transition-colors">Terms of Service</Link>
-            <Link href="#" className="hover:text-primary transition-colors">Contact Support</Link>
+            <Link href="#" className="hover:text-premier-green transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">Privacy Policy</Link>
+            <Link href="#" className="hover:text-premier-green transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">Terms of Service</Link>
+            <Link href="#" className="hover:text-premier-green transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">Contact Support</Link>
           </div>
         </div>
       </div>
@@ -179,9 +179,9 @@ export function Footer() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contact WhatsApp"
-        className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300"
+        className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-premier-green text-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300"
       >
-        <MessageCircle className="w-6 h-6 fill-white text-emerald-500" />
+        <MessageCircle className="w-6 h-6 fill-white text-premier-green" />
       </a>
 
       {/* Back To Top Button */}
@@ -189,7 +189,7 @@ export function Footer() {
         <button
           onClick={scrollToTop}
           aria-label="Back to top"
-          className="fixed bottom-6 right-20 z-40 w-11 h-11 rounded-full bg-white border border-border text-heading flex items-center justify-center shadow-card hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+          className="fixed bottom-6 right-20 z-40 w-11 h-11 rounded-full bg-premier-cream border border-border text-heading flex items-center justify-center shadow-card hover:bg-premier-green hover:text-white hover:border-premier-green transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
         >
           <ArrowUp className="w-5 h-5" />
         </button>

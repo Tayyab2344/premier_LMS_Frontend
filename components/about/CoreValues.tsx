@@ -59,12 +59,12 @@ const values = [
 
 export function CoreValues() {
   return (
-    <section className="section-padding bg-white relative overflow-hidden">
+    <section className="section-padding bg-premier-cream relative overflow-hidden">
       <div className="section-container relative z-10">
         
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <span className="text-xs font-heading font-bold uppercase tracking-wider text-primary px-3.5 py-1.5 rounded-full bg-primary-50 border border-primary-100 inline-block">
+          <span className="text-xs font-heading font-bold uppercase tracking-wider text-premier-green px-3.5 py-1.5 rounded-full bg-premier-green-50 border border-premier-green-100 inline-block">
             Foundational Pillars
           </span>
           <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-heading">
@@ -100,13 +100,13 @@ export function CoreValues() {
                       <div className={`w-14 h-14 rounded-2xl ${val.bgIcon} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                         <IconComponent className="w-7 h-7" />
                       </div>
-                      <span className="text-xs font-mono font-bold text-body/60 group-hover:text-primary transition-colors">
+                      <span className="text-xs font-mono font-bold text-body/60 group-hover:text-premier-green transition-colors">
                         0{idx + 1}
                       </span>
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-heading font-bold text-heading group-hover:text-primary transition-colors">
+                    <h3 className="text-xl font-heading font-bold text-heading group-hover:text-premier-green transition-colors">
                       {val.title}
                     </h3>
 
@@ -118,7 +118,7 @@ export function CoreValues() {
 
                   {/* Bottom Highlight */}
                   <div className="pt-6 mt-6 border-t border-border/60 flex items-center gap-2 text-xs font-heading font-semibold text-body group-hover:text-heading transition-colors">
-                    <Sparkles className="w-3.5 h-3.5 text-primary" />
+                    <Sparkles className="w-3.5 h-3.5 text-premier-green" />
                     <span>Non-Negotiable Principle</span>
                   </div>
                 </div>

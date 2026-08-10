@@ -40,12 +40,12 @@ export function TabRequirements({ course }: { course: Course }) {
       </div>
 
       {/* Special Highlight Box */}
-      <div className="p-6 rounded-2xl bg-primary-50 border border-primary-100 flex items-start gap-4">
-        <div className="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center shrink-0 shadow-blue-glow">
+      <div className="p-6 rounded-2xl bg-premier-green-50 border border-premier-green-100 flex items-start gap-4">
+        <div className="w-10 h-10 rounded-xl bg-premier-green text-white flex items-center justify-center shrink-0 shadow-blue-glow">
           <Sparkles className="w-5 h-5" />
         </div>
         <div className="space-y-1">
-          <h4 className="text-sm font-heading font-bold text-primary">Beginner-Friendly Guarantee</h4>
+          <h4 className="text-sm font-heading font-bold text-premier-green">Beginner-Friendly Guarantee</h4>
           <p className="text-xs text-body leading-relaxed">
             No prior advanced coding or legal experience is required. All concepts are introduced step-by-step with practical exercise files and direct instructor support.
           </p>

@@ -27,7 +27,7 @@ const philosophyChecklist = [
 
 export function TeachingPhilosophy() {
   return (
-    <section className="section-padding bg-white relative overflow-hidden border-b border-border">
+    <section className="section-padding bg-premier-cream relative overflow-hidden border-b border-border">
       <div className="section-container relative z-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
@@ -39,7 +39,7 @@ export function TeachingPhilosophy() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-5 space-y-6"
           >
-            <span className="text-xs font-heading font-bold uppercase tracking-wider text-primary px-3.5 py-1.5 rounded-full bg-primary-50 border border-primary-100 inline-block">
+            <span className="text-xs font-heading font-bold uppercase tracking-wider text-premier-green px-3.5 py-1.5 rounded-full bg-premier-green-50 border border-premier-green-100 inline-block">
               Pedagogical Standards
             </span>
 
@@ -81,13 +81,13 @@ export function TeachingPhilosophy() {
               return (
                 <div
                   key={idx}
-                  className="p-5 rounded-2xl bg-surface-secondary border border-border hover:border-primary/40 hover:bg-white hover:shadow-card-hover transition-all duration-300 flex items-start gap-4 group"
+                  className="p-5 rounded-2xl bg-surface-secondary border border-border hover:border-premier-green/40 hover:bg-white hover:shadow-card-hover transition-all duration-300 flex items-start gap-4 group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-primary-50 text-primary flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-premier-green-50 text-premier-green flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-premier-green group-hover:text-white transition-all duration-300">
                     <IconComp className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-base font-heading font-bold text-heading group-hover:text-primary transition-colors">
+                    <h3 className="text-base font-heading font-bold text-heading group-hover:text-premier-green transition-colors">
                       {item.title}
                     </h3>
                     <p className="text-xs text-body mt-0.5 leading-relaxed">

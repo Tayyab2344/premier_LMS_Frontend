@@ -64,12 +64,12 @@ const trustPillars = [
 
 export function WhyStudentsTrustUs() {
   return (
-    <section className="section-padding bg-surface-secondary border-b border-border relative overflow-hidden">
+    <section className="section-padding bg-white border-b border-border relative overflow-hidden">
       <div className="section-container relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <span className="text-xs font-heading font-bold uppercase tracking-wider text-primary px-3.5 py-1.5 rounded-full bg-primary-50 border border-primary-100 inline-block">
+          <span className="text-xs font-heading font-bold uppercase tracking-wider text-premier-green px-3.5 py-1.5 rounded-full bg-premier-green-50 border border-premier-green-100 inline-block">
             Student Proof
           </span>
           <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-heading">
@@ -91,13 +91,13 @@ export function WhyStudentsTrustUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.06 }}
-                className="group rounded-3xl bg-white border border-border p-7 shadow-soft hover:shadow-card-hover hover:border-primary/40 transition-all duration-300 flex flex-col justify-between"
+                className="group rounded-3xl bg-white border border-border p-7 shadow-soft hover:shadow-card-hover hover:border-premier-green/40 transition-all duration-300 flex flex-col justify-between"
               >
                 <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-primary-50 text-primary flex items-center justify-center group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-soft">
+                  <div className="w-12 h-12 rounded-2xl bg-premier-green-50 text-premier-green flex items-center justify-center group-hover:scale-110 group-hover:bg-premier-green group-hover:text-white transition-all duration-300 shadow-soft">
                     <IconComp className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-heading font-bold text-heading group-hover:text-primary transition-colors">
+                  <h3 className="text-lg font-heading font-bold text-heading group-hover:text-premier-green transition-colors">
                     {pillar.title}
                   </h3>
                   <p className="text-sm text-body leading-relaxed">

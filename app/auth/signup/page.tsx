@@ -88,7 +88,7 @@ export default function SignupPage() {
             </span>
           </div>
 
-          <h1 className="text-2xl font-bold text-text-primary tracking-tight">
+          <h1 className="text-2xl font-bold text-text-premier-green tracking-tight">
             Student Account Provisioning
           </h1>
           <p className="text-sm text-text-secondary mt-2 leading-relaxed">
@@ -110,14 +110,14 @@ export default function SignupPage() {
           <div className="space-y-3">
             <Link
               href="/admission"
-              className="w-full btn-signup py-3.5 text-base font-bold rounded-xl shadow-lg shadow-brand-green/20 hover:shadow-xl hover:shadow-brand-green/30 transition-all duration-300 block text-center no-underline"
+              className="w-full btn-signup py-3.5 text-base font-bold rounded-xl shadow-lg shadow-brand-green/20 hover:shadow-xl hover:shadow-brand-green/30 transition-all duration-300 block text-center no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
             >
               Apply for Admission
             </Link>
 
             <Link
               href="/auth/login"
-              className="w-full py-3.5 text-sm font-semibold text-text-secondary hover:text-brand-green border border-border-light hover:border-brand-green/40 rounded-xl transition-all duration-200 block text-center no-underline"
+              className="w-full py-3.5 text-sm font-semibold text-text-secondary hover:text-brand-green border border-border-light hover:border-brand-green/40 rounded-xl transition-all duration-200 block text-center no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
             >
               Already Approved? Sign In to Portal
             </Link>

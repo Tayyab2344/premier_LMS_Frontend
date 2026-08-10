@@ -19,10 +19,10 @@ import Link from 'next/link';
 
 export function AboutHero() {
   return (
-    <section className="relative pt-[90px] pb-20 md:py-28 overflow-hidden bg-white">
+    <section className="relative pt-[90px] pb-20 md:py-28 overflow-hidden bg-premier-cream">
       {/* Abstract Animated Ambient Blobs */}
       <div className="absolute top-12 left-10 w-96 h-96 bg-blue-100/60 rounded-full blur-3xl opacity-50 animate-blob pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-[450px] h-[450px] bg-primary-100/40 rounded-full blur-3xl opacity-40 animate-blob pointer-events-none style-gpu" style={{ animationDelay: '3s' }} />
+      <div className="absolute bottom-10 right-10 w-[450px] h-[450px] bg-premier-green-100/40 rounded-full blur-3xl opacity-40 animate-blob pointer-events-none style-gpu" style={{ animationDelay: '3s' }} />
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-sky-50 rounded-full blur-3xl opacity-50 pointer-events-none" />
 
       {/* Grid Pattern Overlay */}
@@ -39,20 +39,7 @@ export function AboutHero() {
           
           {/* Left Content Column */}
           <div className="lg:col-span-7 space-y-8">
-            {/* Small Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-primary-50 border border-primary-100 text-primary text-xs font-heading font-bold uppercase tracking-wider shadow-soft"
-            >
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
-              </span>
-              <Sparkles className="w-3.5 h-3.5 text-primary" />
-              About Our Academy
-            </motion.div>
+            
 
             {/* Main Heading */}
             <motion.h1
@@ -62,19 +49,20 @@ export function AboutHero() {
               className="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-heading leading-[1.12] tracking-tight"
             >
               Empowering Students Through{' '}
-              <span className="relative inline-block text-primary">
+              <span className="relative inline-block text-premier-green">
                 Quality Education
                 <svg
-                  className="absolute -bottom-2 left-0 w-full text-primary/30"
-                  viewBox="0 0 240 12"
+                  className="absolute -bottom-5 sm:-bottom-6 left-0 w-full pointer-events-none"
+                  viewBox="0 0 200 12"
                   fill="none"
                   aria-hidden="true"
                 >
                   <path
-                    d="M3 9C60 3 180 3 237 9"
-                    stroke="currentColor"
+                    d="M2 8.5C50 2.5 150 2.5 198 8.5"
+                    stroke="#C8B687"
                     strokeWidth="4"
                     strokeLinecap="round"
+                    opacity="0.8"
                   />
                 </svg>
               </span>
@@ -97,12 +85,12 @@ export function AboutHero() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="flex flex-wrap items-center gap-4 pt-2"
             >
-              <Link href="/courses" className="btn-primary text-base !px-8 !py-4 group" aria-label="Explore courses catalog">
+              <Link href="/courses" className="btn-primary text-base !px-8 !py-4 group focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream" aria-label="Explore courses catalog">
                 Explore Courses
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
               </Link>
               <a href="#meet-founder" className="btn-secondary text-base !px-8 !py-4 group" aria-label="Meet founder and instructor Raja Gulfam">
-                <UserCheck className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" aria-hidden="true" />
+                <UserCheck className="w-5 h-5 text-premier-green group-hover:scale-110 transition-transform" aria-hidden="true" />
                 Meet the Instructor
               </a>
             </motion.div>
@@ -115,7 +103,7 @@ export function AboutHero() {
               className="pt-6 border-t border-border/60 grid grid-cols-3 gap-4 max-w-lg"
             >
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-primary shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-premier-green shrink-0">
                   <Laptop className="w-4 h-4" />
                 </div>
                 <span className="text-xs font-semibold text-heading">100% Practical</span>
@@ -144,13 +132,13 @@ export function AboutHero() {
               className="relative w-full max-w-[460px]"
             >
               {/* Decorative Frame Glow */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-primary-500/20 to-blue-400/20 rounded-3xl blur-2xl -z-10" />
+              <div className="absolute -inset-4 bg-gradient-to-r from-premier-green-500/20 to-blue-400/20 rounded-3xl blur-2xl -z-10" />
 
               {/* Main Illustration Container */}
-              <div className="relative rounded-3xl bg-gradient-to-b from-white to-primary-50 border border-primary-100 p-6 sm:p-8 shadow-card-hover overflow-hidden">
+              <div className="relative rounded-3xl bg-gradient-to-b from-white to-premier-green-50 border border-premier-green-100 p-6 sm:p-8 shadow-card-hover overflow-hidden">
                 {/* SVG Illustration of Online Education & Laptop */}
                 <div className="relative aspect-[4/3.2] w-full flex items-center justify-center">
-                  <div className="w-full h-full bg-gradient-to-tr from-primary-600 to-blue-500 rounded-2xl p-6 text-white flex flex-col justify-between shadow-elevated relative overflow-hidden group">
+                  <div className="w-full h-full bg-gradient-to-tr from-premier-green-600 to-blue-500 rounded-2xl p-6 text-white flex flex-col justify-between shadow-elevated relative overflow-hidden group">
                     
                     {/* Background Pattern */}
                     <div className="absolute -right-8 -top-8 w-40 h-40 bg-white/10 rounded-full blur-xl pointer-events-none group-hover:scale-125 transition-transform duration-700" />
@@ -177,7 +165,7 @@ export function AboutHero() {
 
                     <div className="pt-3 border-t border-white/20 flex items-center justify-between z-10">
                       <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-white text-primary flex items-center justify-center font-heading font-bold text-xs shadow-md">
+                        <div className="w-8 h-8 rounded-full bg-white text-premier-green flex items-center justify-center font-heading font-bold text-xs shadow-md">
                           RG
                         </div>
                         <div>
@@ -243,7 +231,7 @@ export function AboutHero() {
                   transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
                   className="absolute -bottom-4 -right-4 sm:-right-6 bg-white border border-border rounded-2xl p-3.5 shadow-card-hover flex items-center gap-3 z-20"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center shadow-md">
+                  <div className="w-10 h-10 rounded-xl bg-premier-green text-white flex items-center justify-center shadow-md">
                     <TrendingUp className="w-5 h-5" />
                   </div>
                   <div>

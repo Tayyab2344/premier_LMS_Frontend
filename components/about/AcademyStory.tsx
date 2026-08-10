@@ -19,7 +19,7 @@ const storyFocusPoints = [
 
 export function AcademyStory() {
   return (
-    <section className="section-padding bg-surface-secondary border-y border-border relative overflow-hidden">
+    <section className="section-padding bg-white border-y border-border relative overflow-hidden">
       <div className="section-container relative z-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
@@ -56,7 +56,7 @@ export function AcademyStory() {
 
             {/* Decorative Floating Experience Pill */}
             <div className="absolute -bottom-6 -right-4 sm:right-4 bg-white border border-border rounded-2xl p-4 shadow-card-hover flex items-center gap-3.5 z-20 max-w-[220px]">
-              <div className="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center font-heading font-bold text-lg shadow-blue-glow shrink-0">
+              <div className="w-12 h-12 rounded-xl bg-premier-green text-white flex items-center justify-center font-heading font-bold text-lg shadow-blue-glow shrink-0">
                 10+
               </div>
               <div>
@@ -75,7 +75,7 @@ export function AcademyStory() {
             className="lg:col-span-7 space-y-8"
           >
             <div className="space-y-4">
-              <span className="text-xs font-heading font-bold uppercase tracking-wider text-primary px-3.5 py-1.5 rounded-full bg-primary-50 border border-primary-100 inline-block">
+              <span className="text-xs font-heading font-bold uppercase tracking-wider text-premier-green px-3.5 py-1.5 rounded-full bg-premier-green-50 border border-premier-green-100 inline-block">
                 Our Story
               </span>
               <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-heading leading-tight">
@@ -94,9 +94,9 @@ export function AcademyStory() {
               {storyFocusPoints.map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-border/80 shadow-soft hover:shadow-card hover:border-primary/30 transition-all duration-300"
+                  className="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-border/80 shadow-soft hover:shadow-card hover:border-premier-green/30 transition-all duration-300"
                 >
-                  <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-premier-green shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-sm font-heading font-bold text-heading">{item.title}</h4>
                     <p className="text-xs text-body mt-0.5 leading-relaxed">{item.desc}</p>
@@ -106,10 +106,10 @@ export function AcademyStory() {
             </div>
 
             {/* Quote Block */}
-            <div className="relative rounded-2xl bg-gradient-to-r from-primary-900 via-primary-800 to-primary p-6 text-white shadow-elevated overflow-hidden mt-6">
+            <div className="relative rounded-2xl bg-[#0F3524] p-6 text-white shadow-elevated overflow-hidden mt-6 border border-[#164E36]">
               <Quote className="absolute right-4 bottom-2 w-24 h-24 text-white/10 pointer-events-none" />
               <div className="relative z-10 flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-amber-400 text-primary-900 flex items-center justify-center font-heading font-bold text-xl shrink-0 shadow-md">
+                <div className="w-10 h-10 rounded-full bg-amber-400 text-premier-green-900 flex items-center justify-center font-heading font-bold text-xl shrink-0 shadow-md">
                   “
                 </div>
                 <div className="space-y-2">

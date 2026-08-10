@@ -18,7 +18,7 @@ export function CourseStats() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
-    <section className="bg-surface-secondary border-y border-border py-12">
+    <section className="bg-premier-cream border-y border-border py-12">
       <div className="section-container">
         <div ref={ref} className="grid grid-cols-2 md:grid-cols-5 gap-6">
           {statsData.map((stat, idx) => {
@@ -32,7 +32,7 @@ export function CourseStats() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.08 }}
-                className={`p-5 rounded-2xl bg-white border border-border shadow-soft flex flex-col justify-between hover:shadow-card hover:border-primary/40 transition-all ${
+                className={`p-5 rounded-2xl bg-white border border-border shadow-soft flex flex-col justify-between hover:shadow-card hover:border-premier-green/40 transition-all ${
                   isLast ? 'col-span-2 md:col-span-1' : ''
                 }`}
               >

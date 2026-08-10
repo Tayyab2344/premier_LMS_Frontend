@@ -113,7 +113,7 @@ export default function AdminApplicationsPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-xl font-bold text-text-primary">Admissions Applications</h1>
+        <h1 className="text-xl font-bold text-text-premier-green">Admissions Applications</h1>
         <p className="text-xs text-text-secondary mt-1">Review student applications and verify payment proofs</p>
       </div>
 
@@ -124,7 +124,7 @@ export default function AdminApplicationsPage() {
             <div>
               <h4 className="text-sm font-bold text-green-800">Student Account Created Successfully</h4>
               <p className="text-xs text-green-700 mt-1">Share these credentials with the student (already copied to clipboard):</p>
-              <div className="mt-2 text-xs font-mono bg-white border border-green-200 rounded-lg p-2.5 space-y-1 text-text-primary select-all">
+              <div className="mt-2 text-xs font-mono bg-white border border-green-200 rounded-lg p-2.5 space-y-1 text-text-premier-green select-all">
                 <p><strong>Email:</strong> {newCredentials.email}</p>
                 <p><strong>Password:</strong> {newCredentials.password}</p>
               </div>
@@ -144,7 +144,7 @@ export default function AdminApplicationsPage() {
               setSearchTerm(e.target.value);
               setCurrentPage(1);
             }}
-            className="w-full pl-9 pr-4 py-2 text-xs border border-border-light rounded-xl bg-white text-text-primary placeholder:text-gray-400 focus:border-brand-green"
+            className="w-full pl-9 pr-4 py-2 text-xs border border-border-light rounded-xl bg-white text-text-premier-green placeholder:text-gray-400 focus:border-brand-green"
           />
           <svg className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -159,7 +159,7 @@ export default function AdminApplicationsPage() {
               setStatusFilter(e.target.value);
               setCurrentPage(1);
             }}
-            className="px-3 py-2 text-xs border border-border-light rounded-xl bg-white text-text-primary font-medium focus:border-brand-green"
+            className="px-3 py-2 text-xs border border-border-light rounded-xl bg-white text-text-premier-green font-medium focus:border-brand-green"
           >
             <option value="all">All Applications</option>
             <option value="pending">Pending</option>
@@ -185,7 +185,7 @@ export default function AdminApplicationsPage() {
             <tbody className="divide-y divide-border-light">
               {applications.map((app) => (
                 <tr key={app.id} className="hover:bg-bg-light transition-colors">
-                  <td className="px-6 py-4 text-sm font-bold text-text-primary">
+                  <td className="px-6 py-4 text-sm font-bold text-text-premier-green">
                     <div>
                       <span>{app.fullName}</span>
                       <span className="text-[10px] text-text-secondary block font-normal">{app.email}</span>
@@ -193,7 +193,7 @@ export default function AdminApplicationsPage() {
                   </td>
                   <td className="px-6 py-4 text-xs text-text-secondary">{app.cnic}</td>
                   <td className="px-6 py-4 text-xs text-text-secondary">{app.whatsapp}</td>
-                  <td className="px-6 py-4 text-xs text-text-primary">
+                  <td className="px-6 py-4 text-xs text-text-premier-green">
                     {app.selectedCourses.join(", ")}
                   </td>
                   <td className="px-6 py-4 text-xs">
@@ -273,7 +273,7 @@ export default function AdminApplicationsPage() {
                 <h3 className="font-bold text-[11px] uppercase text-slate-400 tracking-wider font-mono">Attached Documents</h3>
                 <div className="flex flex-col gap-2.5">
                   {selectedApp.paymentProof ? (
-                    <a href={getMediaUrl(selectedApp.paymentProof)} target="_blank" rel="noopener noreferrer" className="text-xs text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 px-3 py-2 rounded-xl flex items-center gap-2 transition-colors">
+                    <a href={getMediaUrl(selectedApp.paymentProof)} target="_blank" rel="noopener noreferrer" className="text-xs text-emerald-400 hover:text-emerald-300 bg-premier-green/10 border border-emerald-500/20 px-3 py-2 rounded-xl flex items-center gap-2 transition-colors">
                       <span>📄 View Payment Proof Receipt</span>
                     </a>
                   ) : (
@@ -343,7 +343,7 @@ export default function AdminApplicationsPage() {
             : "bg-slate-900 border-rose-500/40 text-rose-300 shadow-rose-950/50"
         }`}>
           <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-black shrink-0 ${
-            toast.type === "success" ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" : "bg-rose-500/20 text-rose-400 border border-rose-500/30"
+            toast.type === "success" ? "bg-premier-green/20 text-emerald-400 border border-emerald-500/30" : "bg-rose-500/20 text-rose-400 border border-rose-500/30"
           }`}>
             {toast.type === "success" ? "✓" : "!"}
           </div>

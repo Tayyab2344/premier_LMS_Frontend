@@ -1,20 +1,36 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Award, Users, BookOpen, Star, Globe, Share2, Send, MessageCircle, ShieldCheck } from 'lucide-react';
 import Image from 'next/image';
-
-const stats = [
-  { icon: Award, value: '10+', label: 'Years Experience' },
-  { icon: Users, value: '25,000+', label: 'Students Taught' },
-  { icon: BookOpen, value: '45+', label: 'Master Courses' },
-  { icon: Star, value: '98.5%', label: 'Success Rate' },
-];
+import CountUp from 'react-countup';
+import { useInView } from 'react-intersection-observer';
 
 export function MeetInstructor() {
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+
+  // Live real-time state for student count
+  const [studentCount, setStudentCount] = useState(25142);
+
+  useEffect(() => {
+    // Periodically increment student count in real-time
+    const interval = setInterval(() => {
+      setStudentCount((prev) => prev + Math.floor(Math.random() * 2) + 1);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const stats = [
+    { icon: Award, end: 10, prefix: '', suffix: '+', label: 'Years Experience' },
+    { icon: Users, end: studentCount, isDynamic: true, prefix: '', suffix: '+', label: 'Students Taught' },
+    { icon: BookOpen, end: 45, prefix: '', suffix: '+', label: 'Master Courses' },
+    { icon: Star, end: 98.5, decimals: 1, prefix: '', suffix: '%', label: 'Success Rate' },
+  ];
+
   return (
-    <section className="section-padding bg-white border-t border-border" id="instructor">
+    <section className="section-padding bg-white border-t border-border" id="instructor" ref={ref}>
       <div className="section-container">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Instructor Image / Visual Card */}
@@ -27,7 +43,7 @@ export function MeetInstructor() {
           >
             <div className="relative">
               {/* Outer Card frame */}
-              <div className="relative rounded-3xl bg-gradient-to-b from-primary-50 to-surface-secondary border border-border p-6 shadow-elevated overflow-hidden text-center">
+              <div className="relative rounded-3xl bg-gradient-to-b from-premier-green-50 to-surface-secondary border border-border p-6 shadow-elevated overflow-hidden text-center">
                 {/* Avatar Portrait */}
                 <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full mx-auto mb-6 border-4 border-white shadow-card-hover overflow-hidden bg-slate-100">
                   <Image
@@ -40,7 +56,7 @@ export function MeetInstructor() {
                 </div>
 
                 <h3 className="text-2xl font-heading font-extrabold text-heading">Raja Gulfam</h3>
-                <p className="text-sm font-body font-semibold text-primary mt-1">Founder & Lead Instructor</p>
+                <p className="text-sm font-body font-semibold text-premier-green mt-1">Founder & Lead Instructor</p>
 
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-success/10 text-success text-xs font-semibold mt-3">
                   <ShieldCheck className="w-3.5 h-3.5" />
@@ -61,7 +77,7 @@ export function MeetInstructor() {
                         key={i}
                         href={social.href}
                         aria-label={social.label}
-                        className="w-10 h-10 rounded-xl bg-white border border-border flex items-center justify-center text-body hover:text-primary hover:border-primary/40 hover:scale-105 transition-all shadow-soft"
+                        className="w-10 h-10 rounded-xl bg-white border border-border flex items-center justify-center text-body hover:text-premier-green hover:border-premier-green/40 hover:scale-105 transition-all shadow-soft"
                       >
                         <Icon className="w-4 h-4" aria-hidden="true" />
                       </a>
@@ -81,7 +97,7 @@ export function MeetInstructor() {
             className="lg:col-span-7 space-y-8"
           >
             <div className="space-y-4">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-primary-50 text-primary text-xs font-heading font-semibold uppercase tracking-wider">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-premier-green-50 text-premier-green text-xs font-heading font-semibold uppercase tracking-wider">
                 Meet Your Instructor
               </span>
               <h2 className="text-4xl sm:text-[48px] font-heading font-extrabold text-heading leading-[1.1]" style={{ letterSpacing: '-0.03em' }}>
@@ -99,11 +115,32 @@ export function MeetInstructor() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {stats.map((stat, i) => {
                 const Icon = stat.icon;
+
                 return (
-                  <div key={i} className="bg-surface-secondary rounded-2xl p-4 border border-border text-center space-y-1">
-                    <Icon className="w-5 h-5 text-primary mx-auto mb-1" />
-                    <div className="text-xl font-number font-bold text-heading">{stat.value}</div>
-                    <div className="text-xs text-body font-medium">{stat.label}</div>
+                  <div
+                    key={i}
+                    className="bg-white rounded-2xl p-4 border border-border text-center space-y-1 shadow-soft hover:shadow-card-hover transition-all duration-300"
+                  >
+                    <Icon className="w-5 h-5 text-premier-green mx-auto mb-1" />
+                    
+                    <div className="text-xl sm:text-2xl font-number font-extrabold text-heading tracking-tight flex items-center justify-center gap-0.5">
+                      {stat.isDynamic ? (
+                        <span>{studentCount.toLocaleString()}</span>
+                      ) : inView ? (
+                        <CountUp
+                          start={0}
+                          end={stat.end}
+                          duration={2.5}
+                          decimals={stat.decimals || 0}
+                          separator=","
+                        />
+                      ) : (
+                        '0'
+                      )}
+                      <span>{stat.suffix}</span>
+                    </div>
+
+                    <div className="text-xs text-slate-700 font-heading font-semibold">{stat.label}</div>
                   </div>
                 );
               })}

@@ -79,7 +79,7 @@ export function NotifyModal({ isOpen, onClose, courseTitle }: NotifyModalProps) 
             {/* Close Button */}
             <button
               onClick={handleCloseModal}
-              className="absolute top-5 right-5 w-9 h-9 rounded-full bg-surface-secondary text-body hover:text-heading hover:bg-slate-200 flex items-center justify-center transition-all"
+              className="absolute top-5 right-5 w-9 h-9 rounded-full bg-surface-secondary text-body hover:text-heading hover:bg-slate-200 flex items-center justify-center transition-all focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
               aria-label="Close dialog"
             >
               <X className="w-5 h-5" />
@@ -120,7 +120,7 @@ export function NotifyModal({ isOpen, onClose, courseTitle }: NotifyModalProps) 
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         className={`w-full pl-10 pr-4 py-3 rounded-xl border ${
-                          nameError ? 'border-red-500 focus:ring-red-500' : 'border-border focus:ring-primary'
+                          nameError ? 'border-red-500 focus:ring-red-500' : 'border-border focus:ring-premier-green'
                         } text-sm focus:outline-none focus:ring-2 transition-all bg-surface-secondary`}
                       />
                     </div>
@@ -141,7 +141,7 @@ export function NotifyModal({ isOpen, onClose, courseTitle }: NotifyModalProps) 
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className={`w-full pl-10 pr-4 py-3 rounded-xl border ${
-                          emailError ? 'border-red-500 focus:ring-red-500' : 'border-border focus:ring-primary'
+                          emailError ? 'border-red-500 focus:ring-red-500' : 'border-border focus:ring-premier-green'
                         } text-sm focus:outline-none focus:ring-2 transition-all bg-surface-secondary`}
                       />
                     </div>
@@ -153,7 +153,7 @@ export function NotifyModal({ isOpen, onClose, courseTitle }: NotifyModalProps) 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full btn-primary !py-3.5 !text-sm text-center justify-center font-heading font-bold disabled:opacity-50 mt-2"
+                    className="w-full btn-primary !py-3.5 !text-sm text-center justify-center font-heading font-bold disabled:opacity-50 mt-2 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
                   >
                     {isSubmitting ? 'Registering...' : 'Notify Me at Launch'}
                   </button>
@@ -173,7 +173,7 @@ export function NotifyModal({ isOpen, onClose, courseTitle }: NotifyModalProps) 
                 </p>
                 <button
                   onClick={handleCloseModal}
-                  className="btn-primary !py-3 !px-6 text-sm mx-auto inline-flex"
+                  className="btn-primary !py-3 !px-6 text-sm mx-auto inline-flex focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
                 >
                   Done &amp; Close
                 </button>

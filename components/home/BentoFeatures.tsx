@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { ShieldCheck, Calculator, Smartphone, Award, MessageSquare, Cpu } from 'lucide-react';
 
 const features = [
-  { icon: ShieldCheck, title: 'Forensic Watermarking & Security', desc: 'Protect proprietary content with dynamic transparent overlay watermarking and encrypted DRM streaming.', tag: 'Security', color: 'text-primary', bg: 'bg-primary-50', span: 'md:col-span-2' },
+  { icon: ShieldCheck, title: 'Forensic Watermarking & Security', desc: 'Protect proprietary content with dynamic transparent overlay watermarking and encrypted DRM streaming.', tag: 'Security', color: 'text-premier-green', bg: 'bg-premier-green-50', span: 'md:col-span-2' },
   { icon: Calculator, title: 'In-App Calculation Tools', desc: 'Run tax liabilities, DCF models, and depreciation schedules alongside live video.', tag: 'Tools', color: 'text-accent-600', bg: 'bg-accent-50', span: '' },
   { icon: Smartphone, title: 'Mobile & Offline Sync', desc: 'Download modules to your phone. Seamless progress sync across all devices.', tag: 'Mobile', color: 'text-blue-500', bg: 'bg-blue-50', span: '' },
   { icon: Award, title: 'Instant CPE Certificates', desc: 'NASBA/IRS verified PDF certificates with unique QR validation codes auto-generated on completion.', tag: 'CPE', color: 'text-amber-500', bg: 'bg-amber-50', span: '' },
@@ -17,7 +17,7 @@ export function BentoFeatures() {
     <section className="py-20 bg-surface-50 border-t border-border" id="bento-features">
       <div className="section-container">
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-50 border border-primary-200 text-primary text-xs font-semibold mb-4">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-premier-green-50 border border-premier-green-200 text-premier-green text-xs font-semibold mb-4">
             <Cpu className="w-3.5 h-3.5" />
             Platform Engine
           </span>

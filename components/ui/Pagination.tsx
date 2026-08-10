@@ -51,9 +51,9 @@ export default function Pagination({
   return (
     <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-4 px-6 bg-white border-t border-border-light text-xs text-text-secondary">
       <div>
-        Showing <span className="font-bold text-text-primary">{startItem}</span> to{' '}
-        <span className="font-bold text-text-primary">{endItem}</span> of{' '}
-        <span className="font-bold text-text-primary">{totalItems}</span> entries
+        Showing <span className="font-bold text-text-premier-green">{startItem}</span> to{' '}
+        <span className="font-bold text-text-premier-green">{endItem}</span> of{' '}
+        <span className="font-bold text-text-premier-green">{totalItems}</span> entries
       </div>
 
       <div className="flex items-center gap-1">
@@ -74,7 +74,7 @@ export default function Pagination({
                 className={`min-w-[32px] h-8 px-2.5 rounded-lg font-semibold transition-all ${
                   currentPage === num
                     ? 'bg-brand-green text-white shadow-sm'
-                    : 'border border-border-light hover:bg-bg-light text-text-primary'
+                    : 'border border-border-light hover:bg-bg-light text-text-premier-green'
                 }`}
               >
                 {num}

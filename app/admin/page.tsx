@@ -316,12 +316,12 @@ export default function AdminDashboard() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-text-primary">Dashboard</h1>
+          <h1 className="text-xl font-bold text-text-premier-green">Dashboard</h1>
           <p className="text-xs text-text-secondary mt-1">Academy overview and statistics</p>
         </div>
         <div className="flex items-center gap-2">
           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] font-bold uppercase tracking-wider">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-premier-green animate-pulse" />
             Live
           </span>
           <span className="text-[10px] text-text-secondary font-medium">
@@ -336,7 +336,7 @@ export default function AdminDashboard() {
           <Link
             key={card.label}
             href={card.href}
-            className="group bg-white border border-border-light rounded-xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 no-underline block"
+            className="group bg-white border border-border-light rounded-xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 no-underline block focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
           >
             <div className="flex items-start justify-between mb-4">
               <div className={`w-11 h-11 rounded-xl ${card.bgLight} flex items-center justify-center ${card.textColor} group-hover:scale-110 transition-transform`}>
@@ -347,7 +347,7 @@ export default function AdminDashboard() {
               </svg>
             </div>
             <p className="text-[10px] font-bold text-text-secondary uppercase tracking-wider mb-1">{card.label}</p>
-            <p className="text-3xl font-extrabold text-text-primary">
+            <p className="text-3xl font-extrabold text-text-premier-green">
               <AnimatedNumber value={card.value} />
             </p>
           </Link>
@@ -360,12 +360,12 @@ export default function AdminDashboard() {
         <div className="bg-white border border-border-light rounded-xl p-6 shadow-sm">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-sm font-bold text-text-primary">Application Status</h2>
+              <h2 className="text-sm font-bold text-text-premier-green">Application Status</h2>
               <p className="text-[10px] text-text-secondary mt-0.5">Breakdown of all admission applications</p>
             </div>
             <Link
               href="/admin/applications"
-              className="text-[10px] font-bold text-blue-600 hover:text-blue-800 hover:underline no-underline transition-colors"
+              className="text-[10px] font-bold text-blue-600 hover:text-blue-800 hover:underline no-underline transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
             >
               View All →
             </Link>
@@ -377,12 +377,12 @@ export default function AdminDashboard() {
         <div className="bg-white border border-border-light rounded-xl p-6 shadow-sm">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-sm font-bold text-text-primary">This Week&apos;s Classes</h2>
+              <h2 className="text-sm font-bold text-text-premier-green">This Week&apos;s Classes</h2>
               <p className="text-[10px] text-text-secondary mt-0.5">Scheduled classes per day this week</p>
             </div>
             <Link
               href="/admin/classes"
-              className="text-[10px] font-bold text-blue-600 hover:text-blue-800 hover:underline no-underline transition-colors"
+              className="text-[10px] font-bold text-blue-600 hover:text-blue-800 hover:underline no-underline transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
             >
               Manage →
             </Link>
@@ -390,10 +390,10 @@ export default function AdminDashboard() {
           <BarChart data={weeklyClassesData} />
           <div className="flex items-center justify-between mt-5 pt-4 border-t border-gray-50">
             <span className="text-[10px] text-text-secondary font-medium">
-              Total this week: <strong className="text-text-primary">{weeklyClassesData.reduce((s, d) => s + d.value, 0)}</strong> classes
+              Total this week: <strong className="text-text-premier-green">{weeklyClassesData.reduce((s, d) => s + d.value, 0)}</strong> classes
             </span>
             <span className="text-[10px] text-text-secondary font-medium">
-              Avg: <strong className="text-text-primary">{(weeklyClassesData.reduce((s, d) => s + d.value, 0) / 7).toFixed(1)}</strong>/day
+              Avg: <strong className="text-text-premier-green">{(weeklyClassesData.reduce((s, d) => s + d.value, 0) / 7).toFixed(1)}</strong>/day
             </span>
           </div>
         </div>
@@ -403,12 +403,12 @@ export default function AdminDashboard() {
       <div className="bg-white border border-border-light rounded-xl p-6 shadow-sm">
         <div className="flex items-center justify-between mb-5">
           <div>
-            <h2 className="text-sm font-bold text-text-primary">Active Batches</h2>
+            <h2 className="text-sm font-bold text-text-premier-green">Active Batches</h2>
             <p className="text-[10px] text-text-secondary mt-0.5">Currently running batches with enrollment progress</p>
           </div>
           <Link
             href="/admin/batches"
-            className="text-[10px] font-bold text-blue-600 hover:text-blue-800 hover:underline no-underline transition-colors"
+            className="text-[10px] font-bold text-blue-600 hover:text-blue-800 hover:underline no-underline transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
           >
             Manage Batches →
           </Link>
@@ -435,7 +435,7 @@ export default function AdminDashboard() {
               return (
                 <div key={batch.id} className="border border-gray-100 rounded-xl p-4 hover:border-gray-200 hover:shadow-sm transition-all group">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-xs font-bold text-text-primary truncate pr-2">{batch.name}</h3>
+                    <h3 className="text-xs font-bold text-text-premier-green truncate pr-2">{batch.name}</h3>
                     <span className={`inline-block px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-wider ${
                       batch.status === "admission"
                         ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
@@ -467,15 +467,15 @@ export default function AdminDashboard() {
                   <div className="grid grid-cols-3 gap-2">
                     <div className="text-center py-2 bg-gray-50 rounded-lg">
                       <span className="text-[9px] text-gray-400 block font-medium">Courses</span>
-                      <span className="text-sm font-extrabold text-text-primary">{batch.courses?.length || 0}</span>
+                      <span className="text-sm font-extrabold text-text-premier-green">{batch.courses?.length || 0}</span>
                     </div>
                     <div className="text-center py-2 bg-gray-50 rounded-lg">
                       <span className="text-[9px] text-gray-400 block font-medium">Classes</span>
-                      <span className="text-sm font-extrabold text-text-primary">{totalClasses}</span>
+                      <span className="text-sm font-extrabold text-text-premier-green">{totalClasses}</span>
                     </div>
                     <div className="text-center py-2 bg-gray-50 rounded-lg">
                       <span className="text-[9px] text-gray-400 block font-medium">Applicants</span>
-                      <span className="text-sm font-extrabold text-text-primary">{batch.totalApplicants || 0}</span>
+                      <span className="text-sm font-extrabold text-text-premier-green">{batch.totalApplicants || 0}</span>
                     </div>
                   </div>
 
@@ -497,12 +497,12 @@ export default function AdminDashboard() {
         <div className="lg:col-span-2 bg-white border border-border-light rounded-xl p-6 shadow-sm">
           <div className="flex items-center justify-between mb-5">
             <div>
-              <h2 className="text-sm font-bold text-text-primary">Recent Applications</h2>
+              <h2 className="text-sm font-bold text-text-premier-green">Recent Applications</h2>
               <p className="text-[10px] text-text-secondary mt-0.5">Latest admission submissions</p>
             </div>
             <Link
               href="/admin/applications"
-              className="text-[10px] font-bold text-blue-600 hover:text-blue-800 hover:underline no-underline transition-colors"
+              className="text-[10px] font-bold text-blue-600 hover:text-blue-800 hover:underline no-underline transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
             >
               View All →
             </Link>
@@ -534,7 +534,7 @@ export default function AdminDashboard() {
                             </span>
                           </div>
                           <div>
-                            <p className="text-xs font-bold text-text-primary m-0 leading-tight">{app.fullName}</p>
+                            <p className="text-xs font-bold text-text-premier-green m-0 leading-tight">{app.fullName}</p>
                             <p className="text-[10px] text-text-secondary m-0 leading-tight">{app.email}</p>
                           </div>
                         </div>

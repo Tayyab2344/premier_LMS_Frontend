@@ -78,7 +78,7 @@ export default function AdminStudentsPage() {
     <div>
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-text-primary">Enrolled Students</h1>
+          <h1 className="text-xl font-bold text-text-premier-green">Enrolled Students</h1>
           <p className="text-xs text-text-secondary mt-1">Manage active students and their courses</p>
         </div>
 
@@ -91,7 +91,7 @@ export default function AdminStudentsPage() {
               setSearchTerm(e.target.value);
               setCurrentPage(1);
             }}
-            className="w-full pl-9 pr-4 py-2 text-xs border border-border-light rounded-xl bg-white text-text-primary placeholder:text-gray-400 focus:border-brand-green"
+            className="w-full pl-9 pr-4 py-2 text-xs border border-border-light rounded-xl bg-white text-text-premier-green placeholder:text-gray-400 focus:border-brand-green"
           />
           <svg className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -114,9 +114,9 @@ export default function AdminStudentsPage() {
             <tbody className="divide-y divide-border-light">
               {students.map((student) => (
                 <tr key={student.id} className="hover:bg-bg-light transition-colors">
-                  <td className="px-6 py-4 text-sm font-bold text-text-primary">{student.name}</td>
+                  <td className="px-6 py-4 text-sm font-bold text-text-premier-green">{student.name}</td>
                   <td className="px-6 py-4 text-xs text-text-secondary">{student.email}</td>
-                  <td className="px-6 py-4 text-xs text-text-primary">
+                  <td className="px-6 py-4 text-xs text-text-premier-green">
                     {student.enrollments?.map((e) => e.course?.name).filter(Boolean).join(", ") || "None"}
                   </td>
                   <td className="px-6 py-4 text-xs">

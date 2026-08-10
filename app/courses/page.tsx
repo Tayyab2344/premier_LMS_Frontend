@@ -107,7 +107,7 @@ export default function CoursesPage() {
   };
 
   return (
-    <main className="min-h-screen bg-white text-heading selection:bg-primary-100 selection:text-primary-900 overflow-x-hidden">
+    <main className="min-h-screen bg-premier-cream text-heading selection:bg-premier-green-100 selection:text-premier-green-900 overflow-x-hidden">
         {/* 1. Hero Section */}
         <CoursesHero />
 
@@ -132,7 +132,7 @@ export default function CoursesPage() {
         />
 
         {/* 4. Featured Courses Grid */}
-        <section className="section-padding bg-white min-h-[600px]">
+        <section className="section-padding bg-premier-cream min-h-[600px]">
           <div className="section-container">
             {filteredCourses.length === 0 ? (
               /* Empty State */
@@ -146,7 +146,7 @@ export default function CoursesPage() {
                 </p>
                 <button
                   onClick={handleResetFilters}
-                  className="btn-primary !py-3 !px-6 text-xs mx-auto"
+                  className="btn-primary !py-3 !px-6 text-xs mx-auto focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
                 >
                   Reset All Filters
                 </button>

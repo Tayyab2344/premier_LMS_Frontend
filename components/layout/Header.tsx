@@ -52,7 +52,7 @@ export default function Header() {
     >
       <div className="container-main flex items-center justify-between h-16 gap-3">
         {/* ── Logo ─────────────────────────────── */}
-        <Link href="/" className="flex items-center gap-2 shrink-0 no-underline group">
+        <Link href="/" className="flex items-center gap-2 shrink-0 no-underline group focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
           <Image
             src="/logo.png"
             alt="Premier Tax Corporate & Accounting School Logo"
@@ -86,7 +86,7 @@ export default function Header() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full pl-10 pr-4 py-2 text-sm border border-border-light rounded-full
-                         bg-white text-text-primary placeholder:text-gray-400
+                         bg-white text-text-premier-green placeholder:text-gray-400
                          focus:border-brand-green focus:ring-1 focus:ring-brand-green/20 transition-all"
             />
           </form>
@@ -94,18 +94,18 @@ export default function Header() {
 
         {/* ── Right Actions (desktop) ──────────── */}
         <div className="hidden md:flex items-center gap-3">
-          <Link href="/courses" className="text-sm font-medium text-text-secondary hover:text-brand-green transition-colors no-underline">
+          <Link href="/courses" className="text-sm font-medium text-text-secondary hover:text-brand-green transition-colors no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
             Courses
           </Link>
-          <Link href="/about" className="text-sm font-medium text-text-secondary hover:text-brand-green transition-colors no-underline">
+          <Link href="/about" className="text-sm font-medium text-text-secondary hover:text-brand-green transition-colors no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
             About Us
           </Link>
-          <Link href="/news" className="text-sm font-medium text-text-secondary hover:text-brand-green transition-colors no-underline">
+          <Link href="/news" className="text-sm font-medium text-text-secondary hover:text-brand-green transition-colors no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
             News &amp; Updates
           </Link>
 
 
-          <Link href="/admission" className="text-sm font-medium text-brand-green hover:underline transition-colors no-underline">
+          <Link href="/admission" className="text-sm font-medium text-brand-green hover:underline transition-colors no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
             Apply Admission
           </Link>
 
@@ -113,27 +113,27 @@ export default function Header() {
             <div className="flex items-center gap-3 ml-2 border-l border-border-light pl-3">
               {/* Show ENROLL NOW for students with no active enrollments */}
               {user.role === 'student' && user.enrolledCourses.length === 0 && (
-                <Link href="/admission" className="btn-signup whitespace-nowrap no-underline text-center text-xs px-4 py-1.5 animate-pulse">
+                <Link href="/admission" className="btn-signup whitespace-nowrap no-underline text-center text-xs px-4 py-1.5 animate-pulse focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
                   ENROLL NOW
                 </Link>
               )}
-              <Link href={user.role === 'admin' ? '/admin' : '/dashboard'} className="flex items-center gap-2 group no-underline">
+              <Link href={user.role === 'admin' ? '/admin' : '/dashboard'} className="flex items-center gap-2 group no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
                 <Image src={user.avatar} alt={user.name} width={32} height={32} className="w-8 h-8 rounded-full object-cover border border-border-light group-hover:border-brand-green transition-colors" />
-                <span className="text-sm font-semibold text-text-primary group-hover:text-brand-green transition-colors">{user.name.split(' ')[0]}</span>
+                <span className="text-sm font-semibold text-text-premier-green group-hover:text-brand-green transition-colors">{user.name.split(' ')[0]}</span>
               </Link>
-              <button onClick={handleLogout} className="text-sm text-text-secondary hover:text-red-500 transition-colors font-medium ml-2">
+              <button onClick={handleLogout} className="text-sm text-text-secondary hover:text-red-500 transition-colors font-medium ml-2 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
                 Logout
               </button>
             </div>
           ) : (
             <>
               {/* Sign In */}
-              <Link id="btn-signin" href="/auth/login" className="btn-signin whitespace-nowrap no-underline text-center">
+              <Link id="btn-signin" href="/auth/login" className="btn-signin whitespace-nowrap no-underline text-center focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
                 SIGN IN
               </Link>
 
               {/* Admission Form */}
-              <Link id="btn-signup" href="/admission" className="btn-signup whitespace-nowrap no-underline text-center">
+              <Link id="btn-signup" href="/admission" className="btn-signup whitespace-nowrap no-underline text-center focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
                 ADMISSION FORM
               </Link>
             </>
@@ -142,7 +142,7 @@ export default function Header() {
 
         {/* ── Mobile Toggle ────────────────────── */}
         <button
-          className="md:hidden text-text-primary p-2 hover:bg-gray-50 rounded-lg transition-colors"
+          className="md:hidden text-text-premier-green p-2 hover:bg-gray-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -182,38 +182,38 @@ export default function Header() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full pl-10 pr-4 py-2.5 text-sm border border-border-light rounded-full
-                           bg-white text-text-primary placeholder:text-gray-400 focus:border-brand-green"
+                           bg-white text-text-premier-green placeholder:text-gray-400 focus:border-brand-green"
               />
             </form>
 
-            <Link href="/courses" className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors py-2 no-underline" onClick={() => setMenuOpen(false)}>
+            <Link href="/courses" className="text-sm font-medium text-text-secondary hover:text-text-premier-green transition-colors py-2 no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream" onClick={() => setMenuOpen(false)}>
               Courses
             </Link>
-            <Link href="/about" className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors py-2 no-underline" onClick={() => setMenuOpen(false)}>
+            <Link href="/about" className="text-sm font-medium text-text-secondary hover:text-text-premier-green transition-colors py-2 no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream" onClick={() => setMenuOpen(false)}>
               About Us
             </Link>
 
             {user ? (
               <div className="flex flex-col gap-2">
                 {user.role === 'student' && user.enrolledCourses.length === 0 && (
-                  <Link href="/admission" className="btn-signup w-full text-center no-underline" onClick={() => setMenuOpen(false)}>
+                  <Link href="/admission" className="btn-signup w-full text-center no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream" onClick={() => setMenuOpen(false)}>
                     ENROLL NOW
                   </Link>
                 )}
-                <Link href={user.role === 'admin' ? '/admin' : '/dashboard'} className="flex items-center gap-3 py-2 no-underline" onClick={() => setMenuOpen(false)}>
+                <Link href={user.role === 'admin' ? '/admin' : '/dashboard'} className="flex items-center gap-3 py-2 no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream" onClick={() => setMenuOpen(false)}>
                   <Image src={user.avatar} alt={user.name} width={32} height={32} className="w-8 h-8 rounded-full object-cover border border-border-light" />
-                  <span className="text-sm font-semibold text-text-primary">{user.name}</span>
+                  <span className="text-sm font-semibold text-text-premier-green">{user.name}</span>
                 </Link>
-                <button onClick={handleLogout} className="text-left text-sm font-medium text-red-500 py-2">
+                <button onClick={handleLogout} className="text-left text-sm font-medium text-red-500 py-2 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
                   Logout
                 </button>
               </div>
             ) : (
               <>
-                <Link href="/auth/login" className="btn-signin w-full text-center no-underline" onClick={() => setMenuOpen(false)}>
+                <Link href="/auth/login" className="btn-signin w-full text-center no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream" onClick={() => setMenuOpen(false)}>
                   SIGN IN
                 </Link>
-                <Link href="/auth/signup" className="btn-signup w-full text-center no-underline" onClick={() => setMenuOpen(false)}>
+                <Link href="/auth/signup" className="btn-signup w-full text-center no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream" onClick={() => setMenuOpen(false)}>
                   SIGN UP
                 </Link>
               </>

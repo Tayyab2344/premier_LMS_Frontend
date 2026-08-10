@@ -36,7 +36,7 @@ const missions = [
     icon: Handshake,
     title: 'Support Students With Mentorship',
     desc: 'Providing direct 1-on-1 instructor feedback, career Q&As, and personalized guidance.',
-    color: 'bg-emerald-500',
+    color: 'bg-premier-green',
   },
   {
     icon: TrendingUp,
@@ -60,12 +60,12 @@ const missions = [
 
 export function MissionSection() {
   return (
-    <section className="section-padding bg-surface-secondary border-y border-border relative overflow-hidden">
+    <section className="section-padding bg-white border-y border-border relative overflow-hidden">
       <div className="section-container relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <span className="text-xs font-heading font-bold uppercase tracking-wider text-primary px-3.5 py-1.5 rounded-full bg-primary-50 border border-primary-100 inline-block">
+          <span className="text-xs font-heading font-bold uppercase tracking-wider text-premier-green px-3.5 py-1.5 rounded-full bg-premier-green-50 border border-premier-green-100 inline-block">
             Our Purpose
           </span>
           <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-heading">
@@ -89,7 +89,7 @@ export function MissionSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
-                className={`group rounded-3xl bg-white border border-border p-7 shadow-soft hover:shadow-card-hover hover:border-primary/40 transition-all duration-300 flex flex-col justify-between ${
+                className={`group rounded-3xl bg-white border border-border p-7 shadow-soft hover:shadow-card-hover hover:border-premier-green/40 transition-all duration-300 flex flex-col justify-between ${
                   isLastOdd ? 'md:col-span-2 lg:col-span-1' : ''
                 }`}
               >
@@ -97,7 +97,7 @@ export function MissionSection() {
                   <div className={`w-12 h-12 rounded-2xl ${mission.color} text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300`}>
                     <IconComponent className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-heading font-bold text-heading group-hover:text-primary transition-colors">
+                  <h3 className="text-lg font-heading font-bold text-heading group-hover:text-premier-green transition-colors">
                     {mission.title}
                   </h3>
                   <p className="text-sm text-body leading-relaxed">
@@ -105,7 +105,7 @@ export function MissionSection() {
                   </p>
                 </div>
 
-                <div className="pt-6 mt-4 border-t border-border/50 flex items-center justify-between text-xs font-heading font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="pt-6 mt-4 border-t border-border/50 flex items-center justify-between text-xs font-heading font-bold text-premier-green opacity-0 group-hover:opacity-100 transition-opacity">
                   <span>Pillar #{idx + 1}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>

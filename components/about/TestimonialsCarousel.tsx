@@ -56,13 +56,13 @@ export function TestimonialsCarousel() {
   }, [emblaApi]);
 
   return (
-    <section className="section-padding bg-white relative overflow-hidden border-b border-border">
+    <section className="section-padding bg-premier-cream relative overflow-hidden border-b border-border">
       <div className="section-container relative z-10">
         
         {/* Header with Navigation */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="space-y-3 max-w-2xl">
-            <span className="text-xs font-heading font-bold uppercase tracking-wider text-primary px-3.5 py-1.5 rounded-full bg-primary-50 border border-primary-100 inline-block">
+            <span className="text-xs font-heading font-bold uppercase tracking-wider text-premier-green px-3.5 py-1.5 rounded-full bg-premier-green-50 border border-premier-green-100 inline-block">
               Alumni Success
             </span>
             <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-heading">
@@ -76,14 +76,14 @@ export function TestimonialsCarousel() {
           <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={scrollPrev}
-              className="w-12 h-12 rounded-full border border-border bg-white text-heading hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center justify-center shadow-soft"
+              className="w-12 h-12 rounded-full border border-border bg-white text-heading hover:bg-premier-green hover:text-white hover:border-premier-green transition-all flex items-center justify-center shadow-soft focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
               aria-label="Previous Testimonial"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={scrollNext}
-              className="w-12 h-12 rounded-full border border-border bg-white text-heading hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center justify-center shadow-soft"
+              className="w-12 h-12 rounded-full border border-border bg-white text-heading hover:bg-premier-green hover:text-white hover:border-premier-green transition-all flex items-center justify-center shadow-soft focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
               aria-label="Next Testimonial"
             >
               <ChevronRight className="w-5 h-5" />
@@ -92,11 +92,11 @@ export function TestimonialsCarousel() {
         </div>
 
         {/* Embla Carousel Viewport */}
-        <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
-          <div className="flex gap-6">
+        <div className="overflow-hidden cursor-grab active:cursor-grabbing -mx-4 px-4 py-4" ref={emblaRef}>
+          <div className="flex -ml-6">
             {testimonials.map((item, idx) => (
-              <div key={idx} className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.333%]">
-                <div className="h-full rounded-3xl bg-surface-secondary border border-border p-7 shadow-soft hover:shadow-card-hover hover:border-primary/40 transition-all duration-300 flex flex-col justify-between">
+              <div key={idx} className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.333%] pl-6">
+                <div className="h-full rounded-3xl bg-surface-secondary border border-border p-7 shadow-soft hover:shadow-card-hover hover:border-premier-green/40 transition-all duration-300 flex flex-col justify-between">
                   <div className="space-y-4">
                     
                     {/* Stars + Rating */}
@@ -132,7 +132,7 @@ export function TestimonialsCarousel() {
                       <h4 className="text-sm font-heading font-bold text-heading leading-tight">
                         {item.name}
                       </h4>
-                      <p className="text-xs text-primary font-semibold">{item.role}</p>
+                      <p className="text-xs text-premier-green font-semibold">{item.role}</p>
                       <p className="text-[11px] text-body/70 truncate max-w-[200px]">{item.course}</p>
                     </div>
                   </div>

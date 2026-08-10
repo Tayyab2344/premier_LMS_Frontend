@@ -10,7 +10,7 @@ export function CourseCTA() {
       <div className="section-container">
         
         {/* Banner Container */}
-        <div className="relative rounded-3xl bg-gradient-to-br from-primary-900 via-primary to-blue-600 p-8 sm:p-14 md:p-16 text-white shadow-card-hover overflow-hidden">
+        <div className="relative rounded-3xl bg-gradient-to-br from-[#0F3524] via-[#164E36] to-[#1E3A8A] p-8 sm:p-14 md:p-16 text-white shadow-card-hover overflow-hidden">
           
           {/* Ambient Blobs */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/3" />
@@ -37,7 +37,7 @@ export function CourseCTA() {
             <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-4 justify-end">
               <Link
                 href="/admission"
-                className="btn-primary !bg-white !text-primary hover:!bg-surface-hover shadow-lg text-center justify-center !py-4 !px-8 text-base group"
+                className="btn-primary !bg-white !text-premier-green hover:!bg-surface-hover shadow-lg text-center justify-center !py-4 !px-8 text-base group focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
               >
                 Enroll Now
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -45,7 +45,7 @@ export function CourseCTA() {
               
               <Link
                 href="/courses"
-                className="btn-secondary !bg-white/10 !text-white !border-white/40 hover:!bg-white/20 text-center justify-center !py-4 !px-8 text-base"
+                className="btn-secondary !bg-white/10 !text-white !border-white/40 hover:!bg-white/20 text-center justify-center !py-4 !px-8 text-base focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
               >
                 Explore More Courses
               </Link>

@@ -6,9 +6,9 @@ import { Users, Award, CheckCircle2, Star, ShieldCheck, Check } from 'lucide-rea
 
 export function TrustMetrics() {
   const metrics = [
-    { icon: Users, value: '25,000+', label: 'Professionals Trained', desc: 'Active CPAs, auditors & consultants', color: 'text-primary', bg: 'bg-primary-50' },
+    { icon: Users, value: '25,000+', label: 'Professionals Trained', desc: 'Active CPAs, auditors & consultants', color: 'text-premier-green', bg: 'bg-premier-green-50' },
     { icon: CheckCircle2, value: '98.4%', label: 'Exam Pass Rate', desc: 'CPA & Tax certification guarantee', color: 'text-accent-600', bg: 'bg-accent-50' },
-    { icon: Award, value: '150,000+', label: 'CPE Hours Awarded', desc: 'NASBA & IRS approved credits', color: 'text-primary-700', bg: 'bg-primary-50' },
+    { icon: Award, value: '150,000+', label: 'CPE Hours Awarded', desc: 'NASBA & IRS approved credits', color: 'text-premier-green-700', bg: 'bg-premier-green-50' },
     { icon: Star, value: '4.9 / 5.0', label: 'Student Satisfaction', desc: '2,400+ verified reviews', color: 'text-amber-500', bg: 'bg-amber-50' },
   ];
 

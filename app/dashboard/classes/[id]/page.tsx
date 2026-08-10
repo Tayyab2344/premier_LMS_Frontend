@@ -442,7 +442,7 @@ export default function ClassroomPage() {
             }}
             className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-black/60 hover:bg-black border border-white/10 rounded-lg backdrop-blur-md shadow-lg transition-all duration-200 no-underline cursor-pointer"
           >
-            <svg className="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <svg className="w-4 h-4 text-premier-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
             </svg>
             <span className="hover:text-emerald-400 transition-colors duration-200 font-medium">Invite Students</span>
@@ -538,7 +538,7 @@ export default function ClassroomPage() {
                     ) : (
                       <button
                         onClick={() => handleControlRecording('resume')}
-                        className="py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-[11px] transition-all duration-200 cursor-pointer text-center"
+                        className="py-2 bg-premier-green-dark hover:bg-emerald-700 text-white font-bold rounded-xl text-[11px] transition-all duration-200 cursor-pointer text-center"
                       >
                         Resume
                       </button>
@@ -567,7 +567,7 @@ export default function ClassroomPage() {
                       <div className="flex gap-1.5">
                         <button
                           onClick={() => handleAdmitStudent(s.userId)}
-                          className="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-[10px] transition-all duration-200 cursor-pointer"
+                          className="px-2 py-1 bg-premier-green-dark hover:bg-emerald-700 text-white font-bold rounded-lg text-[10px] transition-all duration-200 cursor-pointer"
                         >
                           Admit
                         </button>
@@ -697,7 +697,7 @@ export default function ClassroomPage() {
             <button
               onClick={handleToggleMicPermission}
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${isMicAllowed
-                  ? "bg-emerald-600/20 hover:bg-emerald-600/35 text-emerald-400 border border-emerald-500/20"
+                  ? "bg-premier-green-dark/20 hover:bg-premier-green-dark/35 text-emerald-400 border border-emerald-500/20"
                   : "bg-red-600/20 hover:bg-red-600/35 text-red-400 border border-red-500/20"
                 }`}
             >

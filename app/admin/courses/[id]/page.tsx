@@ -247,13 +247,13 @@ export default function AdminCourseBuilderPage() {
       <div className="sticky top-0 bg-bg-light/95 backdrop-blur-md z-30 flex flex-col md:flex-row md:items-center justify-between border-b border-border-light pb-4 mb-8 gap-4">
         <div>
           <div className="flex items-center gap-2 text-xs font-semibold text-text-secondary">
-            <Link href="/admin/courses" className="text-brand-green hover:underline no-underline">
+            <Link href="/admin/courses" className="text-brand-green hover:underline no-underline focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
               Courses
             </Link>
             <span>/</span>
             <span>Edit Details</span>
           </div>
-          <h1 className="text-xl font-extrabold text-text-primary mt-2">{courseData.name || "Course Builder"}</h1>
+          <h1 className="text-xl font-extrabold text-text-premier-green mt-2">{courseData.name || "Course Builder"}</h1>
         </div>
 
         <div className="flex items-center gap-3">
@@ -267,7 +267,7 @@ export default function AdminCourseBuilderPage() {
             <span className="text-sm font-semibold text-text-secondary uppercase">Active Status</span>
           </label>
 
-          <button onClick={handleSave} className="btn-signup px-5 py-2.5 text-xs">
+          <button onClick={handleSave} className="btn-signup px-5 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
             Save Changes
           </button>
         </div>
@@ -290,7 +290,7 @@ export default function AdminCourseBuilderPage() {
             className={`px-5 py-3 text-sm font-bold whitespace-nowrap transition-all border-b-2 ${
               activeTab === tab.id
                 ? "border-brand-green text-brand-green"
-                : "border-transparent text-text-secondary hover:text-text-primary"
+                : "border-transparent text-text-secondary hover:text-text-premier-green"
             }`}
           >
             {tab.label}
@@ -310,7 +310,7 @@ export default function AdminCourseBuilderPage() {
                 type="text"
                 value={courseData.name}
                 onChange={(e) => setCourseData((p) => ({ ...p, name: e.target.value }))}
-                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
                 placeholder="e.g. Certified Tax Practitioner (CTP)"
               />
             </div>
@@ -323,7 +323,7 @@ export default function AdminCourseBuilderPage() {
                 type="text"
                 value={courseData.category}
                 onChange={(e) => setCourseData((p) => ({ ...p, category: e.target.value }))}
-                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
                 placeholder="e.g. Income Tax"
               />
             </div>
@@ -336,7 +336,7 @@ export default function AdminCourseBuilderPage() {
                 type="number"
                 value={courseData.originalFee}
                 onChange={(e) => setCourseData((p) => ({ ...p, originalFee: Number(e.target.value) }))}
-                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
               />
             </div>
 
@@ -348,7 +348,7 @@ export default function AdminCourseBuilderPage() {
                 type="number"
                 value={courseData.discountedFee}
                 onChange={(e) => setCourseData((p) => ({ ...p, discountedFee: Number(e.target.value) }))}
-                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
               />
             </div>
 
@@ -359,7 +359,7 @@ export default function AdminCourseBuilderPage() {
               <select
                 value={courseData.level}
                 onChange={(e) => setCourseData((p) => ({ ...p, level: e.target.value }))}
-                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
               >
                 <option value="Beginner">Beginner</option>
                 <option value="Intermediate">Intermediate</option>
@@ -374,7 +374,7 @@ export default function AdminCourseBuilderPage() {
               <select
                 value={courseData.badge || ""}
                 onChange={(e) => setCourseData((p) => ({ ...p, badge: e.target.value }))}
-                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
               >
                 <option value="">No Badge</option>
                 <option value="new">New</option>
@@ -391,7 +391,7 @@ export default function AdminCourseBuilderPage() {
                 type="number"
                 value={courseData.lecturesPerLiveClass}
                 onChange={(e) => setCourseData((p) => ({ ...p, lecturesPerLiveClass: Number(e.target.value) || 1 }))}
-                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
                 min={1}
               />
             </div>
@@ -404,7 +404,7 @@ export default function AdminCourseBuilderPage() {
                 type="number"
                 value={courseData.duration}
                 onChange={(e) => setCourseData((p) => ({ ...p, duration: Number(e.target.value) }))}
-                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
               />
             </div>
 
@@ -416,7 +416,7 @@ export default function AdminCourseBuilderPage() {
                 type="text"
                 value={courseData.language}
                 onChange={(e) => setCourseData((p) => ({ ...p, language: e.target.value }))}
-                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
                 placeholder="e.g. Urdu & English"
               />
             </div>
@@ -430,7 +430,7 @@ export default function AdminCourseBuilderPage() {
               type="text"
               value={courseData.thumbnail}
               onChange={(e) => setCourseData((p) => ({ ...p, thumbnail: e.target.value }))}
-              className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+              className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
               placeholder="https://..."
             />
           </div>
@@ -443,7 +443,7 @@ export default function AdminCourseBuilderPage() {
               type="text"
               value={courseData.description}
               onChange={(e) => setCourseData((p) => ({ ...p, description: e.target.value }))}
-              className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+              className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
               placeholder="e.g. Master the complete process of filing income tax returns..."
             />
           </div>
@@ -456,7 +456,7 @@ export default function AdminCourseBuilderPage() {
               rows={4}
               value={courseData.longDescription}
               onChange={(e) => setCourseData((p) => ({ ...p, longDescription: e.target.value }))}
-              className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary resize-y"
+              className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green resize-y"
               placeholder="Enter detailed long description..."
             />
           </div>
@@ -467,10 +467,10 @@ export default function AdminCourseBuilderPage() {
       {activeTab === "curriculum" && (
         <div className="space-y-6 animate-fade-in">
           <div className="flex items-center justify-between">
-            <h2 className="text-base font-bold text-text-primary">Curriculum Modules &amp; Lessons</h2>
+            <h2 className="text-base font-bold text-text-premier-green">Curriculum Modules &amp; Lessons</h2>
             <button
               onClick={addModule}
-              className="btn-signup text-xs px-4 py-2 bg-brand-green text-white hover:bg-brand-green-dark"
+              className="btn-signup text-xs px-4 py-2 bg-brand-green text-white hover:bg-brand-green-dark focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
             >
               + Add Module
             </button>
@@ -487,7 +487,7 @@ export default function AdminCourseBuilderPage() {
                     type="text"
                     value={mod.title}
                     onChange={(e) => updateModuleTitle(mIdx, e.target.value)}
-                    className="flex-1 px-3 py-1.5 text-sm font-bold border border-border-light rounded-lg bg-white text-text-primary"
+                    className="flex-1 px-3 py-1.5 text-sm font-bold border border-border-light rounded-lg bg-white text-text-premier-green"
                     placeholder="Enter module title"
                   />
                 </div>
@@ -517,7 +517,7 @@ export default function AdminCourseBuilderPage() {
                         type="text"
                         value={lesson.title}
                         onChange={(e) => updateLessonField(mIdx, lIdx, "title", e.target.value)}
-                        className="flex-1 px-3 py-1.5 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                        className="flex-1 px-3 py-1.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
                         placeholder="Enter lesson title"
                       />
                     </div>
@@ -528,7 +528,7 @@ export default function AdminCourseBuilderPage() {
                           type="number"
                           value={lesson.duration}
                           onChange={(e) => updateLessonField(mIdx, lIdx, "duration", e.target.value)}
-                          className="w-16 px-2 py-1 text-xs border border-border-light rounded bg-white text-text-primary text-center"
+                          className="w-16 px-2 py-1 text-xs border border-border-light rounded bg-white text-text-premier-green text-center"
                         />
                       </div>
                       <label className="flex items-center gap-1.5 cursor-pointer">
@@ -579,7 +579,7 @@ export default function AdminCourseBuilderPage() {
                 type="text"
                 value={courseData.instructorName}
                 onChange={(e) => setCourseData((p) => ({ ...p, instructorName: e.target.value }))}
-                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
                 placeholder="e.g. Barrister Ahmed Khan"
               />
             </div>
@@ -592,7 +592,7 @@ export default function AdminCourseBuilderPage() {
                 type="text"
                 value={courseData.instructorTitle}
                 onChange={(e) => setCourseData((p) => ({ ...p, instructorTitle: e.target.value }))}
-                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
                 placeholder="e.g. Senior Tax Consultant & SC Advocate"
               />
             </div>
@@ -606,7 +606,7 @@ export default function AdminCourseBuilderPage() {
               type="text"
               value={courseData.instructorImage}
               onChange={(e) => setCourseData((p) => ({ ...p, instructorImage: e.target.value }))}
-              className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+              className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
               placeholder="https://..."
             />
           </div>
@@ -619,7 +619,7 @@ export default function AdminCourseBuilderPage() {
               rows={5}
               value={courseData.instructorBio}
               onChange={(e) => setCourseData((p) => ({ ...p, instructorBio: e.target.value }))}
-              className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-primary resize-y"
+              className="w-full px-4 py-2.5 text-sm border border-border-light rounded-lg bg-white text-text-premier-green resize-y"
               placeholder="Enter details about the instructor's background, qualifications, and accomplishments..."
             />
           </div>
@@ -632,10 +632,10 @@ export default function AdminCourseBuilderPage() {
           {/* Learning Outcomes */}
           <div className="bg-white border border-border-light rounded-xl p-6 shadow-sm space-y-4">
             <div className="flex items-center justify-between border-b border-border-light pb-3">
-              <h3 className="font-bold text-text-primary text-sm">What You&apos;ll Learn</h3>
+              <h3 className="font-bold text-text-premier-green text-sm">What You&apos;ll Learn</h3>
               <button
                 onClick={addOutcome}
-                className="px-2.5 py-1 text-xs font-bold text-brand-green border border-brand-green/20 bg-brand-green/5 hover:bg-brand-green/10 rounded-lg transition-colors"
+                className="px-2.5 py-1 text-xs font-bold text-brand-green border border-brand-green/20 bg-brand-green/5 hover:bg-brand-green/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
               >
                 + Add Item
               </button>
@@ -648,7 +648,7 @@ export default function AdminCourseBuilderPage() {
                     type="text"
                     value={item}
                     onChange={(e) => updateOutcome(idx, e.target.value)}
-                    className="flex-1 px-3 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                    className="flex-1 px-3 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
                     placeholder="Enter learning objective"
                   />
                   <button
@@ -671,10 +671,10 @@ export default function AdminCourseBuilderPage() {
           {/* Requirements */}
           <div className="bg-white border border-border-light rounded-xl p-6 shadow-sm space-y-4">
             <div className="flex items-center justify-between border-b border-border-light pb-3">
-              <h3 className="font-bold text-text-primary text-sm">Requirements</h3>
+              <h3 className="font-bold text-text-premier-green text-sm">Requirements</h3>
               <button
                 onClick={addRequirement}
-                className="px-2.5 py-1 text-xs font-bold text-brand-green border border-brand-green/20 bg-brand-green/5 hover:bg-brand-green/10 rounded-lg transition-colors"
+                className="px-2.5 py-1 text-xs font-bold text-brand-green border border-brand-green/20 bg-brand-green/5 hover:bg-brand-green/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
               >
                 + Add Item
               </button>
@@ -687,7 +687,7 @@ export default function AdminCourseBuilderPage() {
                     type="text"
                     value={item}
                     onChange={(e) => updateRequirement(idx, e.target.value)}
-                    className="flex-1 px-3 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                    className="flex-1 px-3 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
                     placeholder="Enter prerequisite / requirement"
                   />
                   <button
@@ -714,7 +714,7 @@ export default function AdminCourseBuilderPage() {
         <div className="space-y-6 animate-fade-in">
           {/* Add Review Panel */}
           <div className="bg-white border border-border-light rounded-xl p-6 shadow-sm space-y-4">
-            <h3 className="font-bold text-text-primary text-sm border-b border-border-light pb-2">
+            <h3 className="font-bold text-text-premier-green text-sm border-b border-border-light pb-2">
               Add Mock / Custom Review
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -726,7 +726,7 @@ export default function AdminCourseBuilderPage() {
                   type="text"
                   value={newReview.name}
                   onChange={(e) => setNewReview((p) => ({ ...p, name: e.target.value }))}
-                  className="w-full px-3 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                  className="w-full px-3 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
                   placeholder="e.g. Ali Raza"
                 />
               </div>
@@ -738,7 +738,7 @@ export default function AdminCourseBuilderPage() {
                 <select
                   value={newReview.rating}
                   onChange={(e) => setNewReview((p) => ({ ...p, rating: Number(e.target.value) }))}
-                  className="w-full px-3 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                  className="w-full px-3 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
                 >
                   <option value={5}>5 Stars</option>
                   <option value={4}>4 Stars</option>
@@ -756,7 +756,7 @@ export default function AdminCourseBuilderPage() {
                   type="text"
                   value={newReview.date}
                   onChange={(e) => setNewReview((p) => ({ ...p, date: e.target.value }))}
-                  className="w-full px-3 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary"
+                  className="w-full px-3 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green"
                   placeholder="e.g. 2 weeks ago"
                 />
               </div>
@@ -770,14 +770,14 @@ export default function AdminCourseBuilderPage() {
                 rows={3}
                 value={newReview.content}
                 onChange={(e) => setNewReview((p) => ({ ...p, content: e.target.value }))}
-                className="w-full px-3 py-2 text-sm border border-border-light rounded-lg bg-white text-text-primary resize-y"
+                className="w-full px-3 py-2 text-sm border border-border-light rounded-lg bg-white text-text-premier-green resize-y"
                 placeholder="Write the reviewer's testimonial..."
               />
             </div>
 
             <button
               onClick={addReview}
-              className="btn-signup text-xs px-5 py-2 bg-brand-green text-white hover:bg-brand-green-dark"
+              className="btn-signup text-xs px-5 py-2 bg-brand-green text-white hover:bg-brand-green-dark focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
             >
               Add Review Record
             </button>
@@ -785,7 +785,7 @@ export default function AdminCourseBuilderPage() {
 
           {/* Reviews List */}
           <div className="bg-white border border-border-light rounded-xl p-6 shadow-sm space-y-4">
-            <h3 className="font-bold text-text-primary text-sm border-b border-border-light pb-2">
+            <h3 className="font-bold text-text-premier-green text-sm border-b border-border-light pb-2">
               Reviews List ({reviews.length})
             </h3>
             <div className="divide-y divide-border-light">
@@ -793,7 +793,7 @@ export default function AdminCourseBuilderPage() {
                 <div key={idx} className="py-4 first:pt-0 last:pb-0 flex justify-between gap-4">
                   <div className="space-y-1.5">
                     <div className="flex items-center gap-3">
-                      <span className="text-sm font-bold text-text-primary">{rev.name}</span>
+                      <span className="text-sm font-bold text-text-premier-green">{rev.name}</span>
                       <span className="text-xs text-text-secondary">{rev.date}</span>
                     </div>
                     <div className="flex items-center text-amber-500 text-xs">
@@ -827,7 +827,7 @@ export default function AdminCourseBuilderPage() {
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/35 backdrop-blur-[2px] animate-fade-in">
           <div className="bg-white border border-border-light rounded-2xl p-6 flex flex-col items-center space-y-4 shadow-2xl">
             <div className="w-10 h-10 border-4 border-brand-green/20 border-t-brand-green rounded-full animate-spin" />
-            <p className="text-xs font-bold text-text-primary uppercase tracking-wider">Saving course details...</p>
+            <p className="text-xs font-bold text-text-premier-green uppercase tracking-wider">Saving course details...</p>
           </div>
         </div>
       )}

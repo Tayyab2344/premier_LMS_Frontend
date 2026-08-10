@@ -28,7 +28,7 @@ export function CourseCard({ course, onNotifyClick }: CourseCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
-      className="group relative rounded-3xl bg-white border border-border hover:border-primary/40 shadow-soft hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between overflow-hidden h-full"
+      className="group relative rounded-3xl bg-white border border-border hover:border-premier-green/40 shadow-soft hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between overflow-hidden h-full"
     >
       {/* Top Image Container */}
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-100">
@@ -53,7 +53,7 @@ export function CourseCard({ course, onNotifyClick }: CourseCardProps) {
 
           {/* Status Ribbon */}
           {isAvailable ? (
-            <span className="px-3 py-1 rounded-full bg-emerald-500 text-white text-[11px] font-heading font-bold shadow-soft flex items-center gap-1">
+            <span className="px-3 py-1 rounded-full bg-premier-green text-white text-[11px] font-heading font-bold shadow-soft flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
               Available Now
             </span>
@@ -93,14 +93,14 @@ export function CourseCard({ course, onNotifyClick }: CourseCardProps) {
 
             {isAvailable && (
               <div className="flex items-center gap-1">
-                <Users className="w-3.5 h-3.5 text-primary" />
+                <Users className="w-3.5 h-3.5 text-premier-green" />
                 <span className="font-heading font-medium">{course.studentsCount} Students</span>
               </div>
             )}
           </div>
 
           {/* Title */}
-          <h3 className="text-lg font-heading font-bold text-heading group-hover:text-primary transition-colors line-clamp-2 leading-snug">
+          <h3 className="text-lg font-heading font-bold text-heading group-hover:text-premier-green transition-colors line-clamp-2 leading-snug">
             <Link href={`/courses/${course.slug}`}>
               {course.title}
             </Link>
@@ -155,7 +155,7 @@ export function CourseCard({ course, onNotifyClick }: CourseCardProps) {
               <div className="text-right">
                 {course.price ? (
                   <div className="flex items-baseline gap-1.5">
-                    <span className="text-lg font-mono font-extrabold text-primary">PKR {course.price.toLocaleString()}</span>
+                    <span className="text-lg font-mono font-extrabold text-premier-green">PKR {course.price.toLocaleString()}</span>
                     {course.originalPrice > course.price && (
                       <span className="text-xs font-mono text-body/50 line-through">PKR {course.originalPrice.toLocaleString()}</span>
                     )}
@@ -175,7 +175,7 @@ export function CourseCard({ course, onNotifyClick }: CourseCardProps) {
           {isAvailable ? (
             <Link
               href="/admission"
-              className="w-full btn-primary !py-3 !text-xs text-center justify-center font-heading font-bold shadow-md group-hover:shadow-blue-glow transition-all"
+              className="w-full btn-primary !py-3 !text-xs text-center justify-center font-heading font-bold shadow-md group-hover:shadow-blue-glow transition-all focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
             >
               Enroll Now
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

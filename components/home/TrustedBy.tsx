@@ -15,7 +15,7 @@ const partners = [
 
 export function TrustedBy() {
   return (
-    <section className="py-12 bg-surface-secondary border-y border-border overflow-hidden">
+    <section className="py-12 bg-premier-cream border-y border-border overflow-hidden">
       <div className="section-container mb-6 text-center">
         <p className="text-xs font-heading font-semibold uppercase tracking-widest text-body">
           Trusted by professionals from leading institutions & organizations
@@ -31,9 +31,9 @@ export function TrustedBy() {
           {[...partners, ...partners].map((name, i) => (
             <div
               key={i}
-              className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-white border border-border/60 shadow-soft text-heading font-heading font-bold text-sm tracking-tight opacity-75 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default"
+              className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-premier-cream border border-border/60 shadow-soft text-heading font-heading font-bold text-sm tracking-tight opacity-75 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default"
             >
-              <div className="w-2 h-2 rounded-full bg-primary" />
+              <div className="w-2 h-2 rounded-full bg-premier-green" />
               {name}
             </div>
           ))}

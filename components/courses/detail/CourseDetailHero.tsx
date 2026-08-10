@@ -34,7 +34,7 @@ export function CourseDetailHero({ course }: CourseDetailHeroProps) {
   };
 
   return (
-    <section className="bg-white text-heading pt-[90px] pb-8 border-b border-border">
+    <section className="bg-premier-cream text-heading pt-[90px] pb-8 border-b border-border">
       <div className="section-container">
         
         {/* Breadcrumb */}
@@ -50,7 +50,7 @@ export function CourseDetailHero({ course }: CourseDetailHeroProps) {
           
           {/* Badges & Status */}
           <div className="flex flex-wrap items-center gap-2.5">
-            <span className="px-3.5 py-1 rounded-full bg-primary-50 text-primary text-xs font-heading font-bold uppercase tracking-wider border border-primary-100">
+            <span className="px-3.5 py-1 rounded-full bg-premier-green-50 text-premier-green text-xs font-heading font-bold uppercase tracking-wider border border-premier-green-100">
               {course.category}
             </span>
             <span className="px-3.5 py-1 rounded-full bg-surface-secondary text-body text-xs font-heading font-bold uppercase tracking-wider border border-border">
@@ -59,7 +59,7 @@ export function CourseDetailHero({ course }: CourseDetailHeroProps) {
 
             {isAvailable ? (
               <span className="px-3.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-heading font-bold flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                <span className="w-2 h-2 rounded-full bg-premier-green animate-ping" />
                 Available Now
               </span>
             ) : (
@@ -97,7 +97,7 @@ export function CourseDetailHero({ course }: CourseDetailHeroProps) {
             {/* Students */}
             {isAvailable && (
               <div className="flex items-center gap-1.5">
-                <Users className="w-4 h-4 text-primary" />
+                <Users className="w-4 h-4 text-premier-green" />
                 <span className="font-heading font-semibold text-heading">{course.studentsCount} Students</span>
               </div>
             )}
@@ -116,8 +116,8 @@ export function CourseDetailHero({ course }: CourseDetailHeroProps) {
 
             {/* Student App */}
             <div className="flex items-center gap-1.5">
-              <Smartphone className="w-4 h-4 text-primary" />
-              <span className="font-heading font-semibold text-primary">Student Mobile App Access</span>
+              <Smartphone className="w-4 h-4 text-premier-green" />
+              <span className="font-heading font-semibold text-premier-green">Student Mobile App Access</span>
             </div>
           </div>
 
@@ -144,7 +144,7 @@ export function CourseDetailHero({ course }: CourseDetailHeroProps) {
             <div className="flex items-center gap-2">
               <button
                 onClick={handleShare}
-                className="px-3.5 py-2 rounded-xl bg-surface-secondary hover:bg-slate-200 border border-border text-xs font-heading font-semibold text-heading transition-all flex items-center gap-1.5"
+                className="px-3.5 py-2 rounded-xl bg-surface-secondary hover:bg-slate-200 border border-border text-xs font-heading font-semibold text-heading transition-all flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
                 title="Share Course"
               >
                 <Share2 className="w-3.5 h-3.5 text-body" />

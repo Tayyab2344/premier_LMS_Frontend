@@ -17,7 +17,7 @@ import { useInView } from 'react-intersection-observer';
 const impactStats = [
   { icon: Users, label: 'Students Enrolled', end: 5000, suffix: '+', color: 'text-blue-500', bg: 'bg-blue-50' },
   { icon: BookOpen, label: 'Specialized Courses', end: 12, suffix: '+', color: 'text-indigo-500', bg: 'bg-indigo-50' },
-  { icon: Award, label: 'Certificates Issued', end: 4200, suffix: '+', color: 'text-emerald-500', bg: 'bg-emerald-50' },
+  { icon: Award, label: 'Certificates Issued', end: 4200, suffix: '+', color: 'text-premier-green', bg: 'bg-emerald-50' },
   { icon: Clock, label: 'Learning Hours', end: 50000, suffix: '+', color: 'text-purple-500', bg: 'bg-purple-50' },
   { icon: CheckSquare, label: 'Projects Completed', end: 8500, suffix: '+', color: 'text-amber-500', bg: 'bg-amber-50' },
   { icon: Globe, label: 'Countries Reached', end: 15, suffix: '+', color: 'text-cyan-500', bg: 'bg-cyan-50' },
@@ -28,9 +28,9 @@ export function StudentImpactStats() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
-    <section className="section-padding bg-gradient-to-b from-primary-900 via-primary-800 to-primary-950 text-white relative overflow-hidden">
+    <section className="section-padding bg-[#0F3524] text-white relative overflow-hidden border-y border-[#164E36]">
       {/* Glow Ornaments */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-400/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-premier-green-400/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl pointer-events-none" />
 
       <div className="section-container relative z-10">

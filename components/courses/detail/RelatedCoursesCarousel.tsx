@@ -34,7 +34,7 @@ export function RelatedCoursesCarousel({
         {/* Header */}
         <div className="flex items-center justify-between gap-4 mb-8">
           <div>
-            <span className="text-xs font-heading font-bold uppercase tracking-wider text-primary px-3 py-1 rounded-full bg-primary-50 border border-primary-100 inline-block mb-1">
+            <span className="text-xs font-heading font-bold uppercase tracking-wider text-premier-green px-3 py-1 rounded-full bg-premier-green-50 border border-premier-green-100 inline-block mb-1">
               Explore More
             </span>
             <h3 className="text-2xl font-heading font-extrabold text-heading">
@@ -45,14 +45,14 @@ export function RelatedCoursesCarousel({
           <div className="flex items-center gap-2">
             <button
               onClick={scrollPrev}
-              className="w-10 h-10 rounded-full border border-border bg-white text-heading hover:bg-primary hover:text-white transition-all flex items-center justify-center shadow-soft"
+              className="w-10 h-10 rounded-full border border-border bg-white text-heading hover:bg-premier-green hover:text-white transition-all flex items-center justify-center shadow-soft focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
               aria-label="Previous"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={scrollNext}
-              className="w-10 h-10 rounded-full border border-border bg-white text-heading hover:bg-primary hover:text-white transition-all flex items-center justify-center shadow-soft"
+              className="w-10 h-10 rounded-full border border-border bg-white text-heading hover:bg-premier-green hover:text-white transition-all flex items-center justify-center shadow-soft focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
               aria-label="Next"
             >
               <ChevronRight className="w-5 h-5" />
@@ -61,12 +61,12 @@ export function RelatedCoursesCarousel({
         </div>
 
         {/* Embla Viewport */}
-        <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
-          <div className="flex gap-6">
+        <div className="overflow-hidden cursor-grab active:cursor-grabbing -mx-4 px-4 py-4" ref={emblaRef}>
+          <div className="flex -ml-6">
             {relatedCourses.map((relCourse) => (
               <div
                 key={relCourse.id}
-                className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_33.333%]"
+                className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] pl-6"
               >
                 <CourseCard course={relCourse} onNotifyClick={onNotifyClick} />
               </div>
