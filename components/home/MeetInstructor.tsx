@@ -97,11 +97,12 @@ export function MeetInstructor() {
             className="lg:col-span-7 space-y-8"
           >
             <div className="space-y-4">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-premier-green-50 text-premier-green text-xs font-heading font-semibold uppercase tracking-wider">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-premier-green text-white text-xs font-heading font-bold uppercase tracking-wider shadow-sm border border-emerald-700/30">
+                <Award className="w-3.5 h-3.5 text-premier-gold" />
                 Meet Your Instructor
               </span>
-              <h2 className="text-4xl sm:text-[48px] font-heading font-extrabold text-heading leading-[1.1]" style={{ letterSpacing: '-0.03em' }}>
-                Driven by Passion for Professional Excellence
+              <h2 className="text-4xl sm:text-[48px] font-heading font-extrabold text-heading leading-[1.25]" style={{ letterSpacing: '-0.025em' }}>
+                Driven by Passion for <span className="text-premier-green">Professional Excellence</span>
               </h2>
               <p className="text-body text-base sm:text-lg leading-relaxed">
                 &ldquo;My mission is to simplify complex financial, tax, and accounting frameworks into clear, actionable knowledge that empowers professionals to excel in their careers.&rdquo;

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Clock, Users, ArrowRight, Trophy } from 'lucide-react';
+import { Star, Clock, Users, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -136,10 +136,7 @@ export function PopularCourses() {
         {/* Header — Premium visual hierarchy */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="space-y-4 max-w-2xl">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-premier-green-50 border border-premier-green-200 text-premier-green text-sm font-body font-semibold">
-              <Trophy className="w-4 h-4" />
-              Premium Legal Education
-            </span>
+
             <h2
               className="text-4xl sm:text-5xl lg:text-[48px] font-heading font-extrabold text-heading leading-[1.1]"
               style={{ letterSpacing: '-0.03em' }}
@@ -166,11 +163,10 @@ export function PopularCourses() {
               key={cat.id}
               onClick={() => setFilter(cat.id)}
               aria-pressed={filter === cat.id}
-              className={`px-5 h-[42px] rounded-full text-sm font-body font-semibold transition-all ${
-                filter === cat.id
+              className={`px-5 h-[42px] rounded-full text-sm font-body font-semibold transition-all ${filter === cat.id
                   ? 'bg-premier-green text-white shadow-sm'
                   : 'bg-white text-slate-700 hover:bg-slate-200 border border-border'
-              }`}
+                }`}
             >
               {cat.label}
             </button>

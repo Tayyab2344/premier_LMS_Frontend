@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Star, Quote, ChevronLeft, ChevronRight, CheckCircle } from 'lucide-react';
 
@@ -49,6 +49,18 @@ const testimonials = [
 
 export function StudentTestimonials() {
   const [activeIndex, setActiveIndex] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto-play timer (transitions every 4 seconds)
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
   const handlePrev = () => {
     setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
@@ -69,7 +81,9 @@ export function StudentTestimonials() {
       id="testimonials"
       tabIndex={0}
       onKeyDown={handleKeyDown}
-      aria-label="Student Testimonials 3D Carousel"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      aria-label="Student Testimonials 3D Auto-Carousel"
     >
       <div className="section-container">
         {/* Header */}
@@ -86,7 +100,7 @@ export function StudentTestimonials() {
             </p>
           </div>
 
-          {/* Navigation Controls (Strictly Manual) */}
+          {/* Navigation Controls */}
           <div className="flex items-center gap-3">
             <button
               onClick={handlePrev}
@@ -183,9 +197,8 @@ export function StudentTestimonials() {
                     transformStyle: 'preserve-3d',
                   }}
                   onClick={() => setActiveIndex(idx)}
-                  className={`w-full max-w-[320px] sm:max-w-[420px] rounded-3xl p-7 bg-white border border-border shadow-[0_20px_40px_rgba(0,0,0,0.07)] flex flex-col justify-between h-[320px] cursor-pointer select-none ${
-                    isActive ? 'border-premier-green/30 shadow-[0_25px_50px_rgba(22,78,54,0.15)] ring-1 ring-premier-green/20' : 'hover:opacity-80'
-                  }`}
+                  className={`w-full max-w-[320px] sm:max-w-[420px] rounded-3xl p-7 bg-white border border-border shadow-[0_20px_40px_rgba(0,0,0,0.07)] flex flex-col justify-between h-[320px] cursor-pointer select-none ${isActive ? 'border-premier-green/30 shadow-[0_25px_50px_rgba(22,78,54,0.15)] ring-1 ring-premier-green/20' : 'hover:opacity-80'
+                    }`}
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
