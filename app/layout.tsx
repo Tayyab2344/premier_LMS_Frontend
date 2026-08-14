@@ -33,6 +33,14 @@ export const metadata: Metadata = {
   title: 'Premier LMS | Professional Education Platform by Raja Gulfam',
   description:
     'Master taxation, accounting, corporate finance, and forensic audit with live interactive masterclasses and accredited certifications instructed by Raja Gulfam.',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/logo-icon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon.svg',
+    apple: '/logo-icon.svg',
+  },
 }
 
 export default function RootLayout({

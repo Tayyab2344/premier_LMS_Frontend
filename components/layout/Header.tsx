@@ -52,15 +52,20 @@ export default function Header() {
     >
       <div className="container-main flex items-center justify-between h-16 gap-3">
         {/* ── Logo ─────────────────────────────── */}
-        <Link href="/" className="flex items-center gap-2 shrink-0 no-underline group focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
+        <Link href="/" className="flex items-center gap-2.5 shrink-0 no-underline group focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
           <Image
-            src="/logo.png"
-            alt="Premier Tax Corporate & Accounting School Logo"
-            width={160}
-            height={44}
-            className="h-10 w-auto object-contain"
+            src="/logo-icon.svg"
+            alt="Premier Academy Crest Logo"
+            width={38}
+            height={38}
+            className="h-9 w-9 object-contain rounded-lg shadow-sm"
             priority
           />
+          <div className="flex flex-col leading-none">
+            <span className="font-heading font-extrabold text-base text-slate-900 tracking-tight">
+              Premier <span className="text-emerald-700">Academy</span>
+            </span>
+          </div>
         </Link>
 
         {/* ── Search Bar (desktop) ─────────────── */}

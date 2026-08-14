@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { ReactLenis } from 'lenis/react';
+import 'lenis/dist/lenis.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
