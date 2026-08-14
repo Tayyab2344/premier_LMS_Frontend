@@ -11,8 +11,7 @@ import {
   FileText,
   Brain,
   Sparkles,
-  ShieldCheck,
-  Zap
+  ShieldCheck
 } from 'lucide-react';
 
 const philosophyChecklist = [
