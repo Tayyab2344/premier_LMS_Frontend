@@ -4,7 +4,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, PlayCircle } from 'lucide-react';
 import Link from 'next/link';
-import { ImageSequence } from './ImageSequence';
+import Image from 'next/image';
+import blindfoldImg from '@/assets/blindfold.png';
 
 export function Hero() {
   return (
@@ -90,26 +91,21 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right — Visual */}
-          {/* Right Visual Area (3D Image Sequence Monitor) */}
+          {/* Right — Visual (Static Hero Image) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="w-full relative flex flex-col items-center justify-center mt-8 lg:mt-0 hidden lg:flex"
+            className="w-full relative flex items-center justify-center mt-8 lg:mt-0"
           >
-            {/* Monitor Display */}
-            <div className="w-full aspect-video relative rounded-xl lg:rounded-2xl border-[8px] lg:border-[16px] border-[#0a2318] bg-[#05140e] shadow-[0_0_60px_rgba(16,185,129,0.35)] overflow-hidden ring-1 ring-emerald-500/50">
-              {/* Screen Reflection */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent z-10 pointer-events-none" />
-              <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.5)] z-10 pointer-events-none" />
-              
-              <ImageSequence frameCount={60} />
+            <div className="w-full max-w-md sm:max-w-lg lg:max-w-[540px] relative flex items-center justify-center">
+              <Image
+                src={blindfoldImg}
+                alt="Premier LMS Hero"
+                priority
+                className="w-full h-auto object-contain rounded-2xl"
+              />
             </div>
-            
-            {/* Monitor Stand */}
-            <div className="w-16 lg:w-24 h-6 lg:h-8 bg-gradient-to-b from-premier-green-dark to-premier-green shadow-inner relative z-0 -mt-1" />
-            <div className="w-32 lg:w-48 h-2 lg:h-3 bg-premier-gold rounded-t-lg shadow-2xl relative z-10" />
           </motion.div>
         </div>
       </div>

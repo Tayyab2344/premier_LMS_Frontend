@@ -3,7 +3,6 @@
 import React from 'react';
 import { Hero } from '@/components/home/Hero';
 import { TrustedBy } from '@/components/home/TrustedBy';
-import { WhyChooseUs } from '@/components/home/WhyChooseUs';
 import { PlatformFeatures } from '@/components/home/PlatformFeatures';
 import { MeetInstructor } from '@/components/home/MeetInstructor';
 import { LearningJourney } from '@/components/home/LearningJourney';
@@ -22,9 +21,6 @@ export default function HomePage() {
 
       {/* 2. Trusted By Section (Auto-scrolling logos) */}
       <TrustedBy />
-
-      {/* 3. Why Choose Us (8 Benefit Cards) */}
-      <WhyChooseUs />
 
       {/* 4. Platform Features (Alternating Layouts) */}
       <PlatformFeatures />

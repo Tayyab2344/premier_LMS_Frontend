@@ -26,8 +26,8 @@ export function ImageSequence({ frameCount }: ImageSequenceProps) {
 
     // Handle high-DPI displays
     const dpr = window.devicePixelRatio || 1;
-    const renderWidth = 1920;
-    const renderHeight = 1080;
+    const renderWidth = 1760;
+    const renderHeight = 1840;
     
     canvas.width = renderWidth * dpr;
     canvas.height = renderHeight * dpr;
@@ -110,10 +110,10 @@ export function ImageSequence({ frameCount }: ImageSequenceProps) {
   }, [frameCount]);
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full flex items-center justify-center pointer-events-none">
       <canvas
         ref={canvasRef}
-        className="w-full h-full object-cover"
+        className="w-full h-full object-contain"
       />
     </div>
   );

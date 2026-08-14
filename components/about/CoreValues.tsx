@@ -4,128 +4,159 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import {
   Award,
-  Shield,
+  ShieldCheck,
   Lightbulb,
   GraduationCap,
   Laptop,
   Compass,
-  Sparkles
+  Target
 } from 'lucide-react';
 
 const values = [
   {
-    icon: Award,
-    title: 'Excellence',
-    desc: 'Deliver high-quality education by adhering to rigorous academic standards and real-world corporate rigor.',
-    gradient: 'from-blue-500 to-indigo-600',
-    bgIcon: 'bg-blue-50 text-blue-600',
-  },
-  {
-    icon: Shield,
-    title: 'Integrity',
-    desc: 'Teach with honesty, legal accuracy, and complete transparency in every masterclass and consultation.',
-    gradient: 'from-emerald-500 to-teal-600',
-    bgIcon: 'bg-emerald-50 text-emerald-600',
-  },
-  {
-    icon: Lightbulb,
-    title: 'Innovation',
-    desc: 'Continuously improve learning methods by incorporating digital software, live Q&As, and interactive cases.',
-    gradient: 'from-amber-500 to-orange-600',
-    bgIcon: 'bg-amber-50 text-amber-600',
-  },
-  {
-    icon: GraduationCap,
-    title: 'Student Success',
-    desc: 'Every student’s growth matters. We measure our achievement by the promotions and careers our alumni earn.',
-    gradient: 'from-purple-500 to-violet-600',
-    bgIcon: 'bg-purple-50 text-purple-600',
-  },
-  {
+    step: '01',
     icon: Laptop,
+    tag: '⚡ Real Client Files',
     title: 'Practical Learning',
-    desc: 'Focus on real-world applications so students leave with portfolio-ready tax files, audits, and advice.',
-    gradient: 'from-cyan-500 to-blue-600',
-    bgIcon: 'bg-cyan-50 text-cyan-600',
+    desc: 'We skip pure theory. Students work directly with real corporate files, FBR wealth reconciliations, SECP statutory filings, and audit checklists.',
+    color: 'bg-emerald-500',
+    accentBorder: 'hover:border-emerald-500/60',
+    isLeft: true,
   },
   {
-    icon: Compass,
-    title: 'Lifelong Learning',
-    desc: 'Encourage continuous personal and professional development in an ever-evolving legal and financial market.',
-    gradient: 'from-rose-500 to-pink-600',
-    bgIcon: 'bg-rose-50 text-rose-600',
+    step: '02',
+    icon: GraduationCap,
+    tag: '🏆 Career Leaps',
+    title: 'Student Success First',
+    desc: 'Every student’s trajectory matters. We measure our achievements by the firm launches, promotions, and salaries our alumni earn.',
+    color: 'bg-purple-500',
+    accentBorder: 'hover:border-purple-500/60',
+    isLeft: false,
   },
+  {
+    step: '03',
+    icon: Award,
+    tag: '⚖️ Legal Rigor',
+    title: 'Academic Excellence',
+    desc: 'Deliver high-caliber legal and financial education adhering strictly to high court advocate standards and corporate governance principles.',
+    color: 'bg-blue-500',
+    accentBorder: 'hover:border-blue-500/60',
+    isLeft: true,
+  },
+  {
+    step: '04',
+    icon: Lightbulb,
+    tag: '💡 Interactive Tech',
+    title: 'Digital Innovation',
+    desc: 'Continuously upgrade learning tools using mobile lecture streaming, step-by-step FBR portal walk-throughs, and active Q&A forums.',
+    color: 'bg-amber-500',
+    accentBorder: 'hover:border-amber-500/60',
+    isLeft: false,
+  },
+  {
+    step: '05',
+    icon: ShieldCheck,
+    tag: '🛡️ 100% Transparency',
+    title: 'Uncompromised Integrity',
+    desc: 'Teach with complete legal accuracy, statutory truth, and total transparency in every single masterclass, case file, and consultation.',
+    color: 'bg-teal-600',
+    accentBorder: 'hover:border-teal-500/60',
+    isLeft: true,
+  },
+  {
+    step: '06',
+    icon: Compass,
+    tag: '🚀 Continuous Growth',
+    title: 'Lifelong Learning',
+    desc: 'Empower ongoing career evolution with 24/7 access to updated annual budget amendments, tax circulars, and SECP statutory updates.',
+    color: 'bg-rose-500',
+    accentBorder: 'hover:border-rose-500/60',
+    isLeft: false,
+  }
 ];
 
 export function CoreValues() {
   return (
-    <section className="section-padding bg-premier-cream relative overflow-hidden">
-      <div className="section-container relative z-10">
+    <section className="section-padding bg-premier-cream border-b border-border relative overflow-hidden" id="core-values">
+      {/* Ambient background decoration */}
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-premier-green/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="section-container relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
         
         {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <span className="text-xs font-heading font-bold uppercase tracking-wider text-premier-green px-3.5 py-1.5 rounded-full bg-premier-green-50 border border-premier-green-100 inline-block">
+        <div className="text-center max-w-3xl mx-auto space-y-3.5 mb-14">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-premier-green/10 text-premier-green text-xs font-heading font-bold uppercase tracking-wider border border-premier-green/20">
+            <Target className="w-3.5 h-3.5 text-premier-green" />
             Foundational Pillars
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-heading">
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-heading">
             Our Core Values
           </h2>
-          <p className="text-base text-body leading-relaxed">
+          <p className="text-base sm:text-lg text-body leading-relaxed max-w-2xl mx-auto">
             These six principles dictate how we structure our courses, interact with students, and cultivate educational excellence.
           </p>
         </div>
 
-        {/* 6 Premium Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {values.map((val, idx) => {
-            const IconComponent = val.icon;
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group relative rounded-3xl p-[2px] transition-all duration-500 hover:-translate-y-1.5"
-              >
-                {/* Gradient Border Animation on Hover */}
-                <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${val.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[1px]`} />
+        {/* Zig-Zag Pill Pathway Layout with Scroll In/Out Animations */}
+        <div className="relative py-2">
+          {/* Central Vertical Timeline Line (Desktop) */}
+          <div className="hidden md:block absolute left-1/2 top-6 bottom-6 w-1 -translate-x-1/2 bg-gradient-to-b from-premier-green via-emerald-400 to-premier-green/30 rounded-full z-0 opacity-40" />
 
-                {/* Card Main Body */}
-                <div className="relative rounded-[22px] bg-white p-8 border border-border group-hover:border-transparent transition-colors shadow-soft group-hover:shadow-card-hover h-full flex flex-col justify-between">
-                  <div className="space-y-5">
-                    
-                    {/* Top Row: Icon + Badge */}
-                    <div className="flex items-center justify-between">
-                      <div className={`w-14 h-14 rounded-2xl ${val.bgIcon} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                        <IconComponent className="w-7 h-7" />
-                      </div>
-                      <span className="text-xs font-mono font-bold text-body/60 group-hover:text-premier-green transition-colors">
-                        0{idx + 1}
-                      </span>
+          <div className="space-y-6 md:space-y-8 relative z-10">
+            {values.map((val, idx) => {
+              const IconComp = val.icon;
+
+              return (
+                <div
+                  key={idx}
+                  className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 md:gap-10 relative"
+                >
+                  {/* Step Node Dot on Central Line (Desktop) */}
+                  <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white border-2 border-premier-green shadow-md items-center justify-center z-20 font-mono font-extrabold text-[11px] text-premier-green">
+                    {val.step}
+                  </div>
+
+                  {/* Left / Right Card Content */}
+                  <motion.div
+                    initial={{ opacity: 0, x: val.isLeft ? -40 : 40, scale: 0.94 }}
+                    whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                    viewport={{ once: false, amount: 0.25 }}
+                    transition={{ duration: 0.45, ease: 'easeOut' }}
+                    whileHover={{ scale: 1.02, y: -3 }}
+                    className={`bg-white rounded-2xl sm:rounded-3xl border border-border p-4 sm:p-5 shadow-soft hover:shadow-card-hover transition-all duration-300 flex items-start gap-4 relative z-10 max-w-md w-full ${val.accentBorder} ${
+                      val.isLeft ? 'md:col-start-1 md:ml-auto md:mr-2' : 'md:col-start-2 md:mr-auto md:ml-2'
+                    }`}
+                  >
+                    {/* Icon Pill Circle */}
+                    <div className={`w-11 h-11 rounded-xl ${val.color} text-white flex items-center justify-center shrink-0 shadow-md`}>
+                      <IconComp className="w-5 h-5 text-white" />
                     </div>
 
-                    {/* Title */}
-                    <h3 className="text-xl font-heading font-bold text-heading group-hover:text-premier-green transition-colors">
-                      {val.title}
-                    </h3>
+                    {/* Content Details */}
+                    <div className="space-y-1.5 flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-[10px] font-heading font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 inline-block">
+                          {val.tag}
+                        </span>
+                        <span className="md:hidden font-mono font-extrabold text-[11px] text-premier-green">
+                          #{val.step}
+                        </span>
+                      </div>
 
-                    {/* Description */}
-                    <p className="text-sm text-body leading-relaxed">
-                      {val.desc}
-                    </p>
-                  </div>
+                      <h3 className="text-base sm:text-lg font-heading font-extrabold text-heading leading-snug">
+                        {val.title}
+                      </h3>
 
-                  {/* Bottom Highlight */}
-                  <div className="pt-6 mt-6 border-t border-border/60 flex items-center gap-2 text-xs font-heading font-semibold text-body group-hover:text-heading transition-colors">
-                    <Sparkles className="w-3.5 h-3.5 text-premier-green" />
-                    <span>Non-Negotiable Principle</span>
-                  </div>
+                      <p className="text-xs text-slate-600 leading-relaxed font-body">
+                        {val.desc}
+                      </p>
+                    </div>
+                  </motion.div>
                 </div>
-
-              </motion.div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
 
       </div>

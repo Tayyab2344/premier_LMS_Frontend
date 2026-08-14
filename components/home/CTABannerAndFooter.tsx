@@ -189,7 +189,7 @@ export function Footer() {
         <button
           onClick={scrollToTop}
           aria-label="Back to top"
-          className="fixed bottom-6 right-20 z-40 w-11 h-11 rounded-full bg-premier-cream border border-border text-heading flex items-center justify-center shadow-card hover:bg-premier-green hover:text-white hover:border-premier-green transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
+          className="fixed bottom-6 right-20 z-40 w-11 h-11 rounded-full bg-transparent backdrop-blur-md border border-slate-300/80 text-slate-900 flex items-center justify-center shadow-sm hover:bg-premier-green hover:text-white hover:border-premier-green transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2"
         >
           <ArrowUp className="w-5 h-5" />
         </button>
