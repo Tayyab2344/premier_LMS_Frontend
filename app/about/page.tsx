@@ -1,63 +1,39 @@
 import React from 'react';
 import { AboutHero } from '@/components/about/AboutHero';
 import { AcademyStory } from '@/components/about/AcademyStory';
-import { VisionSection } from '@/components/about/VisionSection';
-import { MissionSection } from '@/components/about/MissionSection';
-import { CoreValues } from '@/components/about/CoreValues';
+import { VisionMissionValuesHub } from '@/components/about/VisionMissionValuesHub';
 import { MeetFounder } from '@/components/about/MeetFounder';
 import { TeachingPhilosophy } from '@/components/about/TeachingPhilosophy';
 import { WhyStudentsTrustUs } from '@/components/about/WhyStudentsTrustUs';
 import { LearningMethodology } from '@/components/about/LearningMethodology';
-import { StudentImpactStats } from '@/components/about/StudentImpactStats';
-import { TestimonialsCarousel } from '@/components/about/TestimonialsCarousel';
-import { CommunitySection } from '@/components/about/CommunitySection';
-import { FutureGoalsRoadmap } from '@/components/about/FutureGoalsRoadmap';
 import { AboutCTA } from '@/components/about/AboutCTA';
 
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-premier-cream text-heading selection:bg-premier-green-100 selection:text-premier-green-900 overflow-x-hidden">
-        {/* 1. Hero Section */}
-        <AboutHero />
+      {/* 1. Hero Section */}
+      <AboutHero />
 
-        {/* 2. Academy Story */}
-        <AcademyStory />
+      {/* 2. Academy Story */}
+      <AcademyStory />
 
-        {/* 3. Our Vision */}
-        <VisionSection />
+      {/* 3. Vision, Mission & Core Values Hub */}
+      <VisionMissionValuesHub />
 
-        {/* 4. Our Mission */}
-        <MissionSection />
+      {/* 4. Meet the Founder */}
+      <MeetFounder />
 
-        {/* 5. Core Values */}
-        <CoreValues />
+      {/* 5. Teaching Philosophy */}
+      <TeachingPhilosophy />
 
-        {/* 6. Meet the Founder */}
-        <MeetFounder />
+      {/* 6. Why Students Trust Us */}
+      <WhyStudentsTrustUs />
 
-        {/* 7. Teaching Philosophy */}
-        <TeachingPhilosophy />
+      {/* 7. Learning Methodology (8-step interactive timeline) */}
+      <LearningMethodology />
 
-        {/* 8. Why Students Trust Us */}
-        <WhyStudentsTrustUs />
-
-        {/* 9. Learning Methodology (8-step interactive timeline) */}
-        <LearningMethodology />
-
-        {/* 10. Student Impact (CountUp stats) */}
-        <StudentImpactStats />
-
-        {/* 11. Testimonials Preview (Embla slider) */}
-        <TestimonialsCarousel />
-
-        {/* 12. Community Section */}
-        <CommunitySection />
-
-        {/* 13. Future Goals Roadmap */}
-        <FutureGoalsRoadmap />
-
-        {/* 14. Call To Action Banner */}
-        <AboutCTA />
-      </main>
+      {/* 8. Call To Action Banner */}
+      <AboutCTA />
+    </main>
   );
 }

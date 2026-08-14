@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import {
   UserPlus,
   Smartphone,
@@ -11,7 +11,8 @@ import {
   FolderGit2,
   Award,
   TrendingUp,
-  ChevronRight
+  ChevronRight,
+  ChevronLeft
 } from 'lucide-react';
 
 const steps = [
@@ -26,126 +27,152 @@ const steps = [
 ];
 
 export function LearningMethodology() {
-  const sectionRef = useRef<HTMLElement>(null);
   const [activeStep, setActiveStep] = useState(0);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start 0.6', 'end 0.4'],
-  });
-
-  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
-    const stepCount = steps.length;
-    const clampedProgress = Math.max(0, Math.min(0.999, latest));
-    const activeIdx = Math.floor(clampedProgress * stepCount);
-    setActiveStep(activeIdx);
-  });
+  // Always auto-cycle through steps 01 -> 08 continuously
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % steps.length);
+    }, 3200);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section ref={sectionRef} className="section-padding bg-premier-cream relative overflow-hidden">
-      <div className="section-container relative z-10">
-        
+    <section className="bg-premier-cream border-t border-border py-14 lg:py-20 relative" id="learning-methodology">
+      <div className="section-container max-w-7xl mx-auto px-4 sm:px-6">
+
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <span className="text-xs font-heading font-bold uppercase tracking-wider text-premier-green px-3.5 py-1.5 rounded-full bg-premier-green-50 border border-premier-green-100 inline-block">
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-3.5">
+          <span className="text-xs font-heading font-bold uppercase tracking-wider text-premier-green px-4 py-1.5 rounded-full bg-premier-green-50 border border-premier-green-100 inline-block">
             Step-by-Step Roadmap
           </span>
-          <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-heading">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-heading">
             Our Learning Methodology
           </h2>
-          <p className="text-base text-body leading-relaxed">
+          <p className="text-base sm:text-lg text-body leading-relaxed max-w-2xl mx-auto">
             A proven 8-step practical framework powered by our Student Mobile App to take you from foundational concepts to professional execution.
           </p>
         </div>
 
-        {/* Timeline Desktop Grid / Stepper with Smooth Scroll Animation */}
-        <div className="relative py-4">
-          {/* Connecting Line behind items on Desktop */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-border -translate-y-1/2 z-0" />
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 relative z-10">
-            {steps.map((item, idx) => {
-              const IconComp = item.icon;
-              const isActive = activeStep === idx;
+        {/* Desktop 8 Step Cards Single Row Grid */}
+        <div className="hidden lg:grid grid-cols-8 gap-3.5 relative z-10 w-full mb-10">
+          {steps.map((item, idx) => {
+            const IconComp = item.icon;
+            const isActive = activeStep === idx;
 
-              return (
-                <motion.div
-                  key={idx}
-                  animate={
-                    isActive
-                      ? { scale: 1.05, y: -10 }
-                      : { scale: 1, y: 0 }
-                  }
-                  transition={{ duration: 0.35, ease: 'easeOut' }}
-                  className={`rounded-2xl p-4 transition-colors duration-300 border flex flex-col justify-between group relative ${
-                    isActive
-                      ? 'bg-white border-2 border-premier-green shadow-[0_15px_35px_rgba(22,78,54,0.22)] z-20'
-                      : 'bg-white border-border/80 opacity-80 z-10'
+            return (
+              <motion.div
+                key={idx}
+                onClick={() => setActiveStep(idx)}
+                animate={
+                  isActive
+                    ? {
+                      scale: 1.05,
+                      y: -8,
+                    }
+                    : {
+                      scale: 1,
+                      y: 0,
+                    }
+                }
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                className={`rounded-2xl p-4 border transition-all duration-300 relative flex flex-col justify-between cursor-pointer h-[200px] ${isActive
+                    ? 'bg-white border-2 border-premier-green shadow-[0_18px_40px_rgba(22,78,54,0.24)] z-20'
+                    : 'bg-premier-cream-dark/60 border-border/70 z-10 opacity-75 hover:opacity-100 hover:bg-white/90'
                   }`}
-                >
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className={`text-xs font-mono font-extrabold transition-colors ${
-                        isActive ? 'text-premier-green font-bold text-sm' : 'text-slate-500'
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-2.5">
+                    <span className={`text-xs sm:text-sm font-mono font-extrabold transition-colors ${isActive ? 'text-premier-green font-extrabold' : 'text-slate-400'
                       }`}>
-                        {item.step}
-                      </span>
-                      <div className={`w-8 h-8 rounded-xl ${item.color} text-white flex items-center justify-center shadow-sm transition-all duration-300 ${
-                        isActive ? 'scale-110 shadow-md ring-2 ring-white' : ''
+                      {item.step}
+                    </span>
+                    <div className={`w-8 h-8 rounded-lg ${item.color} text-white flex items-center justify-center shadow-sm transition-all duration-300 ${isActive ? 'scale-110 shadow-md ring-2 ring-white' : ''
                       }`}>
-                        <IconComp className="w-4 h-4 text-white" />
-                      </div>
+                      <IconComp className="w-4 h-4 text-white" />
                     </div>
-
-                    <h3 className={`text-sm font-heading font-bold transition-colors leading-tight ${
-                      isActive ? 'text-premier-green font-extrabold' : 'text-slate-900'
-                    }`}>
-                      {item.title}
-                    </h3>
                   </div>
 
-                  <p className="text-[11px] text-slate-600 leading-relaxed mt-3 pt-3 border-t border-border/50 font-body">
+                  <h3 className={`text-xs sm:text-sm font-heading font-bold transition-colors leading-tight mb-1.5 ${isActive ? 'text-premier-green font-extrabold' : 'text-slate-900'
+                    }`}>
+                    {item.title}
+                  </h3>
+
+                  <p className="text-[11px] text-slate-600 leading-relaxed font-body">
                     {item.desc}
                   </p>
+                </div>
 
-                  {/* Active Step Indicator Bar */}
-                  <div className="mt-3 pt-2 border-t border-border/30">
-                    <div className={`h-1 rounded-full transition-all duration-500 ${
-                      isActive ? 'bg-premier-green w-full' : 'bg-transparent w-0'
+                {/* Progress Indicator line for active step */}
+                <div className="mt-2 pt-2 border-t border-border/30">
+                  <div className={`h-1.5 rounded-full transition-all duration-500 ${isActive ? 'bg-premier-green w-full' : 'bg-transparent w-0'
                     }`} />
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* Highlight Banner of Selected Step - 100% High Contrast Visibility */}
-        <div className="mt-12 rounded-2xl bg-[#0F3524] border border-[#164E36] p-6 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-elevated">
+        {/* Mobile / Tablet 2-Column Grid */}
+        <div className="grid lg:hidden grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+          {steps.map((item, idx) => {
+            const IconComp = item.icon;
+            const isActive = activeStep === idx;
+            return (
+              <div
+                key={idx}
+                onClick={() => setActiveStep(idx)}
+                className={`rounded-xl p-4 border transition-all cursor-pointer flex flex-col justify-between ${isActive ? 'bg-white border-2 border-premier-green shadow-md' : 'bg-white border-border shadow-soft'
+                  }`}
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-2.5">
+                    <span className="text-lg font-mono font-extrabold text-premier-green">
+                      {item.step}
+                    </span>
+                    <div className={`w-8 h-8 rounded-lg ${item.color} text-white flex items-center justify-center`}>
+                      <IconComp className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
+                  <h3 className="text-sm font-heading font-bold text-heading mb-1">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Highlight Banner of Selected Step */}
+        <div className="w-full rounded-2xl bg-[#0F3524] border border-[#164E36] px-7 py-5 text-white flex flex-col sm:flex-row items-center justify-between gap-5 shadow-elevated">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center font-mono font-bold text-xl text-amber-300 shrink-0 border border-white/15">
+            <div className="w-11 h-11 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center font-mono font-bold text-xl text-amber-300 shrink-0 border border-white/15">
               {steps[activeStep].step}
             </div>
             <div>
-              <span className="text-xs font-heading font-bold uppercase tracking-wider text-amber-300">
-                Phase Breakdown
+              <span className="text-xs font-heading font-bold uppercase tracking-wider text-amber-300 block mb-0.5">
+                Phase Breakdown ({activeStep + 1} of {steps.length})
               </span>
-              <h4 className="text-base sm:text-lg font-heading font-bold text-white leading-snug">
+              <h4 className="text-sm sm:text-base font-heading font-bold text-white leading-snug">
                 <span className="text-amber-200">{steps[activeStep].title}:</span> {steps[activeStep].desc}
               </h4>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={() => setActiveStep((prev) => (prev > 0 ? prev - 1 : steps.length - 1))}
-              className="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white border border-white/20 text-xs font-heading font-semibold transition-colors"
+              className="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white border border-white/20 text-xs sm:text-sm font-heading font-semibold transition-colors flex items-center gap-1.5"
             >
-              Previous Step
+              <ChevronLeft className="w-4 h-4" />
+              Previous
             </button>
             <button
               onClick={() => setActiveStep((prev) => (prev < steps.length - 1 ? prev + 1 : 0))}
-              className="px-4 py-2.5 rounded-xl bg-white text-[#164E36] hover:bg-emerald-50 text-xs font-heading font-bold transition-colors flex items-center gap-1 shadow-sm"
+              className="px-4 py-2.5 rounded-xl bg-white text-[#164E36] hover:bg-emerald-50 text-xs sm:text-sm font-heading font-bold transition-colors flex items-center gap-1.5 shadow-sm"
             >
               Next Step
               <ChevronRight className="w-4 h-4" />
