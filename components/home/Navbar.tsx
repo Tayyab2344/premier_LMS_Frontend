@@ -53,13 +53,21 @@ export function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream" aria-label="Premier LMS Homepage">
               <Image
-                src="/logo.png"
-                alt="Premier Tax Corporate & Accounting School Logo"
-                width={180}
-                height={50}
-                className="h-11 w-auto object-contain transition-transform group-hover:scale-105"
+                src="/logo-icon.svg"
+                alt="Premier Academy Crest Logo"
+                width={44}
+                height={44}
+                className="h-11 w-11 object-contain rounded-xl shadow-sm transition-transform group-hover:scale-105"
                 priority
               />
+              <div className="flex flex-col leading-none">
+                <span className="font-heading font-extrabold text-lg text-slate-900 tracking-tight group-hover:text-premier-green transition-colors">
+                  Premier <span className="text-emerald-700">Academy</span>
+                </span>
+                <span className="text-[10px] font-body text-slate-500 uppercase tracking-widest font-semibold mt-1">
+                  Tax & Accounting School
+                </span>
+              </div>
             </Link>
 
             {/* Desktop Nav */}

@@ -335,13 +335,21 @@ export default function AdmissionPage() {
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
             <Image
-              src="/logo.png"
-              alt="Premier Tax Corporate & Accounting School Logo"
-              width={200}
-              height={55}
-              className="h-12 w-auto object-contain"
+              src="/logo-icon.svg"
+              alt="Premier Academy Crest Logo"
+              width={44}
+              height={44}
+              className="h-11 w-11 object-contain rounded-xl shadow-sm"
               priority
             />
+            <div className="flex flex-col leading-none">
+              <span className="font-heading font-extrabold text-xl text-white tracking-tight">
+                Premier <span className="text-emerald-400">Academy</span>
+              </span>
+              <span className="text-[10px] font-body text-slate-400 uppercase tracking-widest font-semibold mt-1">
+                Tax & Accounting School
+              </span>
+            </div>
           </Link>
 
           <Link
