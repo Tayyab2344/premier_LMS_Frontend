@@ -88,7 +88,7 @@ export function Footer() {
       </div>
 
       {/* ── Dark Curvy Footer Container ───────────────────── */}
-      <footer className="bg-[#091E16] text-slate-300 pt-8 pb-12 text-body relative">
+      <footer className="bg-[#091E16] text-slate-200 pt-8 pb-12 text-body relative">
         <div className="section-container space-y-12">
           
           {/* 4-Column Layout */}
@@ -102,44 +102,44 @@ export function Footer() {
                   alt="Premier Academy Crest Logo"
                   width={44}
                   height={44}
-                  className="h-11 w-11 object-contain rounded-xl shadow-md"
+                  className="h-11 w-11 object-contain rounded-xl shadow-md bg-white/10 p-1 border border-white/15"
                 />
                 <div className="flex flex-col leading-none">
                   <span className="font-heading font-extrabold text-xl text-white tracking-tight">
                     Premier <span className="text-emerald-400">Academy</span>
                   </span>
-                  <span className="text-[10px] font-body text-slate-400 uppercase tracking-widest font-semibold mt-1">
+                  <span className="text-[10px] font-body text-emerald-300 uppercase tracking-widest font-semibold mt-1">
                     Tax & Accounting School
                   </span>
                 </div>
               </Link>
               
-              <p className="text-sm leading-relaxed text-slate-400 max-w-sm">
+              <p className="text-sm leading-relaxed text-slate-300 max-w-sm">
                 Premier Learning Management System owned and instructed by Raja Gulfam. Empowering certified professionals globally with accredited education.
               </p>
 
               {/* Social Media Buttons */}
               <div className="flex items-center gap-3 pt-2">
                 {/* Twitter / X */}
-                <a href="#" aria-label="Twitter / X" className="w-9 h-9 rounded-full bg-white/10 hover:bg-emerald-500 hover:text-slate-950 text-white flex items-center justify-center transition-all duration-200 border border-white/10">
+                <a href="#" aria-label="Twitter / X" className="w-9 h-9 rounded-full bg-white/10 hover:bg-emerald-400 hover:text-slate-950 text-white flex items-center justify-center transition-all duration-200 border border-white/20 shadow-sm">
                   <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                   </svg>
                 </a>
                 {/* Facebook */}
-                <a href="#" aria-label="Facebook" className="w-9 h-9 rounded-full bg-white/10 hover:bg-emerald-500 hover:text-slate-950 text-white flex items-center justify-center transition-all duration-200 border border-white/10">
+                <a href="#" aria-label="Facebook" className="w-9 h-9 rounded-full bg-white/10 hover:bg-emerald-400 hover:text-slate-950 text-white flex items-center justify-center transition-all duration-200 border border-white/20 shadow-sm">
                   <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                   </svg>
                 </a>
                 {/* YouTube */}
-                <a href="#" aria-label="YouTube" className="w-9 h-9 rounded-full bg-white/10 hover:bg-emerald-500 hover:text-slate-950 text-white flex items-center justify-center transition-all duration-200 border border-white/10">
+                <a href="#" aria-label="YouTube" className="w-9 h-9 rounded-full bg-white/10 hover:bg-emerald-400 hover:text-slate-950 text-white flex items-center justify-center transition-all duration-200 border border-white/20 shadow-sm">
                   <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
                     <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                   </svg>
                 </a>
                 {/* LinkedIn */}
-                <a href="#" aria-label="LinkedIn" className="w-9 h-9 rounded-full bg-white/10 hover:bg-emerald-500 hover:text-slate-950 text-white flex items-center justify-center transition-all duration-200 border border-white/10">
+                <a href="#" aria-label="LinkedIn" className="w-9 h-9 rounded-full bg-white/10 hover:bg-emerald-400 hover:text-slate-950 text-white flex items-center justify-center transition-all duration-200 border border-white/20 shadow-sm">
                   <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
                     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                   </svg>
@@ -152,20 +152,20 @@ export function Footer() {
               <h4 className="text-sm font-heading font-bold text-white uppercase tracking-wider">
                 Contact Info
               </h4>
-              <ul className="space-y-3 text-sm text-slate-400">
+              <ul className="space-y-3 text-sm text-slate-200">
                 <li className="flex items-start gap-2.5">
                   <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Premier Corporate Tower, Main Boulevard, Pakistan</span>
+                  <span className="text-slate-200">Premier Corporate Tower, Main Boulevard, Pakistan</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <a href="mailto:support@premierlms.com" className="hover:text-emerald-400 transition-colors">
+                  <a href="mailto:support@premierlms.com" className="text-slate-200 hover:text-emerald-400 transition-colors">
                     support@premierlms.com
                   </a>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <a href="tel:+923000000000" className="hover:text-emerald-400 transition-colors">
+                  <a href="tel:+923000000000" className="text-slate-200 hover:text-emerald-400 transition-colors">
                     +92 (300) 000-0000
                   </a>
                 </li>
@@ -177,7 +177,7 @@ export function Footer() {
               <h4 className="text-sm font-heading font-bold text-white uppercase tracking-wider">
                 Quick Links
               </h4>
-              <ul className="space-y-2 text-sm text-slate-400">
+              <ul className="space-y-2 text-sm text-slate-200">
                 {[
                   { label: 'Home', href: '/' },
                   { label: 'About Raja Gulfam', href: '/about' },
@@ -186,7 +186,7 @@ export function Footer() {
                   { label: 'Student Admission', href: '/admission' },
                 ].map((item) => (
                   <li key={item.label}>
-                    <Link href={item.href} className="hover:text-emerald-400 transition-colors">
+                    <Link href={item.href} className="text-slate-200 hover:text-emerald-400 transition-colors">
                       {item.label}
                     </Link>
                   </li>
@@ -199,7 +199,7 @@ export function Footer() {
               <h4 className="text-sm font-heading font-bold text-white uppercase tracking-wider">
                 Support & Downloads
               </h4>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-300 leading-relaxed">
                 Scan QR code or click below to download our Android mobile app.
               </p>
 
@@ -211,8 +211,8 @@ export function Footer() {
                       <path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm8-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm13-2h3v3h-3v-3zm0 5h3v3h-3v-3zm-5-5h3v3h-3v-3zm0 5h3v3h-3v-3zm2.5-2.5h3v3h-3v-3zM5 5h2v2H5V5zm10 0h2v2h-2V5zM5 17h2v2H5v-2z"/>
                     </svg>
                   </div>
-                  <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wide flex items-center gap-1">
-                    <QrCode className="w-3 h-3 text-emerald-400" /> Scan QR
+                  <span className="text-[10px] font-semibold text-emerald-300 uppercase tracking-wide flex items-center gap-1 mt-1">
+                    <QrCode className="w-3.5 h-3.5 text-emerald-400" /> Scan QR
                   </span>
                 </div>
 
@@ -226,7 +226,7 @@ export function Footer() {
                         alert('Play Store app link placeholder. Update route when live!');
                       }
                     }}
-                    className="inline-flex items-center gap-2.5 bg-black hover:bg-slate-950 text-white px-3.5 py-1.5 rounded-xl border border-slate-700 hover:border-slate-500 transition-all shadow-sm group no-underline"
+                    className="inline-flex items-center gap-2.5 bg-black hover:bg-slate-900 text-white px-3.5 py-2 rounded-xl border border-emerald-500/40 hover:border-emerald-400 transition-all shadow-sm group no-underline"
                     title="Download on Google Play (Fake Route)"
                   >
                     <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
@@ -236,7 +236,7 @@ export function Footer() {
                       <path d="M17.972 9.244l-2.766 1.342 2.342 2.342 2.342-2.342-1.918-1.342z" fill="#2196F3"/>
                     </svg>
                     <div className="flex flex-col text-left leading-none">
-                      <span className="text-[8px] uppercase tracking-wider text-slate-400 font-semibold">GET IT ON</span>
+                      <span className="text-[8px] uppercase tracking-wider text-slate-300 font-semibold">GET IT ON</span>
                       <span className="text-xs font-bold text-white group-hover:text-emerald-400 transition-colors">Google Play</span>
                     </div>
                   </a>
@@ -247,14 +247,14 @@ export function Footer() {
           </div>
 
           {/* Bottom Copyright & Legal Line */}
-          <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+          <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-300">
             <div>
               &copy; {new Date().getFullYear()} Premier LMS — Founded by Raja Gulfam. All rights reserved.
             </div>
             <div className="flex items-center gap-6">
-              <Link href="#" className="hover:text-emerald-400 transition-colors">Privacy Policy</Link>
-              <Link href="#" className="hover:text-emerald-400 transition-colors">Terms of Service</Link>
-              <Link href="#" className="hover:text-emerald-400 transition-colors">Contact Support</Link>
+              <Link href="#" className="text-slate-300 hover:text-emerald-400 transition-colors">Privacy Policy</Link>
+              <Link href="#" className="text-slate-300 hover:text-emerald-400 transition-colors">Terms of Service</Link>
+              <Link href="#" className="text-slate-300 hover:text-emerald-400 transition-colors">Contact Support</Link>
             </div>
           </div>
 

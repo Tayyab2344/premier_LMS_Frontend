@@ -17,7 +17,7 @@ export default function Footer() {
   if (hideFooter) return null;
 
   return (
-    <footer className="bg-slate-900 text-slate-300 border-t border-slate-800 mt-auto">
+    <footer className="bg-slate-900 text-slate-200 border-t border-slate-800 mt-auto">
       {/* Main Section */}
       <div className="container-main py-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center border-b border-slate-800">
         
@@ -29,33 +29,33 @@ export default function Footer() {
               alt="Premier Academy Crest"
               width={36}
               height={36}
-              className="w-9 h-9 rounded-lg shadow-sm object-contain"
+              className="w-9 h-9 rounded-lg shadow-sm object-contain bg-white/10 p-1 border border-white/15"
             />
             <span className="text-xl font-bold text-white tracking-tight">
               Premier <span className="text-emerald-400">Academy</span>
             </span>
           </div>
-          <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
+          <p className="text-sm text-slate-300 max-w-sm leading-relaxed">
             Empowering students with top-tier professional qualifications, interactive classes, and seamless digital learning.
           </p>
         </div>
 
         {/* Navigation Links */}
         <div className="md:col-span-3 flex flex-col space-y-2">
-          <h4 className="text-xs font-semibold text-slate-200 uppercase tracking-wider mb-1">Quick Links</h4>
-          <div className="flex flex-col space-y-2 text-sm text-slate-400">
-            <Link href="/about" className="hover:text-emerald-400 transition-colors no-underline">About Us</Link>
-            <Link href="/courses" className="hover:text-emerald-400 transition-colors no-underline">Courses</Link>
-            <Link href="/contact" className="hover:text-emerald-400 transition-colors no-underline">Contact Us</Link>
+          <h4 className="text-xs font-semibold text-white uppercase tracking-wider mb-1">Quick Links</h4>
+          <div className="flex flex-col space-y-2 text-sm text-slate-300">
+            <Link href="/about" className="text-slate-300 hover:text-emerald-400 transition-colors no-underline">About Us</Link>
+            <Link href="/courses" className="text-slate-300 hover:text-emerald-400 transition-colors no-underline">Courses</Link>
+            <Link href="/contact" className="text-slate-300 hover:text-emerald-400 transition-colors no-underline">Contact Us</Link>
           </div>
         </div>
 
         {/* Mobile App Download */}
         <div className="md:col-span-4 space-y-3">
-          <h4 className="text-xs font-semibold text-slate-200 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+          <h4 className="text-xs font-semibold text-white uppercase tracking-wider mb-1 flex items-center gap-1.5">
             <Smartphone className="w-4 h-4 text-emerald-400" /> Get The Mobile App
           </h4>
-          <p className="text-xs text-slate-400 leading-relaxed">
+          <p className="text-xs text-slate-300 leading-relaxed">
             Access your courses, live classes, and recordings on the go.
           </p>
 
@@ -68,7 +68,7 @@ export default function Footer() {
                 </svg>
               </div>
               <span className="text-[9px] uppercase font-semibold text-emerald-400 tracking-wider flex items-center gap-1">
-                <QrCode className="w-3 h-3" /> Scan QR
+                <QrCode className="w-3 h-3 text-emerald-400" /> Scan QR
               </span>
             </div>
 
@@ -81,7 +81,7 @@ export default function Footer() {
                   alert('Play Store app link placeholder. Update route when live!');
                 }
               }}
-              className="inline-flex items-center gap-2 bg-black hover:bg-slate-950 text-white px-3 py-2 rounded-xl border border-slate-700 hover:border-slate-600 transition-all shadow-sm group no-underline"
+              className="inline-flex items-center gap-2 bg-black hover:bg-slate-950 text-white px-3 py-2 rounded-xl border border-emerald-500/40 hover:border-emerald-400 transition-all shadow-sm group no-underline"
               title="Download on Google Play (Fake Route)"
             >
               <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
@@ -91,7 +91,7 @@ export default function Footer() {
                 <path d="M17.972 9.244l-2.766 1.342 2.342 2.342 2.342-2.342-1.918-1.342z" fill="#2196F3"/>
               </svg>
               <div className="flex flex-col text-left leading-none">
-                <span className="text-[8px] uppercase tracking-wider text-slate-400 font-semibold">GET IT ON</span>
+                <span className="text-[8px] uppercase tracking-wider text-slate-300 font-semibold">GET IT ON</span>
                 <span className="text-xs font-bold text-white group-hover:text-emerald-400 transition-colors">Google Play</span>
               </div>
             </a>
@@ -101,16 +101,16 @@ export default function Footer() {
       </div>
 
       {/* Copyright Bar */}
-      <div className="container-main py-4 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2">
+      <div className="container-main py-4 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-300 gap-2">
         <span>
           &copy; {new Date().getFullYear()} Premier Academy — All rights reserved.
         </span>
         <div className="flex items-center gap-4">
-          <Link href="/about" className="hover:text-slate-200 transition-colors no-underline">About</Link>
+          <Link href="/about" className="text-slate-300 hover:text-emerald-400 transition-colors no-underline">About</Link>
           <span className="text-slate-700">•</span>
-          <Link href="#" className="hover:text-slate-200 transition-colors no-underline">Privacy Policy</Link>
+          <Link href="#" className="text-slate-300 hover:text-emerald-400 transition-colors no-underline">Privacy Policy</Link>
           <span className="text-slate-700">•</span>
-          <Link href="#" className="hover:text-slate-200 transition-colors no-underline">Terms of Service</Link>
+          <Link href="#" className="text-slate-300 hover:text-emerald-400 transition-colors no-underline">Terms of Service</Link>
         </div>
       </div>
     </footer>
