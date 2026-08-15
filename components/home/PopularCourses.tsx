@@ -21,7 +21,7 @@ const courses = [
     instructor: 'Raja Gulfam',
     price: 'PKR 30,000',
     oldPrice: 'PKR 50,000',
-    thumbnail: '/about/fbr-seminar.jpeg',
+    thumbnail: '/courses_thubmnail/CERTIFICATE INCOME TAX AND SALES TAX.png',
     status: 'Available',
   },
   {
@@ -38,7 +38,7 @@ const courses = [
     instructor: 'Raja Gulfam',
     price: 'PKR 30,000',
     oldPrice: 'PKR 50,000',
-    thumbnail: '/about/cima-certificate.jpeg',
+    thumbnail: '/courses_thubmnail/CERTIFICATE OF INCORPORTATION.png',
     status: 'Coming Soon',
   },
   {
@@ -55,7 +55,7 @@ const courses = [
     instructor: 'Raja Gulfam',
     price: 'PKR 30,000',
     oldPrice: 'PKR 50,000',
-    thumbnail: '/about/office-desk.jpeg',
+    thumbnail: '/courses_thubmnail/corporate accounting with IFRS.png',
     status: 'Coming Soon',
   },
   {
@@ -72,7 +72,7 @@ const courses = [
     instructor: 'Raja Gulfam',
     price: 'PKR 30,000',
     oldPrice: 'PKR 50,000',
-    thumbnail: '/about/fbr-award.jpeg',
+    thumbnail: '/courses_thubmnail/Forensic Audit & Anti-Money Laundering (AML) Laws.png',
     status: 'Coming Soon',
   },
   {
@@ -89,7 +89,7 @@ const courses = [
     instructor: 'Raja Gulfam',
     price: 'PKR 30,000',
     oldPrice: 'PKR 50,000',
-    thumbnail: '/about/high-court.jpeg',
+    thumbnail: '/courses_thubmnail/Advanced Corporate Finance & Management Accounting.png',
     status: 'Coming Soon',
   },
   {
@@ -106,7 +106,7 @@ const courses = [
     instructor: 'Raja Gulfam',
     price: 'PKR 30,000',
     oldPrice: 'PKR 50,000',
-    thumbnail: '/about/teaching-class.jpeg',
+    thumbnail: '/courses_thubmnail/Customs, Federal Excise Duty (FED) & Indirect Tax Audit.png',
     status: 'Coming Soon',
   },
 ];

@@ -208,7 +208,7 @@ export const courses: Course[] = [
     price: 22500,
     originalPrice: 35000,
     discountPercent: 36,
-    thumbnail: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=340&fit=crop',
+    thumbnail: '/courses_thubmnail/corporate accounting with IFRS.png',
     lessonCount: 120,
     tags: ['IFRS', 'Accounting', 'Corporate'],
     lastUpdated: 'April 2026',
@@ -566,7 +566,7 @@ export const liveClasses: LiveClass[] = [
 export const batches: Batch[] = [
   { id: 'batch-1', title: 'Income Tax Filing Masterclass — Jan 2026', thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=700&h=400&fit=crop' },
   { id: 'batch-2', title: 'Sales Tax & GST Compliance — Feb 2026', thumbnail: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=700&h=400&fit=crop' },
-  { id: 'batch-3', title: 'IFRS & Corporate Accounting — Mar 2026', thumbnail: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=700&h=400&fit=crop' },
+  { id: 'batch-3', title: 'IFRS & Corporate Accounting — Mar 2026', thumbnail: '/courses_thubmnail/corporate accounting with IFRS.png' },
   { id: 'batch-4', title: 'FBR Compliance & E-Filing — Apr 2026', thumbnail: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=700&h=400&fit=crop' },
   { id: 'batch-5', title: 'Audit & Assurance Professional — May 2026', thumbnail: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=700&h=400&fit=crop' },
   { id: 'batch-6', title: 'Tax Planning Strategies — Jun 2026', thumbnail: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=700&h=400&fit=crop' },
