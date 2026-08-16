@@ -46,9 +46,6 @@ const NEWS_ITEMS: NewsItem[] = [
   },
 ];
 
-// Ticker text with pipe separators
-const TICKER_TEXTS = NEWS_ITEMS.map((n) => n.title).join('   |   ');
-
 // ─── Category config ──────────────────────────────────────────────────────────
 const CATEGORY_CONFIG: Record<
   Category,
@@ -93,32 +90,6 @@ export function LatestNews() {
       style={{ borderColor: '#E6DFD0', backgroundColor: '#FFFFFF' }}
       id="news"
     >
-
-      {/* ── Ticker strip ───────────────────────────────────────────────────── */}
-      <div className="overflow-hidden py-2.5" style={{ backgroundColor: '#1B3B2C' }}>
-        <div className="flex items-center">
-          {/* LIVE pill */}
-          <div
-            className="live-pill shrink-0 flex items-center gap-1.5 px-3.5 py-1 rounded-full select-none mx-4"
-            style={{ backgroundColor: '#DC2626' }}
-          >
-            <span className="w-2 h-2 rounded-full bg-white opacity-90" />
-            <span className="text-[11px] font-bold uppercase tracking-widest text-white">LIVE</span>
-          </div>
-
-          {/* Scrolling marquee */}
-          <div className="overflow-hidden flex-1">
-            <div className="marquee-track">
-              <span className="text-[13px] font-body font-medium px-6" style={{ color: '#F3EBD8' }}>
-                {TICKER_TEXTS}
-              </span>
-              <span className="text-[13px] font-body font-medium px-6" style={{ color: '#F3EBD8' }} aria-hidden>
-                {TICKER_TEXTS}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* ── Section body ───────────────────────────────────────────────────── */}
       <div className="section-container py-7">

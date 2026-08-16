@@ -3,12 +3,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Newspaper,
   Calendar,
   Clock,
   Search,
   ArrowRight,
-  ChevronRight,
   Filter,
   CheckCircle2,
   FileText,
@@ -224,34 +222,8 @@ export default function NewsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 pt-28 pb-20">
-      {/* ── Breadcrumb & Hero Header ───────────────────────── */}
-      <section className="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white py-16 border-b border-slate-800">
-        <div className="section-container space-y-6">
-          <div className="flex items-center gap-2 text-xs text-slate-400 font-heading">
-            <Link href="/" className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
-              Home
-            </Link>
-            <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-premier-green-300 font-semibold">News &amp; Regulatory Updates</span>
-          </div>
-
-          <div className="max-w-3xl space-y-4">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-premier-green/20 border border-premier-green/40 text-premier-green-300 text-xs font-heading font-bold uppercase tracking-wider">
-              <Newspaper className="w-3.5 h-3.5" />
-              Pakistani Tax &amp; Corporate Regulatory Hub
-            </span>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white tracking-tight leading-tight">
-              FBR SROs, SECP Circulars &amp; Tax Law Updates
-            </h1>
-            <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-              Authoritative statutory analysis, court precedents, and practical compliance walkthroughs published directly by Advocate High Court &amp; ACMA Raja Gulfam.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <div className="section-container space-y-12 mt-10">
+    <div className="min-h-screen bg-slate-50 pt-[115px] pb-20">
+      <div className="section-container space-y-12">
         {/* ── Featured Article Card Banner ──────────────────── */}
         {featured && (
           <motion.div

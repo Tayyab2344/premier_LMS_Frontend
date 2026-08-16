@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 export function Hero() {
   return (
-    <section id="home" className="relative pt-[72px] overflow-hidden">
+    <section id="home" className="relative pt-[108px] overflow-hidden">
       {/* Background Video (v1.mp4 from assets) */}
       <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
         <video
@@ -33,7 +33,7 @@ export function Hero() {
       <div className="absolute inset-0 dot-pattern opacity-[0.03] pointer-events-none" />
 
       <div className="section-container relative z-10">
-        <div className="flex flex-col justify-center min-h-[calc(100vh-72px)] py-12 lg:py-20 max-w-2xl">
+        <div className="flex flex-col justify-center min-h-[calc(100vh-108px)] py-10 lg:py-16 max-w-2xl">
           {/* Content */}
           <div className="space-y-6 sm:space-y-8">
             {/* Heading — 64px, Manrope 800, -0.04em */}

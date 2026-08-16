@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 export function AboutHero() {
   return (
-    <section className="relative pt-[72px] overflow-hidden">
+    <section className="relative pt-[108px] overflow-hidden">
       {/* Background Video (v3.mp4 from assets) */}
       <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
         <video
@@ -40,7 +40,7 @@ export function AboutHero() {
       />
 
       <div className="section-container relative z-10">
-        <div className="flex flex-col justify-center min-h-[calc(100vh-72px)] py-10 lg:py-16 max-w-3xl">
+        <div className="flex flex-col justify-center min-h-[calc(100vh-108px)] py-10 lg:py-16 max-w-3xl">
           {/* Content Column */}
           <div className="space-y-6 sm:space-y-8">
             {/* Main Heading */}

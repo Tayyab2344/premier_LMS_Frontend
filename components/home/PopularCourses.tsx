@@ -2,203 +2,15 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import {
-  Star, Users, BookOpen, Clock, Award, ArrowRight, Zap, ChevronRight, GraduationCap,
-} from 'lucide-react';
+import { Zap, ChevronRight, Award, Star, Clock, Users, CheckCircle2, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { COURSES_DATA, Course } from '@/lib/coursesData';
-
-// ─── Magnetic Button ──────────────────────────────────────────────────────────
-function MagneticButton({
-  children, href, className, style,
-}: {
-  children: React.ReactNode;
-  href: string;
-  className?: string;
-  style?: React.CSSProperties;
-}) {
-  const ref = React.useRef<HTMLDivElement>(null);
-  const [pos, setPos] = React.useState({ x: 0, y: 0 });
-  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const { left, top, width, height } = ref.current.getBoundingClientRect();
-    setPos({ x: (e.clientX - (left + width / 2)) * 0.35, y: (e.clientY - (top + height / 2)) * 0.35 });
-  };
-  return (
-    <div ref={ref} onMouseMove={onMove} onMouseLeave={() => setPos({ x: 0, y: 0 })} className="inline-block p-6 -m-6">
-      <motion.div animate={{ x: pos.x, y: pos.y }} transition={{ type: 'spring', stiffness: 200, damping: 15, mass: 0.1 }}>
-        <Link href={href} className={className} style={style}>{children}</Link>
-      </motion.div>
-    </div>
-  );
-}
+import Image from 'next/image';
+import { COURSES_DATA } from '@/lib/coursesData';
 
 // ─── Data — dynamic, scales as more courses go Available ──────────────────────
 const availableCourses = COURSES_DATA.filter((c) => c.status === 'Available');
-const upNextCourses = COURSES_DATA.filter((c) => c.status === 'Coming Soon').slice(0, 2);
 
-// ─── Spotlight Card ───────────────────────────────────────────────────────────
-function SpotlightCard({ course, single }: { course: Course; single: boolean }) {
-  const hasDiscount = typeof course.discountPercent === 'number' && course.discountPercent > 0;
-  const moduleCount = course.modules.length;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="rounded-3xl overflow-hidden border flex flex-col"
-      style={{ borderColor: '#E6DFD0', boxShadow: '0 8px 40px rgba(27,59,44,0.08)' }}
-    >
-      {/* ── Top row: green panel + white panel ───────────────────────────── */}
-      <div className={`flex flex-col ${single ? 'lg:flex-row' : ''}`}>
-
-        {/* Left — forest green panel */}
-        <div
-          className={`p-7 flex flex-col justify-between gap-6 ${single ? 'lg:w-64 xl:w-72 shrink-0' : ''}`}
-          style={{ background: 'linear-gradient(160deg, #1B3B2C 0%, #143020 100%)' }}
-        >
-          {/* Title */}
-          <div>
-            <h2
-              className="text-xl font-heading font-extrabold leading-tight"
-              style={{ letterSpacing: '-0.02em', color: '#FAF6EE' }}
-            >
-              {course.title}
-            </h2>
-          </div>
-
-          {/* Stars */}
-          <div className="flex items-center gap-1">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className="w-3.5 h-3.5"
-                style={{
-                  fill: i < Math.floor(course.rating) ? '#D9A544' : '#2E5540',
-                  color: i < Math.floor(course.rating) ? '#D9A544' : '#2E5540',
-                }}
-              />
-            ))}
-            <span className="text-sm font-body font-bold ml-1" style={{ color: '#D9A544' }}>{course.rating}</span>
-            <span className="text-xs font-body ml-0.5" style={{ color: '#6B9478' }}>({course.reviewCount})</span>
-          </div>
-
-          {/* Instructor */}
-          <div className="border-t pt-4" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
-            <p className="text-[10px] font-body uppercase tracking-wider mb-0.5" style={{ color: '#6B9478' }}>
-              Instructor
-            </p>
-            <p className="text-sm font-heading font-bold" style={{ color: '#FAF6EE' }}>{course.instructor.name}</p>
-            <p className="text-[11px] font-body mt-0.5 leading-snug" style={{ color: '#8AAF94' }}>
-              {course.instructor.title}
-            </p>
-          </div>
-        </div>
-
-        {/* Right — white panel */}
-        <div className="flex-1 p-7 flex flex-col justify-start gap-6 bg-white">
-          <p className="font-body text-sm leading-relaxed" style={{ color: '#4A5E54' }}>
-            {course.shortDescription}
-          </p>
-
-          {/* Stat chips */}
-          <div className="flex flex-wrap gap-2">
-            {[
-              { Icon: Users, label: `${course.studentsCount.toLocaleString()} Students` },
-              { Icon: BookOpen, label: `${moduleCount > 0 ? moduleCount : '–'} Modules` },
-              { Icon: Clock, label: course.duration },
-              { Icon: Award, label: course.level },
-            ].map(({ Icon, label }) => (
-              <div
-                key={label}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-body font-semibold border"
-                style={{ backgroundColor: '#F5F0E8', borderColor: '#E6DFD0', color: '#3A5248' }}
-              >
-                <Icon className="w-3.5 h-3.5" style={{ color: '#1B3B2C' }} />
-                {label}
-              </div>
-            ))}
-          </div>
-
-          {/* What you'll learn */}
-          <div className="border-t pt-5" style={{ borderColor: '#E6DFD0' }}>
-            <p className="text-[10px] font-body font-bold uppercase tracking-widest mb-3" style={{ color: '#8A7D66' }}>
-              What you'll learn
-            </p>
-            <ul className="space-y-2">
-              {course.learningObjectives.slice(0, 3).map((obj, i) => (
-                <li key={i} className="flex items-start gap-2 text-xs font-body" style={{ color: '#4A5E54' }}>
-                  <span className="mt-1 w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: '#D9A544' }} />
-                  {obj}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Bottom footer: price + CTAs — full-width, horizontally centered ── */}
-      <div
-        className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-8 px-8 py-5 border-t"
-        style={{ backgroundColor: '#F5F0E8', borderColor: '#E6DFD0' }}
-      >
-        {/* Price */}
-        <div className="flex items-baseline gap-3 flex-wrap justify-center">
-          <span className="text-2xl font-number font-extrabold" style={{ color: '#1B3B2C' }}>
-            PKR {course.price?.toLocaleString()}
-          </span>
-          {hasDiscount && (
-            <>
-              <span className="text-sm font-body line-through" style={{ color: '#A09480' }}>
-                PKR {course.originalPrice.toLocaleString()}
-              </span>
-              <motion.span
-                animate={{ opacity: [1, 0.35, 1], scale: [1, 1.08, 1] }}
-                transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-                className="px-2 py-0.5 rounded text-[11px] font-body font-bold inline-block"
-                style={{ backgroundColor: '#D9A544', color: '#1B3B2C' }}
-              >
-                {course.discountPercent}% OFF
-              </motion.span>
-            </>
-          )}
-        </div>
-
-        {/* Vertical divider — visible on sm+ */}
-        <div className="hidden sm:block w-px h-8 self-center" style={{ backgroundColor: '#D4C9B5' }} />
-
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center gap-3">
-          <MagneticButton
-            href={`/courses/${course.slug}`}
-            className="flex items-center gap-2 rounded-xl py-3 px-7 text-sm font-body font-bold transition-opacity hover:opacity-90 whitespace-nowrap"
-            style={{ backgroundColor: '#D9A544', color: '#1B3B2C' }}
-          >
-            <BookOpen className="w-4 h-4" />
-            Enroll Now
-            <ArrowRight className="w-4 h-4" />
-          </MagneticButton>
-
-          <Link
-            href="/admission?pathway=exam"
-            className="flex items-center gap-2 rounded-xl py-3 px-6 text-sm font-body font-semibold border transition-colors hover:opacity-90 whitespace-nowrap"
-            style={{ backgroundColor: '#1B3B2C', borderColor: '#1B3B2C', color: '#FAF6EE' }}
-          >
-            <GraduationCap className="w-4 h-4" />
-            Already skilled? Certify by exam
-          </Link>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-// ─── Component ────────────────────────────────────────────────────────────────
 export function PopularCourses() {
-  const isSingle = availableCourses.length === 1;
-
   return (
     <section
       className="relative border-t overflow-hidden"
@@ -211,109 +23,202 @@ export function PopularCourses() {
         style={{ backgroundColor: '#D9A544' }}
       />
 
-      <div className="section-container relative z-10 max-w-5xl mx-auto space-y-8">
+      <div className="section-container relative z-10 max-w-5xl mx-auto space-y-7">
 
         {/* Section header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
             <h2
-              className="text-3xl sm:text-4xl font-heading font-extrabold leading-tight"
+              className="text-2xl sm:text-3xl font-heading font-extrabold leading-tight"
               style={{ color: '#1B3B2C', letterSpacing: '-0.025em' }}
             >
-              Master Tax, Law &amp; Finance
+              Courses That Are Currently Happening
             </h2>
-            <p className="mt-1.5 text-sm font-body" style={{ color: '#8A7D66' }}>
-              Professional masterclasses taught by a practicing High Court Advocate &amp; ACMA
+            <p className="mt-1 text-xs sm:text-sm font-body" style={{ color: '#8A7D66' }}>
+              Live ongoing masterclasses &amp; accredited training sessions open for immediate enrollment
             </p>
           </div>
-
 
           <Link
             href="/courses"
-            className="cta-blink shrink-0 inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-body font-bold border transition-colors hover:opacity-90 whitespace-nowrap"
+            className="cta-blink shrink-0 inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-body font-bold border transition-colors hover:opacity-90 whitespace-nowrap"
             style={{ backgroundColor: '#1B3B2C', color: '#D9A544', borderColor: '#1B3B2C' }}
           >
-            <Zap className="w-4 h-4" />
+            <Zap className="w-3.5 h-3.5" />
             Explore All Courses
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
-        {/* Spotlight card(s) */}
-        {isSingle ? (
-          <SpotlightCard course={availableCourses[0]} single={true} />
-        ) : (
-          <div className="grid md:grid-cols-2 gap-6">
-            {availableCourses.map((course) => (
-              <SpotlightCard key={course.id} course={course} single={false} />
-            ))}
-          </div>
-        )}
+        {/* Ongoing Featured Course Showcase Cards */}
+        <div className="space-y-5">
+          {availableCourses.map((course) => (
+            <motion.div
+              key={course.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="relative rounded-2xl bg-white text-heading border border-slate-200 p-4 sm:p-6 shadow-lg overflow-hidden group"
+            >
+              <div className="grid lg:grid-cols-12 gap-5 lg:gap-6 items-center">
+                
+                {/* Image Column (5 cols out of 12) */}
+                <div className="lg:col-span-5 relative">
+                  <div className="relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/11] w-full rounded-xl overflow-hidden shadow-sm border border-slate-200 bg-slate-900">
+                    <Image
+                      src={course.thumbnail}
+                      alt={course.title}
+                      fill
+                      priority
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                    />
 
-        {/* Up Next teasers — show 2 upcoming courses */}
-        {upNextCourses.length > 0 && (
-          <div className="space-y-2">
-            <p className="text-base font-heading font-extrabold uppercase tracking-[0.08em]" style={{ color: '#22301F' }}>
-              Up Next
-            </p>
-            {upNextCourses.map((course, i) => (
-              <motion.div
-                key={course.id}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="flex flex-col sm:flex-row items-start sm:items-center gap-4 px-5 py-4 rounded-2xl border border-dashed"
-                style={{ borderColor: '#C9BFA8', backgroundColor: 'rgba(255,255,255,0.5)' }}
-              >
-                <span className="w-2 h-2 rounded-full animate-pulse shrink-0" style={{ backgroundColor: '#D9A544' }} />
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-body font-semibold truncate" style={{ color: '#22301F' }}>
-                    {course.title}
-                  </p>
-                  <p className="text-[11px] font-body" style={{ color: '#8A7D66' }}>{course.category}</p>
+                    {/* Dark Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+
+                    {/* Dominant "AVAILABLE NOW" Badge */}
+                    <div className="absolute top-3 left-3 z-10">
+                      <span className="px-2.5 py-1 rounded-full bg-emerald-600 text-white text-[11px] font-heading font-extrabold uppercase tracking-wider shadow-md flex items-center gap-1.5 border border-emerald-400/40">
+                        <span className="w-2 h-2 rounded-full bg-white animate-ping" />
+                        AVAILABLE NOW
+                      </span>
+                    </div>
+
+                    {/* Flagship Badge */}
+                    {course.badge && (
+                      <div className="absolute top-3 right-3 z-10">
+                        <span className="px-2.5 py-1 rounded-full bg-amber-500 text-slate-950 text-[11px] font-heading font-extrabold shadow-sm">
+                          {course.badge}
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Bottom Overlay Stats */}
+                    <div className="absolute bottom-3 left-3 right-3 text-white text-[11px] font-medium flex items-center justify-between pointer-events-none">
+                      <div className="flex items-center gap-1 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10">
+                        <Clock className="w-3 h-3 text-amber-400" />
+                        <span>{course.duration}</span>
+                      </div>
+                      <div className="flex items-center gap-1 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10">
+                        <Users className="w-3 h-3 text-emerald-400" />
+                        <span>{course.studentsCount.toLocaleString()}+ Students</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <span
-                  className="shrink-0 px-2.5 py-1 rounded-full border text-[11px] font-body font-semibold"
-                  style={{ backgroundColor: '#FDF4E0', borderColor: '#D9A544', color: '#8A6A1F' }}
-                >
-                  Coming Soon
-                </span>
-              </motion.div>
-            ))}
-          </div>
-        )}
 
-        {/* Already Have Prior Experience — original dark animated banner */}
-        <motion.div
-          animate={{ y: [0, -10, 0], opacity: [0.65, 1, 0.65], scale: [0.98, 1.015, 0.98] }}
-          transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="rounded-3xl p-6 sm:p-8 border relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6"
-          style={{
-            background: 'linear-gradient(to right, #020617, #0f172a, #f1f5f9)',
-            borderColor: '#f59e0b',
-            boxShadow: '0 8px 25px rgba(245,158,11,0.2)',
-          }}
+                {/* Content Column (7 cols out of 12) */}
+                <div className="lg:col-span-7 space-y-3.5">
+                  
+                  {/* Category Tag & Rating */}
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-[11px] font-heading font-bold uppercase tracking-wider border border-emerald-200">
+                      {course.category}
+                    </span>
+
+                    <div className="flex items-center gap-1 bg-amber-50 text-amber-900 px-2.5 py-0.5 rounded-full text-[11px] font-heading font-bold border border-amber-200">
+                      <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
+                      <span>{course.rating.toFixed(1)}</span>
+                      <span className="text-amber-700 font-normal">({course.reviewCount} reviews)</span>
+                    </div>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-heading leading-tight">
+                    {course.title}
+                  </h3>
+
+                  {/* Compact Visual Feature Pills */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-0.5">
+                    <div className="p-2 rounded-lg bg-slate-50 border border-slate-200 flex items-center gap-1.5 text-[11px] font-heading font-semibold text-heading">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <span>FBR IRIS Portal E-Filing Demos</span>
+                    </div>
+                    <div className="p-2 rounded-lg bg-slate-50 border border-slate-200 flex items-center gap-1.5 text-[11px] font-heading font-semibold text-heading">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <span>Sales Tax Returns &amp; Annexure C</span>
+                    </div>
+                    <div className="p-2 rounded-lg bg-slate-50 border border-slate-200 flex items-center gap-1.5 text-[11px] font-heading font-semibold text-heading">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <span>Wealth Statement (Sec 116) Reconciliation</span>
+                    </div>
+                    <div className="p-2 rounded-lg bg-slate-50 border border-slate-200 flex items-center gap-1.5 text-[11px] font-heading font-semibold text-heading">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <span>FBR Notice Appeals Defense</span>
+                    </div>
+                  </div>
+
+                  {/* Price & Action Button */}
+                  <div className="pt-3 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div className="space-y-0.5">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-xl sm:text-2xl font-heading font-extrabold text-heading">
+                          PKR {course.price?.toLocaleString()}
+                        </span>
+                        {course.originalPrice && (
+                          <span className="text-xs font-heading line-through text-slate-400">
+                            PKR {course.originalPrice.toLocaleString()}
+                          </span>
+                        )}
+                        {course.discountPercent && (
+                          <span className="px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-heading font-bold">
+                            SAVE {course.discountPercent}%
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-[10px] font-heading text-emerald-700 font-bold block">
+                        Instant 24/7 Access on Premier LMS Student Mobile App
+                      </span>
+                    </div>
+
+                    <Link
+                      href={`/courses/${course.slug}`}
+                      className="btn-primary text-xs !py-2.5 !px-6 text-center shrink-0 group focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+                    >
+                      Enroll Now
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+
+                </div>
+
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+      {/* Already Have Prior Experience Banner — Restored Original Dark Animated Design */}
+      <motion.div
+        animate={{ y: [0, -10, 0], opacity: [0.65, 1, 0.65], scale: [0.98, 1.015, 0.98] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+        className="rounded-3xl p-6 sm:p-8 border relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6"
+        style={{
+          background: 'linear-gradient(to right, #020617, #0f172a, #f1f5f9)',
+          borderColor: '#f59e0b',
+          boxShadow: '0 8px 25px rgba(245,158,11,0.2)',
+        }}
+      >
+        <div className="space-y-2 text-center md:text-left">
+          <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-white">
+            Already Have Prior Experience?{' '}
+            <span className="text-amber-400">Get Certified Directly</span>
+          </h3>
+          <p className="text-sm font-body text-slate-300 max-w-xl">
+            Skip redundant classes if you have previously studied or worked in Taxation, Law, Accounting, or Audit. Apply for direct evaluation and get certified.
+          </p>
+        </div>
+        <Link
+          href="/admission?pathway=exam"
+          className="cert-btn shrink-0 inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-sm font-body font-bold"
         >
-          <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-white">
-              Already Have Prior Experience?{' '}
-              <span className="text-amber-400">Get Certified Directly</span>
-            </h3>
-            <p className="text-sm font-body text-slate-300 max-w-xl">
-              Skip redundant classes if you have previously studied or worked in Taxation, Law, Accounting, or Audit. Apply for direct evaluation and get certified.
-            </p>
-          </div>
-          <Link
-            href="/admission"
-            className="cert-btn shrink-0 inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-sm font-body font-bold"
-          >
-            <Award className="w-4 h-4" />
-            Apply for Direct Certification
-          </Link>
-        </motion.div>
+          <Award className="w-4 h-4" />
+          Apply for Direct Certification
+        </Link>
+      </motion.div>
 
-      </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 }
