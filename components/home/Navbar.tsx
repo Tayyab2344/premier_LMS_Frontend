@@ -37,21 +37,33 @@ export function Navbar() {
     return null;
   }
 
+  // Detect if page has a dark hero background unscrolled
+  const isDarkHeroPage = pathname === '/' || pathname === '/about' || pathname === '/courses';
+  const isDarkHeader = isDarkHeroPage && !scrolled;
+
   return (
     <>
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled
-            ? 'bg-white/95 backdrop-blur-lg shadow-soft border-b border-border'
-            : 'bg-slate-950/40 backdrop-blur-md border-b border-white/10'
-          }`}
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+          scrolled
+            ? 'bg-white/95 backdrop-blur-lg shadow-soft border-b border-border text-slate-900'
+            : isDarkHeroPage
+            ? 'bg-slate-950/40 backdrop-blur-md border-b border-white/10 text-white'
+            : 'bg-transparent text-slate-900'
+        }`}
       >
         <div className="section-container">
           <div className="flex items-center justify-between h-[72px]">
+            
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream" aria-label="Premier LMS Homepage">
+            <Link
+              href="/"
+              className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2"
+              aria-label="Premier LMS Homepage"
+            >
               <Image
                 src="/logo-icon.svg"
                 alt="Premier Academy Crest Logo"
@@ -61,15 +73,21 @@ export function Navbar() {
                 priority
               />
               <div className="flex flex-col leading-none">
-                <span className={`font-heading font-extrabold text-lg tracking-tight transition-colors ${
-                  scrolled ? 'text-slate-900 group-hover:text-premier-green' : 'text-white group-hover:text-emerald-300'
-                }`}>
-                  Premier <span className={scrolled ? 'text-emerald-700' : 'text-emerald-400'}>Academy</span>
+                <span
+                  className={`font-heading font-extrabold text-lg tracking-tight transition-colors ${
+                    isDarkHeader
+                      ? 'text-white group-hover:text-emerald-300'
+                      : 'text-slate-900 group-hover:text-premier-green'
+                  }`}
+                >
+                  Premier <span className={isDarkHeader ? 'text-emerald-400' : 'text-emerald-700'}>Academy</span>
                 </span>
-                <span className={`text-[10px] font-body uppercase tracking-widest font-semibold mt-1 transition-colors ${
-                  scrolled ? 'text-slate-500' : 'text-slate-300'
-                }`}>
-                  Tax & Accounting School
+                <span
+                  className={`text-[10px] font-body uppercase tracking-widest font-semibold mt-1 transition-colors ${
+                    isDarkHeader ? 'text-slate-300' : 'text-slate-500'
+                  }`}
+                >
+                  Tax &amp; Accounting School
                 </span>
               </div>
             </Link>
@@ -84,15 +102,19 @@ export function Navbar() {
                     href={link.href}
                     className={`relative px-4 py-2 text-base font-body font-semibold transition-colors group focus:outline-none ${
                       isActive
-                        ? scrolled ? 'text-slate-900 font-bold' : 'text-white font-bold'
-                        : scrolled ? 'text-slate-700 hover:text-slate-900' : 'text-slate-200 hover:text-white'
+                        ? isDarkHeader
+                          ? 'text-white font-bold'
+                          : 'text-slate-900 font-bold'
+                        : isDarkHeader
+                        ? 'text-slate-200 hover:text-white'
+                        : 'text-slate-700 hover:text-slate-900'
                     }`}
                   >
                     {link.label}
                     {/* Animated Pill Underline Indicator */}
                     <span
                       className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-5 h-[3px] rounded-full origin-center transition-transform duration-300 ease-out ${
-                        scrolled ? 'bg-[#5D3A1A]' : 'bg-emerald-400'
+                        isDarkHeader ? 'bg-emerald-400' : 'bg-[#5D3A1A]'
                       } ${
                         isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                       }`}
@@ -106,17 +128,17 @@ export function Navbar() {
             <div className="hidden lg:flex items-center gap-3">
               <Link
                 href="/auth/login"
-                className={`px-5 py-2.5 text-base font-body font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream ${
-                  scrolled ? 'text-slate-700 hover:text-heading' : 'text-white hover:text-emerald-300'
+                className={`px-5 py-2.5 text-base font-body font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 ${
+                  isDarkHeader ? 'text-white hover:text-emerald-300' : 'text-slate-700 hover:text-heading'
                 }`}
               >
                 Login
               </Link>
               <Link
                 href="/admission"
-                className="btn-primary !py-2.5 !px-6 !text-[13px] focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
+                className="btn-primary !py-2.5 !px-6 !text-[13px] focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2"
               >
-                Enroll Now
+                <span>Enroll Now</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -124,18 +146,19 @@ export function Navbar() {
             {/* Mobile Toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               className={`lg:hidden p-2 rounded-xl transition-colors ${
-                scrolled ? 'text-heading hover:bg-surface-secondary' : 'text-white hover:bg-white/10'
+                isDarkHeader ? 'text-white hover:bg-white/10' : 'text-heading hover:bg-surface-secondary'
               }`}
             >
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
+
           </div>
         </div>
       </motion.header>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -143,25 +166,41 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-x-0 top-[72px] z-40 bg-white border-b border-border shadow-elevated lg:hidden"
+            className="fixed inset-x-0 top-[72px] z-40 bg-white border-b border-border shadow-elevated lg:hidden text-slate-900"
           >
             <div className="section-container py-6 space-y-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="block py-3 px-4 rounded-xl text-base font-body font-semibold text-heading hover:bg-surface-secondary transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href || (link.href !== '/' && pathname?.startsWith(link.href));
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`block py-3 px-4 rounded-xl text-base font-body font-semibold transition-all ${
+                      isActive
+                        ? 'bg-premier-green text-white font-bold'
+                        : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+
               <div className="pt-4 border-t border-border flex flex-col gap-3">
-                <Link href="/auth/login" onClick={() => setMobileOpen(false)} className="btn-secondary w-full">
+                <Link
+                  href="/auth/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="w-full text-center py-2.5 rounded-xl font-body font-semibold text-base border border-border text-slate-900"
+                >
                   Login
                 </Link>
-                <Link href="/admission" onClick={() => setMobileOpen(false)} className="btn-primary w-full">
-                  Enroll Now <ArrowRight className="w-4 h-4" />
+                <Link
+                  href="/admission"
+                  onClick={() => setMobileOpen(false)}
+                  className="btn-primary w-full text-center justify-center !py-3"
+                >
+                  Enroll Now
                 </Link>
               </div>
             </div>
