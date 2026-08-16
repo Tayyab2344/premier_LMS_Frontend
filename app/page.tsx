@@ -2,51 +2,51 @@
 
 import React from 'react';
 import { Hero } from '@/components/home/Hero';
+import { LatestNews } from '@/components/home/LatestNews';
+import { PopularCourses } from '@/components/home/PopularCourses';
 import { TrustedBy } from '@/components/home/TrustedBy';
 import { PlatformFeatures } from '@/components/home/PlatformFeatures';
 import { MeetInstructor } from '@/components/home/MeetInstructor';
 import { LearningJourney } from '@/components/home/LearningJourney';
-import { PopularCourses } from '@/components/home/PopularCourses';
 import { StudentSuccessNumbers } from '@/components/home/StudentSuccessNumbers';
 import { StudentTestimonials } from '@/components/home/StudentTestimonials';
-import { LatestNews } from '@/components/home/LatestNews';
 import { FAQSection } from '@/components/home/FAQSection';
 import { CTABanner } from '@/components/home/CTABannerAndFooter';
 
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-premier-cream relative">
-      {/* 1. Hero Section */}
+      {/* 1. Hero */}
       <Hero />
 
       {/* 2. Trusted By Section (Auto-scrolling logos) */}
       <TrustedBy />
 
-      {/* 4. Platform Features (Alternating Layouts) */}
+      {/* 3. Platform Features (Alternating Layouts) */}
       <PlatformFeatures />
 
-      {/* 5. Meet Your Instructor (Raja Gulfam Spotlight) */}
+      {/* 4. Meet Your Instructor (Raja Gulfam Spotlight) */}
       <MeetInstructor />
 
-      {/* 6. Learning Journey (Horizontal Timeline) */}
+      {/* 5. Learning Journey (Horizontal Timeline) */}
       <LearningJourney />
 
-      {/* 7. Popular Courses Preview */}
-      <PopularCourses />
-
-      {/* 8. Student Success Numbers (Animated Counters) */}
+      {/* 6. Student Success Numbers / Analytics */}
       <StudentSuccessNumbers />
 
-      {/* 9. Student Testimonials (Embla Auto-Carousel) */}
-      <StudentTestimonials />
-
-      {/* 10. Latest News Preview */}
+      {/* 7. Latest News & Regulatory Alerts */}
       <LatestNews />
 
-      {/* 11. Frequently Asked Questions (Accordion) */}
+      {/* 8. Featured Masterclass Spotlight */}
+      <PopularCourses />
+
+      {/* 9. Student Testimonials (Auto-Carousel) */}
+      <StudentTestimonials />
+
+      {/* 10. Frequently Asked Questions (Accordion) */}
       <FAQSection />
 
-      {/* 12. Call To Action Banner */}
+      {/* 11. Call To Action Banner */}
       <CTABanner />
     </main>
   );

@@ -1,241 +1,193 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Star, Quote, ChevronLeft, ChevronRight, CheckCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Star, CheckCircle2, Quote } from 'lucide-react';
 
-const testimonials = [
+const reviews = [
   {
+    id: 1,
     name: 'Muhammad Tariq, ITP',
-    role: 'Senior Tax Practitioner, Lahore',
-    course: 'Certified Income Tax & Sales Tax Practitioner',
+    role: 'Senior Tax Practitioner',
+    city: 'Lahore',
+    course: 'Income Tax & Sales Tax Practitioner',
     rating: 5,
-    text: 'Raja Gulfam’s course was exceptionally thorough. The practical portal walk-throughs gave me exact answers for complex FBR client scenarios. Highly recommended!',
-    avatar: 'MT',
+    text: 'Raja Gulfam’s course was exceptionally thorough. The practical portal walk-throughs gave me exact answers for complex FBR client scenarios and corporate filing.',
+    initials: 'MT',
+    bg: 'bg-emerald-600',
   },
   {
+    id: 2,
     name: 'Advocate Syed Hamza Shah',
-    role: 'High Court Legal Advocate, Peshawar',
+    role: 'High Court Legal Advocate',
+    city: 'Peshawar',
     course: 'Corporate Law & SECP Masterclass',
     rating: 5,
-    text: 'The practical SECP company registration case studies and legal formats saved me dozens of hours. Easily the best professional development course in Pakistan.',
-    avatar: 'HS',
+    text: 'The practical SECP company registration case studies and legal formats saved me dozens of hours. Easily the best professional legal development course in Pakistan.',
+    initials: 'HS',
+    bg: 'bg-blue-600',
   },
   {
+    id: 3,
     name: 'Ayesha Siddiqui, ACMA',
-    role: 'Senior Finance Manager, Islamabad',
+    role: 'Senior Finance Manager',
+    city: 'Islamabad',
     course: 'Financial Accounting & Bookkeeping',
     rating: 5,
-    text: 'The wealth statement reconciliation and balance sheet modules were crystal clear. Raja Gulfam breaks down complicated financial statutes into simple steps. 10/10 content quality!',
-    avatar: 'AS',
+    text: 'The wealth statement reconciliation and balance sheet modules were crystal clear. Raja Gulfam breaks down complicated financial statutes into simple, step-by-step guidance.',
+    initials: 'AS',
+    bg: 'bg-amber-600',
   },
   {
+    id: 4,
     name: 'Usman Ali Khan',
-    role: 'Financial Analyst, Karachi',
+    role: 'Financial Analyst',
+    city: 'Karachi',
     course: 'Forensic Audit & AML Laws',
     rating: 5,
-    text: 'Clear, structured, and directly applicable to daily corporate tax & audit practice. The verifiable digital diploma on the Student Mobile App was a great bonus for my career.',
-    avatar: 'UK',
+    text: 'Clear, structured, and directly applicable to daily corporate tax & audit practice. The verifiable digital diploma was a great boost for my professional career.',
+    initials: 'UK',
+    bg: 'bg-purple-600',
   },
   {
+    id: 5,
     name: 'Bilal Ahmed, FCA',
-    role: 'Partner, Tax & Advisory, Rawalpindi',
+    role: 'Partner, Tax & Advisory',
+    city: 'Rawalpindi',
     course: 'Advanced Corporate Tax Reform',
     rating: 5,
-    text: 'Extremely well-structured content with real case studies. Raja Gulfam simplifies complex tax laws into actionable, step-by-step guidance.',
-    avatar: 'BA',
+    text: 'Extremely well-structured content with real-world case studies. Raja Gulfam simplifies complex tax laws into actionable guidance that every practitioner needs.',
+    initials: 'BA',
+    bg: 'bg-teal-600',
+  },
+  {
+    id: 6,
+    name: 'Zainab Mustafa',
+    role: 'Corporate Compliance Manager',
+    city: 'Faisalabad',
+    course: 'Customs & Sales Tax Audit',
+    rating: 5,
+    text: 'The step-by-step guidance on sales tax audit defense and Federal Excise Duty gave our compliance team total confidence during official FBR audits.',
+    initials: 'ZM',
+    bg: 'bg-rose-600',
   },
 ];
 
 export function StudentTestimonials() {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeReviewIndex, setActiveReviewIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-play timer (transitions every 4 seconds)
+  // Auto-play animation every 4 seconds
   useEffect(() => {
     if (isPaused) return;
 
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+      setActiveReviewIndex((prev) => (prev + 1) % reviews.length);
     }, 4000);
 
     return () => clearInterval(interval);
   }, [isPaused]);
 
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowLeft') handlePrev();
-    if (e.key === 'ArrowRight') handleNext();
-  };
-
   return (
     <section
-      className="section-padding bg-white border-t border-border overflow-hidden relative"
+      className="py-16 bg-slate-50 border-t border-border overflow-hidden relative"
       id="testimonials"
-      tabIndex={0}
-      onKeyDown={handleKeyDown}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      aria-label="Student Testimonials 3D Auto-Carousel"
     >
-      <div className="section-container">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div className="space-y-3 max-w-xl">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-premier-green-50 text-premier-green text-xs font-body font-semibold uppercase tracking-wider border border-premier-green/10">
-              Student Success
-            </span>
-            <h2 className="text-4xl sm:text-[48px] font-heading font-extrabold text-heading leading-[1.1]" style={{ letterSpacing: '-0.03em' }}>
-              Trusted by Pakistani Professionals
-            </h2>
-            <p className="text-body text-base sm:text-lg">
-              Hear from accountants, advocates, and tax consultants who transformed their practice with Raja Gulfam.
-            </p>
-          </div>
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-premier-green/10 rounded-full blur-[120px] pointer-events-none" />
 
-          {/* Navigation Controls */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={handlePrev}
-              className="w-12 h-12 rounded-full border border-border bg-white text-heading hover:bg-premier-green hover:text-white hover:border-premier-green transition-all shadow-card flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={handleNext}
-              className="w-12 h-12 rounded-full border border-border bg-white text-heading hover:bg-premier-green hover:text-white hover:border-premier-green transition-all shadow-card flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
+      <div className="section-container relative z-10 max-w-4xl mx-auto space-y-8">
+        {/* Header - Light Section Header */}
+        <div className="text-center space-y-3 max-w-2xl mx-auto">
+          <h2
+            className="text-3xl sm:text-4xl font-heading font-extrabold text-heading leading-tight"
+            style={{ letterSpacing: '-0.02em' }}
+          >
+            Student Reviews &amp; Success Stories
+          </h2>
+          <p className="text-base sm:text-lg font-body text-slate-600 leading-relaxed">
+            Hear directly from tax consultants, advocates, and finance professionals across Pakistan who transformed their practice with Raja Gulfam.
+          </p>
         </div>
 
-        {/* 3D Coverflow Container with Curved Mask Framing */}
-        <div className="relative py-10 px-2 overflow-hidden rounded-3xl bg-gradient-to-b from-premier-cream/30 via-white to-premier-cream/30 border border-border/50 shadow-inner">
-          <div
-            className="relative flex justify-center items-center h-[380px] sm:h-[400px] w-full"
-            style={{ perspective: '1200px', transformStyle: 'preserve-3d' }}
-          >
-            {testimonials.map((item, idx) => {
-              // Calculate offset relative to activeIndex
-              let offset = idx - activeIndex;
+        {/* Contrast Dark Testimonial Card */}
+        <div
+          className="relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={reviews[activeReviewIndex].id}
+              initial={{ opacity: 0, scale: 0.98, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.98, y: -12 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+              className="rounded-2xl bg-slate-900 text-white border border-slate-800 p-6 sm:p-9 shadow-2xl shadow-slate-900/30 relative overflow-hidden space-y-6 group hover:border-slate-700 transition-all duration-300"
+            >
+              {/* Top Accent Gradient Bar */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-400" />
 
-              // Handle circular wrapping for 3D stack
-              const total = testimonials.length;
-              if (offset > total / 2) offset -= total;
-              if (offset < -total / 2) offset += total;
-
-              const isActive = offset === 0;
-
-              // Dynamic 3D Transform Properties
-              let rotateY = 0;
-              let translateX = '0%';
-              let scale = 1;
-              let opacity = 1;
-              let filter = 'blur(0px)';
-              let zIndex = 30;
-
-              if (offset === -1) {
-                rotateY = 28;
-                translateX = '-65%';
-                scale = 0.82;
-                opacity = 0.55;
-                filter = 'blur(4px)';
-                zIndex = 20;
-              } else if (offset === 1) {
-                rotateY = -28;
-                translateX = '65%';
-                scale = 0.82;
-                opacity = 0.55;
-                filter = 'blur(4px)';
-                zIndex = 20;
-              } else if (offset < -1) {
-                rotateY = 35;
-                translateX = '-120%';
-                scale = 0.7;
-                opacity = 0;
-                filter = 'blur(8px)';
-                zIndex = 10;
-              } else if (offset > 1) {
-                rotateY = -35;
-                translateX = '120%';
-                scale = 0.7;
-                opacity = 0;
-                filter = 'blur(8px)';
-                zIndex = 10;
-              }
-
-              return (
-                <motion.div
-                  key={idx}
-                  initial={false}
-                  animate={{
-                    x: translateX,
-                    scale: isActive ? 1.05 : scale,
-                    rotateY: rotateY,
-                    opacity: opacity,
-                    filter: filter,
-                  }}
-                  transition={{
-                    type: 'spring',
-                    stiffness: 260,
-                    damping: 24,
-                    mass: 0.8,
-                  }}
-                  style={{
-                    position: 'absolute',
-                    zIndex: zIndex,
-                    transformStyle: 'preserve-3d',
-                  }}
-                  onClick={() => setActiveIndex(idx)}
-                  className={`w-full max-w-[320px] sm:max-w-[420px] rounded-3xl p-7 bg-white border border-border shadow-[0_20px_40px_rgba(0,0,0,0.07)] flex flex-col justify-between h-[320px] cursor-pointer select-none ${isActive ? 'border-premier-green/30 shadow-[0_25px_50px_rgba(22,78,54,0.15)] ring-1 ring-premier-green/20' : 'hover:opacity-80'
-                    }`}
-                >
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      {/* 5-Star Rating Icons strictly in premier-gold */}
-                      <div className="flex items-center gap-1 text-premier-gold">
-                        {[...Array(item.rating)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-premier-gold text-premier-gold" />
-                        ))}
-                      </div>
-                      <Quote className="w-8 h-8 text-premier-green/20" />
-                    </div>
-
-                    {/* Main Testimonial Body in text-slate-900 */}
-                    <blockquote className="text-sm sm:text-base text-slate-900 leading-relaxed italic font-body">
-                      &ldquo;{item.text}&rdquo;
-                    </blockquote>
+              <div className="flex items-center justify-between">
+                {/* Rating Stars & Verified Badge */}
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-1 text-amber-400">
+                    {[...Array(reviews[activeReviewIndex].rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400 filter drop-shadow" />
+                    ))}
                   </div>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-950/90 text-emerald-300 border border-emerald-500/30 text-xs font-body font-semibold">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    Verified Graduate
+                  </span>
+                </div>
 
-                  {/* Profile Footer with text-premier-green heading */}
-                  <div className="pt-4 border-t border-border/60 flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-2xl bg-premier-green text-white flex items-center justify-center font-heading font-bold text-sm shadow-sm shrink-0">
-                      {item.avatar}
-                    </div>
-                    <div className="overflow-hidden">
-                      <h3 className="text-sm font-heading font-bold text-premier-green truncate flex items-center gap-1">
-                        {item.name}
-                        <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                      </h3>
-                      <p className="text-[11px] text-slate-600 truncate mt-0.5 font-body">
-                        {item.role} · <span className="text-premier-green font-semibold">{item.course}</span>
-                      </p>
-                    </div>
+                <Quote className="w-8 h-8 text-amber-400 filter drop-shadow opacity-90 shrink-0" />
+              </div>
+
+              {/* Review Text */}
+              <p className="text-base sm:text-xl font-body text-slate-100 leading-relaxed italic font-normal">
+                &ldquo;{reviews[activeReviewIndex].text}&rdquo;
+              </p>
+
+              {/* Compact Footer: Author Info */}
+              <div className="pt-5 border-t border-slate-800/80">
+                <div className="flex items-center gap-3.5">
+                  <div
+                    className={`w-12 h-12 rounded-xl ${reviews[activeReviewIndex].bg} text-white font-heading font-bold text-base flex items-center justify-center shadow-lg shadow-black/40 shrink-0 border border-white/10`}
+                  >
+                    {reviews[activeReviewIndex].initials}
                   </div>
-                </motion.div>
-              );
-            })}
-          </div>
+                  <div className="overflow-hidden">
+                    <h3 className="text-base font-heading font-bold text-white truncate">
+                      {reviews[activeReviewIndex].name}
+                    </h3>
+                    <p className="text-xs font-body text-slate-400 truncate">
+                      {reviews[activeReviewIndex].role} · <span className="text-slate-500">{reviews[activeReviewIndex].city}</span>
+                    </p>
+                    <p className="text-xs font-body font-semibold text-emerald-400 mt-1 truncate">
+                      Course: {reviews[activeReviewIndex].course}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Minimal Dot Indicators */}
+        <div className="flex items-center justify-center gap-2">
+          {reviews.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActiveReviewIndex(idx)}
+              aria-label={`Go to slide ${idx + 1}`}
+              className={`h-2 rounded-full transition-all duration-300 ${activeReviewIndex === idx
+                  ? 'w-7 bg-premier-green'
+                  : 'w-2 bg-slate-300 hover:bg-slate-400'
+                }`}
+            />
+          ))}
         </div>
       </div>
     </section>

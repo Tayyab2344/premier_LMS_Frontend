@@ -45,7 +45,7 @@ export function Navbar() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled
             ? 'bg-white/95 backdrop-blur-lg shadow-soft border-b border-border'
-            : 'bg-transparent'
+            : 'bg-slate-950/40 backdrop-blur-md border-b border-white/10'
           }`}
       >
         <div className="section-container">
@@ -61,10 +61,14 @@ export function Navbar() {
                 priority
               />
               <div className="flex flex-col leading-none">
-                <span className="font-heading font-extrabold text-lg text-slate-900 tracking-tight group-hover:text-premier-green transition-colors">
-                  Premier <span className="text-emerald-700">Academy</span>
+                <span className={`font-heading font-extrabold text-lg tracking-tight transition-colors ${
+                  scrolled ? 'text-slate-900 group-hover:text-premier-green' : 'text-white group-hover:text-emerald-300'
+                }`}>
+                  Premier <span className={scrolled ? 'text-emerald-700' : 'text-emerald-400'}>Academy</span>
                 </span>
-                <span className="text-[10px] font-body text-slate-500 uppercase tracking-widest font-semibold mt-1">
+                <span className={`text-[10px] font-body uppercase tracking-widest font-semibold mt-1 transition-colors ${
+                  scrolled ? 'text-slate-500' : 'text-slate-300'
+                }`}>
                   Tax & Accounting School
                 </span>
               </div>
@@ -79,13 +83,17 @@ export function Navbar() {
                     key={link.href}
                     href={link.href}
                     className={`relative px-4 py-2 text-base font-body font-semibold transition-colors group focus:outline-none ${
-                      isActive ? 'text-slate-900 font-bold' : 'text-slate-700 hover:text-slate-900'
+                      isActive
+                        ? scrolled ? 'text-slate-900 font-bold' : 'text-white font-bold'
+                        : scrolled ? 'text-slate-700 hover:text-slate-900' : 'text-slate-200 hover:text-white'
                     }`}
                   >
                     {link.label}
-                    {/* Animated Pill Underline Indicator in Rich Chocolate Brown */}
+                    {/* Animated Pill Underline Indicator */}
                     <span
-                      className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-5 h-[3px] bg-[#5D3A1A] rounded-full origin-center transition-transform duration-300 ease-out ${
+                      className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-5 h-[3px] rounded-full origin-center transition-transform duration-300 ease-out ${
+                        scrolled ? 'bg-[#5D3A1A]' : 'bg-emerald-400'
+                      } ${
                         isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                       }`}
                     />
@@ -98,7 +106,9 @@ export function Navbar() {
             <div className="hidden lg:flex items-center gap-3">
               <Link
                 href="/auth/login"
-                className="px-5 py-2.5 text-base font-body font-semibold text-slate-700 hover:text-heading transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
+                className={`px-5 py-2.5 text-base font-body font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream ${
+                  scrolled ? 'text-slate-700 hover:text-heading' : 'text-white hover:text-emerald-300'
+                }`}
               >
                 Login
               </Link>
@@ -115,7 +125,9 @@ export function Navbar() {
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
-              className="lg:hidden p-2 rounded-xl hover:bg-surface-secondary text-heading transition-colors"
+              className={`lg:hidden p-2 rounded-xl transition-colors ${
+                scrolled ? 'text-heading hover:bg-surface-secondary' : 'text-white hover:bg-white/10'
+              }`}
             >
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>

@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { 
-  ArrowRight, 
-  ArrowUp, 
-  MessageCircle, 
-  QrCode, 
-  MapPin, 
-  Mail, 
-  Phone 
+import {
+  ArrowRight,
+  ArrowUp,
+  MessageCircle,
+  QrCode,
+  MapPin,
+  Mail,
+  Phone
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
@@ -80,20 +80,20 @@ export function Footer() {
 
   return (
     <div className="relative bg-premier-cream">
-      {/* ── Curvy Arc Top SVG Divider ──────────────────────── */}
+      {/* ── Silky Smooth Liquid Wave Top SVG Divider ──────────────────── */}
       <div className="relative w-full overflow-hidden leading-none z-10 -mb-1 pointer-events-none">
-        <svg className="relative block w-full h-12 sm:h-16 md:h-20 text-[#091E16] fill-current" viewBox="0 0 1440 100" preserveAspectRatio="none">
-          <path d="M 0,100 C 360,15 1080,15 1440,100 L 1440,100 L 0,100 Z" />
+        <svg className="relative block w-full h-14 sm:h-20 md:h-24 text-[#091E16] fill-current" viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path d="M 0,75 C 200,75 280,15 420,15 C 560,15 640,65 780,65 C 920,65 1000,15 1140,15 C 1280,15 1360,50 1440,50 L 1440,120 L 0,120 Z" />
         </svg>
       </div>
 
       {/* ── Dark Curvy Footer Container ───────────────────── */}
       <footer className="bg-[#091E16] text-slate-200 pt-8 pb-12 text-body relative">
         <div className="section-container space-y-12">
-          
+
           {/* 4-Column Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-start">
-            
+
             {/* Col 1: Brand & Description & Social Icons */}
             <div className="lg:col-span-4 space-y-4">
               <Link href="/" className="flex items-center gap-3 focus:outline-none" aria-label="Premier LMS Home">
@@ -113,7 +113,7 @@ export function Footer() {
                   </span>
                 </div>
               </Link>
-              
+
               <p className="text-sm leading-relaxed text-slate-300 max-w-sm">
                 Premier Learning Management System owned and instructed by Raja Gulfam. Empowering certified professionals globally with accredited education.
               </p>
@@ -121,27 +121,46 @@ export function Footer() {
               {/* Social Media Buttons */}
               <div className="flex items-center gap-3 pt-2">
                 {/* Twitter / X */}
-                <a href="#" aria-label="Twitter / X" className="w-9 h-9 rounded-full bg-white/10 hover:bg-emerald-400 hover:text-slate-950 text-white flex items-center justify-center transition-all duration-200 border border-white/20 shadow-sm">
-                  <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                <a
+                  href="#"
+                  aria-label="Twitter / X"
+                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#000000] hover:border-black flex items-center justify-center transition-all duration-300 border border-white/25 shadow-sm group hover:-translate-y-1"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="#FAF6EE" />
                   </svg>
                 </a>
+
                 {/* Facebook */}
-                <a href="#" aria-label="Facebook" className="w-9 h-9 rounded-full bg-white/10 hover:bg-emerald-400 hover:text-slate-950 text-white flex items-center justify-center transition-all duration-200 border border-white/20 shadow-sm">
-                  <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                <a
+                  href="#"
+                  aria-label="Facebook"
+                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#1877F2] hover:border-[#1877F2] flex items-center justify-center transition-all duration-300 border border-white/25 shadow-sm group hover:-translate-y-1"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#FAF6EE" />
                   </svg>
                 </a>
+
                 {/* YouTube */}
-                <a href="#" aria-label="YouTube" className="w-9 h-9 rounded-full bg-white/10 hover:bg-emerald-400 hover:text-slate-950 text-white flex items-center justify-center transition-all duration-200 border border-white/20 shadow-sm">
-                  <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
-                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                <a
+                  href="#"
+                  aria-label="YouTube"
+                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#FF0000] hover:border-[#FF0000] flex items-center justify-center transition-all duration-300 border border-white/25 shadow-sm group hover:-translate-y-1"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#FAF6EE" />
                   </svg>
                 </a>
+
                 {/* LinkedIn */}
-                <a href="#" aria-label="LinkedIn" className="w-9 h-9 rounded-full bg-white/10 hover:bg-emerald-400 hover:text-slate-950 text-white flex items-center justify-center transition-all duration-200 border border-white/20 shadow-sm">
-                  <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
-                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                <a
+                  href="#"
+                  aria-label="LinkedIn"
+                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#0A66C2] hover:border-[#0A66C2] flex items-center justify-center transition-all duration-300 border border-white/25 shadow-sm group hover:-translate-y-1"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" fill="#FAF6EE" />
                   </svg>
                 </a>
               </div>
@@ -208,7 +227,7 @@ export function Footer() {
                 <div className="flex flex-col items-center gap-1 shrink-0">
                   <div className="bg-white p-1.5 rounded-xl border border-slate-700 shadow-sm">
                     <svg className="w-14 h-14 text-slate-900" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm8-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm13-2h3v3h-3v-3zm0 5h3v3h-3v-3zm-5-5h3v3h-3v-3zm0 5h3v3h-3v-3zm2.5-2.5h3v3h-3v-3zM5 5h2v2H5V5zm10 0h2v2h-2V5zM5 17h2v2H5v-2z"/>
+                      <path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm8-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm13-2h3v3h-3v-3zm0 5h3v3h-3v-3zm-5-5h3v3h-3v-3zm0 5h3v3h-3v-3zm2.5-2.5h3v3h-3v-3zM5 5h2v2H5V5zm10 0h2v2h-2V5zM5 17h2v2H5v-2z" />
                     </svg>
                   </div>
                   <span className="text-[10px] font-semibold text-emerald-300 uppercase tracking-wide flex items-center gap-1 mt-1">
@@ -230,10 +249,10 @@ export function Footer() {
                     title="Download on Google Play (Fake Route)"
                   >
                     <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
-                      <path d="M3.609 1.814L13.792 12 3.61 22.186a1.99 1.99 0 0 1-.61-1.416V3.23c0-.547.224-1.042.609-1.416z" fill="#00E676"/>
-                      <path d="M15.206 13.414l2.766-2.766-13.682-7.9 10.916 10.666z" fill="#FFC107"/>
-                      <path d="M15.206 10.586l2.766-1.342L4.29 1.344l10.916 10.666z" fill="#FF3D00"/>
-                      <path d="M17.972 9.244l-2.766 1.342 2.342 2.342 2.342-2.342-1.918-1.342z" fill="#2196F3"/>
+                      <path d="M3.609 1.814L13.792 12 3.61 22.186a1.99 1.99 0 0 1-.61-1.416V3.23c0-.547.224-1.042.609-1.416z" fill="#00E676" />
+                      <path d="M15.206 13.414l2.766-2.766-13.682-7.9 10.916 10.666z" fill="#FFC107" />
+                      <path d="M15.206 10.586l2.766-1.342L4.29 1.344l10.916 10.666z" fill="#FF3D00" />
+                      <path d="M17.972 9.244l-2.766 1.342 2.342 2.342 2.342-2.342-1.918-1.342z" fill="#2196F3" />
                     </svg>
                     <div className="flex flex-col text-left leading-none">
                       <span className="text-[8px] uppercase tracking-wider text-slate-300 font-semibold">GET IT ON</span>

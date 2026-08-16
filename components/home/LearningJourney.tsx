@@ -38,13 +38,13 @@ export function LearningJourney() {
             {/* Header */}
             <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
               <span className="inline-block px-4 py-1.5 rounded-full bg-premier-green/10 text-premier-green text-xs font-body font-semibold uppercase tracking-wider">
-                Step-by-Step Path
+                THE PROCESS
               </span>
               <h2 className="text-4xl sm:text-[48px] font-heading font-extrabold text-heading leading-[1.1]" style={{ letterSpacing: '-0.03em' }}>
-                Your Structured Learning Journey
+                Six Steps to Certification
               </h2>
               <p className="text-body text-base sm:text-lg">
-                Scroll to experience your step-by-step roadmap to professional excellence.
+                See exactly what you need to do to complete a course.
               </p>
             </div>
 
@@ -135,13 +135,13 @@ export function LearningJourney() {
         <div className="section-container">
           <div className="text-center max-w-2xl mx-auto mb-12 space-y-4">
             <span className="inline-block px-4 py-1.5 rounded-full bg-premier-green/10 text-premier-green text-xs font-body font-semibold uppercase tracking-wider">
-              Step-by-Step Path
+              THE PROCESS
             </span>
             <h2 className="text-3xl font-heading font-extrabold text-heading">
-              Your Structured Learning Journey
+              Six Steps to Certification
             </h2>
             <p className="text-body text-sm sm:text-base">
-              From enrollment to certification, experience a seamless roadmap to success.
+              See exactly what you need to do to complete a course.
             </p>
           </div>
 
