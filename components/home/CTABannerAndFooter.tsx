@@ -18,10 +18,11 @@ export function CTABanner() {
   return (
     <section className="section-padding bg-premier-cream relative overflow-hidden">
       <div className="section-container">
-        <div className="relative rounded-3xl bg-gradient-to-br from-premier-green-dark via-premier-green to-premier-green-dark p-8 sm:p-14 md:p-16 text-white shadow-card-hover overflow-hidden">
-          {/* Subtle background circles */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-premier-gold/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/3" />
-          <div className="absolute bottom-0 left-0 w-72 h-72 bg-emerald-400/10 rounded-full blur-3xl pointer-events-none translate-y-1/3 -translate-x-1/4" />
+        <div className="relative rounded-3xl bg-gradient-to-r from-[#002618] via-[#003B26] to-[#0B5238] p-8 sm:p-14 md:p-16 text-white shadow-card-hover overflow-hidden border border-emerald-500/20">
+          {/* Two-toned ambient glow layers */}
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(202,146,8,0.22)_0%,transparent_65%)] pointer-events-none -translate-y-1/3 translate-x-1/4" />
+          <div className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-[radial-gradient(circle,rgba(16,185,129,0.2)_0%,transparent_65%)] pointer-events-none translate-y-1/3 -translate-x-1/4" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20 pointer-events-none" />
 
           <div className="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 space-y-4">
