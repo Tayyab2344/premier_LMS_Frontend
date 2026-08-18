@@ -486,15 +486,15 @@ export default function NewsPage() {
         {/* ── Weekly FBR & SECP Newsletter Signup ───────────── */}
         <div className="rounded-3xl bg-slate-950 text-white p-8 sm:p-12 border border-slate-800 shadow-card relative overflow-hidden">
           {/* Subtle glow background */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-premier-green-600/20 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-premier-green/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-72 h-72 bg-premier-gold/15 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-2xl space-y-4">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/10 border border-white/20 text-amber-300 text-xs font-body font-bold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/10 border border-white/20 text-premier-gold text-xs font-heading font-bold uppercase tracking-wider">
               <Mail className="w-3.5 h-3.5" />
               Weekly Regulatory Digest
             </span>
-            <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-white tracking-tight">
+            <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-white tracking-tight leading-snug">
               Get Instant FBR Circulars &amp; SECP SRO Alerts in Your Inbox
             </h3>
             <p className="text-slate-300 text-sm font-body leading-relaxed">
@@ -514,20 +514,20 @@ export default function NewsPage() {
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
                   placeholder="Enter your email (e.g. practitioner@domain.pk)"
-                  className="flex-1 px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs placeholder:text-slate-400 focus:outline-none focus:border-premier-green focus:ring-1 focus:ring-premier-green"
+                  className="flex-1 px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs placeholder:text-slate-400 focus:outline-none focus:border-premier-gold focus:ring-1 focus:ring-premier-gold"
                 />
                 <button
                   type="submit"
-                  className="btn-accent !py-3 !px-6 text-xs font-body font-bold whitespace-nowrap justify-center focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
+                  className="px-6 py-3 rounded-xl bg-premier-gold text-slate-950 hover:bg-amber-400 text-xs font-heading font-extrabold tracking-wide uppercase shadow-md transition-all whitespace-nowrap justify-center focus:outline-none focus:ring-2 focus:ring-premier-gold focus:ring-offset-2 focus:ring-offset-slate-950"
                 >
                   Subscribe for Free
                 </button>
               </form>
             )}
 
-            <div className="flex items-center gap-4 text-[11px] text-slate-400 pt-2 font-mono">
-              <span className="flex items-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> No spam. Unsubscribe anytime.
+            <div className="flex items-center gap-4 text-xs text-slate-300 pt-2 font-body font-medium">
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" /> No spam. Unsubscribe anytime.
               </span>
             </div>
           </div>
