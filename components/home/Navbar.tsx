@@ -48,9 +48,9 @@ export function Navbar() {
     <>
       {/* ── Fixed Top Live Ticker Bar (Above Navbar) ────────────────────── */}
       <div className="fixed top-0 inset-x-0 z-[60] h-9 bg-[#1B3B2C] border-b border-[#2A523E] flex items-center overflow-hidden">
-        <div className="section-container flex items-center w-full">
-          {/* LIVE Pill */}
-          <div className="shrink-0 flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-red-600 select-none mr-3 shadow-sm">
+        <div className="flex items-center w-full pl-2 sm:pl-3 pr-4">
+          {/* LIVE Pill (Very Left) */}
+          <div className="shrink-0 flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-600 select-none mr-3 shadow-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
             <span className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-white">LIVE</span>
           </div>
@@ -79,7 +79,7 @@ export function Navbar() {
             : isDarkHeroPage
               ? 'bg-slate-950/40 backdrop-blur-md border-b border-white/10 text-white'
               : 'bg-transparent text-slate-900'
-          }`}
+        }`}
       >
         <div className="section-container">
           <div className="flex items-center justify-between h-[72px]">
@@ -101,11 +101,11 @@ export function Navbar() {
               <div className="flex flex-col leading-none">
                 <span
                   className={`font-heading font-extrabold text-lg tracking-tight transition-colors ${isDarkHeader
-                      ? 'text-white group-hover:text-emerald-300'
-                      : 'text-slate-900 group-hover:text-premier-green'
+                      ? 'text-white group-hover:text-premier-gold'
+                      : 'text-premier-green group-hover:text-premier-gold'
                     }`}
                 >
-                  Premier <span className={isDarkHeader ? 'text-emerald-400' : 'text-emerald-700'}>Academy</span>
+                  Premier <span className="text-premier-gold font-extrabold">Academy</span>
                 </span>
                 <span
                   className={`text-[10px] font-body uppercase tracking-widest font-semibold mt-1 transition-colors ${isDarkHeader ? 'text-slate-300' : 'text-slate-500'

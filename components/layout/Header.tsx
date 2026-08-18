@@ -62,8 +62,8 @@ export default function Header() {
             priority
           />
           <div className="flex flex-col leading-none">
-            <span className="font-heading font-extrabold text-base text-slate-900 tracking-tight">
-              Premier <span className="text-emerald-700">Academy</span>
+            <span className="font-heading font-extrabold text-base text-premier-green tracking-tight">
+              Premier <span className="text-premier-gold font-extrabold">Academy</span>
             </span>
           </div>
         </Link>
