@@ -17,14 +17,24 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     const lenis = lenisRef.current?.lenis;
     if (!lenis) return;
 
-    const handleScroll = () => {
+    // Sync ScrollTrigger updates with Lenis scroll RAF
+    const updateScroll = () => {
       ScrollTrigger.update();
     };
 
-    lenis.on('scroll', handleScroll);
+    lenis.on('scroll', updateScroll);
+
+    // Sync GSAP ticker with Lenis for 60Hz/120Hz/144Hz smooth animations
+    const updateTicker = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(updateTicker);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
-      lenis.off('scroll', handleScroll);
+      lenis.off('scroll', updateScroll);
+      gsap.ticker.remove(updateTicker);
     };
   }, []);
 
@@ -39,7 +49,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
         gestureOrientation: 'vertical',
         smoothWheel: true,
         wheelMultiplier: 1,
-        touchMultiplier: 1,
+        touchMultiplier: 1.2,
       }}
     >
       {children}

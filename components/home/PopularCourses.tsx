@@ -13,14 +13,12 @@ const availableCourses = COURSES_DATA.filter((c) => c.status === 'Available');
 export function PopularCourses() {
   return (
     <section
-      className="relative border-t overflow-hidden"
+      className="relative section-padding bg-premier-cream border-t border-border overflow-hidden"
       id="courses"
-      style={{ backgroundColor: '#FAF6EE', borderColor: '#E6DFD0', paddingTop: '72px', paddingBottom: '80px' }}
     >
       {/* Background radial glow */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] rounded-full blur-[100px] opacity-30 pointer-events-none"
-        style={{ backgroundColor: '#D9A544' }}
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] rounded-full blur-[100px] opacity-20 pointer-events-none bg-premier-green/20"
       />
 
       <div className="section-container relative z-10 max-w-5xl mx-auto space-y-7">
@@ -29,22 +27,20 @@ export function PopularCourses() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
             <h2
-              className="text-2xl sm:text-3xl font-heading font-extrabold leading-tight"
-              style={{ color: '#1B3B2C', letterSpacing: '-0.025em' }}
+              className="text-2xl sm:text-3xl font-heading font-extrabold text-heading leading-tight tracking-tight"
             >
               Courses That Are Currently Happening
             </h2>
-            <p className="mt-1 text-xs sm:text-sm font-body" style={{ color: '#8A7D66' }}>
+            <p className="mt-1 text-xs sm:text-sm font-body text-slate-600">
               Live ongoing masterclasses &amp; accredited training sessions open for immediate enrollment
             </p>
           </div>
 
           <Link
             href="/courses"
-            className="cta-blink shrink-0 inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-body font-bold border transition-colors hover:opacity-90 whitespace-nowrap"
-            style={{ backgroundColor: '#1B3B2C', color: '#D9A544', borderColor: '#1B3B2C' }}
+            className="cta-blink shrink-0 inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-heading font-bold bg-premier-green text-white hover:bg-premier-green-800 transition-colors whitespace-nowrap shadow-soft"
           >
-            <Zap className="w-3.5 h-3.5" />
+            <Zap className="w-3.5 h-3.5 text-amber-300" />
             Explore All Courses
             <ChevronRight className="w-3.5 h-3.5" />
           </Link>

@@ -1,15 +1,20 @@
 const nextConfig = {
   reactStrictMode: false,
+  swcMinify: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
   images: {
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
     ],
+  },
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'framer-motion', 'gsap'],
   },
 
   // Handle Zoom SDK's WebAssembly files and package resolution aliases
@@ -25,8 +30,6 @@ const nextConfig = {
     }
 
     // Avoid Webpack trying to resolve unpublished/internal Zoom dependencies.
-    // This MUST be applied to both client and server (SSR) builds, otherwise
-    // the dev server will crash when pre-compiling the component for SSR.
     config.resolve.alias = {
       ...config.resolve.alias,
       '@zoom/download-manager': false,
@@ -35,9 +38,7 @@ const nextConfig = {
     return config;
   },
 
-  // Scoped COEP/COOP headers — ONLY on classroom routes where Zoom SDK runs.
-  // These headers enable SharedArrayBuffer (required by Zoom's WASM video pipeline)
-  // but would break third-party iframes (YouTube) on other pages if applied globally.
+  // Headers for Zoom SDK WASM pipeline and static asset caching
   async headers() {
     return [
       {
@@ -47,8 +48,20 @@ const nextConfig = {
           { key: 'Cross-Origin-Embedder-Policy', value: 'require-corp' },
         ],
       },
+      {
+        source: '/assets/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      {
+        source: '/about/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
     ];
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
