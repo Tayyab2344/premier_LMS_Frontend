@@ -16,7 +16,7 @@ import { Course } from '@/lib/coursesData';
 export function TabOverview({ course }: { course: Course }) {
   return (
     <div id="overview" className="space-y-10">
-      
+
       {/* Full Description */}
       <div className="space-y-4">
         <h3 className="text-xl font-heading font-bold text-heading">Course Overview</h3>
