@@ -112,6 +112,8 @@ export function StickyScrollFeatures({
               <motion.div
                 key={feature.id || idx}
                 onClick={() => setActiveIndex(idx)}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
                 layout
                 initial={false}
                 animate={{
