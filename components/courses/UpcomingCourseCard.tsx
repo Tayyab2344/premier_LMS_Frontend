@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Bell, Lock, ArrowRight, Sparkles } from 'lucide-react';
+import { Bell, ArrowRight, Sparkles } from 'lucide-react';
 import Image from 'next/image';
 import { Course } from '@/lib/coursesData';
 
@@ -33,17 +33,7 @@ export function UpcomingCourseCard({ course, onNotifyClick }: UpcomingCourseCard
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent pointer-events-none" />
 
-        {/* Top Badges */}
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-          <span className="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-heading text-[11px] font-heading font-bold shadow-soft">
-            {course.category}
-          </span>
 
-          <span className="px-2.5 py-1 rounded-full bg-slate-900/90 border border-amber-400/40 text-amber-300 text-[10px] font-heading font-bold uppercase tracking-wider flex items-center gap-1 shadow-soft">
-            <Lock className="w-3 h-3 text-amber-400" />
-            Coming Soon
-          </span>
-        </div>
       </div>
 
       {/* Card Content */}

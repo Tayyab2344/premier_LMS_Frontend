@@ -2,18 +2,12 @@
 
 import React, { useState } from 'react';
 import {
-  ShieldCheck,
-  Award,
-  FolderGit2,
-  Download,
-  Users,
-  MessageSquare,
   Lock,
   Bell,
   ArrowRight,
   Share2,
   Smartphone,
-  Video
+  Download,
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -36,23 +30,10 @@ export function CourseSidebar({ course, onNotifyClick }: CourseSidebarProps) {
     }
   };
 
-  const includesList = [
-    { icon: Smartphone, text: 'Premier LMS Student Mobile App (iOS & Android)' },
-    { icon: ShieldCheck, text: 'Access Active During Course + 2 Months After' },
-    { icon: Award, text: 'Accredited Digital Diploma Certificate' },
-    { icon: FolderGit2, text: `${course.projects.length || 3} Real Case Studies & FBR Portal Demos` },
-    { icon: Video, text: 'Weekly Live & HD Recorded Masterclasses' },
-    { icon: Download, text: 'Downloadable Legal & Tax Formats (Excel/Word)' },
-    { icon: Users, text: 'Exclusive Tax Bar Student Community' },
-    { icon: MessageSquare, text: 'Direct Mentorship from Raja Gulfam' },
-  ];
-
   return (
     <div className="sticky top-[140px] space-y-6">
-      
       {/* Main Sidebar Card */}
       <div className="rounded-3xl bg-white border border-border p-6 sm:p-7 shadow-card-hover space-y-6 overflow-hidden">
-        
         {/* Preview Media Thumbnail */}
         <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-slate-100 border border-border shadow-soft group">
           <Image
@@ -76,9 +57,13 @@ export function CourseSidebar({ course, onNotifyClick }: CourseSidebarProps) {
             <div>
               {course.price ? (
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-mono font-extrabold text-heading">PKR {course.price.toLocaleString()}</span>
+                  <span className="text-3xl font-mono font-extrabold text-heading">
+                    PKR {course.price.toLocaleString()}
+                  </span>
                   {course.originalPrice > course.price && (
-                    <span className="text-base font-mono text-body/50 line-through">PKR {course.originalPrice.toLocaleString()}</span>
+                    <span className="text-base font-mono text-body/50 line-through">
+                      PKR {course.originalPrice.toLocaleString()}
+                    </span>
                   )}
                   {course.discountPercent && (
                     <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 text-xs font-bold font-heading">
@@ -149,28 +134,7 @@ export function CourseSidebar({ course, onNotifyClick }: CourseSidebarProps) {
             {copied ? 'Copied!' : 'Share'}
           </button>
         </div>
-
-        {/* Course Includes Checklist */}
-        <div className="pt-5 border-t border-border space-y-3">
-          <h4 className="text-xs font-heading font-bold uppercase tracking-wider text-heading">
-            This Course Includes:
-          </h4>
-
-          <div className="space-y-2.5">
-            {includesList.map((item, idx) => {
-              const IconComp = item.icon;
-              return (
-                <div key={idx} className="flex items-center gap-3 text-xs text-body">
-                  <IconComp className="w-4 h-4 text-premier-green shrink-0" />
-                  <span>{item.text}</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
       </div>
-
     </div>
   );
 }

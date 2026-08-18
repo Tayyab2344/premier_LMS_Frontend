@@ -67,91 +67,97 @@ export function UpcomingAcademySection({
   }, [upcomingCourses, searchQuery, selectedCategory]);
 
   return (
-    <section id="upcoming-academy" className="section-padding bg-[#11241B] text-white min-h-[600px] border-t border-[#1E3B2E]">
-      <div className="section-container space-y-10">
-        
-        {/* Section Header */}
-        <div className="max-w-3xl space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1B3B2C] text-[#D9A544] border border-[#2A523E] text-xs font-heading font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5" />
-            Academy Expansion Roadmap
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white">
-            Coming Soon
-          </h2>
-
-          <p className="text-[#A8BFA3] text-base sm:text-lg leading-relaxed">
-            We&apos;re expanding the academy with specialized courses in accounting, taxation, corporate law, and financial advisory. Get notified when enrollment opens to claim early-bird discounts.
-          </p>
-        </div>
-
-        {/* Filter / Search Bar */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#1B3B2C]/90 border border-[#2A523E] shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
+    <section id="upcoming-academy" className="border-t border-[#1E3B2E]">
+      {/* ── Top Header Block (Dark Green Background ONLY) ────────────────── */}
+      <div className="bg-[#11241B] text-white pt-16 sm:pt-20 pb-12">
+        <div className="section-container space-y-8">
           
-          {/* Search Box */}
-          <div className="relative w-full md:w-80">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B9478]" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => onSearchChange(e.target.value)}
-              placeholder="Search upcoming courses..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#11241B] border border-[#2A523E] text-xs text-white placeholder:text-[#6B9478] focus:outline-none focus:ring-2 focus:ring-[#D9A544] transition-all"
-            />
+          {/* Section Header */}
+          <div className="max-w-3xl space-y-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1B3B2C] text-[#D9A544] border border-[#2A523E] text-xs font-heading font-bold uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5" />
+              Academy Expansion Roadmap
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white">
+              Coming Soon
+            </h2>
+
+            <p className="text-[#A8BFA3] text-base sm:text-lg leading-relaxed">
+              We&apos;re expanding the academy with specialized courses in accounting, taxation, corporate law, and financial advisory. Get notified when enrollment opens to claim early-bird discounts.
+            </p>
           </div>
 
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
-            {[
-              { id: 'All', label: `All Upcoming (${upcomingCourses.length})` },
-              { id: 'Taxation', label: 'Taxation' },
-              { id: 'Accounting & Finance', label: 'Accounting & Finance' },
-              { id: 'Law & Compliance', label: 'Law & Compliance' },
-            ].map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => onCategoryChange(cat.id)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-heading font-bold transition-all ${
-                  selectedCategory === cat.id
-                    ? 'bg-[#D9A544] text-[#1B3B2C] shadow-md font-extrabold'
-                    : 'bg-[#11241B] text-[#A8BFA3] hover:bg-[#1B3B2C] hover:text-white border border-[#2A523E]'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
+          {/* Filter / Search Bar */}
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#1B3B2C]/90 border border-[#2A523E] shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            {/* Search Box */}
+            <div className="relative w-full md:w-80">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B9478]" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => onSearchChange(e.target.value)}
+                placeholder="Search upcoming courses..."
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#11241B] border border-[#2A523E] text-xs text-white placeholder:text-[#6B9478] focus:outline-none focus:ring-2 focus:ring-[#D9A544] transition-all"
+              />
+            </div>
+
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+              {[
+                { id: 'All', label: `All Upcoming (${upcomingCourses.length})` },
+                { id: 'Taxation', label: 'Taxation' },
+                { id: 'Accounting & Finance', label: 'Accounting & Finance' },
+                { id: 'Law & Compliance', label: 'Law & Compliance' },
+              ].map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => onCategoryChange(cat.id)}
+                  className={`px-3.5 py-2 rounded-xl text-xs font-heading font-bold transition-all ${
+                    selectedCategory === cat.id
+                      ? 'bg-[#D9A544] text-[#1B3B2C] shadow-md font-extrabold'
+                      : 'bg-[#11241B] text-[#A8BFA3] hover:bg-[#1B3B2C] hover:text-white border border-[#2A523E]'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* 3x3 Matrix Grid Layout */}
-        {filteredUpcoming.length === 0 ? (
-          /* Empty State */
-          <div className="py-16 text-center space-y-4 max-w-md mx-auto">
-            <div className="w-14 h-14 rounded-full bg-[#1B3B2C] text-[#D9A544] flex items-center justify-center mx-auto border border-[#2A523E]">
-              <SlidersHorizontal className="w-6 h-6" />
+      {/* ── Bottom Content Block (Beige / Cream Background for Upcoming Courses Cards) ── */}
+      <div className="bg-premier-cream py-14 sm:py-16 border-t border-border">
+        <div className="section-container">
+          {filteredUpcoming.length === 0 ? (
+            /* Empty State */
+            <div className="py-16 text-center space-y-4 max-w-md mx-auto">
+              <div className="w-14 h-14 rounded-full bg-white text-premier-green flex items-center justify-center mx-auto border border-border shadow-xs">
+                <SlidersHorizontal className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-heading font-bold text-heading">No Upcoming Courses Found</h3>
+              <p className="text-xs text-muted">Try adjusting your search query or switching categories.</p>
+              <button
+                onClick={() => {
+                  onSearchChange('');
+                  onCategoryChange('All');
+                }}
+                className="px-5 py-2.5 rounded-xl bg-premier-green text-white text-xs font-heading font-extrabold uppercase tracking-wide shadow-md mx-auto hover:bg-premier-green-dark transition-colors"
+              >
+                Reset Filters
+              </button>
             </div>
-            <h3 className="text-lg font-heading font-bold text-white">No Upcoming Courses Found</h3>
-            <p className="text-xs text-[#A8BFA3]">Try adjusting your search query or switching categories.</p>
-            <button
-              onClick={() => {
-                onSearchChange('');
-                onCategoryChange('All');
-              }}
-              className="px-5 py-2.5 rounded-xl bg-[#D9A544] text-[#1B3B2C] text-xs font-heading font-extrabold uppercase tracking-wide shadow-md mx-auto"
-            >
-              Reset Filters
-            </button>
-          </div>
-        ) : (
-          /* 3 Columns x 3 Rows = 9 Cards Matrix Grid */
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-            {filteredUpcoming.map((course) => (
-              <UpcomingCourseCard key={course.id} course={course} onNotifyClick={onNotifyClick} />
-            ))}
-          </div>
-        )}
-
+          ) : (
+            /* 3 Columns x 3 Rows = 9 Cards Matrix Grid */
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+              {filteredUpcoming.map((course) => (
+                <UpcomingCourseCard key={course.id} course={course} onNotifyClick={onNotifyClick} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );
