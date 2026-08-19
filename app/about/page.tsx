@@ -1,6 +1,7 @@
 import React from 'react';
 import { AcademyStory } from '@/components/about/AcademyStory';
 import { VisionMissionValuesHub } from '@/components/about/VisionMissionValuesHub';
+import { ProfessionalJourney } from '@/src/components/premier-lms/ProfessionalJourney';
 
 export default function AboutPage() {
   return (
@@ -10,6 +11,9 @@ export default function AboutPage() {
 
       {/* Vision, Mission & Core Values Hub */}
       <VisionMissionValuesHub />
+
+      {/* Standalone Professional Journey (3D Photo Stack) */}
+      <ProfessionalJourney />
     </main>
   );
 }

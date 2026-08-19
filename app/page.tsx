@@ -9,6 +9,7 @@ import { LearningJourney } from '@/components/home/LearningJourney';
 import { PopularCourses } from '@/components/home/PopularCourses';
 import { FAQSection } from '@/components/home/FAQSection';
 import { CTABanner } from '@/components/home/CTABannerAndFooter';
+import { ProfessionalJourney } from '@/src/components/premier-lms/ProfessionalJourney';
 
 export default function HomePage() {
   return (
@@ -34,7 +35,10 @@ export default function HomePage() {
       {/* 7. Frequently Asked Questions (Accordion) */}
       <FAQSection />
 
-      {/* 8. Call To Action Banner */}
+      {/* 8. Standalone Professional Journey (3D Photo Stack) */}
+      <ProfessionalJourney />
+
+      {/* 9. Call To Action Banner */}
       <CTABanner />
     </main>
   );
