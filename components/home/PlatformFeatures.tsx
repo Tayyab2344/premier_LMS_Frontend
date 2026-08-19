@@ -38,13 +38,11 @@ const featureBlocks: FeatureItem[] = [
 
 export function PlatformFeatures() {
   return (
-    <section className="section-padding bg-premier-cream border-t border-border" id="features">
-      <div className="section-container space-y-16">
+    <section className="pt-6 pb-12 sm:pt-8 sm:pb-16 bg-premier-cream border-t border-border" id="features">
+      <div className="section-container space-y-2 sm:space-y-3">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto space-y-4">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-premier-green/10 text-premier-green text-xs font-body font-semibold uppercase tracking-wider border border-premier-green/15">
-            Platform Features
-          </span>
+        <div className="text-center max-w-2xl mx-auto space-y-2">
+          
           <h2 className="text-4xl sm:text-[48px] font-heading font-extrabold text-heading leading-[1.1]" style={{ letterSpacing: '-0.03em' }}>
             State-of-the-Art Learning Tools
           </h2>

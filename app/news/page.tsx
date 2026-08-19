@@ -1,19 +1,19 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Calendar,
   Clock,
-  Search,
   ArrowRight,
-  Filter,
   CheckCircle2,
   FileText,
   X,
   BookOpen,
   Mail,
   ShieldCheck,
+  Newspaper,
+  Award,
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -184,34 +184,29 @@ const newsArticles: NewsArticle[] = [
   },
 ];
 
-const categories = [
-  'All Updates',
-  'FBR SROs & Income Tax',
-  'SECP Circulars',
-  'Sales Tax & PRA',
-  'Customs & FED',
-  'High Court Rulings',
-  'Academy News',
-];
-
 export default function NewsPage() {
-  const [selectedCategory, setSelectedCategory] = useState('All Updates');
-  const [searchQuery, setSearchQuery] = useState('');
   const [activeArticle, setActiveArticle] = useState<NewsArticle | null>(null);
   const [subscribed, setSubscribed] = useState(false);
   const [emailInput, setEmailInput] = useState('');
 
-  const featured = newsArticles.find((a) => a.featured) || newsArticles[0];
+  // Lock background scroll when article modal is active
+  useEffect(() => {
+    if (activeArticle) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+      document.documentElement.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+      document.documentElement.style.overflow = 'unset';
+    };
+  }, [activeArticle]);
 
-  const filteredArticles = newsArticles.filter((article) => {
-    const matchesCategory =
-      selectedCategory === 'All Updates' || article.category === selectedCategory;
-    const matchesSearch =
-      article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      article.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      article.category.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const leadStory = newsArticles[0];
+  const secondaryStories = newsArticles.slice(1, 3);
+  const sidebarBriefings = newsArticles.slice(1);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -223,264 +218,331 @@ export default function NewsPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 pt-[115px] pb-20">
-      <div className="section-container space-y-12">
-        {/* ── Featured Article Card Banner ──────────────────── */}
-        {featured && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="rounded-3xl bg-white border border-border overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 grid lg:grid-cols-12 gap-0"
-          >
-            <div className="lg:col-span-7 relative min-h-[280px] lg:min-h-[400px] bg-slate-900">
-              <Image
-                src={featured.image}
-                alt={featured.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 60vw"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent" />
-              <div className="absolute top-4 left-4 z-10">
-                <span className="px-3.5 py-1 rounded-full bg-premier-green text-white text-xs font-heading font-extrabold uppercase tracking-wider shadow-sm">
-                  ★ Featured Regulatory Update
-                </span>
+      <div className="section-container space-y-10">
+
+        {/* ── Gazette Editorial Masthead Header ────────────────────── */}
+        <div className="border-b-2 border-premier-green/30 pb-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 text-premier-green text-xs font-mono font-bold uppercase tracking-wider mb-1">
+                <Newspaper className="w-4 h-4 text-premier-green" />
+                Premier Academy Regulatory & Legal Gazette
               </div>
+              <h1 className="text-3xl sm:text-4xl font-heading font-extrabold text-heading tracking-tight">
+                Corporate Tax & Legislative Intelligence
+              </h1>
             </div>
-
-            <div className="lg:col-span-5 p-8 flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between text-xs text-body">
-                  <span className="font-heading font-bold text-premier-green uppercase tracking-wider">
-                    {featured.category}
-                  </span>
-                  <div className="flex items-center gap-3 text-slate-500 font-mono">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {featured.date}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5" />
-                      {featured.readTime}
-                    </span>
-                  </div>
-                </div>
-
-                <h2 className="text-xl sm:text-2xl font-heading font-extrabold text-heading leading-snug hover:text-premier-green transition-colors cursor-pointer" onClick={() => setActiveArticle(featured)}>
-                  {featured.title}
-                </h2>
-
-                <p className="text-body text-sm leading-relaxed line-clamp-3">
-                  {featured.summary}
-                </p>
-
-                {featured.officialRef && (
-                  <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono text-heading flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-premier-green shrink-0" />
-                    <span className="truncate">Ref: {featured.officialRef}</span>
-                  </div>
-                )}
-              </div>
-
-              <div className="pt-4 border-t border-border flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="relative w-9 h-9 rounded-full overflow-hidden border border-border bg-slate-200 shrink-0">
-                    <Image
-                      src={featured.authorImage}
-                      alt={featured.author}
-                      fill
-                      className="object-cover object-top"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-heading font-bold text-heading">{featured.author}</h4>
-                    <p className="text-[10px] text-body">{featured.authorTitle}</p>
-                  </div>
-                </div>
-
-                <button
-                  onClick={() => setActiveArticle(featured)}
-                  className="btn-primary !py-2.5 !px-4 text-xs font-heading font-bold flex items-center gap-1.5"
-                >
-                  Read Full Article
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-
-        {/* ── Search & Category Filter Bar ─────────────────── */}
-        <div className="space-y-6 pt-4">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 sm:p-6 rounded-2xl border border-border shadow-soft">
-            <div className="relative flex-1 max-w-md">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search FBR SROs, SECP circulars, court rulings..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs text-heading focus:outline-none focus:border-premier-green focus:ring-1 focus:ring-premier-green bg-slate-50/50"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
-              <Filter className="w-4 h-4 text-premier-green shrink-0 hidden sm:block" />
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-heading font-bold whitespace-nowrap transition-all ${
-                    selectedCategory === cat
-                      ? 'bg-premier-green text-white shadow-sm'
-                      : 'bg-slate-100 text-body hover:bg-slate-200 border border-slate-200'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
+            <div className="text-left md:text-right font-mono text-xs text-slate-500">
+              
+              <p className="font-semibold text-slate-700">Curated by Raja Gulfam (Advocate High Court)</p>
             </div>
           </div>
         </div>
 
-        {/* ── Articles Grid ────────────────────────────────── */}
-        <div className="space-y-6">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-heading font-bold text-heading">
-              Latest Regulatory Publications ({filteredArticles.length})
-            </h3>
-            {selectedCategory !== 'All Updates' && (
-              <button
-                onClick={() => {
-                  setSelectedCategory('All Updates');
-                  setSearchQuery('');
-                }}
-                className="text-xs text-premier-green hover:underline font-heading font-semibold"
-              >
-                Clear Filters
-              </button>
-            )}
-          </div>
+        {/* ── Main Gazette Editorial Grid (8 cols Main Lead Story + 4 cols Regulatory Sidebar) ── */}
+        <div className="grid lg:grid-cols-12 gap-8 items-start">
 
-          {filteredArticles.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-border p-12 text-center space-y-3">
-              <FileText className="w-10 h-10 text-slate-300 mx-auto" />
-              <h4 className="text-base font-heading font-bold text-heading">No regulatory updates match your search</h4>
-              <p className="text-xs text-body">Try searching for terms like "FBR", "SECP", "Sales Tax", or "High Court".</p>
-              <button
-                onClick={() => {
-                  setSelectedCategory('All Updates');
-                  setSearchQuery('');
-                }}
-                className="btn-secondary !py-2 text-xs font-heading font-bold"
+          {/* LEFT 8 COLUMNS: Lead Front Page Story + Secondary Headlines */}
+          <div className="lg:col-span-8 space-y-8">
+            
+            {/* Main Lead Story Card */}
+            {leadStory && (
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-white rounded-2xl border border-border overflow-hidden shadow-soft hover:shadow-card-hover transition-all duration-300 group"
               >
-                Reset Search
-              </button>
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredArticles.map((article) => (
-                <motion.div
+                <div className="relative h-48 sm:h-56 bg-slate-900 overflow-hidden cursor-pointer" onClick={() => setActiveArticle(leadStory)}>
+                  <Image
+                    src={leadStory.image}
+                    alt={leadStory.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+                  
+                  <div className="absolute bottom-3 left-4 right-4 z-10 flex items-center justify-between text-xs text-white/90 font-mono">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3.5 h-3.5 text-amber-300" />
+                      {leadStory.date}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5 text-blue-200" />
+                      {leadStory.readTime}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-5 sm:p-6 space-y-3">
+                  <div className="space-y-1.5">
+                    <span className="text-[11px] font-heading font-bold text-premier-green uppercase tracking-wider">
+                      {leadStory.category}
+                    </span>
+                    <h2
+                      onClick={() => setActiveArticle(leadStory)}
+                      className="text-lg sm:text-xl font-heading font-extrabold text-heading leading-snug group-hover:text-premier-green transition-colors cursor-pointer"
+                    >
+                      {leadStory.title}
+                    </h2>
+                  </div>
+
+                  {leadStory.officialRef && (
+                    <div className="p-2.5 rounded-xl bg-premier-green-50/60 border border-premier-green/20 text-xs font-mono text-heading flex items-center gap-2">
+                      <FileText className="w-4 h-4 text-premier-green shrink-0" />
+                      <span className="truncate">Ref: <strong>{leadStory.officialRef}</strong></span>
+                    </div>
+                  )}
+
+                  <div className="pt-3 border-t border-border flex items-center justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <div className="relative w-7 h-7 rounded-full overflow-hidden border border-border bg-slate-200 shrink-0">
+                        <Image
+                          src={leadStory.authorImage}
+                          alt={leadStory.author}
+                          fill
+                          className="object-cover object-top"
+                        />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-heading font-bold text-heading">{leadStory.author}</h4>
+                        <p className="text-[10px] text-body">{leadStory.authorTitle}</p>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => setActiveArticle(leadStory)}
+                      className="btn-primary !py-1.5 !px-3.5 !text-xs font-heading font-bold flex items-center gap-1.5"
+                    >
+                      Read Full Article
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* Secondary Highlight Stories Grid */}
+            <div className="grid md:grid-cols-2 gap-6">
+              {secondaryStories.map((article) => (
+                <div
                   key={article.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-white rounded-3xl border border-border overflow-hidden shadow-soft hover:shadow-card-hover hover:border-premier-green/40 transition-all duration-300 flex flex-col justify-between group"
+                  className="bg-white rounded-3xl border border-border overflow-hidden shadow-soft hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between group p-5 space-y-4"
                 >
-                  <div>
-                    {/* Thumbnail Image Header */}
-                    <div className="relative h-48 bg-slate-900 overflow-hidden cursor-pointer" onClick={() => setActiveArticle(article)}>
+                  <div className="space-y-3">
+                    <div className="relative h-40 rounded-2xl overflow-hidden bg-slate-900 cursor-pointer" onClick={() => setActiveArticle(article)}>
                       <Image
                         src={article.image}
                         alt={article.title}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-85"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent pointer-events-none" />
-
-                      <div className="relative z-10 p-4 h-full flex flex-col justify-between">
-                        <span className="self-start px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-premier-green text-[11px] font-heading font-extrabold uppercase shadow-sm">
-                          {article.category}
-                        </span>
-
-                        <div className="flex items-center justify-between text-xs text-white/90 font-medium font-mono">
-                          <span className="flex items-center gap-1">
-                            <Calendar className="w-3.5 h-3.5 text-amber-300" />
-                            {article.date}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Clock className="w-3.5 h-3.5 text-blue-200" />
-                            {article.readTime}
-                          </span>
-                        </div>
-                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
                     </div>
 
-                    {/* Article Body */}
-                    <div className="p-6 space-y-3">
-                      <h3
-                        onClick={() => setActiveArticle(article)}
-                        className="text-base font-heading font-bold text-heading group-hover:text-premier-green transition-colors leading-snug line-clamp-2 cursor-pointer"
-                      >
-                        {article.title}
-                      </h3>
+                    <span className="inline-block text-xs font-heading font-bold text-premier-green uppercase tracking-wider">
+                      {article.category}
+                    </span>
 
-                      <p className="text-body text-xs leading-relaxed line-clamp-3">
-                        {article.summary}
-                      </p>
+                    <h3
+                      onClick={() => setActiveArticle(article)}
+                      className="text-base font-heading font-bold text-heading group-hover:text-premier-green transition-colors leading-snug line-clamp-2 cursor-pointer"
+                    >
+                      {article.title}
+                    </h3>
 
-                      {article.officialRef && (
-                        <div className="pt-2">
-                          <span className="inline-block text-[10px] font-mono bg-slate-100 text-slate-600 px-2.5 py-1 rounded-lg border border-slate-200 truncate max-w-full">
-                            Ref: {article.officialRef}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Article Footer */}
-                  <div className="p-6 pt-0 space-y-4">
-                    <div className="pt-4 border-t border-border/60 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="relative w-7 h-7 rounded-full overflow-hidden border border-border bg-slate-200 shrink-0">
-                          <Image
-                            src={article.authorImage}
-                            alt={article.author}
-                            fill
-                            className="object-cover object-top"
-                            sizes="28px"
-                          />
-                        </div>
-                        <span className="text-xs font-heading font-semibold text-heading truncate max-w-[120px]">
-                          {article.author}
+                    {article.officialRef && (
+                      <div className="pt-1">
+                        <span className="inline-block text-[10px] font-mono bg-slate-100 text-slate-600 px-2.5 py-1 rounded-lg border border-slate-200 truncate max-w-full">
+                          Ref: {article.officialRef}
                         </span>
                       </div>
-
-                      <button
-                        onClick={() => setActiveArticle(article)}
-                        className="text-xs font-heading font-bold text-premier-green hover:text-premier-green-700 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
-                      >
-                        Read More
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
+                    )}
                   </div>
-                </motion.div>
+
+                  <div className="pt-3 border-t border-border flex items-center justify-between text-xs">
+                    <div className="flex items-center gap-2">
+                      <div className="relative w-6 h-6 rounded-full overflow-hidden border border-border bg-slate-200 shrink-0">
+                        <Image
+                          src={article.authorImage}
+                          alt={article.author}
+                          fill
+                          className="object-cover object-top"
+                        />
+                      </div>
+                      <span className="text-xs font-heading font-semibold text-heading truncate max-w-[100px]">
+                        {article.author}
+                      </span>
+                    </div>
+
+                    <button
+                      onClick={() => setActiveArticle(article)}
+                      className="text-premier-green font-heading font-bold hover:underline flex items-center gap-1"
+                    >
+                      Read Article <ArrowRight className="w-3 h-3" />
+                    </button>
+                  </div>
+                </div>
               ))}
             </div>
-          )}
+
+          </div>
+
+          {/* RIGHT 4 COLUMNS: Regulatory SRO Bulletins & News Briefings Sidebar */}
+          <div className="lg:col-span-4 space-y-6">
+            <div className="bg-white rounded-3xl border border-border p-6 shadow-soft space-y-5 sticky top-28">
+              
+              <div className="flex items-center justify-between pb-3 border-b border-border">
+                <div className="flex items-center gap-2">
+                  <Award className="w-4 h-4 text-premier-green" />
+                  <h3 className="font-heading font-bold text-heading text-sm uppercase tracking-wider">
+                    Regulatory SRO Bulletins
+                  </h3>
+                </div>
+                <span className="text-[11px] font-mono text-slate-400">({sidebarBriefings.length} Bulletins)</span>
+              </div>
+
+              <div className="space-y-3.5 divide-y divide-border">
+                {sidebarBriefings.map((article, index) => (
+                  <div
+                    key={article.id}
+                    onClick={() => setActiveArticle(article)}
+                    className="pt-3.5 first:pt-0 group cursor-pointer space-y-1.5"
+                  >
+                    <div className="flex items-center justify-between text-[11px] text-slate-500 font-mono">
+                      <span className="font-bold text-premier-green">#{String(index + 1).padStart(2, '0')}</span>
+                      <span>{article.category}</span>
+                    </div>
+
+                    <h4 className="text-xs sm:text-sm font-heading font-bold text-heading group-hover:text-premier-green transition-colors leading-snug line-clamp-2">
+                      {article.title}
+                    </h4>
+
+                    {article.officialRef && (
+                      <p className="text-[10px] font-mono text-slate-500 truncate bg-slate-50 p-1.5 rounded-lg border border-slate-100">
+                        {article.officialRef}
+                      </p>
+                    )}
+
+                    <div className="flex items-center justify-between text-[11px] text-slate-400 pt-0.5">
+                      <span>{article.date}</span>
+                      <span className="text-premier-green font-heading font-semibold group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">
+                        View Brief <ArrowRight className="w-3 h-3" />
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        {/* ── Section: Full Publication Gazette Cards (Image on Left, Text on Right) ── */}
+        <div className="pt-8 space-y-6 border-t border-border">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-xl font-heading font-extrabold text-heading">
+                All Gazette Publications & Case Rulings ({newsArticles.length})
+              </h3>
+              <p className="text-xs text-body mt-0.5">Explore detailed tax circulars, SECP notifications, and High Court reference judgements</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {newsArticles.map((article) => (
+              <motion.div
+                key={article.id}
+                layout
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white rounded-3xl border border-border overflow-hidden shadow-soft hover:shadow-card-hover hover:border-premier-green/40 transition-all duration-300 grid sm:grid-cols-12 items-stretch group"
+              >
+                {/* Left Column: Picture */}
+                <div
+                  onClick={() => setActiveArticle(article)}
+                  className="sm:col-span-5 relative min-h-[200px] sm:min-h-full bg-slate-900 overflow-hidden cursor-pointer"
+                >
+                  <Image
+                    src={article.image}
+                    alt={article.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
+                    sizes="(max-width: 640px) 100vw, 40vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-slate-950/40 via-transparent to-transparent pointer-events-none" />
+                </div>
+
+                {/* Right Column: Text Content */}
+                <div className="sm:col-span-7 p-6 sm:p-7 flex flex-col justify-between space-y-4">
+                  <div className="space-y-3">
+                    {/* Header Info: Category, Date, ReadTime */}
+                    <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-body">
+                      <span className="px-3 py-0.5 rounded-full bg-premier-green-50 text-premier-green text-[11px] font-heading font-extrabold uppercase">
+                        {article.category}
+                      </span>
+                      <div className="flex items-center gap-3 text-slate-500 font-mono text-[11px]">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="w-3.5 h-3.5 text-premier-green" />
+                          {article.date}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3.5 h-3.5 text-slate-400" />
+                          {article.readTime}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    <h3
+                      onClick={() => setActiveArticle(article)}
+                      className="text-base sm:text-lg font-heading font-bold text-heading group-hover:text-premier-green transition-colors leading-snug line-clamp-2 cursor-pointer"
+                    >
+                      {article.title}
+                    </h3>
+
+                    {/* Ref Tag */}
+                    {article.officialRef && (
+                      <div className="pt-1">
+                        <span className="inline-block text-[10px] font-mono bg-slate-100 text-slate-600 px-2.5 py-1 rounded-lg border border-slate-200 truncate max-w-full">
+                          Ref: {article.officialRef}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Footer: Author & Read More */}
+                  <div className="pt-3 border-t border-border/60 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="relative w-7 h-7 rounded-full overflow-hidden border border-border bg-slate-200 shrink-0">
+                        <Image
+                          src={article.authorImage}
+                          alt={article.author}
+                          fill
+                          className="object-cover object-top"
+                          sizes="28px"
+                        />
+                      </div>
+                      <span className="text-xs font-heading font-semibold text-heading truncate max-w-[110px]">
+                        {article.author}
+                      </span>
+                    </div>
+
+                    <button
+                      onClick={() => setActiveArticle(article)}
+                      className="text-xs font-heading font-bold text-premier-green hover:text-premier-green-700 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                    >
+                      Read More
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* ── Weekly FBR & SECP Newsletter Signup ───────────── */}
@@ -494,17 +556,19 @@ export default function NewsPage() {
               <Mail className="w-3.5 h-3.5" />
               Weekly Regulatory Digest
             </span>
-            <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-white tracking-tight leading-snug">
-              Get Instant FBR Circulars &amp; SECP SRO Alerts in Your Inbox
+
+            <h3 className="text-2xl sm:text-3xl font-heading font-extrabold tracking-tight leading-snug">
+              Stay ahead of FBR Tax Amendments & SECP Corporate Circulars
             </h3>
-            <p className="text-slate-300 text-sm font-body leading-relaxed">
-              Join over 4,500+ tax practitioners, corporate lawyers, and accountants in Pakistan who receive weekly statutory summaries and practical filing guides written by Raja Gulfam.
+
+            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-body">
+              Join 4,500+ tax consultants, chartered accountants, and finance managers who receive our weekly legal compliance summary delivered directly to their inbox.
             </p>
 
             {subscribed ? (
-              <div className="p-4 rounded-2xl bg-premier-green/20 border border-emerald-500/40 text-emerald-200 text-xs font-body font-bold flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
-                Thank you! You are now subscribed to Premier LMS Weekly Regulatory Updates.
+              <div className="p-4 rounded-2xl bg-emerald-950/80 border border-emerald-500/30 flex items-center gap-3 text-emerald-300 text-xs font-heading font-semibold">
+                <CheckCircle2 className="w-5 h-5 shrink-0 text-emerald-400" />
+                <span>Thank you! You are now subscribed to Premier Regulatory Digest updates.</span>
               </div>
             ) : (
               <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 pt-2">
@@ -513,8 +577,8 @@ export default function NewsPage() {
                   required
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
-                  placeholder="Enter your email (e.g. practitioner@domain.pk)"
-                  className="flex-1 px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs placeholder:text-slate-400 focus:outline-none focus:border-premier-gold focus:ring-1 focus:ring-premier-gold"
+                  placeholder="Enter your professional email..."
+                  className="flex-1 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-slate-400 text-xs focus:outline-none focus:border-premier-gold focus:ring-1 focus:ring-premier-gold"
                 />
                 <button
                   type="submit"
@@ -537,22 +601,19 @@ export default function NewsPage() {
       {/* ── Article Detail Modal ──────────────────────────── */}
       <AnimatePresence>
         {activeArticle && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md overflow-y-auto">
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm"
+            onClick={() => setActiveArticle(null)}
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white rounded-3xl max-w-3xl w-full p-6 sm:p-8 space-y-6 shadow-card border border-border relative my-8 max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+              className="max-h-[90vh] h-full flex flex-col rounded-3xl overflow-hidden bg-white shadow-2xl relative max-w-3xl w-full border border-border"
             >
-              <button
-                onClick={() => setActiveArticle(null)}
-                className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 text-slate-500 transition-colors z-10"
-                aria-label="Close modal"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="space-y-4">
+              {/* 1. FIXED TOP HEADER BAR */}
+              <div className="shrink-0 bg-white border-b border-border p-6 flex items-center justify-between z-20">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="px-3 py-1 rounded-full bg-premier-green-50 text-premier-green text-xs font-heading font-extrabold uppercase">
                     {activeArticle.category}
@@ -561,7 +622,22 @@ export default function NewsPage() {
                     {activeArticle.date} · {activeArticle.readTime}
                   </span>
                 </div>
+                <button
+                  onClick={() => setActiveArticle(null)}
+                  className="p-2 rounded-full hover:bg-slate-100 text-slate-500 transition-colors"
+                  aria-label="Close modal"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
 
+              {/* 2. FREELY SCROLLABLE CONTENT BODY */}
+              <div
+                tabIndex={0}
+                ref={(el) => el?.focus()}
+                onWheel={(e) => e.stopPropagation()}
+                className="flex-1 overflow-y-auto overscroll-contain p-6 sm:p-8 space-y-6 custom-modal-scrollbar focus:outline-none"
+              >
                 <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-heading leading-tight">
                   {activeArticle.title}
                 </h2>
@@ -572,79 +648,82 @@ export default function NewsPage() {
                     <span>Official Reference: <strong>{activeArticle.officialRef}</strong></span>
                   </div>
                 )}
-              </div>
 
-              {/* Cover Image */}
-              <div className="relative h-64 sm:h-80 rounded-2xl overflow-hidden bg-slate-900">
-                <Image
-                  src={activeArticle.image}
-                  alt={activeArticle.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
+                {/* Cover Image */}
+                <div className="relative h-64 sm:h-80 rounded-2xl overflow-hidden bg-slate-900">
+                  <Image
+                    src={activeArticle.image}
+                    alt={activeArticle.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
 
-              {/* Author & Citation */}
-              <div className="p-4 rounded-2xl bg-slate-50 border border-border flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="relative w-10 h-10 rounded-full overflow-hidden border border-border bg-slate-200 shrink-0">
-                    <Image
-                      src={activeArticle.authorImage}
-                      alt={activeArticle.author}
-                      fill
-                      className="object-cover object-top"
-                    />
+                {/* Author & Citation */}
+                <div className="p-4 rounded-2xl bg-slate-50 border border-border flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="relative w-10 h-10 rounded-full overflow-hidden border border-border bg-slate-200 shrink-0">
+                      <Image
+                        src={activeArticle.authorImage}
+                        alt={activeArticle.author}
+                        fill
+                        className="object-cover object-top"
+                      />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-heading font-bold text-heading">{activeArticle.author}</h4>
+                      <p className="text-[11px] text-body">{activeArticle.authorTitle}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-xs font-heading font-bold text-heading">{activeArticle.author}</h4>
-                    <p className="text-[11px] text-body">{activeArticle.authorTitle}</p>
+
+                  <div className="flex items-center gap-2 text-xs text-slate-500">
+                    <BookOpen className="w-4 h-4 text-premier-green" />
+                    <span>Verified Legal Analysis</span>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 text-xs text-slate-500">
-                  <BookOpen className="w-4 h-4 text-premier-green" />
-                  <span>Premier LMS Faculty</span>
-                </div>
-              </div>
+                {/* Key Takeaways */}
+                {activeArticle.keyTakeaways && activeArticle.keyTakeaways.length > 0 && (
+                  <div className="p-5 rounded-2xl bg-premier-green-50/70 border border-premier-green/20 space-y-3">
+                    <h4 className="text-xs font-heading font-bold text-premier-green uppercase tracking-wider flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4" />
+                      Key Compliance Takeaways
+                    </h4>
+                    <ul className="space-y-2">
+                      {activeArticle.keyTakeaways.map((takeaway, idx) => (
+                        <li key={idx} className="text-xs text-heading flex items-start gap-2">
+                          <span className="text-premier-green font-bold">•</span>
+                          <span>{takeaway}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
-              {/* Key Takeaways */}
-              <div className="p-5 rounded-2xl bg-premier-green-50/60 border border-premier-green-100 space-y-3">
-                <h4 className="text-xs font-heading font-extrabold uppercase tracking-wider text-premier-green">
-                  Key Practitioner Takeaways
-                </h4>
-                <ul className="space-y-2 text-xs text-heading font-medium">
-                  {activeArticle.keyTakeaways.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-premier-green shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
+                {/* Article Paragraphs */}
+                <div className="space-y-4 text-body text-xs sm:text-sm leading-relaxed border-t border-border pt-4">
+                  {activeArticle.content.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
                   ))}
-                </ul>
-              </div>
-
-              {/* Main Content Paragraphs */}
-              <div className="space-y-4 text-sm text-heading leading-relaxed font-sans border-t border-border pt-4">
-                {activeArticle.content.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
-              </div>
-
-              {/* Related Masterclass Callout */}
-              <div className="p-6 rounded-2xl bg-slate-900 text-white flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div className="space-y-1 text-center sm:text-left">
-                  <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-amber-300">
-                    Master Practical Compliance
-                  </span>
-                  <h4 className="text-sm font-heading font-bold text-white">
-                    Enroll in Raja Gulfam's Tax &amp; Corporate Diploma
-                  </h4>
                 </div>
-                <Link
-                  href="/courses/certified-income-tax-and-sales-tax-practitioner"
-                  className="btn-primary text-xs !py-2.5 !px-5 whitespace-nowrap shrink-0 focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream"
-                >
-                  View Course Details
-                </Link>
+
+                {/* Modal Actions */}
+                <div className="pt-4 border-t border-border flex items-center justify-between">
+                  <button
+                    onClick={() => setActiveArticle(null)}
+                    className="px-5 py-2.5 rounded-xl border border-border text-xs font-heading font-bold text-heading hover:bg-slate-50 transition-colors"
+                  >
+                    Close Article
+                  </button>
+
+                  <Link
+                    href="/admission"
+                    onClick={() => setActiveArticle(null)}
+                    className="btn-primary !py-2.5 !px-5 text-xs font-heading font-bold"
+                  >
+                    Enroll in Tax & Accounting Diploma
+                  </Link>
+                </div>
               </div>
             </motion.div>
           </div>

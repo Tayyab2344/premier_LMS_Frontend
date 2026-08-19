@@ -41,7 +41,7 @@ export function Navbar() {
   }
 
   // Detect if page has a dark hero background unscrolled
-  const isDarkHeroPage = pathname === '/' || pathname === '/about' || pathname === '/courses';
+  const isDarkHeroPage = pathname === '/';
   const isDarkHeader = isDarkHeroPage && !scrolled;
 
   return (
