@@ -341,9 +341,19 @@ export default function AdmissionPage() {
 
     setErrors(newErrors);
 
-    // Auto-scroll to top error if any
+    // Auto-scroll directly to the specific field where the validation error occurred
     if (Object.keys(newErrors).length > 0) {
-      window.scrollTo({ top: 200, behavior: 'smooth' });
+      const firstErrorKey = Object.keys(newErrors)[0];
+      setTimeout(() => {
+        const errorElement = document.getElementById(`field-${firstErrorKey}`);
+        if (errorElement) {
+          errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          const inputEl = errorElement.querySelector('input, select, textarea') as HTMLElement;
+          if (inputEl && 'focus' in inputEl) inputEl.focus();
+        } else {
+          window.scrollTo({ top: 150, behavior: 'smooth' });
+        }
+      }, 50);
       return false;
     }
     return true;
@@ -682,7 +692,7 @@ export default function AdmissionPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     
                     {/* Full Name */}
-                    <div>
+                    <div id="field-fullName">
                       <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                         Full Name (As per CNIC) *
                       </label>
@@ -705,7 +715,7 @@ export default function AdmissionPage() {
                     </div>
 
                     {/* Father Name */}
-                    <div>
+                    <div id="field-fatherName">
                       <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                         Father's / Guardian's Name *
                       </label>
@@ -725,7 +735,7 @@ export default function AdmissionPage() {
                     </div>
 
                     {/* CNIC */}
-                    <div>
+                    <div id="field-cnic">
                       <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                         Pakistani CNIC Number * (13 Digits)
                       </label>
@@ -750,7 +760,7 @@ export default function AdmissionPage() {
                     </div>
 
                     {/* Date of Birth */}
-                    <div>
+                    <div id="field-dateOfBirth">
                       <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                         Date of Birth *
                       </label>
@@ -787,7 +797,7 @@ export default function AdmissionPage() {
                     </div>
 
                     {/* Mobile / WhatsApp */}
-                    <div>
+                    <div id="field-whatsapp">
                       <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                         Pakistani Mobile / WhatsApp Contact *
                       </label>
@@ -812,7 +822,7 @@ export default function AdmissionPage() {
                     </div>
 
                     {/* Email */}
-                    <div className="sm:col-span-2">
+                    <div id="field-email" className="sm:col-span-2">
                       <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                         Email Address *
                       </label>
@@ -860,7 +870,7 @@ export default function AdmissionPage() {
                     </h3>
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                      <div>
+                      <div id="field-lastQualification">
                         <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                           Last Qualification *
                         </label>
@@ -879,7 +889,7 @@ export default function AdmissionPage() {
                         {errors.lastQualification && <p className="text-[11px] text-red-500 mt-1">{errors.lastQualification}</p>}
                       </div>
 
-                      <div>
+                      <div id="field-passingYear">
                         <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                           Passing Year *
                         </label>
@@ -898,7 +908,7 @@ export default function AdmissionPage() {
                         {errors.passingYear && <p className="text-[11px] text-red-500 mt-1">{errors.passingYear}</p>}
                       </div>
 
-                      <div>
+                      <div id="field-institute">
                         <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                           Institute / University *
                         </label>
@@ -927,7 +937,7 @@ export default function AdmissionPage() {
                     </h3>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div>
+                      <div id="field-city">
                         <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                           City Name *
                         </label>
@@ -965,7 +975,7 @@ export default function AdmissionPage() {
                         </select>
                       </div>
 
-                      <div className="sm:col-span-2">
+                      <div id="field-postalAddress" className="sm:col-span-2">
                         <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                           Complete Postal Address *
                         </label>
@@ -1007,7 +1017,7 @@ export default function AdmissionPage() {
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                    <div>
+                    <div id="field-emergencyName">
                       <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                         Emergency Contact Name *
                       </label>
@@ -1026,7 +1036,7 @@ export default function AdmissionPage() {
                       {errors.emergencyName && <p className="text-[11px] text-red-500 mt-1">{errors.emergencyName}</p>}
                     </div>
 
-                    <div>
+                    <div id="field-emergencyRelation">
                       <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                         Relation *
                       </label>
@@ -1045,7 +1055,7 @@ export default function AdmissionPage() {
                       {errors.emergencyRelation && <p className="text-[11px] text-red-500 mt-1">{errors.emergencyRelation}</p>}
                     </div>
 
-                    <div>
+                    <div id="field-emergencyContact">
                       <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                         Emergency Contact Number *
                       </label>
@@ -1177,7 +1187,7 @@ export default function AdmissionPage() {
                         <span className="text-xs font-mono font-bold text-slate-700">Course Fee: PKR {currentFee.toLocaleString()}</span>
                       </div>
 
-                      <div>
+                      <div id="field-selectedCourse">
                         <label className="block text-xs font-heading font-bold text-heading uppercase mb-2">
                           Select Desired Course *
                         </label>
@@ -1218,7 +1228,7 @@ export default function AdmissionPage() {
                       </div>
 
                       {/* Course Declaration Checkbox */}
-                      <div className="p-3.5 rounded-xl bg-white border border-slate-200">
+                      <div id="field-courseDeclaration" className="p-3.5 rounded-xl bg-white border border-slate-200">
                         <label className="flex items-start gap-3 cursor-pointer">
                           <input
                             type="checkbox"
@@ -1292,7 +1302,7 @@ export default function AdmissionPage() {
                         </select>
 
                         {testReason === 'Other' && (
-                          <div className="mt-3">
+                          <div id="field-otherTestReason" className="mt-3">
                             <label className="block text-xs font-heading font-bold text-heading uppercase mb-1">Please specify *</label>
                             <input
                               type="text"
@@ -1364,7 +1374,7 @@ export default function AdmissionPage() {
                       </div>
 
                       {/* Test-Only Declaration */}
-                      <div className="p-4 rounded-xl bg-white border border-amber-200">
+                      <div id="field-testDeclaration" className="p-4 rounded-xl bg-white border border-amber-200">
                         <label className="flex items-start gap-3 cursor-pointer">
                           <input
                             type="checkbox"
@@ -1571,7 +1581,7 @@ export default function AdmissionPage() {
                   <div className="space-y-6 pt-2">
                     
                     {/* Transaction ID */}
-                    <div>
+                    <div id="field-transactionId">
                       <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                         Transaction / Reference ID *
                       </label>
@@ -1600,7 +1610,7 @@ export default function AdmissionPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                       
                       {/* Payment Proof Card */}
-                      <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                      <div id="field-paymentProof" className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
                         <label className="block text-xs font-heading font-bold text-heading uppercase">
                           Payment Proof *
                         </label>
@@ -1649,7 +1659,7 @@ export default function AdmissionPage() {
                       </div>
 
                       {/* CNIC Front Copy Card */}
-                      <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                      <div id="field-cnicFile" className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
                         <label className="block text-xs font-heading font-bold text-heading uppercase">
                           CNIC / ID Front Copy *
                         </label>
@@ -1691,7 +1701,7 @@ export default function AdmissionPage() {
                       </div>
 
                       {/* Passport Photograph Card */}
-                      <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                      <div id="field-photoFile" className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
                         <label className="block text-xs font-heading font-bold text-heading uppercase">
                           Passport Photograph *
                         </label>
