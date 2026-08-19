@@ -184,8 +184,8 @@ export function Footer() {
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <a href="tel:+923487257761" className="text-slate-200 hover:text-emerald-400 transition-colors">
-                    +92 (348) 725-7761
+                  <a href="tel:+923348972072" className="text-slate-200 hover:text-emerald-400 transition-colors">
+                    +92 334 8972072
                   </a>
                 </li>
               </ul>
@@ -281,11 +281,11 @@ export function Footer() {
 
         {/* Floating WhatsApp Button */}
         <a
-          href="https://wa.me/923487257761?text=Hi%2C%20I%20came%20from%20the%20Premier%20LMS%20website%20and%20I%20have%20a%20question%20regarding%20courses%20and%20admission."
+          href="https://wa.me/923348972072?text=Hi%2C%20I%20came%20from%20the%20Premier%20LMS%20website%20and%20I%20have%20a%20question%20regarding%20courses%20and%20admission."
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Contact WhatsApp Support"
-          title="Chat on WhatsApp (+92 348 7257761)"
+          title="Chat on WhatsApp (+92 334 8972072)"
           className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-white flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 group"
         >
           <svg className="w-6 h-6 fill-current text-white" viewBox="0 0 24 24">
