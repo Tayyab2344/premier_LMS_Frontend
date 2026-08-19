@@ -1533,10 +1533,10 @@ export default function AdmissionPage() {
                         <div>
                           <span className="text-[10px] text-slate-400 block uppercase">EasyPaisa Mobile Number</span>
                           <div className="flex items-center gap-2 mt-0.5">
-                            <strong className="text-emerald-300 text-sm">0300-1234567</strong>
+                            <strong className="text-emerald-300 text-sm">0334-8972072</strong>
                             <button
                               type="button"
-                              onClick={() => copyToClipboard('03001234567', 'epNum')}
+                              onClick={() => copyToClipboard('03348972072', 'epNum')}
                               className="px-2 py-0.5 rounded bg-slate-800 text-[10px] text-slate-300 hover:text-white flex items-center gap-1 cursor-pointer"
                             >
                               {copiedField === 'epNum' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
@@ -1556,10 +1556,10 @@ export default function AdmissionPage() {
                         <div>
                           <span className="text-[10px] text-slate-400 block uppercase">JazzCash Mobile Number</span>
                           <div className="flex items-center gap-2 mt-0.5">
-                            <strong className="text-emerald-300 text-sm">0300-1234567</strong>
+                            <strong className="text-emerald-300 text-sm">0334-8972072</strong>
                             <button
                               type="button"
-                              onClick={() => copyToClipboard('03001234567', 'jcNum')}
+                              onClick={() => copyToClipboard('03348972072', 'jcNum')}
                               className="px-2 py-0.5 rounded bg-slate-800 text-[10px] text-slate-300 hover:text-white flex items-center gap-1 cursor-pointer"
                             >
                               {copiedField === 'jcNum' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
