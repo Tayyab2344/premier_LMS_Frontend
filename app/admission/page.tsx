@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import api from '@/lib/api';
 import { useAuth } from '@/lib/AuthContext';
-import { useModal } from '@/lib/ModalContext';
 import {
   ArrowLeft,
   CheckCircle2,
@@ -37,7 +36,6 @@ import {
 
 export default function AdmissionPage() {
   const { user } = useAuth();
-  const { showAlert } = useModal();
 
   // Multi-step State (1 to 5)
   const [step, setStep] = useState(1);
