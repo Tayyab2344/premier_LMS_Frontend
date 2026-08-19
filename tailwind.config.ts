@@ -9,11 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'premier-green': '#164E36',
-        'premier-green-dark': '#0F3524',
+        'premier-green': '#003320',
+        'premier-green-dark': '#002618',
         'premier-cream': '#F8F6F0',
         'premier-cream-dark': '#EAE6DB',
-        'premier-gold': '#C8B687',
+        'premier-gold': '#CA9208',
         brand: {
           green: '#059669',
           light: '#D1FAE5',

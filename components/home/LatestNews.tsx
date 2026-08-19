@@ -1,162 +1,195 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Calendar, ArrowRight, ExternalLink } from 'lucide-react';
+import React, { useMemo } from 'react';
+import { FileText, Building2, ReceiptText, Clock, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
-import no1Img from '@/assets/no1.png';
-import no2Img from '@/assets/no2.png';
-import no3Img from '@/assets/no3.png';
 
-const newsItems = [
+// ─── Data ─────────────────────────────────────────────────────────────────────
+type Category = 'FBR SROs & Tax' | 'SECP Circulars' | 'Sales Tax & PRA' | 'Deadline';
+
+interface NewsItem {
+  id: string;
+  title: string;
+  category: Category;
+  date: string;
+  urgent: boolean;
+}
+
+const NEWS_ITEMS: NewsItem[] = [
   {
     id: 'n1',
     title: 'FBR Circular No. 4 of 2026: Extension for Income Tax Return Filing & Wealth Reconciliation',
     category: 'FBR SROs & Tax',
-    date: 'July 24, 2026',
-    desc: 'Official guidance on Tax Year 2026 return extensions, Active Taxpayer List (ATL) maintenance, and Section 37A capital gain rules.',
-    ref: 'FBR Circular No. 04/2026',
-    image: no1Img,
-    badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+    date: '2026-08-15',
+    urgent: true,
   },
   {
     id: 'n2',
     title: 'SECP Notification: Mandatory Filing of Ultimate Beneficial Ownership (UBO) Disclosures',
     category: 'SECP Circulars',
-    date: 'July 18, 2026',
-    desc: 'SECP mandates Form 45 filing on eServices portal for all incorporated companies to meet FATF & Anti-Money Laundering requirements.',
-    ref: 'SECP S.R.O. 582(I)/2026',
-    image: no2Img,
-    badgeColor: 'bg-amber-400/20 text-amber-300 border-amber-400/30',
+    date: '2026-08-14',
+    urgent: false,
   },
   {
     id: 'n3',
-    title: 'Punjab Revenue Authority (PRA) & SRB Sales Tax Harmonization Framework',
+    title: 'Punjab Revenue Authority (PRA) & SRB Sales Tax Harmonization Framework Effective September',
     category: 'Sales Tax & PRA',
-    date: 'July 12, 2026',
-    desc: 'Single-window sales tax input tax credit reconciliation between FBR IRIS, PRA, and SRB for services & corporate consultancies.',
-    ref: 'PRA Directive No. 12/2026',
-    image: no3Img,
-    badgeColor: 'bg-blue-400/20 text-blue-300 border-blue-400/30',
+    date: '2026-08-12',
+    urgent: false,
+  },
+  {
+    id: 'n4',
+    title: 'FBR Filing Deadline: Tax Year 2026 Return Submission Closes September 30 — Act Now',
+    category: 'Deadline',
+    date: '2026-08-16',
+    urgent: true,
   },
 ];
 
+// ─── Category config ──────────────────────────────────────────────────────────
+const CATEGORY_CONFIG: Record<
+  Category,
+  { Icon: React.FC<{ className?: string }>; color: string; bg: string; border: string }
+> = {
+  'FBR SROs & Tax':  { Icon: FileText,     color: 'text-[#1B3B2C]', bg: 'bg-[#1B3B2C]/8',  border: 'border-[#1B3B2C]/15' },
+  'SECP Circulars':  { Icon: Building2,    color: 'text-[#8A6A1F]', bg: 'bg-[#D9A544]/10', border: 'border-[#D9A544]/20' },
+  'Sales Tax & PRA': { Icon: ReceiptText,  color: 'text-[#1B3B2C]', bg: 'bg-[#1B3B2C]/8',  border: 'border-[#1B3B2C]/15' },
+  'Deadline':        { Icon: Clock,        color: 'text-[#B4472F]', bg: 'bg-[#B4472F]/8',  border: 'border-[#B4472F]/20' },
+};
+
+// ─── Relative time ─────────────────────────────────────────────────────────────
+function getRelativeTime(dateStr: string): string {
+  const diffMs = Date.now() - new Date(dateStr).getTime();
+  const diffH  = Math.floor(diffMs / (1000 * 60 * 60));
+  const diffD  = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  if (diffH < 1)  return 'Just now';
+  if (diffH < 24) return `${diffH}h ago`;
+  if (diffD === 1) return 'Yesterday';
+  if (diffD < 7)  return `${diffD} days ago`;
+  return new Date(dateStr).toLocaleDateString('en-PK', { day: 'numeric', month: 'short' });
+}
+
+function isNew(dateStr: string): boolean {
+  return Date.now() - new Date(dateStr).getTime() < 1000 * 60 * 60 * 48;
+}
+
+// ─── Component ────────────────────────────────────────────────────────────────
 export function LatestNews() {
+  const sorted = useMemo(
+    () =>
+      [...NEWS_ITEMS].sort((a, b) => {
+        if (a.urgent !== b.urgent) return a.urgent ? -1 : 1;
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      }),
+    []
+  );
+
   return (
-    <section className="py-24 bg-[#091B13] text-white border-t border-emerald-900/40 relative overflow-hidden" id="news">
-      {/* Ambient Radial Background Lighting */}
-      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-emerald-700/10 rounded-full blur-[120px] pointer-events-none" />
+    <section
+      className="border-t border-b overflow-hidden"
+      style={{ borderColor: '#E6DFD0', backgroundColor: '#FFFFFF' }}
+      id="news"
+    >
 
-      <div className="section-container relative z-10">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="space-y-4 max-w-2xl">
-            <motion.h2
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-4xl sm:text-5xl font-heading font-extrabold text-white leading-[1.15]"
-              style={{ letterSpacing: '-0.03em' }}
-            >
-              News &amp; Regulatory Insights
-            </motion.h2>
+      {/* ── Section body ───────────────────────────────────────────────────── */}
+      <div className="section-container py-7">
 
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-emerald-100/80 text-base sm:text-lg"
-            >
-              Stay updated with statutory circulars, High Court precedents, and practical tax guides authored by Raja Gulfam.
-            </motion.p>
+        {/* Header row */}
+        <div className="flex items-center justify-between mb-5">
+          <div className="flex items-center gap-2.5">
+            <span className="pulse-dot w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: '#1B3B2C' }} />
+            <span className="text-base font-heading font-extrabold uppercase tracking-[0.1em]" style={{ color: '#1B3B2C' }}>
+              Alerts &amp; Updates
+            </span>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+          <Link
+            href="/news"
+            className="flex items-center gap-1 text-sm font-heading font-bold transition-colors group"
+            style={{ color: '#8A6A1F' }}
           >
-            <Link
-              href="/news"
-              className="inline-flex items-center gap-2 bg-emerald-500 text-slate-950 hover:bg-emerald-400 font-heading font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-emerald-500/20 group"
-            >
-              View News Hub
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </motion.div>
+            View all
+            <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          </Link>
         </div>
 
-        {/* 3 Distinct Image Cards Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {newsItems.map((news, i) => (
-            <motion.article
-              key={news.id}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-[#0D241A] rounded-3xl border border-emerald-800/40 overflow-hidden shadow-2xl hover:border-emerald-500/50 hover:shadow-emerald-950/50 transition-all duration-300 flex flex-col group relative"
-            >
-              <Link href="/news" className="flex flex-col h-full">
-                {/* Image Container with Zoom Effect & Gradient Overlay */}
-                <div className="relative h-56 w-full overflow-hidden">
-                  <Image
-                    src={news.image}
-                    alt={news.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D241A] via-[#0D241A]/40 to-transparent" />
+        {/* ── Unified rows container with flowing shimmer ─────────────────── */}
+        <div
+          className="rows-container rounded-2xl border overflow-hidden"
+          style={{ borderColor: '#E6DFD0' }}
+        >
+          {sorted.map((item, index) => {
+            const { Icon, color, bg, border } = CATEGORY_CONFIG[item.category];
+            const showNew  = isNew(item.date);
+            const relTime  = getRelativeTime(item.date);
+            const isLast   = index === sorted.length - 1;
 
-                  {/* Category Pill Overlay */}
-                  <div className="absolute top-4 left-4 z-10">
-                    <span className={`px-3 py-1 rounded-full text-xs font-heading font-bold backdrop-blur-md border ${news.badgeColor}`}>
-                      {news.category}
-                    </span>
-                  </div>
-
-                  {/* Ref Tag Overlay */}
-                  <div className="absolute top-4 right-4 z-10">
-                    <span className="text-[10px] font-mono bg-black/60 backdrop-blur-md text-emerald-200 px-2.5 py-1 rounded-md border border-white/10">
-                      {news.ref}
-                    </span>
-                  </div>
+            return (
+              <Link
+                key={item.id}
+                href="/news"
+                className={`relative z-10 flex items-center gap-3 group transition-colors duration-150 hover:bg-[#1B3B2C]/[0.04] ${item.urgent ? 'urgent-pop' : ''}`}
+                style={{
+                  padding: '15px 16px',
+                  backgroundColor: item.urgent ? '#FBF1E9' : 'transparent',
+                  borderBottom: isLast ? 'none' : '1px solid #EDE7DA',
+                }}
+              >
+                {/* Category icon */}
+                <div className={`shrink-0 w-9 h-9 rounded-xl flex items-center justify-center ${bg} border ${border}`}>
+                  <Icon className={`w-4 h-4 ${color}`} />
                 </div>
 
-                {/* Card Body */}
-                <div className="p-6 flex-1 flex flex-col justify-between space-y-4 bg-[#0D241A]">
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-emerald-400/80 text-xs font-mono">
-                      <Calendar className="w-3.5 h-3.5 text-emerald-400" />
-                      <span>{news.date}</span>
-                    </div>
+                {/* Category label */}
+                <span
+                  className={`shrink-0 hidden sm:block text-[10px] font-body font-bold uppercase tracking-wider w-24 truncate ${color}`}
+                >
+                  {item.category}
+                </span>
 
-                    <h3 className="text-lg font-heading font-bold text-white leading-snug group-hover:text-emerald-300 transition-colors line-clamp-2">
-                      {news.title}
-                    </h3>
+                {/* Headline */}
+                <p
+                  className="flex-1 min-w-0 text-sm font-body font-semibold truncate transition-colors group-hover:opacity-80"
+                  style={{ color: '#22301F' }}
+                >
+                  {item.title}
+                </p>
 
-                    <p className="text-emerald-100/70 text-xs leading-relaxed line-clamp-3 font-body">
-                      {news.desc}
-                    </p>
-                  </div>
-
-                  <div className="pt-4 border-t border-emerald-800/40 flex items-center justify-between">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-emerald-400 group-hover:text-white transition-colors">
-                      Read Full Report <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                {/* Right badges + timestamp */}
+                <div className="shrink-0 flex items-center gap-2 ml-2">
+                  {/* NEW badge */}
+                  {showNew && (
+                    <span
+                      className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md"
+                      style={{ backgroundColor: '#1B3B2C', color: '#FFFFFF', letterSpacing: '0.08em' }}
+                    >
+                      NEW
                     </span>
-                    <ExternalLink className="w-4 h-4 text-emerald-600 group-hover:text-emerald-400 transition-colors" />
-                  </div>
+                  )}
+                  {/* URGENT badge */}
+                  {item.urgent && (
+                    <span
+                      className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md"
+                      style={{ backgroundColor: '#B4472F', color: '#FFFFFF', letterSpacing: '0.08em' }}
+                    >
+                      URGENT
+                    </span>
+                  )}
+                  <span
+                    className="text-[11px] font-body whitespace-nowrap hidden md:block"
+                    style={{ color: '#8A7D66' }}
+                  >
+                    {relTime}
+                  </span>
+                  <ChevronRight
+                    className="w-4 h-4 group-hover:translate-x-0.5 transition-all"
+                    style={{ color: '#C4B8A0' }}
+                  />
                 </div>
               </Link>
-            </motion.article>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
-

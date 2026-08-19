@@ -8,7 +8,6 @@ import {
   Globe,
   Share2,
   Heart,
-  Lock,
   Smartphone
 } from 'lucide-react';
 import Image from 'next/image';
@@ -34,9 +33,9 @@ export function CourseDetailHero({ course }: CourseDetailHeroProps) {
   };
 
   return (
-    <section className="bg-premier-cream text-heading pt-[90px] pb-8 border-b border-border">
+    <section className="bg-premier-cream text-heading pt-28 sm:pt-32 pb-8 border-b border-border">
       <div className="section-container">
-        
+
         {/* Breadcrumb */}
         <Breadcrumb
           items={[
@@ -47,28 +46,8 @@ export function CourseDetailHero({ course }: CourseDetailHeroProps) {
         />
 
         <div className="mt-6 space-y-5 max-w-4xl">
-          
-          {/* Badges & Status */}
-          <div className="flex flex-wrap items-center gap-2.5">
-            <span className="px-3.5 py-1 rounded-full bg-premier-green-50 text-premier-green text-xs font-heading font-bold uppercase tracking-wider border border-premier-green-100">
-              {course.category}
-            </span>
-            <span className="px-3.5 py-1 rounded-full bg-surface-secondary text-body text-xs font-heading font-bold uppercase tracking-wider border border-border">
-              {course.level}
-            </span>
 
-            {isAvailable ? (
-              <span className="px-3.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-heading font-bold flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-premier-green animate-ping" />
-                Available Now
-              </span>
-            ) : (
-              <span className="px-3.5 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-xs font-heading font-bold flex items-center gap-1.5">
-                <Lock className="w-3.5 h-3.5" />
-                Coming Soon
-              </span>
-            )}
-          </div>
+
 
           {/* Title */}
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-heading leading-tight tracking-tight">
@@ -82,7 +61,7 @@ export function CourseDetailHero({ course }: CourseDetailHeroProps) {
 
           {/* Key Stats Bar */}
           <div className="flex flex-wrap items-center gap-6 pt-3 text-sm text-body border-t border-border/70">
-            
+
             {/* Rating */}
             <div className="flex items-center gap-1.5">
               <div className="flex items-center text-amber-400">
@@ -153,9 +132,8 @@ export function CourseDetailHero({ course }: CourseDetailHeroProps) {
 
               <button
                 onClick={() => setIsWishlisted(!isWishlisted)}
-                className={`w-9 h-9 rounded-xl border border-border flex items-center justify-center transition-all ${
-                  isWishlisted ? 'bg-rose-500 text-white border-rose-500' : 'bg-surface-secondary hover:bg-slate-200 text-body'
-                }`}
+                className={`w-9 h-9 rounded-xl border border-border flex items-center justify-center transition-all ${isWishlisted ? 'bg-rose-500 text-white border-rose-500' : 'bg-surface-secondary hover:bg-slate-200 text-body'
+                  }`}
                 title="Add to Wishlist"
               >
                 <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-white' : ''}`} />

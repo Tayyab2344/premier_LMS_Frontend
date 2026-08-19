@@ -60,7 +60,7 @@ export default function CourseDetailPage() {
               setDynamicCourse(mapBackendCourseToFrontend(found));
             }
           }
-        }).catch(() => {});
+        }).catch(() => { });
       })
       .finally(() => {
         setLoading(false);
@@ -121,7 +121,7 @@ export default function CourseDetailPage() {
         <section className="section-padding bg-premier-cream">
           <div className="section-container">
             <div className="grid lg:grid-cols-12 gap-12 items-start">
-              
+
               {/* Left Column: Interactive Mini Pages / Tab Content */}
               <div className="lg:col-span-8 min-h-[500px]">
                 <AnimatePresence mode="wait">

@@ -139,3 +139,74 @@
   background-image: radial-gradient(circle, #1B4A31 0.5px, transparent 0.5px);
   background-size: 24px 24px;
 }
+
+/* ── LatestNews animations ──────────────────────────────────────────────── */
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee-scroll 26s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.25; }
+}
+.pulse-dot { animation: dot-pulse 1.4s ease-in-out infinite; }
+
+@keyframes live-blink {
+  0%, 100% { opacity: 1;    box-shadow: 0 0 8px 2px rgba(220,38,38,0.7), 0 0 20px 4px rgba(220,38,38,0.35); }
+  50%       { opacity: 0.75; box-shadow: 0 0 4px 1px rgba(220,38,38,0.4), 0 0 10px 2px rgba(220,38,38,0.15); }
+}
+.live-pill { animation: live-blink 1.1s ease-in-out infinite; }
+
+@keyframes urgent-pop {
+  0%, 100% { transform: translateY(0)    scale(1);     box-shadow: none; }
+  45%       { transform: translateY(-3px) scale(1.012); box-shadow: 0 6px 20px rgba(180,71,47,0.18); }
+  55%       { transform: translateY(-3px) scale(1.012); box-shadow: 0 6px 20px rgba(180,71,47,0.18); }
+}
+.urgent-pop { animation: urgent-pop 2.4s ease-in-out infinite; }
+
+@keyframes flow-shimmer {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 0% 200%; }
+}
+.rows-container { position: relative; }
+.rows-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(27,59,44,0.04) 0%,
+    rgba(217,165,68,0.06) 40%,
+    rgba(27,59,44,0.04) 80%,
+    rgba(217,165,68,0.06) 100%
+  );
+  background-size: 100% 200%;
+  animation: flow-shimmer 4s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── PopularCourses animations ──────────────────────────────────────────── */
+@keyframes cta-blink {
+  0%, 100% { opacity: 1;    box-shadow: 0 0 0 0 rgba(217,165,68,0); }
+  50%       { opacity: 0.82; box-shadow: 0 0 0 6px rgba(217,165,68,0.18); }
+}
+.cta-blink { animation: cta-blink 1.8s ease-in-out infinite; }
+
+.cert-btn {
+  background-color: #f59e0b;
+  color: #0c0a09;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+.cert-btn:hover {
+  background-color: #1B3B2C;
+  color: #D9A544;
+}

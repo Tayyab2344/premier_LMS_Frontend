@@ -2,10 +2,9 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { FeaturedCourseHero } from '@/components/courses/FeaturedCourseHero';
-import { TrustStrip } from '@/components/courses/TrustStrip';
 import { UpcomingAcademySection } from '@/components/courses/UpcomingAcademySection';
-import { NotifyModal } from '@/components/courses/NotifyModal';
 import { CourseCTA } from '@/components/courses/detail/CourseCTA';
+import { NotifyModal } from '@/components/courses/NotifyModal';
 import { COURSES_DATA, Course, mapBackendCourseToFrontend } from '@/lib/coursesData';
 import api from '@/lib/api';
 
@@ -56,10 +55,7 @@ export default function CoursesPage() {
       {/* 1. Hero Section: Available Flagship Course as the Star */}
       <FeaturedCourseHero course={featuredAvailableCourse} />
 
-      {/* 2. Trust Strip Underneath */}
-      <TrustStrip />
-
-      {/* 3. "Coming Soon" Categorized Upcoming Academy Section */}
+      {/* 2. "Coming Soon" Categorized Upcoming Academy Section */}
       <UpcomingAcademySection
         upcomingCourses={upcomingCourses}
         onNotifyClick={handleOpenNotifyModal}
@@ -69,10 +65,10 @@ export default function CoursesPage() {
         onCategoryChange={setSelectedCategory}
       />
 
-      {/* 4. Final CTA Banner */}
+      {/* 3. Final CTA Banner */}
       <CourseCTA />
 
-      {/* 5. Notify Modal for Upcoming Courses */}
+      {/* 4. Notify Modal for Upcoming Courses */}
       <NotifyModal
         isOpen={notifyModalOpen}
         onClose={() => setNotifyModalOpen(false)}
