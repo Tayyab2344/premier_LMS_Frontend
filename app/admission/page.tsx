@@ -257,7 +257,6 @@ export default function AdmissionPage() {
       });
       setter(res.data.filename);
       if (sizeSetter) sizeSetter(formatBytes(file.size));
-      showAlert('File Attached', `${file.name} (${formatBytes(file.size)}) uploaded successfully.`);
     } catch (err: any) {
       const apiMsg = err?.response?.data?.message || `Failed to upload ${file.name}. Please try again.`;
       setFileErrors((prev) => ({ ...prev, [fieldKey]: apiMsg }));
