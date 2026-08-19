@@ -12,7 +12,6 @@ import {
   BookOpen,
   Mail,
   ShieldCheck,
-  Newspaper,
   Award,
 } from 'lucide-react';
 import Image from 'next/image';
@@ -220,25 +219,6 @@ export default function NewsPage() {
     <div className="min-h-screen bg-slate-50 pt-[115px] pb-20">
       <div className="section-container space-y-10">
 
-        {/* ── Gazette Editorial Masthead Header ────────────────────── */}
-        <div className="border-b-2 border-premier-green/30 pb-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 text-premier-green text-xs font-mono font-bold uppercase tracking-wider mb-1">
-                <Newspaper className="w-4 h-4 text-premier-green" />
-                Premier Academy Regulatory & Legal Gazette
-              </div>
-              <h1 className="text-3xl sm:text-4xl font-heading font-extrabold text-heading tracking-tight">
-                Corporate Tax & Legislative Intelligence
-              </h1>
-            </div>
-            <div className="text-left md:text-right font-mono text-xs text-slate-500">
-              
-              <p className="font-semibold text-slate-700">Curated by Raja Gulfam (Advocate High Court)</p>
-            </div>
-          </div>
-        </div>
-
         {/* ── Main Gazette Editorial Grid (8 cols Main Lead Story + 4 cols Regulatory Sidebar) ── */}
         <div className="grid lg:grid-cols-12 gap-8 items-start">
 
@@ -394,12 +374,12 @@ export default function NewsPage() {
               
               <div className="flex items-center justify-between pb-3 border-b border-border">
                 <div className="flex items-center gap-2">
-                  <Award className="w-4 h-4 text-premier-green" />
+                  
                   <h3 className="font-heading font-bold text-heading text-sm uppercase tracking-wider">
-                    Regulatory SRO Bulletins
+                    Regulatory  Bulletins
                   </h3>
                 </div>
-                <span className="text-[11px] font-mono text-slate-400">({sidebarBriefings.length} Bulletins)</span>
+                
               </div>
 
               <div className="space-y-3.5 divide-y divide-border">
