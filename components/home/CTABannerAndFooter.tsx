@@ -252,9 +252,9 @@ export function Footer() {
               &copy; {new Date().getFullYear()} Premier LMS — Founded by Raja Gulfam. All rights reserved.
             </div>
             <div className="flex items-center gap-6">
-              <Link href="#" className="text-slate-300 hover:text-emerald-400 transition-colors">Privacy Policy</Link>
-              <Link href="#" className="text-slate-300 hover:text-emerald-400 transition-colors">Terms of Service</Link>
-              <Link href="#" className="text-slate-300 hover:text-emerald-400 transition-colors">Contact Support</Link>
+              <Link href="/privacy" className="text-slate-300 hover:text-emerald-400 transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="text-slate-300 hover:text-emerald-400 transition-colors">Terms of Service</Link>
+              <Link href="/about#meet-founder" className="text-slate-300 hover:text-emerald-400 transition-colors">Contact Support</Link>
             </div>
           </div>
 

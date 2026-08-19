@@ -108,9 +108,9 @@ export default function Footer() {
         <div className="flex items-center gap-4">
           <Link href="/about" className="text-slate-300 hover:text-emerald-400 transition-colors no-underline">About</Link>
           <span className="text-slate-700">•</span>
-          <Link href="#" className="text-slate-300 hover:text-emerald-400 transition-colors no-underline">Privacy Policy</Link>
+          <Link href="/privacy" className="text-slate-300 hover:text-emerald-400 transition-colors no-underline">Privacy Policy</Link>
           <span className="text-slate-700">•</span>
-          <Link href="#" className="text-slate-300 hover:text-emerald-400 transition-colors no-underline">Terms of Service</Link>
+          <Link href="/terms" className="text-slate-300 hover:text-emerald-400 transition-colors no-underline">Terms of Service</Link>
         </div>
       </div>
     </footer>
