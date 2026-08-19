@@ -67,7 +67,7 @@ export function MeetInstructor() {
                 <div className="flex items-center justify-center gap-3 mt-6 pt-6 border-t border-border">
                   {[
                     { icon: Globe, href: '#', label: 'Visit Instructor Website' },
-                    { icon: MessageCircle, href: '#', label: 'Contact Instructor via WhatsApp' },
+                    { icon: MessageCircle, href: 'https://wa.me/923487257761?text=Hi%20Raja%20Gulfam%2C%20I%20came%20from%20the%20Premier%20LMS%20website%20and%20I%20have%20a%20question%20regarding%20your%20courses.', label: 'Contact Instructor via WhatsApp' },
                     { icon: Share2, href: '#', label: 'Share Instructor Profile' },
                     { icon: Send, href: '#', label: 'Send Instructor Email' },
                   ].map((social, i) => {
