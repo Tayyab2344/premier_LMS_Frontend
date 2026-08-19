@@ -77,7 +77,7 @@ export default function AdmissionPage() {
   const [otherTestReason, setOtherTestReason] = useState('');
   const [previousTraining, setPreviousTraining] = useState('');
   const [professionalExperience, setProfessionalExperience] = useState('');
-  const [assessmentMode, setAssessmentMode] = useState('On-site Assessment');
+  const assessmentMode = 'On-site Assessment';
   const [preferredAssessmentDate, setPreferredAssessmentDate] = useState('');
 
   // Payment Method & Details
