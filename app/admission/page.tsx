@@ -77,7 +77,7 @@ export default function AdmissionPage() {
   const [otherTestReason, setOtherTestReason] = useState('');
   const [previousTraining, setPreviousTraining] = useState('');
   const [professionalExperience, setProfessionalExperience] = useState('');
-  const [assessmentMode, setAssessmentMode] = useState('Online Assessment');
+  const [assessmentMode, setAssessmentMode] = useState('On-site Assessment');
   const [preferredAssessmentDate, setPreferredAssessmentDate] = useState('');
 
   // Payment Method & Details
@@ -1341,14 +1341,10 @@ export default function AdmissionPage() {
                           <label className="block text-xs font-heading font-bold text-heading uppercase mb-1.5">
                             Assessment Mode *
                           </label>
-                          <select
-                            value={assessmentMode}
-                            onChange={(e) => setAssessmentMode(e.target.value)}
-                            className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs text-heading focus:outline-none focus:border-emerald-600 bg-white"
-                          >
-                            <option value="Online Assessment">Online Assessment</option>
-                            <option value="On-site Assessment">On-site Assessment</option>
-                          </select>
+                          <div className="p-3 rounded-xl border border-amber-300 bg-amber-50/80 text-xs font-bold text-amber-950 flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-amber-600 shrink-0" />
+                            <span>🏛️ On-site Assessment (Premier Academy Campus)</span>
+                          </div>
                         </div>
 
                         <div>
