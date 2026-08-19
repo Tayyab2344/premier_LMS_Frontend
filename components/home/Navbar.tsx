@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, Smartphone } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -149,10 +149,11 @@ export function Navbar() {
             <div className="hidden lg:flex items-center gap-3">
               <Link
                 href="/auth/login"
-                className={`px-5 py-2.5 text-base font-body font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 ${isDarkHeader ? 'text-white hover:text-emerald-300' : 'text-slate-700 hover:text-heading'
+                className={`flex items-center gap-1.5 px-4 py-2.5 text-base font-body font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 ${isDarkHeader ? 'text-white hover:text-emerald-300' : 'text-slate-700 hover:text-heading'
                   }`}
               >
-                Login
+                <Smartphone className="w-4 h-4 text-emerald-500" />
+                <span>Download App</span>
               </Link>
               <Link
                 href="/admission"
@@ -209,9 +210,10 @@ export function Navbar() {
                 <Link
                   href="/auth/login"
                   onClick={() => setMobileOpen(false)}
-                  className="w-full text-center py-2.5 rounded-xl font-body font-semibold text-base border border-border text-slate-900"
+                  className="w-full text-center py-2.5 rounded-xl font-body font-semibold text-base border border-border text-slate-900 flex items-center justify-center gap-2"
                 >
-                  Login
+                  <Smartphone className="w-4 h-4 text-premier-green" />
+                  <span>Download App</span>
                 </Link>
                 <Link
                   href="/admission"

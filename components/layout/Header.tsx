@@ -132,9 +132,9 @@ export default function Header() {
             </div>
           ) : (
             <>
-              {/* Sign In */}
+              {/* Download App */}
               <Link id="btn-signin" href="/auth/login" className="btn-signin whitespace-nowrap no-underline text-center focus:outline-none focus:ring-2 focus:ring-premier-green focus:ring-offset-2 focus:ring-offset-premier-cream">
-                SIGN IN
+                DOWNLOAD APP
               </Link>
 
               {/* Admission Form */}
