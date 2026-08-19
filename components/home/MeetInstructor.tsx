@@ -123,7 +123,7 @@ export function MeetInstructor() {
                     className="bg-white rounded-2xl p-4 border border-border text-center space-y-1 shadow-soft hover:shadow-card-hover transition-all duration-300"
                   >
                     <Icon className="w-5 h-5 text-premier-green mx-auto mb-1" />
-                    
+
                     <div className="text-xl sm:text-2xl font-number font-extrabold text-heading tracking-tight flex items-center justify-center gap-0.5">
                       {stat.isDynamic ? (
                         <span>{studentCount.toLocaleString()}</span>

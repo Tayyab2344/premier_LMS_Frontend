@@ -8,8 +8,8 @@ import Image from 'next/image';
 
 export default function Footer() {
   const pathname = usePathname();
-  const hideFooter = 
-    pathname.startsWith('/auth') || 
+  const hideFooter =
+    pathname.startsWith('/auth') ||
     pathname.startsWith('/admin') ||
     pathname.startsWith('/dashboard/classes') ||
     pathname.startsWith('/dashboard/recordings/player');
@@ -20,7 +20,7 @@ export default function Footer() {
     <footer className="bg-slate-900 text-slate-200 border-t border-slate-800 mt-auto">
       {/* Main Section */}
       <div className="container-main py-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center border-b border-slate-800">
-        
+
         {/* Brand & Info */}
         <div className="md:col-span-5 space-y-3">
           <div className="flex items-center gap-3">
@@ -64,7 +64,7 @@ export default function Footer() {
             <div className="flex flex-col items-center gap-1 shrink-0">
               <div className="bg-white p-1.5 rounded-xl border border-slate-700 shadow-sm flex items-center justify-center">
                 <svg className="w-12 h-12 text-slate-900" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm8-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm13-2h3v3h-3v-3zm0 5h3v3h-3v-3zm-5-5h3v3h-3v-3zm0 5h3v3h-3v-3zm2.5-2.5h3v3h-3v-3zM5 5h2v2H5V5zm10 0h2v2h-2V5zM5 17h2v2H5v-2z"/>
+                  <path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm8-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm13-2h3v3h-3v-3zm0 5h3v3h-3v-3zm-5-5h3v3h-3v-3zm0 5h3v3h-3v-3zm2.5-2.5h3v3h-3v-3zM5 5h2v2H5V5zm10 0h2v2h-2V5zM5 17h2v2H5v-2z" />
                 </svg>
               </div>
               <span className="text-[9px] uppercase font-semibold text-emerald-400 tracking-wider flex items-center gap-1">
@@ -85,10 +85,10 @@ export default function Footer() {
               title="Download on Google Play (Fake Route)"
             >
               <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
-                <path d="M3.609 1.814L13.792 12 3.61 22.186a1.99 1.99 0 0 1-.61-1.416V3.23c0-.547.224-1.042.609-1.416z" fill="#00E676"/>
-                <path d="M15.206 13.414l2.766-2.766-13.682-7.9 10.916 10.666z" fill="#FFC107"/>
-                <path d="M15.206 10.586l2.766-1.342L4.29 1.344l10.916 10.666z" fill="#FF3D00"/>
-                <path d="M17.972 9.244l-2.766 1.342 2.342 2.342 2.342-2.342-1.918-1.342z" fill="#2196F3"/>
+                <path d="M3.609 1.814L13.792 12 3.61 22.186a1.99 1.99 0 0 1-.61-1.416V3.23c0-.547.224-1.042.609-1.416z" fill="#00E676" />
+                <path d="M15.206 13.414l2.766-2.766-13.682-7.9 10.916 10.666z" fill="#FFC107" />
+                <path d="M15.206 10.586l2.766-1.342L4.29 1.344l10.916 10.666z" fill="#FF3D00" />
+                <path d="M17.972 9.244l-2.766 1.342 2.342 2.342 2.342-2.342-1.918-1.342z" fill="#2196F3" />
               </svg>
               <div className="flex flex-col text-left leading-none">
                 <span className="text-[8px] uppercase tracking-wider text-slate-300 font-semibold">GET IT ON</span>

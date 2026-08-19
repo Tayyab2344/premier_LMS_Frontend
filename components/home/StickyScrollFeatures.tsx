@@ -205,22 +205,22 @@ export function StickyScrollFeatures({
                       ? { opacity: isActive ? 1 : 0 }
                       : isActive
                       ? {
-                          x: [180, 45, 0],
-                          y: [140, 15, 0],
-                          rotate: [12, 3, 0],
-                          opacity: [0, 0.85, 1],
-                          scale: [0.9, 0.97, 1],
+                          x: 0,
+                          y: 0,
+                          rotate: 0,
+                          opacity: 1,
+                          scale: 1,
                         }
                       : {
-                          x: [0, 45, 180],
-                          y: [0, 15, 140],
-                          rotate: [0, 3, 12],
-                          opacity: [1, 0.4, 0],
-                          scale: [1, 0.97, 0.9],
+                          x: 80,
+                          y: 20,
+                          rotate: 2,
+                          opacity: 0,
+                          scale: 0.95,
                         }
                   }
                   transition={{
-                    duration: 0.85,
+                    duration: 0.55,
                     ease: [0.16, 1, 0.3, 1],
                   }}
                   className={`absolute inset-0 w-full h-full flex items-center justify-center ${

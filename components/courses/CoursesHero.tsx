@@ -31,10 +31,10 @@ export function CoursesHero() {
 
       <div className="section-container relative z-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center min-h-[540px]">
-          
+
           {/* Left Column: Heading & Content */}
           <div className="lg:col-span-7 space-y-8">
-            
+
 
             {/* Main Heading */}
             <motion.h1
@@ -127,7 +127,7 @@ export function CoursesHero() {
               <div className="relative rounded-3xl bg-gradient-to-b from-white to-premier-green-50 border border-premier-green-100 p-6 sm:p-8 shadow-card-hover overflow-hidden">
                 <div className="relative aspect-[4/3.2] w-full flex items-center justify-center">
                   <div className="w-full h-full bg-gradient-to-tr from-premier-green-700 via-premier-green to-blue-600 rounded-2xl p-6 text-white flex flex-col justify-between shadow-elevated relative overflow-hidden group">
-                    
+
                     <div className="flex justify-between items-start z-10">
                       <div className="flex items-center gap-2 bg-white/15 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20">
                         <GraduationCap className="w-4 h-4 text-amber-300" />

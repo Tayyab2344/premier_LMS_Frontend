@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, PlayCircle } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 export function Hero() {
@@ -89,7 +89,7 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Bottom Content Block: Primary & Secondary CTA Buttons */}
+          {/* Bottom Content Block: Primary CTA Button */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -100,10 +100,6 @@ export function Hero() {
               Explore Courses
               <ArrowRight className="w-5 h-5" aria-hidden="true" />
             </Link>
-            <button className="btn-secondary text-base !px-8 !py-4 group !bg-white/15 !text-white !border-white/30 hover:!bg-white/25 backdrop-blur-sm" aria-label="Watch platform introduction video">
-              <PlayCircle className="w-5 h-5 text-white group-hover:scale-110 transition-transform" aria-hidden="true" />
-              Watch Introduction
-            </button>
           </motion.div>
         </div>
       </div>

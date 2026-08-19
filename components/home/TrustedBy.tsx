@@ -13,13 +13,13 @@ import iotaLogo from '@/assets/iota.png';
 import itiLogo from '@/assets/ITI-Logo.jpg';
 
 const logos = [
-  { name: 'AICPA', src: aicpaLogo, scaleClass: 'scale-[1.35]' },
-  { name: 'ACCA', src: accaLogo, scaleClass: 'scale-[1.35]' },
-  { name: 'IFFCA', src: iffcaLogo, scaleClass: 'scale-[1.35]' },
-  { name: 'CIMA', src: cimaLogo, scaleClass: 'scale-[1.35]' },
+  { name: 'AICPA', src: aicpaLogo, scaleClass: 'scale-[1.20]' },
+  { name: 'ACCA', src: accaLogo, scaleClass: 'scale-[1.20]' },
+  { name: 'IFFCA', src: iffcaLogo, scaleClass: 'scale-[1.20]' },
+  { name: 'CIMA', src: cimaLogo, scaleClass: 'scale-[1.20]' },
   { name: 'FBR Portal', src: fbr3Logo, scaleClass: 'scale-[1.35]' },
   { name: 'FBR Tax', src: fbr5Logo, scaleClass: 'scale-[1.35]' },
-  { name: 'IOTA', src: iotaLogo, scaleClass: 'scale-[1.35]' },
+  { name: 'IOTA', src: iotaLogo, scaleClass: 'scale-[1.20]' },
   { name: 'ITI', src: itiLogo, scaleClass: 'scale-[2.8]' },
 ];
 
@@ -58,7 +58,7 @@ export function TrustedBy() {
           {marqueeLogos.map((logo, index) => (
             <div
               key={`${logo.name}-${index}`}
-              className="bg-white border-2 border-[#1B3B2C] shadow-[3.5px_3.5px_0px_#1B3B2C] hover:shadow-[5px_5px_0px_#1B3B2C] rounded-xl p-2 sm:p-2.5 flex items-center justify-center transition-all duration-300 w-36 sm:w-44 h-16 sm:h-20 shrink-0 hover:scale-105 overflow-hidden"
+              className="bg-white rounded-xl p-2 sm:p-2.5 flex items-center justify-center transition-all duration-300 w-36 sm:w-44 h-16 sm:h-20 shrink-0 hover:scale-105 overflow-hidden"
             >
               <Image
                 src={logo.src}
