@@ -87,8 +87,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const { data } = await api.post('/auth/login', { email, password });
       const { accessToken, user: userData } = data;
 
-      // Set cookie expiry (7 days matching JWT)
-      Cookies.set('accessToken', accessToken, { expires: 7 });
+      // Set cookie expiry: 30 days for students, browser session only (expires when closed) for admin
+      if (userData.role === 'ADMIN') {
+        Cookies.set('accessToken', accessToken);
+      } else {
+        Cookies.set('accessToken', accessToken, { expires: 30 });
+      }
 
       // Fetch profile to get enrollments & admissions
       const profileRes = await api.get('/auth/profile');
