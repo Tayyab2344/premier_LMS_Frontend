@@ -85,6 +85,8 @@ export default function ClassroomPage() {
     }
 
     if (urlToken) {
+      async function authFromToken() {
+        try {
           // Fetch profile using the token first to inspect role
           const { data } = await api.get('/auth/profile', {
             headers: { Authorization: `Bearer ${urlToken}` }
