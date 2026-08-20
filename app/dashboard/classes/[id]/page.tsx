@@ -87,11 +87,15 @@ export default function ClassroomPage() {
     if (urlToken) {
       async function authFromToken() {
         try {
-          Cookies.set('accessToken', urlToken!, { expires: 7 });
-          // Fetch profile using the token
+          // Fetch profile using the token first to inspect role
           const { data } = await api.get('/auth/profile', {
             headers: { Authorization: `Bearer ${urlToken}` }
           });
+          if (data.role === 'ADMIN') {
+            Cookies.set('accessToken', urlToken!);
+          } else {
+            Cookies.set('accessToken', urlToken!, { expires: 30 });
+          }
           const mappedUser = {
             id: data.id,
             name: data.name,
