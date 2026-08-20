@@ -239,99 +239,103 @@ export default function AdminApplicationsPage() {
 
       {/* Review Application Modal */}
       {selectedApp && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/75 backdrop-blur-md overflow-y-auto py-10 select-none animate-fade-in">
-          <div className="bg-slate-900 border border-slate-700/60 rounded-3xl p-6 sm:p-8 w-full max-w-2xl mx-4 shadow-2xl max-h-[85vh] overflow-y-auto text-white space-y-6 animate-scale-up relative">
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-400 via-emerald-500 to-amber-600" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 backdrop-blur-sm p-4 overflow-hidden select-none animate-fade-in">
+          <div className="bg-white border border-gray-200 rounded-3xl w-full max-w-2xl shadow-2xl overflow-hidden text-gray-800 flex flex-col max-h-[90vh] animate-scale-up relative">
+            <div className="h-1.5 bg-gradient-to-r from-amber-400 via-emerald-500 to-amber-600 shrink-0" />
             
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4 shrink-0 bg-white">
               <div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
                   Application Review
                 </span>
-                <h2 className="font-heading font-extrabold text-white text-lg mt-1">Review Student Admission</h2>
+                <h2 className="font-heading font-extrabold text-text-premier-green text-lg mt-1">Review Student Admission</h2>
               </div>
               <button
                 onClick={() => setSelectedApp(null)}
-                className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center font-bold text-lg transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-800 flex items-center justify-center font-bold text-base transition-colors cursor-pointer"
               >
                 ✕
               </button>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-              <div className="bg-slate-800/50 rounded-2xl p-4 border border-slate-800 space-y-2.5">
-                <h3 className="font-bold text-[11px] uppercase text-slate-400 tracking-wider font-mono">Personal Information</h3>
-                <p><strong className="text-slate-300">Name:</strong> <span className="text-white font-medium">{selectedApp.fullName}</span></p>
-                <p><strong className="text-slate-300">CNIC:</strong> <span className="text-amber-300 font-mono">{selectedApp.cnic}</span></p>
-                <p><strong className="text-slate-300">Email:</strong> <span className="text-slate-200">{selectedApp.email}</span></p>
-                <p><strong className="text-slate-300">WhatsApp:</strong> <span className="text-slate-200 font-mono">{selectedApp.whatsapp}</span></p>
-                <p><strong className="text-slate-300">Selected Courses:</strong> <span className="text-emerald-400 font-bold">{selectedApp.selectedCourses.join(", ")}</span></p>
-                <p><strong className="text-slate-300">Total Paid:</strong> <span className="text-emerald-400 font-mono font-bold">PKR {selectedApp.totalAmount.toLocaleString()}</span></p>
-              </div>
+            {/* Scrollable Body */}
+            <div className="p-6 overflow-y-auto space-y-5 flex-1 bg-white">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
+                <div className="bg-gray-50/80 rounded-2xl p-4 border border-gray-200/80 space-y-2.5">
+                  <h3 className="font-bold text-[11px] uppercase text-gray-500 tracking-wider font-mono">Personal Information</h3>
+                  <p><strong className="text-gray-600">Name:</strong> <span className="text-gray-900 font-semibold">{selectedApp.fullName}</span></p>
+                  <p><strong className="text-gray-600">CNIC:</strong> <span className="text-amber-800 font-mono font-medium">{selectedApp.cnic}</span></p>
+                  <p><strong className="text-gray-600">Email:</strong> <span className="text-gray-800">{selectedApp.email}</span></p>
+                  <p><strong className="text-gray-600">WhatsApp:</strong> <span className="text-gray-800 font-mono">{selectedApp.whatsapp}</span></p>
+                  <p><strong className="text-gray-600">Selected Courses:</strong> <span className="text-text-premier-green font-bold">{selectedApp.selectedCourses.join(", ")}</span></p>
+                  <p><strong className="text-gray-600">Total Paid:</strong> <span className="text-text-premier-green font-mono font-bold">PKR {selectedApp.totalAmount.toLocaleString()}</span></p>
+                </div>
 
-              <div className="bg-slate-800/50 rounded-2xl p-4 border border-slate-800 space-y-3">
-                <h3 className="font-bold text-[11px] uppercase text-slate-400 tracking-wider font-mono">Attached Documents</h3>
-                <div className="flex flex-col gap-2.5">
-                  {selectedApp.paymentProof ? (
-                    <a href={getMediaUrl(selectedApp.paymentProof)} target="_blank" rel="noopener noreferrer" className="text-xs text-emerald-400 hover:text-emerald-300 bg-premier-green/10 border border-emerald-500/20 px-3 py-2 rounded-xl flex items-center gap-2 transition-colors">
-                      <span>📄 View Payment Proof Receipt</span>
-                    </a>
-                  ) : (
-                    <span className="text-slate-500 italic">No receipt attached</span>
-                  )}
-                  {selectedApp.cnicFile ? (
-                    <a href={getMediaUrl(selectedApp.cnicFile)} target="_blank" rel="noopener noreferrer" className="text-xs text-amber-400 hover:text-amber-300 bg-amber-500/10 border border-amber-500/20 px-3 py-2 rounded-xl flex items-center gap-2 transition-colors">
-                      <span>🆔 View CNIC Copy</span>
-                    </a>
-                  ) : (
-                    <span className="text-slate-500 italic">No CNIC copy attached</span>
-                  )}
-                  {selectedApp.photoFile ? (
-                    <a href={getMediaUrl(selectedApp.photoFile)} target="_blank" rel="noopener noreferrer" className="text-xs text-sky-400 hover:text-sky-300 bg-sky-500/10 border border-sky-500/20 px-3 py-2 rounded-xl flex items-center gap-2 transition-colors">
-                      <span>🖼️ View Photo</span>
-                    </a>
-                  ) : (
-                    <span className="text-slate-500 italic">No photo attached</span>
-                  )}
+                <div className="bg-gray-50/80 rounded-2xl p-4 border border-gray-200/80 space-y-3">
+                  <h3 className="font-bold text-[11px] uppercase text-gray-500 tracking-wider font-mono">Attached Documents</h3>
+                  <div className="flex flex-col gap-2.5">
+                    {selectedApp.paymentProof ? (
+                      <a href={getMediaUrl(selectedApp.paymentProof)} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-emerald-800 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-3.5 py-2.5 rounded-xl flex items-center gap-2 transition-colors">
+                        <span>📄 View Payment Proof Receipt</span>
+                      </a>
+                    ) : (
+                      <span className="text-gray-400 italic">No receipt attached</span>
+                    )}
+                    {selectedApp.cnicFile ? (
+                      <a href={getMediaUrl(selectedApp.cnicFile)} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-amber-800 hover:text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3.5 py-2.5 rounded-xl flex items-center gap-2 transition-colors">
+                        <span>🆔 View CNIC Copy</span>
+                      </a>
+                    ) : (
+                      <span className="text-gray-400 italic">No CNIC copy attached</span>
+                    )}
+                    {selectedApp.photoFile ? (
+                      <a href={getMediaUrl(selectedApp.photoFile)} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-sky-800 hover:text-sky-900 bg-sky-50 hover:bg-sky-100 border border-sky-200 px-3.5 py-2.5 rounded-xl flex items-center gap-2 transition-colors">
+                        <span>🖼️ View Photo</span>
+                      </a>
+                    ) : (
+                      <span className="text-gray-400 italic">No photo attached</span>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="border-t border-slate-800 pt-5 space-y-4">
               <div>
-                <label className="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1.5 font-mono">Remarks / Admin Reason</label>
+                <label className="block text-[11px] font-bold text-gray-600 uppercase tracking-wider mb-1.5 font-mono">Remarks / Admin Reason</label>
                 <textarea
                   value={remarks}
                   onChange={(e) => setRemarks(e.target.value)}
-                  className="w-full px-4 py-2.5 text-xs bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                  className="w-full px-4 py-2.5 text-xs bg-white border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-brand-green"
                   rows={3}
                   placeholder="Add optional notes or reason for rejection/approval"
                 />
               </div>
-              <div className="flex gap-3 justify-end pt-2">
-                <button
-                  onClick={() => handleUpdateStatus("rejected")}
-                  className="px-5 py-2.5 text-xs font-bold bg-rose-600/90 hover:bg-rose-600 text-white rounded-xl shadow-md transition-all cursor-pointer border border-rose-500/30"
-                >
-                  Reject Application
-                </button>
-                <button
-                  onClick={() => handleUpdateStatus("approved")}
-                  className="px-6 py-2.5 text-xs font-bold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl shadow-md shadow-emerald-950 transition-all cursor-pointer border border-emerald-500/40"
-                >
-                  Approve & Create Account
-                </button>
-              </div>
+            </div>
+
+            {/* Pinned Action Footer */}
+            <div className="border-t border-gray-100 px-6 py-4 bg-gray-50 flex items-center justify-end gap-3 shrink-0 rounded-b-3xl">
+              <button
+                onClick={() => handleUpdateStatus("rejected")}
+                className="px-5 py-2.5 text-xs font-bold bg-white hover:bg-rose-50 text-rose-600 hover:text-rose-700 rounded-xl transition-all cursor-pointer border border-rose-200 shadow-sm hover:shadow"
+              >
+                Reject Application
+              </button>
+              <button
+                onClick={() => handleUpdateStatus("approved")}
+                className="px-6 py-2.5 text-xs font-bold bg-brand-green hover:bg-premier-green-dark text-white rounded-xl shadow-md transition-all cursor-pointer border border-brand-green"
+              >
+                Approve & Create Account
+              </button>
             </div>
           </div>
         </div>
       )}
 
       {actionLoading && (
-        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-slate-950/75 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-slate-700/60 rounded-3xl p-6 flex flex-col items-center space-y-4 shadow-2xl text-white">
-            <div className="w-10 h-10 border-4 border-emerald-500/30 border-t-emerald-400 rounded-full animate-spin" />
-            <p className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">Processing Request...</p>
+        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-slate-950/60 backdrop-blur-sm">
+          <div className="bg-white border border-gray-200 rounded-3xl p-6 flex flex-col items-center space-y-4 shadow-2xl text-gray-800">
+            <div className="w-10 h-10 border-4 border-emerald-500/30 border-t-brand-green rounded-full animate-spin" />
+            <p className="text-xs font-mono font-bold uppercase tracking-wider text-text-premier-green">Processing Request...</p>
           </div>
         </div>
       )}
@@ -339,16 +343,16 @@ export default function AdminApplicationsPage() {
       {toast && (
         <div className={`fixed bottom-6 right-6 z-[99999] flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl border animate-scale-up max-w-md ${
           toast.type === "success"
-            ? "bg-slate-900 border-emerald-500/40 text-emerald-300 shadow-emerald-950/50"
-            : "bg-slate-900 border-rose-500/40 text-rose-300 shadow-rose-950/50"
+            ? "bg-white border-emerald-300 text-emerald-900 shadow-xl shadow-emerald-900/5"
+            : "bg-white border-rose-300 text-rose-900 shadow-xl shadow-rose-900/5"
         }`}>
           <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-black shrink-0 ${
-            toast.type === "success" ? "bg-premier-green/20 text-emerald-400 border border-emerald-500/30" : "bg-rose-500/20 text-rose-400 border border-rose-500/30"
+            toast.type === "success" ? "bg-emerald-100 text-emerald-700 border border-emerald-300" : "bg-rose-100 text-rose-700 border border-rose-300"
           }`}>
             {toast.type === "success" ? "✓" : "!"}
           </div>
-          <p className="text-xs font-semibold leading-normal font-sans text-white">{toast.message}</p>
-          <button onClick={() => setToast(null)} className="text-slate-400 hover:text-white text-sm ml-2 font-bold cursor-pointer">✕</button>
+          <p className="text-xs font-semibold leading-normal font-sans text-gray-800">{toast.message}</p>
+          <button onClick={() => setToast(null)} className="text-gray-400 hover:text-gray-700 text-sm ml-2 font-bold cursor-pointer">✕</button>
         </div>
       )}
     </div>
