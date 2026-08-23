@@ -300,21 +300,28 @@ export default function DashboardPage() {
                               {c.title}
                             </h3>
                             {/* Batch & Status */}
-                            <div className="flex items-center justify-between text-xs mt-3 border-t border-border-light pt-2">
-                              <span className="text-text-secondary font-medium">Batch: {c.batchName}</span>
-                              <span className={`font-bold uppercase tracking-wider text-[10px] ${
-                                c.isCompleted
-                                  ? "text-text-secondary"
-                                  : c.batchStatus === "admission"
-                                  ? "text-amber-500"
-                                  : "text-brand-green"
-                              }`}>
-                                {c.isCompleted
-                                  ? "Completed"
-                                  : c.batchStatus === "admission"
-                                  ? "Admission"
-                                  : "Active"}
-                              </span>
+                            <div className="flex flex-col gap-2 border-t border-border-light pt-2 mt-auto">
+                              <div className="flex items-center justify-between text-xs">
+                                <span className="text-text-secondary font-medium">Batch: {c.batchName}</span>
+                                <span className={`font-bold uppercase tracking-wider text-[10px] ${
+                                  c.isCompleted
+                                    ? "text-text-secondary"
+                                    : c.batchStatus === "admission"
+                                    ? "text-amber-500"
+                                    : "text-brand-green"
+                                }`}>
+                                  {c.isCompleted
+                                    ? "Completed"
+                                    : c.batchStatus === "admission"
+                                    ? "Admission"
+                                    : "Active"}
+                                </span>
+                              </div>
+                              {c.registrationNo && (
+                                <div className="text-[10px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100 w-fit">
+                                  Reg No: {c.registrationNo}
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>

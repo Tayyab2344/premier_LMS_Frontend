@@ -87,15 +87,26 @@ export default function ClassroomPage() {
     if (urlToken) {
       async function authFromToken() {
         try {
-          Cookies.set('accessToken', urlToken!, {
-            expires: 7,
-            secure: typeof window !== 'undefined' ? window.location.protocol === 'https:' : process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
-          });
-          // Fetch profile using the token
+          // Fetch profile using the token first to inspect role
           const { data } = await api.get('/auth/profile', {
             headers: { Authorization: `Bearer ${urlToken}` }
           });
+
+          const isSecure = typeof window !== 'undefined' ? window.location.protocol === 'https:' : process.env.NODE_ENV === 'production';
+          const isUserAdmin = data.role?.toLowerCase() === 'admin';
+
+          if (isUserAdmin) {
+            Cookies.set('accessToken', urlToken!, {
+              secure: isSecure,
+              sameSite: 'lax',
+            });
+          } else {
+            Cookies.set('accessToken', urlToken!, {
+              expires: 30,
+              secure: isSecure,
+              sameSite: 'lax',
+            });
+          }
           const mappedUser = {
             id: data.id,
             name: data.name,
