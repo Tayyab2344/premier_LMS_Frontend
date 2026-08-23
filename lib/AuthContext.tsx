@@ -87,8 +87,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const { data } = await api.post('/auth/login', { email, password });
       const { accessToken, user: userData } = data;
 
-      // Set cookie expiry (7 days matching JWT)
-      Cookies.set('accessToken', accessToken, { expires: 7 });
+      // Set cookie with secure and sameSite attributes
+      Cookies.set('accessToken', accessToken, {
+        expires: 7,
+        secure: typeof window !== 'undefined' ? window.location.protocol === 'https:' : process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+      });
 
       // Fetch profile to get enrollments & admissions
       const profileRes = await api.get('/auth/profile');

@@ -2,44 +2,64 @@
  * POST /api/zoom/signature
  *
  * Generates the Zoom Meeting SDK HS256 JWT signature server-side.
- * This endpoint keeps ZOOM_SDK_KEY and ZOOM_SDK_SECRET off the client
- * entirely — they are read only from server environment variables and
- * are never included in any response payload.
- *
- * Request body:
- *   { meetingNumber: string, role: 0 | 1 }
- *     role 0 = participant (student)
- *     role 1 = host (moderator/admin)
+ * HARDENED:
+ * 1. Requires valid JWT session authentication (Bearer token or accessToken cookie).
+ * 2. Role is strictly computed server-side from the verified user session (never trusted from client).
+ * 3. Enforces in-memory IP-based rate limiting (10 requests/min).
  *
  * Response:
- *   200 { signature: string }
+ *   200 { signature: string, role: 0 | 1 }
  *   400 { error: string }
+ *   401 { error: string }
+ *   429 { error: string }
  *   500 { error: string }
  */
 
 import { NextRequest, NextResponse } from 'next/server';
 import { createHmac } from 'crypto';
 
-// ─── Environment variable validation ────────────────────────────────────────
-// Validated once at module load so a missing var surfaces immediately in
-// server logs rather than silently producing invalid signatures.
 const SDK_KEY = process.env.ZOOM_SDK_KEY;
 const SDK_SECRET = process.env.ZOOM_SDK_SECRET;
+const BACKEND_API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 
 if (!SDK_KEY || !SDK_SECRET) {
   console.error(
-    '[zoom/signature] ⚠️  ZOOM_SDK_KEY or ZOOM_SDK_SECRET is not set. ' +
+    '[zoom/signature] ⚠️ ZOOM_SDK_KEY or ZOOM_SDK_SECRET is not set. ' +
     'Signature generation will fail for all requests.',
   );
 }
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
+// ─── In-Memory Rate Limiting (10 requests / min per IP) ─────────────────────
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 
-/**
- * Base64URL-encodes a plain JavaScript object (serialised as JSON).
- * Produces URL-safe output with no padding chars, matching Zoom's
- * expected JWT segment format exactly.
- */
+function isRateLimited(ip: string, limit = 10, windowMs = 60 * 1000): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + windowMs });
+    return false;
+  }
+
+  if (entry.count >= limit) {
+    return true;
+  }
+
+  entry.count += 1;
+  return false;
+}
+
+// Periodic cleanup of expired rate limit entries
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, entry] of rateLimitMap.entries()) {
+    if (now > entry.resetAt) {
+      rateLimitMap.delete(ip);
+    }
+  }
+}, 5 * 60 * 1000).unref?.();
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 function base64UrlEncodeObject(obj: Record<string, unknown>): string {
   return Buffer.from(JSON.stringify(obj))
     .toString('base64')
@@ -48,12 +68,6 @@ function base64UrlEncodeObject(obj: Record<string, unknown>): string {
     .replace(/\//g, '_');
 }
 
-/**
- * Strips all non-digit characters from a meeting number string and
- * confirms at least one digit remains. Zoom meeting numbers are always
- * purely numeric (9–11 digits) but may arrive with spaces or dashes
- * from copy-paste.
- */
 function normalizeMeetingNumber(raw: unknown): string {
   if (typeof raw !== 'string' && typeof raw !== 'number') {
     throw new RangeError('meetingNumber must be a string or number.');
@@ -67,35 +81,23 @@ function normalizeMeetingNumber(raw: unknown): string {
   return normalized;
 }
 
-/**
- * Builds and signs the Zoom Meeting SDK JWT using HS256.
- *
- * Zoom SDK JWT payload fields:
- *   appKey   — your SDK Key (same value as sdkKey; Zoom requires both)
- *   sdkKey   — your SDK Key
- *   mn       — meeting number as a Number (not string)
- *   role     — 0 (participant) | 1 (host)
- *   iat      — issued-at (Unix timestamp, 30 s in the past for clock skew)
- *   exp      — expiry  (iat + 2 hours; Zoom max is 48 h)
- *   tokenExp — must equal exp (Zoom SDK requirement)
- */
 function generateZoomSignature(meetingNumber: string, role: 0 | 1): string {
   if (!SDK_KEY || !SDK_SECRET) {
     throw new Error('Zoom SDK credentials are not configured on the server.');
   }
 
-  const iat = Math.floor(Date.now() / 1000) - 30; // 30 s grace for clock skew
+  const iat = Math.floor(Date.now() / 1000) - 30; // 30s grace for clock skew
   const exp = iat + 60 * 60 * 2;                  // 2-hour validity window
 
   const header = { alg: 'HS256', typ: 'JWT' };
   const payload = {
     appKey:   SDK_KEY,
     sdkKey:   SDK_KEY,
-    mn:       Number(meetingNumber), // Must be numeric, not a string
+    mn:       Number(meetingNumber),
     role,
     iat,
     exp,
-    tokenExp: exp,                   // Zoom SDK requires this to match exp
+    tokenExp: exp,
   };
 
   const headerEncoded  = base64UrlEncodeObject(header);
@@ -113,9 +115,60 @@ function generateZoomSignature(meetingNumber: string, role: 0 | 1): string {
 }
 
 // ─── Route handler ────────────────────────────────────────────────────────────
-
 export async function POST(request: NextRequest): Promise<NextResponse> {
-  // ── 1. Parse request body ──────────────────────────────────────────────────
+  // 1. IP Extraction & Rate Limiting
+  const ip =
+    request.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+    request.headers.get('x-real-ip') ||
+    '127.0.0.1';
+
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: 'Too many signature requests. Please wait a minute.' },
+      { status: 429 },
+    );
+  }
+
+  // 2. Authentication: Extract Token from Authorization header or Cookies
+  let token = request.headers.get('authorization')?.replace(/^Bearer\s+/i, '');
+  if (!token) {
+    token = request.cookies.get('accessToken')?.value;
+  }
+
+  if (!token) {
+    return NextResponse.json(
+      { error: 'Authentication required. Missing authorization token.' },
+      { status: 401 },
+    );
+  }
+
+  // 3. Verify session & resolve user role from Backend
+  let userRole = 'student';
+  try {
+    const profileRes = await fetch(`${BACKEND_API_URL}/auth/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!profileRes.ok) {
+      return NextResponse.json(
+        { error: 'Invalid or expired session. Please log in again.' },
+        { status: 401 },
+      );
+    }
+
+    const profile = await profileRes.json();
+    userRole = profile?.role || 'student';
+  } catch (err: any) {
+    console.error('[zoom/signature] Auth verification failed:', err.message);
+    return NextResponse.json(
+      { error: 'Unable to verify session with authentication server.' },
+      { status: 500 },
+    );
+  }
+
+  // 4. Parse request body
   let body: Record<string, unknown>;
   try {
     body = await request.json();
@@ -126,9 +179,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     );
   }
 
-  const { meetingNumber, role } = body;
+  const { meetingNumber } = body;
 
-  // ── 2. Validate inputs ─────────────────────────────────────────────────────
   if (meetingNumber === undefined || meetingNumber === null || meetingNumber === '') {
     return NextResponse.json(
       { error: 'meetingNumber is required.' },
@@ -136,14 +188,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     );
   }
 
-  if (role !== 0 && role !== 1) {
-    return NextResponse.json(
-      { error: 'role must be 0 (participant) or 1 (host).' },
-      { status: 400 },
-    );
-  }
-
-  // ── 3. Normalize meeting number ────────────────────────────────────────────
+  // 5. Normalize meeting number
   let normalizedMeetingNumber: string;
   try {
     normalizedMeetingNumber = normalizeMeetingNumber(meetingNumber);
@@ -151,10 +196,21 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ error: err.message }, { status: 400 });
   }
 
-  // ── 4. Generate signature ──────────────────────────────────────────────────
+  // 6. Enforce Server-Side Role (NEVER trust client-supplied role)
+  const isModerator = userRole.toLowerCase() === 'admin' || userRole.toLowerCase() === 'teacher';
+  const role: 0 | 1 = isModerator ? 1 : 0;
+
+  // 7. Generate signature
   try {
-    const signature = generateZoomSignature(normalizedMeetingNumber, role as 0 | 1);
-    return NextResponse.json({ signature }, { status: 200 });
+    const signature = generateZoomSignature(normalizedMeetingNumber, role);
+    return NextResponse.json(
+      {
+        signature,
+        role,
+        notice: 'For full virtual classroom integration, prefer backend endpoint GET /api/classes/:id/join',
+      },
+      { status: 200 },
+    );
   } catch (err: any) {
     console.error('[zoom/signature] Signature generation failed:', err.message);
     return NextResponse.json(
@@ -164,7 +220,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   }
 }
 
-// Explicitly reject all other HTTP methods with a clear error
 export async function GET(): Promise<NextResponse> {
   return NextResponse.json({ error: 'Method not allowed. Use POST.' }, { status: 405 });
 }

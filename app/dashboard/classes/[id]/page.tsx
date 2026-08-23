@@ -87,7 +87,11 @@ export default function ClassroomPage() {
     if (urlToken) {
       async function authFromToken() {
         try {
-          Cookies.set('accessToken', urlToken!, { expires: 7 });
+          Cookies.set('accessToken', urlToken!, {
+            expires: 7,
+            secure: typeof window !== 'undefined' ? window.location.protocol === 'https:' : process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+          });
           // Fetch profile using the token
           const { data } = await api.get('/auth/profile', {
             headers: { Authorization: `Bearer ${urlToken}` }

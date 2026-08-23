@@ -49,7 +49,7 @@ function ZoomPlayer({
   userId,
   isModerator,
   zak,
-  allowStudentScreenshare = false,
+  allowStudentScreenshare: _allowStudentScreenshare = false,
   socket,
   onInit,
   onMeetingEnd,
@@ -108,6 +108,30 @@ function ZoomPlayer({
       body {
         overflow: hidden !important;
       }
+      /* Hide Zoom Screen Share Button */
+      button[aria-label*="Share Screen"],
+      button[aria-label*="share screen"],
+      button[aria-label*="Share"],
+      button[aria-label*="share"],
+      button[class*="share-btn"],
+      div[class*="share-btn"],
+      .footer-button__share-screen,
+      .footer-button-base__share,
+      #wc-footer .share-button,
+      [class*="share-screen"],
+      [class*="share-button"],
+      [aria-label="Share Screen"],
+      [aria-label="Share screen"],
+      [aria-label="share screen"] {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
     `;
     document.head.appendChild(styleEl);
 
@@ -163,18 +187,6 @@ function ZoomPlayer({
       document.removeEventListener('contextmenu', handleContextMenu);
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
-
-  // 4. Polyfill getDisplayMedia for Mobile WebViews so the Share Screen button renders
-  useEffect(() => {
-    if (typeof navigator !== 'undefined' && navigator.mediaDevices) {
-      if (typeof navigator.mediaDevices.getDisplayMedia !== 'function') {
-        (navigator.mediaDevices as any).getDisplayMedia = () => {
-          alert("Screen sharing is not supported in the mobile app. Please use a desktop browser to share your screen.");
-          return Promise.reject(new Error("Screen sharing not supported in WebView."));
-        };
-      }
-    }
   }, []);
 
   // 4. Update watermark coordinates and opacity randomly every 6 seconds
@@ -350,8 +362,8 @@ function ZoomPlayer({
             : `${window.location.origin}/dashboard`,
 
           // ── Screen sharing ────────────────────────────────────────
-          // screenShare: 1 shows the share button; 0 hides it entirely.
-          screenShare: isModerator || allowStudentScreenshare,
+          // screenShare: false hides the share button entirely.
+          screenShare: false,
 
           // Ensure the full participant management panel renders for the host.
           // Without isSupportAV the SDK may suppress host-only controls
