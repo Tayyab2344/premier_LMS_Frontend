@@ -91,10 +91,21 @@ export default function ClassroomPage() {
           const { data } = await api.get('/auth/profile', {
             headers: { Authorization: `Bearer ${urlToken}` }
           });
-          if (data.role === 'ADMIN') {
-            Cookies.set('accessToken', urlToken!);
+
+          const isSecure = typeof window !== 'undefined' ? window.location.protocol === 'https:' : process.env.NODE_ENV === 'production';
+          const isUserAdmin = data.role?.toLowerCase() === 'admin';
+
+          if (isUserAdmin) {
+            Cookies.set('accessToken', urlToken!, {
+              secure: isSecure,
+              sameSite: 'lax',
+            });
           } else {
-            Cookies.set('accessToken', urlToken!, { expires: 30 });
+            Cookies.set('accessToken', urlToken!, {
+              expires: 30,
+              secure: isSecure,
+              sameSite: 'lax',
+            });
           }
           const mappedUser = {
             id: data.id,

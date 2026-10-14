@@ -87,11 +87,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const { data } = await api.post('/auth/login', { email, password });
       const { accessToken, user: userData } = data;
 
-      // Set cookie expiry: 30 days for students, browser session only (expires when closed) for admin
-      if (userData.role === 'ADMIN') {
-        Cookies.set('accessToken', accessToken);
+      const isSecure = typeof window !== 'undefined' ? window.location.protocol === 'https:' : process.env.NODE_ENV === 'production';
+      const isUserAdmin = userData.role?.toLowerCase() === 'admin';
+
+      // Set cookie expiry: 30 days for students, browser session only (expires when closed) for admin, with secure & sameSite flags
+      if (isUserAdmin) {
+        Cookies.set('accessToken', accessToken, {
+          secure: isSecure,
+          sameSite: 'lax',
+        });
       } else {
-        Cookies.set('accessToken', accessToken, { expires: 30 });
+        Cookies.set('accessToken', accessToken, {
+          expires: 30,
+          secure: isSecure,
+          sameSite: 'lax',
+        });
       }
 
       // Fetch profile to get enrollments & admissions
