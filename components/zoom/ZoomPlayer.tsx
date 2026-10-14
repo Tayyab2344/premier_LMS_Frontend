@@ -200,7 +200,10 @@ function ZoomPlayer({
 
     if (!socketInstance) {
       const token = Cookies.get('accessToken') || '';
-      const socketUrl = window.location.protocol + '//' + window.location.hostname + ':3001';
+      const socketUrl =
+        process.env.NEXT_PUBLIC_SOCKET_URL ||
+        (process.env.NEXT_PUBLIC_API_URL ? process.env.NEXT_PUBLIC_API_URL.replace(/\/api\/?$/, '') : '') ||
+        'https://premier-lms-backend-1.onrender.com';
       socketInstance = io(socketUrl, {
         auth: { token },
         transports: ['websocket'],

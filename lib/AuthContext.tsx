@@ -32,7 +32,7 @@ function resolveAvatarUrl(photoFile?: string): string {
   if (photoFile.startsWith('http://') || photoFile.startsWith('https://')) {
     return photoFile;
   }
-  const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+  const apiBase = process.env.NEXT_PUBLIC_API_URL || 'https://premier-lms-backend-1.onrender.com/api';
   const backendBase = apiBase.replace(/\/api\/?$/, '');
   if (photoFile.startsWith('/api/uploads/')) {
     return `${backendBase}${photoFile}`;
