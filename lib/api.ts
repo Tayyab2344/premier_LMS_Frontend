@@ -10,11 +10,17 @@ const api = axios.create({
   },
 });
 
-// Attach JWT token to every request
+// Attach JWT token to every request (preserves explicit Authorization headers and falls back to URL token)
 api.interceptors.request.use((config) => {
-  const token = Cookies.get('accessToken');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+  if (!config.headers.Authorization) {
+    let token = Cookies.get('accessToken');
+    if (!token && typeof window !== 'undefined') {
+      const searchParams = new URLSearchParams(window.location.search);
+      token = searchParams.get('token') || undefined;
+    }
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
   }
   return config;
 });
