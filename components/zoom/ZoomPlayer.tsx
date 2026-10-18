@@ -93,6 +93,7 @@ function ZoomPlayer({
     // Inject styles for Client View root
     const styleEl = document.createElement('style');
     styleEl.id = 'zoom-client-view-styles';
+    const hideShareButton = !isModerator && !_allowStudentScreenshare;
     styleEl.innerHTML = `
       #zmmtg-root {
         display: block !important;
@@ -108,7 +109,8 @@ function ZoomPlayer({
       body {
         overflow: hidden !important;
       }
-      /* Hide Zoom Screen Share Button */
+      ${hideShareButton ? `
+      /* Hide Zoom Screen Share Button for students when disallowed */
       button[aria-label*="Share Screen"],
       button[aria-label*="share screen"],
       button[aria-label*="Share"],
@@ -132,6 +134,23 @@ function ZoomPlayer({
         margin: 0 !important;
         padding: 0 !important;
       }
+      ` : `
+      /* Ensure Screen Share Button is prominent and accessible for Host/Moderator */
+      button[aria-label*="Share Screen"],
+      button[aria-label*="share screen"],
+      button[aria-label*="Share"],
+      button[aria-label*="share"],
+      .footer-button__share-screen,
+      .footer-button-base__share,
+      #wc-footer .share-button,
+      [class*="share-screen"],
+      [class*="share-button"] {
+        display: inline-flex !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        opacity: 1 !important;
+      }
+      `}
     `;
     document.head.appendChild(styleEl);
 
@@ -147,7 +166,7 @@ function ZoomPlayer({
         rootEl.style.display = 'none';
       }
     };
-  }, []);
+  }, [isModerator, _allowStudentScreenshare]);
 
   // 3. Block Developer Tools, Keyboard Shortcuts, and Right-clicks
   useEffect(() => {
@@ -365,8 +384,8 @@ function ZoomPlayer({
             : `${window.location.origin}/dashboard`,
 
           // ── Screen sharing ────────────────────────────────────────
-          // screenShare: false hides the share button entirely.
-          screenShare: false,
+          // Enable screen sharing for host/moderator or when allowed
+          screenShare: isModerator || _allowStudentScreenshare,
 
           // Ensure the full participant management panel renders for the host.
           // Without isSupportAV the SDK may suppress host-only controls
